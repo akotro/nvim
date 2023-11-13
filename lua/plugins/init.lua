@@ -95,10 +95,12 @@ return {
 		},
 		opts = {
 			options = {
-				-- stylua: ignore
-				close_command = function(n) require("mini.bufremove").delete(n, false) end,
-				-- stylua: ignore
-				right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+				close_command = function(n)
+					require("mini.bufremove").delete(n, false)
+				end,
+				right_mouse_command = function(n)
+					require("mini.bufremove").delete(n, false)
+				end,
 				diagnostics = "nvim_lsp",
 				always_show_bufferline = false,
 				diagnostics_indicator = function(_, _, diag)
@@ -151,9 +153,10 @@ return {
 		opts = {
 			indent = {
 				char = require("config.icons").ui.LineLeft,
+				tab_char = require("config.icons").ui.LineLeft,
 			},
 			scope = {
-				enabled = true,
+				enabled = false,
 				char = require("config.icons").ui.LineLeft,
 			},
 			exclude = {
@@ -171,6 +174,35 @@ return {
 			},
 		},
 		main = "ibl",
+	},
+	{
+		"echasnovski/mini.indentscope",
+		version = false,
+		event = "User, FileOpened",
+		opts = {
+			symbol = require("config.icons").ui.LineLeft,
+			options = { try_as_border = true },
+		},
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = {
+					"help",
+					"alpha",
+					"dashboard",
+					"neo-tree",
+					"Trouble",
+					"trouble",
+					"lazy",
+					"mason",
+					"notify",
+					"toggleterm",
+					"lazyterm",
+				},
+				callback = function()
+					vim.b.miniindentscope_disable = true
+				end,
+			})
+		end,
 	},
 	{
 		"RRethy/vim-illuminate",
@@ -232,39 +264,15 @@ return {
 				end,
 				desc = "Delete Buffer",
 			},
-			-- stylua: ignore
-			{ "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+			{
+				"<leader>bD",
+				function()
+					require("mini.bufremove").delete(0, true)
+				end,
+				desc = "Delete Buffer (Force)",
+			},
 		},
 	},
-	-- {
-	-- 	"echasnovski/mini.indentscope",
-	-- 	version = false,
-	-- 	event = "User, FileOpened",
-	-- 	opts = {
-	-- 		symbol = require("config.icons").ui.LineLeft,
-	-- 		options = { try_as_border = true },
-	-- 	},
-	-- 	init = function()
-	-- 		vim.api.nvim_create_autocmd("FileType", {
-	-- 			pattern = {
-	-- 				"help",
-	-- 				"alpha",
-	-- 				"dashboard",
-	-- 				"neo-tree",
-	-- 				"Trouble",
-	-- 				"trouble",
-	-- 				"lazy",
-	-- 				"mason",
-	-- 				"notify",
-	-- 				"toggleterm",
-	-- 				"lazyterm",
-	-- 			},
-	-- 			callback = function()
-	-- 				vim.b.miniindentscope_disable = true
-	-- 			end,
-	-- 		})
-	-- 	end,
-	-- },
 	{
 		"lewis6991/gitsigns.nvim",
 		event = "User FileOpened",
@@ -400,13 +408,13 @@ return {
 				config = function()
 					-- When in diff mode, we want to use the default
 					-- vim text objects c & C instead of the treesitter ones.
-					local move = require("nvim-treesitter.textobjects.move") ---@type table<string,fun(...)>
+					local move = require("nvim-treesitter.textobjects.move")
 					local configs = require("nvim-treesitter.configs")
 					for name, fn in pairs(move) do
 						if name:find("goto") == 1 then
 							move[name] = function(q, ...)
 								if vim.wo.diff then
-									local config = configs.get_module("textobjects.move")[name] ---@type table<string,string>
+									local config = configs.get_module("textobjects.move")[name]
 									for key, query in pairs(config or {}) do
 										if q == query and key:find("[%]%[][cC]") then
 											vim.cmd("normal! " .. key)
@@ -513,6 +521,14 @@ return {
 	-- 		},
 	-- 	},
 	-- },
+	-- comments
+	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		lazy = true,
+		opts = {
+			enable_autocmd = false,
+		},
+	},
 	-- Automatically add closing tags for HTML and JSX
 	{
 		"windwp/nvim-ts-autotag",
@@ -539,5 +555,63 @@ return {
 		},
 		lazy = true,
 		cmd = "Telescope",
+	},
+	{
+		"folke/todo-comments.nvim",
+		cmd = { "TodoTrouble", "TodoTelescope" },
+		event = "BufRead",
+		config = true,
+		keys = {
+			{
+				"]t",
+				function()
+					require("todo-comments").jump_next()
+				end,
+				desc = "Next todo comment",
+			},
+			{
+				"[t",
+				function()
+					require("todo-comments").jump_prev()
+				end,
+				desc = "Previous todo comment",
+			},
+		},
+	},
+	-- NOTE: Trouble
+	{
+		"folke/trouble.nvim",
+		cmd = { "TroubleToggle", "Trouble" },
+		opts = { use_diagnostic_signs = true },
+		keys = {
+			{
+				"[q",
+				function()
+					if require("trouble").is_open() then
+						require("trouble").previous({ skip_groups = true, jump = true })
+					else
+						local ok, err = pcall(vim.cmd.cprev)
+						if not ok then
+							vim.notify(err, vim.log.levels.ERROR)
+						end
+					end
+				end,
+				desc = "Previous trouble/quickfix item",
+			},
+			{
+				"]q",
+				function()
+					if require("trouble").is_open() then
+						require("trouble").next({ skip_groups = true, jump = true })
+					else
+						local ok, err = pcall(vim.cmd.cnext)
+						if not ok then
+							vim.notify(err, vim.log.levels.ERROR)
+						end
+					end
+				end,
+				desc = "Next trouble/quickfix item",
+			},
+		},
 	},
 }

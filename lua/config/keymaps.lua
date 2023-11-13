@@ -68,10 +68,10 @@ keymap.set("v", ">", ">gv")
 
 keymap.set({ "i", "n" }, "<leader><space>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 keymap.set(
-	"n",
-	"<leader>ur",
-	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-	{ desc = "Redraw / clear hlsearch / diff update" }
+    "n",
+    "<leader>ur",
+    "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+    { desc = "Redraw / clear hlsearch / diff update" }
 )
 
 -- Searching

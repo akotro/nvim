@@ -8,7 +8,7 @@ local buffer_finder = ""
 local help_finder = ""
 -- if utils.is_win() then
 file_finder = "<cmd>Telescope find_files<cr>"
-buffer_finder = "<cmd>Telescope buffers<cr>"
+buffer_finder = "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>"
 help_finder = "<cmd>Telescope help_tags<cr>"
 -- else
 -- 	file_finder = "<cmd>CommandTRipgrep<cr>"
@@ -297,7 +297,7 @@ local options = {
 		b = {
 			name = "+Buffers",
 			j = { "<cmd>BufferLinePick<cr>", "Jump" },
-			f = { "<cmd>Telescope buffers<cr>", "Find" },
+			f = { buffer_finder, "Find" },
 			p = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
 			n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
 			d = {
