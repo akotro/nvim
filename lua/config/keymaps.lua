@@ -6,10 +6,10 @@ local allModes = ""
 keymap.set(allModes, ";", ":")
 
 -- cursor movement
-keymap.set("n", "J", "<c-d")
-keymap.set("n", "K", "<c-u")
-keymap.set({ "n", "v" }, "H", "^")
-keymap.set({ "n", "v" }, "L", "g_")
+keymap.set("n", "J", "<c-d>")
+keymap.set("n", "K", "<c-u>")
+keymap.set({ "n", "v" }, "<s-h>", "^")
+keymap.set({ "n", "v" }, "<s-l>", "g_")
 
 -- better up/down
 keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -30,8 +30,8 @@ keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease wi
 keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- buffers
-keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+-- keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+-- keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
@@ -68,10 +68,10 @@ keymap.set("v", ">", ">gv")
 
 keymap.set({ "i", "n" }, "<leader><space>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 keymap.set(
-    "n",
-    "<leader>ur",
-    "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-    { desc = "Redraw / clear hlsearch / diff update" }
+	"n",
+	"<leader>ur",
+	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+	{ desc = "Redraw / clear hlsearch / diff update" }
 )
 
 -- Searching
