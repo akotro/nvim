@@ -240,6 +240,104 @@ return {
 			{ "[[", desc = "Prev Reference" },
 		},
 	},
+	{
+		"kylechui/nvim-surround",
+		event = "BufRead",
+		config = function()
+			require("nvim-surround").setup()
+		end,
+	},
+	{
+		"karb94/neoscroll.nvim",
+		event = "BufRead",
+		config = function()
+			require("neoscroll").setup({
+				easing_function = "quadratic",
+			})
+
+			local mappings = {}
+			-- Syntax: t[keys] = {function, {function arguments}}
+			mappings["K"] = { "scroll", { "-vim.wo.scroll", "true", "150" } }
+			mappings["J"] = { "scroll", { "vim.wo.scroll", "true", "150" } }
+			-- mappings["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "250" } }
+			-- mappings["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "250" } }
+			mappings["<C-b>"] = nil
+			mappings["<C-f>"] = nil
+			mappings["<C-y>"] = { "scroll", { "-0.10", "false", "100" } }
+			mappings["<C-e>"] = { "scroll", { "0.10", "false", "100" } }
+			mappings["zt"] = { "zt", { "150" } }
+			mappings["zz"] = { "zz", { "150" } }
+			mappings["zb"] = { "zb", { "150" } }
+
+			require("neoscroll.config").set_mappings(mappings)
+		end,
+	},
+	{
+		"monaqa/dial.nvim",
+		event = "BufRead",
+		config = function()
+			local augend = require("dial.augend")
+			require("dial.config").augends:register_group({
+				default = {
+					augend.integer.alias.decimal,
+					augend.integer.alias.decimal_int,
+					augend.integer.alias.hex,
+					augend.integer.alias.binary,
+					augend.date.alias["%Y/%m/%d"],
+					augend.date.alias["%Y-%m-%d"],
+					augend.date.alias["%m/%d"],
+					augend.date.alias["%H:%M"],
+					augend.constant.alias.ja_weekday_full,
+					augend.constant.alias.bool,
+					augend.constant.alias.alpha,
+					augend.constant.alias.Alpha,
+					augend.semver.alias.semver,
+				},
+			})
+			local opts = { noremap = true, silent = true }
+			vim.keymap.set("n", "<C-a>", require("dial.map").inc_normal(), opts)
+			vim.keymap.set("n", "<C-x>", require("dial.map").dec_normal(), opts)
+			vim.keymap.set("v", "<C-a>", require("dial.map").inc_visual(), opts)
+			vim.keymap.set("v", "<C-x>", require("dial.map").dec_visual(), opts)
+			vim.keymap.set("v", "g<C-a>", require("dial.map").inc_gvisual(), opts)
+			vim.keymap.set("v", "g<C-x>", require("dial.map").dec_gvisual(), opts)
+		end,
+	},
+	-- NOTE: Search/Replace
+	{
+		"windwp/nvim-spectre",
+		event = "BufRead",
+		config = function()
+			vim.cmd([[
+                nnoremap <leader>S <cmd>lua require('spectre').open()<CR>
+
+                "search current word
+                nnoremap <leader>sw <cmd>lua require('spectre').open_visual({select_word=true})<CR>
+                vnoremap <leader>s <esc>:lua require('spectre').open_visual()<CR>
+                "  search in current file
+                nnoremap <leader>sp viw:lua require('spectre').open_file_search()<cr>
+            ]])
+		end,
+	},
+
+	-- NOTE: Guess Indent
+	{
+		"NMAC427/guess-indent.nvim",
+		event = "BufReadPre",
+		config = function()
+			require("guess-indent").setup({})
+		end,
+	},
+	-- NOTE: Show color values
+	{
+		"NvChad/nvim-colorizer.lua",
+		ft = { "html", "css", "javascript", "vim", "lua", "sh" },
+		config = function()
+			require("colorizer").setup({
+				filetypes = { "html", "css", "javascript", "vim", "lua", "sh" },
+			})
+		end,
+	},
 	-- buffer remove
 	{
 		"echasnovski/mini.bufremove",
@@ -535,6 +633,61 @@ return {
 
 		event = "BufRead",
 		opts = {},
+	},
+	-- NOTE: LSP
+	{
+		"neovim/nvim-lspconfig",
+		event = "BufRead",
+		dependencies = {
+			{ "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+			{ "folke/neodev.nvim", opts = {} },
+			"mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+		},
+		opts = require("plugins.lsp").opts,
+		config = require("plugins.lsp").config,
+	},
+
+	-- cmdline tools and lsp servers
+	{
+
+		"williamboman/mason.nvim",
+		cmd = "Mason",
+		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+		build = ":MasonUpdate",
+		opts = {
+			ensure_installed = {
+				"stylua",
+				"shfmt",
+				-- "flake8",
+			},
+		},
+		config = function(_, opts)
+			require("mason").setup(opts)
+			local mr = require("mason-registry")
+			mr:on("package:install:success", function()
+				vim.defer_fn(function()
+					-- trigger FileType event to possibly load this newly installed LSP server
+					require("lazy.core.handler.event").trigger({
+						event = "FileType",
+						buf = vim.api.nvim_get_current_buf(),
+					})
+				end, 100)
+			end)
+			local function ensure_installed()
+				for _, tool in ipairs(opts.ensure_installed) do
+					local p = mr.get_package(tool)
+					if not p:is_installed() then
+						p:install()
+					end
+				end
+			end
+			if mr.refresh then
+				mr.refresh(ensure_installed)
+			else
+				ensure_installed()
+			end
+		end,
 	},
 	-- NOTE: Telescope
 	{
