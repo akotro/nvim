@@ -34,12 +34,12 @@ function M.get()
 			end,
 			desc = "Goto T[y]pe Definition",
 		},
-		{ "K", vim.lsp.buf.hover, desc = "Hover" },
-		{ "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+		{ "<leader>ld", vim.lsp.buf.hover, desc = "Hover" },
+		{ "<leader>lD", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
 		{ "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-		{ "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+		{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
 		{
-			"<leader>cA",
+			"<leader>lA",
 			function()
 				vim.lsp.buf.code_action({
 					context = {
@@ -56,7 +56,7 @@ function M.get()
 	}
 	-- if util.has_plugin("inc-rename.nvim") then
 	M._keys[#M._keys + 1] = {
-		"<leader>cr",
+		"<leader>lr",
 		function()
 			local inc_rename = require("inc_rename")
 			return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")

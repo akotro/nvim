@@ -178,7 +178,7 @@ return {
 	{
 		"echasnovski/mini.indentscope",
 		version = false,
-		event = "User, FileOpened",
+		event = "BufRead",
 		opts = {
 			symbol = require("config.icons").ui.LineLeft,
 			options = { try_as_border = true },
@@ -203,6 +203,103 @@ return {
 				end,
 			})
 		end,
+	},
+	{
+		"echasnovski/mini.ai",
+		-- keys = {
+		--   { "a", mode = { "x", "o" } },
+		--   { "i", mode = { "x", "o" } },
+		-- },
+		event = "VeryLazy",
+		opts = function()
+			local ai = require("mini.ai")
+			return {
+				n_lines = 500,
+				custom_textobjects = {
+					o = ai.gen_spec.treesitter({
+						a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+						i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+					}, {}),
+					f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
+					c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
+					t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
+				},
+			}
+		end,
+		config = function(_, opts)
+			require("mini.ai").setup(opts)
+			-- register all text objects with which-key
+			require("config.functions").on_load("which-key.nvim", function()
+				---@type table<string, string|table>
+				local i = {
+					[" "] = "Whitespace",
+					['"'] = 'Balanced "',
+					["'"] = "Balanced '",
+					["`"] = "Balanced `",
+					["("] = "Balanced (",
+					[")"] = "Balanced ) including white-space",
+					[">"] = "Balanced > including white-space",
+					["<lt>"] = "Balanced <",
+					["]"] = "Balanced ] including white-space",
+					["["] = "Balanced [",
+					["}"] = "Balanced } including white-space",
+					["{"] = "Balanced {",
+					["?"] = "User Prompt",
+					_ = "Underscore",
+					a = "Argument",
+					b = "Balanced ), ], }",
+					c = "Class",
+					f = "Function",
+					o = "Block, conditional, loop",
+					q = "Quote `, \", '",
+					t = "Tag",
+				}
+				local a = vim.deepcopy(i)
+				for k, v in pairs(a) do
+					a[k] = v:gsub(" including.*", "")
+				end
+
+				local ic = vim.deepcopy(i)
+				local ac = vim.deepcopy(a)
+				for key, name in pairs({ n = "Next", l = "Last" }) do
+					i[key] = vim.tbl_extend("force", { name = "Inside " .. name .. " textobject" }, ic)
+					a[key] = vim.tbl_extend("force", { name = "Around " .. name .. " textobject" }, ac)
+				end
+				require("which-key").register({
+					mode = { "o", "x" },
+					i = i,
+					a = a,
+				})
+			end)
+		end,
+	},
+	-- {
+	-- 	"echasnovski/mini.pairs",
+	-- 	event = "VeryLazy",
+	-- 	opts = {},
+	-- 	keys = {
+	-- 		{
+	-- 			"<leader>up",
+	-- 			function()
+	-- 				local Util = require("lazy.core.util")
+	-- 				vim.g.minipairs_disable = not vim.g.minipairs_disable
+	-- 				if vim.g.minipairs_disable then
+	-- 					Util.warn("Disabled auto pairs", { title = "Option" })
+	-- 				else
+	-- 					Util.info("Enabled auto pairs", { title = "Option" })
+	-- 				end
+	-- 			end,
+	-- 			desc = "Toggle auto pairs",
+	-- 		},
+	-- 	},
+	-- },
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = function()
+			require("plugins.autopairs").setup()
+		end,
+		dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" },
 	},
 	{
 		"RRethy/vim-illuminate",
@@ -247,31 +344,31 @@ return {
 			require("nvim-surround").setup()
 		end,
 	},
-	{
-		"karb94/neoscroll.nvim",
-		event = "BufRead",
-		config = function()
-			require("neoscroll").setup({
-				easing_function = "quadratic",
-			})
+	-- {
+	-- 	"karb94/neoscroll.nvim",
+	-- 	event = "BufRead",
+	-- 	config = function()
+	-- 		require("neoscroll").setup({
+	-- 			easing_function = "quadratic",
+	-- 		})
 
-			local mappings = {}
-			-- Syntax: t[keys] = {function, {function arguments}}
-			mappings["K"] = { "scroll", { "-vim.wo.scroll", "true", "150" } }
-			mappings["J"] = { "scroll", { "vim.wo.scroll", "true", "150" } }
-			-- mappings["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "250" } }
-			-- mappings["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "250" } }
-			mappings["<C-b>"] = nil
-			mappings["<C-f>"] = nil
-			mappings["<C-y>"] = { "scroll", { "-0.10", "false", "100" } }
-			mappings["<C-e>"] = { "scroll", { "0.10", "false", "100" } }
-			mappings["zt"] = { "zt", { "150" } }
-			mappings["zz"] = { "zz", { "150" } }
-			mappings["zb"] = { "zb", { "150" } }
+	-- 		local mappings = {}
+	-- 		-- Syntax: t[keys] = {function, {function arguments}}
+	-- 		mappings["K"] = { "scroll", { "-vim.wo.scroll", "true", "150" } }
+	-- 		mappings["J"] = { "scroll", { "vim.wo.scroll", "true", "150" } }
+	-- 		-- mappings["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "250" } }
+	-- 		-- mappings["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "250" } }
+	-- 		-- mappings["<C-b>"] = nil
+	-- 		-- mappings["<C-f>"] = nil
+	-- 		mappings["<C-y>"] = { "scroll", { "-0.10", "false", "100" } }
+	-- 		mappings["<C-e>"] = { "scroll", { "0.10", "false", "100" } }
+	-- 		mappings["zt"] = { "zt", { "150" } }
+	-- 		mappings["zz"] = { "zz", { "150" } }
+	-- 		mappings["zb"] = { "zb", { "150" } }
 
-			require("neoscroll.config").set_mappings(mappings)
-		end,
-	},
+	-- 		require("neoscroll.config").set_mappings(mappings)
+	-- 	end,
+	-- },
 	{
 		"monaqa/dial.nvim",
 		event = "BufRead",
@@ -303,7 +400,6 @@ return {
 			vim.keymap.set("v", "g<C-x>", require("dial.map").dec_gvisual(), opts)
 		end,
 	},
-	-- NOTE: Search/Replace
 	{
 		"windwp/nvim-spectre",
 		event = "BufRead",
@@ -319,8 +415,6 @@ return {
             ]])
 		end,
 	},
-
-	-- NOTE: Guess Indent
 	{
 		"NMAC427/guess-indent.nvim",
 		event = "BufReadPre",
@@ -328,7 +422,6 @@ return {
 			require("guess-indent").setup({})
 		end,
 	},
-	-- NOTE: Show color values
 	{
 		"NvChad/nvim-colorizer.lua",
 		ft = { "html", "css", "javascript", "vim", "lua", "sh" },
@@ -338,7 +431,6 @@ return {
 			})
 		end,
 	},
-	-- buffer remove
 	{
 		"echasnovski/mini.bufremove",
 
@@ -633,6 +725,43 @@ return {
 
 		event = "BufRead",
 		opts = {},
+	},
+	-- NOTE: Completion
+	{
+		"L3MON4D3/LuaSnip",
+		build = (not jit.os:find("Windows"))
+				and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
+			or nil,
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			config = function()
+				require("luasnip.loaders.from_vscode").lazy_load()
+			end,
+		},
+		opts = require("plugins.completion").luasnip.opts,
+		keys = require("plugins.completion").luasnip.keys,
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-cmdline",
+		},
+		opts = require("plugins.completion").cmp.opts,
+		config = require("plugins.completion").cmp.config,
+	},
+	-- NOTE: Formatting
+	{
+		"stevearc/conform.nvim",
+		-- event = "BufRead",
+		-- cmd = "ConformInfo",
+		keys = require("plugins.conform").keys,
+		opts = require("plugins.conform").opts,
+		-- init = require("plugins.conform").init,
 	},
 	-- NOTE: LSP
 	{
