@@ -170,6 +170,8 @@ return {
 					"NvimTree",
 					"Trouble",
 					"text",
+					"neorg",
+					"oil",
 				},
 			},
 		},

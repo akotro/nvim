@@ -74,6 +74,26 @@ keymap.set(
 	{ desc = "Redraw / clear hlsearch / diff update" }
 )
 
+-- floating terminal
+local lazyterm = function()
+	require("config.terminal")(nil, { cwd = require("config.functions").root.get() })
+end
+keymap.set("n", "<leader>ft", lazyterm, { desc = "Terminal (root dir)" })
+keymap.set("n", "<leader>fT", function()
+	require("config.terminal")()
+end, { desc = "Terminal (cwd)" })
+keymap.set("n", "<c-\\>", lazyterm, { desc = "Terminal (root dir)" })
+keymap.set("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
+
+-- Terminal Mappings
+keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+keymap.set("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
+keymap.set("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
+keymap.set("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
+keymap.set("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
+keymap.set("t", "<C-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+keymap.set("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+
 -- Searching
 -- keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next search result" })
 -- keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
@@ -83,8 +103,8 @@ keymap.set(
 -- keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
 local kopts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap("n", "n", [[<Cmd>lua require('hlslens').nNPeekWithUFO('n')<CR>zz]], {})
-vim.api.nvim_set_keymap("n", "N", [[<Cmd>lua require('hlslens').nNPeekWithUFO('N')<CR>zz]], {})
+-- vim.api.nvim_set_keymap("n", "n", [[<Cmd>lua require('hlslens').nNPeekWithUFO('n')<CR>zz]], {})
+-- vim.api.nvim_set_keymap("n", "N", [[<Cmd>lua require('hlslens').nNPeekWithUFO('N')<CR>zz]], {})
 vim.api.nvim_set_keymap("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>zz]], kopts)
 vim.api.nvim_set_keymap("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>zz]], kopts)
 vim.api.nvim_set_keymap("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>zz]], kopts)

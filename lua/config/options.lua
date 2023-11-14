@@ -1,7 +1,7 @@
 local utils = require("config.functions")
 
 vim.g.mapleader = ","
-vim.g.maplocalleader = "\\"
+-- vim.g.maplocalleader = "\\"
 
 local opt = vim.opt
 

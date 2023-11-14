@@ -18,9 +18,6 @@ help_finder = "<cmd>Telescope help_tags<cr>"
 
 local M = {}
 local options = {
-	---@usage disable which-key completely [not recommended]
-	active = true,
-	on_config_done = nil,
 	setup = {
 		plugins = {
 			marks = false, -- shows a list of your marks on ' and `
