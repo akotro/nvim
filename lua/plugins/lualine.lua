@@ -63,6 +63,10 @@ local components = {
 		color = {},
 		cond = nil,
 	},
+	path = {
+		"filename",
+		path = 1,
+	},
 	diff = {
 		"diff",
 		source = diff_source,
@@ -212,6 +216,7 @@ return {
 			components.mode,
 		},
 		lualine_b = {
+			components.path,
 			components.branch,
 		},
 		lualine_c = {

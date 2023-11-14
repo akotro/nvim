@@ -123,7 +123,7 @@ return {
 			require("bufferline").setup(opts)
 		end,
 	},
-	-- statusline
+	-- NOTE: Statusline
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
@@ -464,8 +464,110 @@ return {
 		},
 	},
 	{
+		"is0n/jaq-nvim",
+		ft = { "c", "cpp", "cs", "markdown", "python", "sh", "rust" },
+		config = require("plugins.jaq").config,
+	},
+	{
+		"kevinhwang91/nvim-bqf",
+		event = "BufRead",
+		config = function()
+			require("bqf").setup({
+				auto_enable = true,
+				auto_resize_height = true,
+			})
+		end,
+	},
+	{
+		url = "https://gitlab.com/yorickpeterse/nvim-pqf",
+		name = "nvim-pqf",
+		event = "BufRead",
+		config = function()
+			require("pqf").setup()
+		end,
+	},
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = "kevinhwang91/promise-async",
+		event = "BufRead",
+		config = require("plugins.ufo").config,
+	},
+	{
+		"kevinhwang91/nvim-hlslens",
+		event = "BufRead",
+		keys = require("plugins.hlslens").keys,
+		config = require("plugins.hlslens").config,
+	},
+	{
+		"stevearc/oil.nvim",
+		opts = {},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		keys = {
+			{
+				"<leader>e",
+				function()
+					require("oil").open_float()
+				end,
+				desc = "Explorer",
+			},
+		},
+		config = function()
+			require("oil").setup({
+				columns = {
+					"icon",
+					"size",
+					-- "permissions",
+					-- "mtime",
+				},
+				default_file_explorer = true,
+				keymaps = {
+					["g?"] = "actions.show_help",
+					["<CR>"] = "actions.select",
+					-- ["<C-s>"] = "actions.select_vsplit",
+					-- ["<C-h>"] = "actions.select_split",
+					["<C-t>"] = "actions.select_tab",
+					["<C-p>"] = "actions.preview",
+					["<C-c>"] = "actions.close",
+					["<C-l>"] = "actions.refresh",
+					["-"] = "actions.parent",
+					["_"] = "actions.open_cwd",
+					["`"] = "actions.cd",
+					["~"] = "actions.tcd",
+					["g."] = "actions.toggle_hidden",
+				},
+				use_default_keymaps = false,
+				view_options = {
+					show_hidden = true,
+				},
+				float = {
+					padding = 4,
+				},
+			})
+		end,
+	},
+	{
+		"samjwill/nvim-unception",
+		init = function()
+			-- Optional settings go here!
+			-- e.g.) vim.g.unception_open_buffer_in_new_tab = true
+		end,
+	},
+	-- NOTE: Git
+	{ "tpope/vim-fugitive" },
+	{
+		"sindrets/diffview.nvim",
+		cmd = {
+			"DiffviewClose",
+			"DiffviewFileHistory",
+			"DiffviewFocusFiles",
+			"DiffviewLog",
+			"DiffviewRefresh",
+			"DiffviewToggleFiles",
+		},
+	},
+	{
 		"lewis6991/gitsigns.nvim",
-		event = "User FileOpened",
+		event = "BufRead",
 		cmd = "Gitsigns",
 		opts = function()
 			local icons = require("config.icons")
@@ -569,6 +671,7 @@ return {
 		keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
 		event = "User FileOpened",
 	},
+	-- NOTE: Keymaps
 	{
 		"folke/which-key.nvim",
 		config = function()
@@ -722,9 +825,32 @@ return {
 	-- Automatically add closing tags for HTML and JSX
 	{
 		"windwp/nvim-ts-autotag",
-
 		event = "BufRead",
+		ft = {
+			"html",
+			"javascript",
+			"typescript",
+			"javascriptreact",
+			"typescriptreact",
+			"svelte",
+			"vue",
+			"tsx",
+			"jsx",
+			"xml",
+			"markdown",
+		},
 		opts = {},
+	},
+	{
+		"m-demare/hlargs.nvim",
+		event = "BufRead",
+		config = function()
+			require("hlargs").setup({
+				color = "#f38ba8",
+				-- color = "#A3D4D5",
+				-- color = "#8ec07c"
+			})
+		end,
 	},
 	-- NOTE: Completion
 	{
@@ -750,18 +876,31 @@ return {
 			"hrsh7th/cmp-path",
 			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-cmdline",
+			{
+				"zbirenbaum/copilot-cmp",
+				config = function()
+					require("copilot_cmp").setup()
+				end,
+			},
 		},
 		opts = require("plugins.completion").cmp.opts,
 		config = require("plugins.completion").cmp.config,
 	},
+	-- NOTE: Linting
+	{
+		"mfussenegger/nvim-lint",
+		event = "BufRead",
+		opts = require("plugins.linting").opts,
+		config = require("plugins.linting").config,
+	},
 	-- NOTE: Formatting
 	{
 		"stevearc/conform.nvim",
-		-- event = "BufRead",
-		-- cmd = "ConformInfo",
-		keys = require("plugins.conform").keys,
-		opts = require("plugins.conform").opts,
-		-- init = require("plugins.conform").init,
+		event = "BufWritePre",
+		cmd = "ConformInfo",
+		keys = require("plugins.formatting").keys,
+		opts = require("plugins.formatting").opts,
+		init = require("plugins.formatting").init,
 	},
 	-- NOTE: LSP
 	{
@@ -776,8 +915,6 @@ return {
 		opts = require("plugins.lsp").opts,
 		config = require("plugins.lsp").config,
 	},
-
-	-- cmdline tools and lsp servers
 	{
 
 		"williamboman/mason.nvim",
@@ -788,6 +925,7 @@ return {
 			ensure_installed = {
 				"stylua",
 				"shfmt",
+				"beautysh",
 				-- "flake8",
 			},
 		},
@@ -818,6 +956,89 @@ return {
 			end
 		end,
 	},
+	-- NOTE: LSP Utils
+	-- {
+	-- 	"ray-x/lsp_signature.nvim",
+	-- 	event = "BufRead",
+	-- 	config = function()
+	-- 		require("lsp_signature").setup({
+	-- 			hint_enable = false,
+	-- 		})
+	-- 	end,
+	-- },
+	{
+		"kosayoda/nvim-lightbulb",
+		event = "BufRead",
+		config = function()
+			local icons = require("config.icons")
+			require("nvim-lightbulb").setup({
+				sign = {
+					enabled = false,
+					priority = 10,
+				},
+				virtual_text = {
+					enabled = true,
+					-- text = " ",
+					text = icons.ui.Lightbulb,
+					hl_mode = "combine",
+				},
+				status_text = {
+					enabled = false,
+					-- text = "",
+					icons.ui.Lightbulb,
+					text_unavailable = "",
+				},
+				autocmd = {
+					enabled = true,
+					pattern = { "*" },
+					events = { "CursorHold", "CursorHoldI" },
+				},
+			})
+		end,
+	},
+	{
+		"smjonas/inc-rename.nvim",
+		event = "BufRead",
+		config = function()
+			require("inc_rename").setup()
+			-- require("inc_rename").setup({
+			-- 	input_buffer_type = "dressing",
+			-- })
+		end,
+	},
+	{
+		"dnlhc/glance.nvim",
+		cmd = "Glance",
+		config = function()
+			require("glance").setup()
+		end,
+	},
+	{
+		"Kasama/nvim-custom-diagnostic-highlight",
+		event = "BufRead",
+		config = function()
+			require("nvim-custom-diagnostic-highlight").setup({})
+		end,
+	},
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({
+				suggestion = { enabled = false },
+				panel = { enabled = false },
+			})
+		end,
+	},
+	{
+		url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		name = "lsp_lines.nvim",
+		event = "BufRead",
+		config = function()
+			require("lsp_lines").setup()
+		end,
+	},
 	-- NOTE: Telescope
 	{
 		"nvim-telescope/telescope.nvim",
@@ -834,31 +1055,65 @@ return {
 					require("telescope").load_extension("fzf")
 				end,
 			},
+			{
+				"AckslD/nvim-neoclip.lua",
+				-- event = "BufRead",
+				lazy = true,
+				config = function()
+					require("neoclip").setup({
+						default_register = "+",
+					})
+					require("config.functions").on_load("telescope.nvim", function()
+						pcall(require("telescope").load_extension, "neoclip")
+					end)
+				end,
+			},
+			{
+				"debugloop/telescope-undo.nvim",
+				-- event = "BufRead",
+				lazy = true,
+				config = function()
+					require("config.functions").on_load("telescope.nvim", function()
+						pcall(require("telescope").load_extension, "undo")
+					end)
+				end,
+			},
+			{
+				"aaronhallaert/advanced-git-search.nvim",
+				-- event = "BufRead",
+				lazy = true,
+				config = function()
+					require("config.functions").on_load("telescope.nvim", function()
+						pcall(require("telescope").load_extension, "advanced_git_search")
+					end)
+				end,
+			},
+			{
+				"folke/todo-comments.nvim",
+				cmd = { "TodoTrouble", "TodoTelescope" },
+				-- event = "BufRead",
+				lazy = true,
+				config = true,
+				keys = {
+					{
+						"]t",
+						function()
+							require("todo-comments").jump_next()
+						end,
+						desc = "Next todo comment",
+					},
+					{
+						"[t",
+						function()
+							require("todo-comments").jump_prev()
+						end,
+						desc = "Previous todo comment",
+					},
+				},
+			},
 		},
 		lazy = true,
 		cmd = "Telescope",
-	},
-	{
-		"folke/todo-comments.nvim",
-		cmd = { "TodoTrouble", "TodoTelescope" },
-		event = "BufRead",
-		config = true,
-		keys = {
-			{
-				"]t",
-				function()
-					require("todo-comments").jump_next()
-				end,
-				desc = "Next todo comment",
-			},
-			{
-				"[t",
-				function()
-					require("todo-comments").jump_prev()
-				end,
-				desc = "Previous todo comment",
-			},
-		},
 	},
 	-- NOTE: Trouble
 	{
@@ -895,5 +1150,96 @@ return {
 				desc = "Next trouble/quickfix item",
 			},
 		},
+	},
+
+	-- NOTE: Writing
+	-- jbyuki/nabla.nvim
+	-- Latex Notes
+	--  - https://castel.dev/post/lecture-notes-1/
+	--  - lervag/vimtex
+	{
+		"folke/zen-mode.nvim",
+		ft = { "txt", "markdown" },
+		cmd = "ZenMode",
+		config = function()
+			require("zen-mode").setup({})
+		end,
+	},
+	-- NOTE: Markdown
+	{
+		"iamcco/markdown-preview.nvim",
+		ft = { "markdown" },
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	},
+	{
+		"dhruvasagar/vim-table-mode",
+		ft = { "txt", "markdown" },
+		cmd = "TableModeToggle",
+		config = function()
+			vim.g.table_mode_corner = "|"
+		end,
+	},
+	-- NOTE: Neorg
+	{
+		"nvim-neorg/neorg",
+		build = ":Neorg sync-parsers",
+		ft = { "norg" },
+		cmd = "Neorg",
+		opts = {
+			load = {
+				["core.defaults"] = {},
+				["core.concealer"] = {
+					config = {
+						icon_preset = "diamond",
+					},
+				},
+				["core.dirman"] = {
+					config = {
+						workspaces = {
+							notes = "~/notes",
+						},
+						default_workspace = "notes",
+					},
+				},
+				["core.completion"] = {
+					config = {
+						engine = "nvim-cmp",
+					},
+				},
+				["core.presenter"] = {
+					config = {
+						zen_mode = "zen-mode",
+					},
+				},
+				["core.summary"] = {},
+				["core.export"] = {},
+				["core.export.markdown"] = {
+					config = {
+						extensions = "all",
+					},
+				},
+			},
+		},
+		dependencies = { { "nvim-lua/plenary.nvim" } },
+	},
+
+	-- NOTE: Web
+	{ "mattn/emmet-vim", ft = { "html", "css", "js" } },
+	-- { "manzeloth/live-server", cmd = "LiveServer" },
+
+	-- NOTE: Database
+	{
+		"tpope/vim-dadbod",
+		lazy = true,
+		dependencies = {
+			"kristijanhusak/vim-dadbod-ui",
+			"kristijanhusak/vim-dadbod-completion",
+		},
+		config = function()
+			require("plugins.dadbod").setup()
+		end,
+		cmd = { "DBUIToggle", "DBUI", "DBUIAddConnection", "DBUIFindBuffer", "DBUIRenameBuffer", "DBUILastQueryInfo" },
 	},
 }

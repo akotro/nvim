@@ -12,24 +12,29 @@ M.keys = {
 	},
 }
 
-local mason_path = vim.fn.stdpath("data") .. "/mason/bin/"
-local stylua_path = mason_path .. "stylua"
-print(stylua_path)
+-- local mason_path = vim.fn.stdpath("data") .. "/mason/bin/"
+-- local stylua_path = mason_path .. "stylua"
 
 M.opts = {
 	-- Map of filetype to formatters
 	formatters_by_ft = {
 		lua = { "stylua" },
+		cs = { "csharpier" },
+		rust = { "rustfmt" },
+		sh = { "beautysh" },
 		-- Conform will run multiple formatters sequentially
 		go = { "goimports", "gofmt" },
 		-- Use a sub-list to run only the first available formatter
 		javascript = { { "prettierd", "prettier" } },
+		typescript = { { "prettierd", "prettier" } },
+		markdown = { "prettierd" },
+		tex = { "prettierd" },
 		-- You can use a function here to determine the formatters dynamically
 		python = function(bufnr)
 			if require("conform").get_formatter_info("ruff_format", bufnr).available then
 				return { "ruff_format" }
 			else
-				return { "isort", "black" }
+				return { "black" }
 			end
 		end,
 		-- Use the "*" filetype to run formatters on all filetypes.
@@ -58,9 +63,13 @@ M.opts = {
 	notify_on_error = true,
 	-- Custom formatters and changes to built-in formatters
 	formatters = {
-		stylua = {
-			command = stylua_path,
+		beautysh = {
+			command = "beautysh",
+			args = { "--indent-size", "2" },
 		},
+		-- stylua = {
+		-- 	command = stylua_path,
+		-- },
 		-- my_formatter = {
 		--  -- This can be a string or a function that returns a string.
 		--  -- When defining a new formatter, this is the only field that is *required*
@@ -105,9 +114,9 @@ M.opts = {
 	},
 }
 
--- function M.init()
--- 	-- If you want the formatexpr, here is the place to set it
--- 	vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
--- end
+function M.init()
+	-- If you want the formatexpr, here is the place to set it
+	vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+end
 
 return M

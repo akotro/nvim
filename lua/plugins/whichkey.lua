@@ -120,13 +120,13 @@ local options = {
 		},
 	},
 	mappings = {
-		["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-		["e"] = {
-			function()
-				require("oil").open_float()
-			end,
-			"Explorer",
-		},
+		-- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+		-- ["e"] = {
+		-- 	function()
+		-- 		require("oil").open_float()
+		-- 	end,
+		-- 	"Explorer",
+		-- },
 		["<space>"] = { ":nohlsearch<cr>", "Clear Highlight" },
 		-- ["<space>"] = { '<cmd>let @/=""<CR>', "Clear Highlight" },
 		["w"] = { "<cmd>w<cr>", "Save" },
@@ -186,6 +186,18 @@ local options = {
 			q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
 			l = { "<cmd>Trouble loclist<cr>", "LocationList" },
 			t = { "<cmd>TodoTrouble<cr>", "Todo" },
+			j = {
+				function()
+					require("trouble").next({ skip_groups = true, jump = true })
+				end,
+				"Next Item",
+			},
+			k = {
+				function()
+					require("trouble").previous({ skip_groups = true, jump = true })
+				end,
+				"Previous Item",
+			},
 		},
 		-- Debug
 		d = {
@@ -229,24 +241,24 @@ local options = {
 		-- Lsp
 		l = {
 			name = "+LSP",
-			a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+			-- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 			-- c = { "<cmd>lua require('copilot.suggestion').toggle_auto_trigger()<cr>", "Get Capabilities" },
 			-- c = { "<cmd>lua require('user.lsp').server_capabilities()<cr>", "Get Capabilities" },
 			-- T = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
-			d = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover Info" },
-			D = {
-				function()
-					require("config.functions").open_diagnostic()
-				end,
-				"Open Diagnostic Float",
-			},
+			-- d = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover Info" },
+			-- D = {
+			-- 	function()
+			-- 		require("config.functions").open_diagnostic()
+			-- 	end,
+			-- 	"Open Diagnostic Float",
+			-- },
 			w = {
 				"<cmd>Telescope lsp_workspace_diagnostics<cr>",
 				"Workspace Diagnostics",
 			},
 			-- f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
 			-- F = { "<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat" },
-			i = { "<cmd>LspInfo<cr>", "Info" },
+			-- i = { "<cmd>LspInfo<cr>", "Info" },
 			h = { "<cmd>lua require('lsp-inlayhints').toggle()<cr>", "Toggle Hints" },
 			H = { "<cmd>IlluminationToggle<cr>", "Toggle Doc HL" },
 			I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
@@ -263,13 +275,13 @@ local options = {
 			o = { "<cmd>SymbolsOutline<cr>", "Outline" },
 			q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
 			-- r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-			r = {
-				function()
-					return ":IncRename " .. vim.fn.expand("<cword>")
-				end,
-				"Rename",
-				expr = true,
-			},
+			-- r = {
+			-- 	function()
+			-- 		return ":IncRename " .. vim.fn.expand("<cword>")
+			-- 	end,
+			-- 	"Rename",
+			-- 	expr = true,
+			-- },
 			R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
 			s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
 			S = {
