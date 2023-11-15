@@ -176,8 +176,8 @@ local options = {
 		-- Trouble
 		x = {
 			name = "+Trouble",
-			x = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-			-- w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+			x = { "<cmd>TroubleToggle<cr>", "Toggle" },
+			w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 			d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
 			r = { "<cmd>Trouble lsp_references<cr>", "References" },
 			f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
