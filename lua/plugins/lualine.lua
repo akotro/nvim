@@ -217,9 +217,9 @@ return {
 		},
 		lualine_b = {
 			components.path,
-			components.branch,
 		},
 		lualine_c = {
+			components.branch,
 			components.diff,
 			components.python_env,
 		},
