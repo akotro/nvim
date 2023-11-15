@@ -1126,6 +1126,11 @@ return {
 				cmd = { "TodoTrouble", "TodoTelescope" },
 				-- event = "BufRead",
 				lazy = true,
+				opts = {
+					keywords = {
+						TODO = { color = "error" },
+					},
+				},
 				config = true,
 				keys = {
 					{
