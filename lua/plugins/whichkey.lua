@@ -8,7 +8,8 @@ local buffer_finder = ""
 local help_finder = ""
 -- if utils.is_win() then
 file_finder = "<cmd>Telescope find_files<cr>"
-buffer_finder = "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>"
+-- buffer_finder = "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>"
+buffer_finder = "<cmd>Telescope buffers sort_mru=true<cr>"
 help_finder = "<cmd>Telescope help_tags<cr>"
 -- else
 -- 	file_finder = "<cmd>CommandTRipgrep<cr>"
