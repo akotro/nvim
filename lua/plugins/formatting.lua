@@ -19,7 +19,9 @@ M.opts = function()
 	local slow_format_filetypes = {}
 	local ignore_auto_format_filetypes = {
 		"cs",
+		"xml",
 	}
+
 	return {
 		-- Map of filetype to formatters
 		formatters_by_ft = {
