@@ -17,6 +17,9 @@ M.keys = {
 
 M.opts = function()
 	local slow_format_filetypes = {}
+	local ignore_auto_format_filetypes = {
+		"cs",
+	}
 	return {
 		-- Map of filetype to formatters
 		formatters_by_ft = {
@@ -54,6 +57,19 @@ M.opts = function()
 		-- 	timeout_ms = 500,
 		-- },
 		format_on_save = function(bufnr)
+			if vim.tbl_contains(ignore_auto_format_filetypes, vim.bo[bufnr].filetype) then
+				return
+			end
+			-- Disable with a global or buffer-local variable
+			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+				return
+			end
+			-- Disable autoformat for files in a certain path
+			-- local bufname = vim.api.nvim_buf_get_name(bufnr)
+			-- if bufname:match("/node_modules/") then
+			-- 	return
+			-- end
+
 			if slow_format_filetypes[vim.bo[bufnr].filetype] then
 				return
 			end
@@ -67,6 +83,14 @@ M.opts = function()
 		end,
 
 		format_after_save = function(bufnr)
+			if vim.tbl_contains(ignore_auto_format_filetypes, vim.bo[bufnr].filetype) then
+				return
+			end
+			-- Disable with a global or buffer-local variable
+			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+				return
+			end
+
 			if not slow_format_filetypes[vim.bo[bufnr].filetype] then
 				return
 			end
