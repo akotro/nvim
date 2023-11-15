@@ -20,7 +20,7 @@ M.opts = {
 	formatters_by_ft = {
 		lua = { "stylua" },
 		cs = { "csharpier" },
-		rust = { "rustfmt" },
+		rust = { "cargo fmt" },
 		sh = { "beautysh" },
 		-- Conform will run multiple formatters sequentially
 		go = { "goimports", "gofmt" },

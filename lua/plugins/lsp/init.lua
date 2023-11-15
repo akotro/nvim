@@ -36,7 +36,7 @@ function M.get()
 		},
 		{ "<leader>ld", vim.lsp.buf.hover, desc = "Hover" },
 		{ "<leader>lD", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-		{ "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+		-- { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
 		{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
 		{
 			"<leader>lA",
@@ -163,10 +163,34 @@ M.opts = {
 				},
 			},
 		},
+		omnisharp = {
+			keys = {
+				{
+					"gd",
+					function()
+						require("omnisharp_extended").telescope_lsp_definitions()
+					end,
+					desc = "Goto Definition",
+					has = "definition",
+				},
+			},
+			settings = {
+				enable_roslyn_analyzers = true,
+				enable_import_completion = true,
+				-- handlers = {
+				-- 	["textDocument/definition"] = require("omnisharp_extended").handler,
+				-- },
+			},
+		},
 	},
 	-- you can do any additional lsp server setup here
 	-- return true if you don't want this server to be setup with lspconfig
 	setup = {
+		omnisharp = function(_, opts)
+			opts.handlers = {
+				["textDocument/definition"] = require("omnisharp_extended").handler,
+			}
+		end,
 		-- example to setup with typescript.nvim
 		-- tsserver = function(_, opts)
 		--   require("typescript").setup({ server = opts })

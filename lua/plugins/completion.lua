@@ -101,6 +101,7 @@ function M.cmp.opts()
 			{ name = "nvim_lsp" },
 			{ name = "luasnip" },
 			{ name = "path" },
+			{ name = "copilot" },
 			-- { name = "nvim_lsp_signature_help" },
 			{ name = "crates" },
 			{ name = "neorg" },
@@ -111,10 +112,14 @@ function M.cmp.opts()
 			format = function(_, item)
 				local icons = require("config.icons").kinds
 				if icons[item.kind] then
-					item.kind = icons[item.kind] .. item.kind
+					item.kind = icons[item.kind]--[[  .. item.kind ]]
 				end
 				return item
 			end,
+		},
+		window = {
+			completion = cmp.config.window.bordered(),
+			scrollbar = false,
 		},
 		experimental = {
 			ghost_text = {
@@ -122,6 +127,24 @@ function M.cmp.opts()
 			},
 		},
 		sorting = defaults.sorting,
+		-- sorting = {
+		-- 	priority_weight = 2,
+		-- 	comparators = {
+		-- 		-- Below is the default comparitor list and order for nvim-cmp
+		-- 		cmp.config.compare.offset,
+		-- 		-- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+		-- 		cmp.config.compare.exact,
+		-- 		require("copilot_cmp.comparators").prioritize,
+
+		-- 		cmp.config.compare.score,
+		-- 		cmp.config.compare.recently_used,
+		-- 		cmp.config.compare.locality,
+		-- 		cmp.config.compare.kind,
+		-- 		cmp.config.compare.sort_text,
+		-- 		cmp.config.compare.length,
+		-- 		cmp.config.compare.order,
+		-- 	},
+		-- },
 	}
 end
 

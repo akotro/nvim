@@ -913,6 +913,23 @@ return {
 			{ "folke/neodev.nvim", opts = {} },
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+
+			-- NOTE: LSP Language Extensions
+			{ "Hoffs/omnisharp-extended-lsp.nvim" },
+			{
+				"simrat39/rust-tools.nvim",
+				ft = { "rust", "toml" },
+				config = function()
+					require("rust-tools").setup()
+				end,
+			},
+			{
+				"saecki/crates.nvim",
+				ft = { "rust", "toml" },
+				config = function()
+					require("crates").setup()
+				end,
+			},
 		},
 		opts = require("plugins.lsp").opts,
 		config = require("plugins.lsp").config,
@@ -1026,6 +1043,7 @@ return {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		event = "InsertEnter",
+		build = ":Copilot auth",
 		config = function()
 			require("copilot").setup({
 				suggestion = { enabled = false },
@@ -1041,6 +1059,7 @@ return {
 			require("lsp_lines").setup()
 		end,
 	},
+	-- TODO: Debugging
 	-- NOTE: Telescope
 	{
 		"nvim-telescope/telescope.nvim",
