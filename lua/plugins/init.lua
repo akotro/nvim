@@ -184,6 +184,9 @@ return {
 		opts = {
 			symbol = require("config.icons").ui.LineLeft,
 			options = { try_as_border = true },
+			draw = {
+				delay = 50,
+			},
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
@@ -555,7 +558,7 @@ return {
 		end,
 	},
 	-- NOTE: Git
-	{ "tpope/vim-fugitive" },
+	{ "tpope/vim-fugitive", event = "BufRead" },
 	{
 		"sindrets/diffview.nvim",
 		cmd = {
@@ -915,9 +918,10 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 
 			-- NOTE: LSP Language Extensions
-			{ "Hoffs/omnisharp-extended-lsp.nvim" },
+			{ "Hoffs/omnisharp-extended-lsp.nvim", lazy = true, ft = "cs" },
 			{
 				"simrat39/rust-tools.nvim",
+				lazy = true,
 				ft = { "rust", "toml" },
 				config = function()
 					require("rust-tools").setup()
@@ -925,10 +929,18 @@ return {
 			},
 			{
 				"saecki/crates.nvim",
+				lazy = true,
 				ft = { "rust", "toml" },
 				config = function()
 					require("crates").setup()
 				end,
+			},
+			{
+				"pmizio/typescript-tools.nvim",
+				lazy = true,
+				-- ft = { "ts", "tsx", "js", "jsx" },
+				dependencies = { "nvim-lua/plenary.nvim" },
+				opts = {},
 			},
 		},
 		opts = require("plugins.lsp").opts,

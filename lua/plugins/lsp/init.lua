@@ -182,6 +182,11 @@ M.opts = {
 				-- },
 			},
 		},
+		tsserver = {},
+		tailwindcss = {},
+		svelte = {},
+		lemminx = {},
+		bashls = {},
 	},
 	-- you can do any additional lsp server setup here
 	-- return true if you don't want this server to be setup with lspconfig
@@ -190,6 +195,10 @@ M.opts = {
 			opts.handlers = {
 				["textDocument/definition"] = require("omnisharp_extended").handler,
 			}
+		end,
+		tsserver = function(_, opts)
+			require("typescript-tools").setup({})
+			return true
 		end,
 		-- example to setup with typescript.nvim
 		-- tsserver = function(_, opts)
