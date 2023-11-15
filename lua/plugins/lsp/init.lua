@@ -185,8 +185,15 @@ M.opts = {
 		tsserver = {},
 		tailwindcss = {},
 		svelte = {},
+		jsonls = {},
 		lemminx = {},
 		bashls = {},
+		nushell = {},
+		pyright = {},
+		sqls = {},
+		yamlls = {},
+		docker_compose_language_service = {},
+		dockerls = {},
 	},
 	-- you can do any additional lsp server setup here
 	-- return true if you don't want this server to be setup with lspconfig
