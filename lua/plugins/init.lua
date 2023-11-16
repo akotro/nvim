@@ -870,7 +870,6 @@ return {
 			end,
 		},
 		opts = require("plugins.completion").luasnip.opts,
-		keys = require("plugins.completion").luasnip.keys,
 	},
 	{
 		"hrsh7th/nvim-cmp",

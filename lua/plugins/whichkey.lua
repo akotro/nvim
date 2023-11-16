@@ -134,9 +134,9 @@ local options = {
 		-- Plugins (Lazy)
 		p = {
 			name = "+Plugins",
-			-- c = { "<cmd>PackerCompile<cr>", "Compile" },
+			l = { "<cmd>Lazy<cr>", "Lazy" },
 			i = { "<cmd>Lazy install<cr>", "Install" },
-			r = { "<cmd>lua require('lv-utils').reload_lv_config()<cr>", "Reload" },
+			r = { ":Lazy reload ", "Reload Plugin" },
 			s = { "<cmd>Lazy sync<cr>", "Sync" },
 			u = { "<cmd>Lazy update<cr>", "Update" },
 		},

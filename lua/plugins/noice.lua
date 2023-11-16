@@ -25,6 +25,9 @@ M.opts = {
 			view = "mini",
 		},
 	},
+	popupmenu = {
+		-- backend = "cmp",
+	},
 	presets = {
 		bottom_search = false,
 		command_palette = true,
