@@ -50,7 +50,7 @@ function M.cmp.opts()
 			end, { "i", "s", "c" }),
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
-					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
 				elseif has_words_before() then
 					cmp.complete()
 				else
@@ -59,7 +59,7 @@ function M.cmp.opts()
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
-					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
 				else
 					fallback()
 				end
@@ -68,7 +68,7 @@ function M.cmp.opts()
 			["<C-f>"] = cmp.mapping.scroll_docs(4),
 			["<C-Space>"] = cmp.mapping.complete(),
 			["<C-e>"] = cmp.mapping.abort(),
-			-- ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+			["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 			["<S-CR>"] = cmp.mapping.confirm({
 				behavior = cmp.ConfirmBehavior.Replace,
 				select = true,
