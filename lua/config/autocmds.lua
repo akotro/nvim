@@ -164,15 +164,16 @@ local autocommands = {
         pattern = "*.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp,*.rgen,*.rmiss,*.rchit,*.rahit,*.rint,*.rcall",
         command = [[set filetype=glsl]],
     },
-    {
-        events = { "User" },
-        group = unception,
-        pattern = "UnceptionEditRequestReceived",
-        callback = function()
-            -- Toggle the terminal off.
-            require("toggleterm").toggle()
-        end,
-    },
+    -- {
+    --     events = { "User" },
+    --     group = unception,
+    --     pattern = "UnceptionEditRequestReceived",
+    --     command = [[<cmd>close<cr>]],
+    --     -- callback = function()
+    --     --     -- Toggle the terminal off.
+    --     --     require("toggleterm").toggle()
+    --     -- end,
+    -- },
 }
 
 local function create_autocommands(commands)

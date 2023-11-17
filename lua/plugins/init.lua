@@ -279,24 +279,24 @@ return {
 		end,
 	},
 	-- {
-	-- 	"echasnovski/mini.pairs",
-	-- 	event = "VeryLazy",
-	-- 	opts = {},
-	-- 	keys = {
-	-- 		{
-	-- 			"<leader>up",
-	-- 			function()
-	-- 				local Util = require("lazy.core.util")
-	-- 				vim.g.minipairs_disable = not vim.g.minipairs_disable
-	-- 				if vim.g.minipairs_disable then
-	-- 					Util.warn("Disabled auto pairs", { title = "Option" })
-	-- 				else
-	-- 					Util.info("Enabled auto pairs", { title = "Option" })
-	-- 				end
-	-- 			end,
-	-- 			desc = "Toggle auto pairs",
-	-- 		},
-	-- 	},
+	--	"echasnovski/mini.pairs",
+	--	event = "VeryLazy",
+	--	opts = {},
+	--	keys = {
+	--		{
+	--			"<leader>up",
+	--			function()
+	--				local Util = require("lazy.core.util")
+	--				vim.g.minipairs_disable = not vim.g.minipairs_disable
+	--				if vim.g.minipairs_disable then
+	--					Util.warn("Disabled auto pairs", { title = "Option" })
+	--				else
+	--					Util.info("Enabled auto pairs", { title = "Option" })
+	--				end
+	--			end,
+	--			desc = "Toggle auto pairs",
+	--		},
+	--	},
 	-- },
 	{
 		"windwp/nvim-autopairs",
@@ -350,29 +350,29 @@ return {
 		end,
 	},
 	-- {
-	-- 	"karb94/neoscroll.nvim",
-	-- 	event = "BufRead",
-	-- 	config = function()
-	-- 		require("neoscroll").setup({
-	-- 			easing_function = "quadratic",
-	-- 		})
+	--	"karb94/neoscroll.nvim",
+	--	event = "BufRead",
+	--	config = function()
+	--		require("neoscroll").setup({
+	--			easing_function = "quadratic",
+	--		})
 
-	-- 		local mappings = {}
-	-- 		-- Syntax: t[keys] = {function, {function arguments}}
-	-- 		mappings["K"] = { "scroll", { "-vim.wo.scroll", "true", "150" } }
-	-- 		mappings["J"] = { "scroll", { "vim.wo.scroll", "true", "150" } }
-	-- 		-- mappings["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "250" } }
-	-- 		-- mappings["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "250" } }
-	-- 		-- mappings["<C-b>"] = nil
-	-- 		-- mappings["<C-f>"] = nil
-	-- 		mappings["<C-y>"] = { "scroll", { "-0.10", "false", "100" } }
-	-- 		mappings["<C-e>"] = { "scroll", { "0.10", "false", "100" } }
-	-- 		mappings["zt"] = { "zt", { "150" } }
-	-- 		mappings["zz"] = { "zz", { "150" } }
-	-- 		mappings["zb"] = { "zb", { "150" } }
+	--		local mappings = {}
+	--		-- Syntax: t[keys] = {function, {function arguments}}
+	--		mappings["K"] = { "scroll", { "-vim.wo.scroll", "true", "150" } }
+	--		mappings["J"] = { "scroll", { "vim.wo.scroll", "true", "150" } }
+	--		-- mappings["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "250" } }
+	--		-- mappings["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "250" } }
+	--		-- mappings["<C-b>"] = nil
+	--		-- mappings["<C-f>"] = nil
+	--		mappings["<C-y>"] = { "scroll", { "-0.10", "false", "100" } }
+	--		mappings["<C-e>"] = { "scroll", { "0.10", "false", "100" } }
+	--		mappings["zt"] = { "zt", { "150" } }
+	--		mappings["zz"] = { "zz", { "150" } }
+	--		mappings["zb"] = { "zb", { "150" } }
 
-	-- 		require("neoscroll.config").set_mappings(mappings)
-	-- 	end,
+	--		require("neoscroll.config").set_mappings(mappings)
+	--	end,
 	-- },
 	{
 		"monaqa/dial.nvim",
@@ -562,6 +562,7 @@ return {
 	{
 		"sindrets/diffview.nvim",
 		cmd = {
+			"DiffviewOpen",
 			"DiffviewClose",
 			"DiffviewFileHistory",
 			"DiffviewFocusFiles",
@@ -798,26 +799,26 @@ return {
 	},
 	-- Show context of the current function
 	-- {
-	-- 	"nvim-treesitter/nvim-treesitter-context",
-	-- 	event = "LazyFile",
-	-- 	enabled = true,
-	-- 	opts = { mode = "cursor", max_lines = 3 },
-	-- 	keys = {
-	-- 		{
-	-- 			"<leader>ut",
-	-- 			function()
-	-- 				local Util = require("lazyvim.util")
-	-- 				local tsc = require("treesitter-context")
-	-- 				tsc.toggle()
-	-- 				if Util.inject.get_upvalue(tsc.toggle, "enabled") then
-	-- 					Util.info("Enabled Treesitter Context", { title = "Option" })
-	-- 				else
-	-- 					Util.warn("Disabled Treesitter Context", { title = "Option" })
-	-- 				end
-	-- 			end,
-	-- 			desc = "Toggle Treesitter Context",
-	-- 		},
-	-- 	},
+	--	"nvim-treesitter/nvim-treesitter-context",
+	--	event = "LazyFile",
+	--	enabled = true,
+	--	opts = { mode = "cursor", max_lines = 3 },
+	--	keys = {
+	--		{
+	--			"<leader>ut",
+	--			function()
+	--				local Util = require("lazyvim.util")
+	--				local tsc = require("treesitter-context")
+	--				tsc.toggle()
+	--				if Util.inject.get_upvalue(tsc.toggle, "enabled") then
+	--					Util.info("Enabled Treesitter Context", { title = "Option" })
+	--				else
+	--					Util.warn("Disabled Treesitter Context", { title = "Option" })
+	--				end
+	--			end,
+	--			desc = "Toggle Treesitter Context",
+	--		},
+	--	},
 	-- },
 	-- comments
 	{
@@ -988,14 +989,21 @@ return {
 	},
 	-- NOTE: LSP Utils
 	-- {
-	-- 	"ray-x/lsp_signature.nvim",
-	-- 	event = "BufRead",
-	-- 	config = function()
-	-- 		require("lsp_signature").setup({
-	-- 			hint_enable = false,
-	-- 		})
-	-- 	end,
+	--	"ray-x/lsp_signature.nvim",
+	--	event = "BufRead",
+	--	config = function()
+	--		require("lsp_signature").setup({
+	--			hint_enable = false,
+	--		})
+	--	end,
 	-- },
+	{
+		"Bekaboo/dropbar.nvim",
+		event = "BufRead",
+		dependencies = {
+			"nvim-telescope/telescope-fzf-native.nvim",
+		},
+	},
 	{
 		"kosayoda/nvim-lightbulb",
 		event = "BufRead",
@@ -1032,7 +1040,7 @@ return {
 		config = function()
 			require("inc_rename").setup()
 			-- require("inc_rename").setup({
-			-- 	input_buffer_type = "dressing",
+			--	input_buffer_type = "dressing",
 			-- })
 		end,
 	},
