@@ -21,7 +21,7 @@ function M.start(char)
 	-- vim.api.nvim_replace_termcodes("zz", true, false, true)
 end
 
-local kopts = { noremap = true, silent = true }
+-- local kopts = { noremap = true, silent = true }
 
 M.keys = {
 	{

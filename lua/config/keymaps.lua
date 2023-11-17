@@ -103,8 +103,18 @@ keymap.set("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 -- keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
 local kopts = { noremap = true, silent = true }
--- vim.api.nvim_set_keymap("n", "n", [[<Cmd>lua require('hlslens').nNPeekWithUFO('n')<CR>zz]], {})
--- vim.api.nvim_set_keymap("n", "N", [[<Cmd>lua require('hlslens').nNPeekWithUFO('N')<CR>zz]], {})
+-- vim.api.nvim_set_keymap(
+-- 	"n",
+-- 	"n",
+-- 	[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+-- 	kopts
+-- )
+-- vim.api.nvim_set_keymap(
+-- 	"n",
+-- 	"N",
+-- 	[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+-- 	kopts
+-- )
 vim.api.nvim_set_keymap("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>zz]], kopts)
 vim.api.nvim_set_keymap("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>zz]], kopts)
 vim.api.nvim_set_keymap("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>zz]], kopts)

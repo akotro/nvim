@@ -499,7 +499,8 @@ return {
 	},
 	{
 		"kevinhwang91/nvim-hlslens",
-		event = "BufRead",
+		lazy = true,
+		-- event = "BufRead",
 		keys = require("plugins.hlslens").keys,
 		config = require("plugins.hlslens").config,
 	},
