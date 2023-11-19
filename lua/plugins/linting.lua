@@ -8,7 +8,7 @@ M.opts = {
 		html = { "tidy" },
 		python = { "flake8" },
 		markdown = { "proselint" },
-		neorg = { "proselint" },
+		norg = { "proselint" },
 		tex = { "proselint" },
 		txt = { "proselint" },
 		-- Use the "*" filetype to run linters on all filetypes.
@@ -30,6 +30,31 @@ M.opts = {
 		-- },
 	},
 }
+
+function M.list_linters()
+	local lint = require("lint")
+	local names = lint._resolve_linter_by_ft(vim.bo.filetype)
+
+	-- Add fallback linters.
+	if #names == 0 then
+		vim.list_extend(names, lint.linters_by_ft["_"] or {})
+	end
+
+	-- Add global linters.
+	vim.list_extend(names, lint.linters_by_ft["*"] or {})
+
+	-- Filter out linters that don't exist or don't match the condition.
+	local ctx = { filename = vim.api.nvim_buf_get_name(0) }
+	ctx.dirname = vim.fn.fnamemodify(ctx.filename, ":h")
+	names = vim.tbl_filter(function(name)
+		local linter = lint.linters[name]
+		if not linter then
+			vim.notify("Linter not found: " .. name, vim.log.levels.WARN, { title = "nvim-lint" })
+		end
+		return linter and not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
+	end, names)
+	return names
+end
 
 function M.config(_, opts)
 	local L = {}

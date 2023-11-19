@@ -77,6 +77,7 @@ opt.smartindent = true
 opt.cinoptions = "l1,(0,w1,W4,U1,m1,j1"
 opt.termguicolors = true -- True color support
 opt.timeoutlen = 300
+opt.swapfile = false
 opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
