@@ -229,6 +229,21 @@ function M.root.get(opts)
 	return M.is_win() and ret:gsub("/", "\\") or ret
 end
 
+M.window = {}
+
+function M.window.is_portrait_mode()
+	local lines = vim.api.nvim_win_get_height(0)
+	local columns = vim.api.nvim_win_get_width(0)
+	-- d("lines", lines, "columns", columns)
+
+	local ratio = lines / columns
+
+	if ratio >= 0.5 then
+		return true
+	end
+	return false
+end
+
 function M.norm(path)
 	-- Replace backslashes with forward slashes (common in Windows paths)
 	path = path:gsub("\\", "/")

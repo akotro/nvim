@@ -6,6 +6,9 @@ M.opts = {
 		view_search = false,
 	},
 	lsp = {
+		progress = {
+			enabled = false,
+		},
 		override = {
 			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 			["vim.lsp.util.stylize_markdown"] = true,
@@ -38,14 +41,14 @@ M.opts = {
 }
 
 M.keys = {
-	{
-		"<S-Enter>",
-		function()
-			require("noice").redirect(vim.fn.getcmdline())
-		end,
-		mode = "c",
-		desc = "Redirect Cmdline",
-	},
+	-- {
+	-- 	"<S-Enter>",
+	-- 	function()
+	-- 		require("noice").redirect(vim.fn.getcmdline())
+	-- 	end,
+	-- 	mode = "c",
+	-- 	desc = "Redirect Cmdline",
+	-- },
 	{
 		"<leader>nl",
 		function()

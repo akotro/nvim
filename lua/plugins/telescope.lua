@@ -1,5 +1,12 @@
+local functions = require("config.functions")
 local icons = require("config.icons")
 local actions = require("telescope.actions")
+
+local layout_strategy = "horizontal"
+if functions.window.is_portrait_mode() then
+	layout_strategy = "vertical"
+end
+
 return {
 	defaults = {
 		prompt_prefix = icons.ui.Telescope .. " ",
@@ -8,7 +15,7 @@ return {
 		initial_mode = "insert",
 		selection_strategy = "reset",
 		sorting_strategy = nil,
-		layout_strategy = nil,
+		layout_strategy = layout_strategy,
 		layout_config = {},
 		vimgrep_arguments = {
 			"rg",

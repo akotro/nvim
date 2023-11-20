@@ -917,6 +917,7 @@ return {
 			{ "folke/neodev.nvim", opts = {} },
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+			{ "j-hui/fidget.nvim", opts = {} },
 
 			-- NOTE: LSP Language Extensions
 			{ "Hoffs/omnisharp-extended-lsp.nvim", lazy = true, ft = "cs" },

@@ -1,3 +1,4 @@
+local functions = require("config.functions")
 local icons = require("config.icons")
 
 local window_width_limit = 100
@@ -44,6 +45,11 @@ end
 
 local branch = icons.git.Branch
 
+local path_mode = 1
+if functions.window.is_portrait_mode() then
+	path_mode = 0
+end
+
 local components = {
 	mode = {
 		function()
@@ -65,7 +71,7 @@ local components = {
 	},
 	path = {
 		"filename",
-		path = 1,
+		path = path_mode,
 	},
 	diff = {
 		"diff",
