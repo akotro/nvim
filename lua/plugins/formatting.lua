@@ -110,6 +110,9 @@ M.opts = function()
 		notify_on_error = true,
 		-- Custom formatters and changes to built-in formatters
 		formatters = {
+			csharpier = {
+				args = { "--fast", "--write-stdout" },
+			},
 			beautysh = {
 				command = "beautysh",
 				args = { "--indent-size", "2" },
