@@ -46,6 +46,7 @@ M.keys = {
 M.opts = {
 	highlight = { enable = true },
 	indent = { enable = true },
+	auto_install = true,
 	ensure_installed = {
 		"bash",
 		"c",

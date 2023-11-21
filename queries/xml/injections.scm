@@ -1,10 +1,14 @@
 ; SQL Injection
-(element
+(
   (STag
-    (Name) @tag-name)
-    (content
-      (CharData) @injection-content
+    (Name) @name
+  )
+  (content
+    (CharData) @injection.language
+      (#eq? @name "WmsEntitySelectQuery")
       (#set! injection.language "sql")
       (#set! injection.combined)
       (#set! injection.include-children)
-        (#eq? @tag-name "WmsEntitySelectQuery")))
+  )
+)
+
