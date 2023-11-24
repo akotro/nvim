@@ -54,20 +54,20 @@ function M.get()
 			has = "codeAction",
 		},
 	}
-	-- if util.has_plugin("inc-rename.nvim") then
-	M._keys[#M._keys + 1] = {
-		"<leader>lr",
-		function()
-			local inc_rename = require("inc_rename")
-			return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
-		end,
-		expr = true,
-		desc = "Rename",
-		has = "rename",
-	}
-	-- else
-	-- 	M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
-	-- end
+	if util.has_plugin("inc-rename.nvim") then
+		M._keys[#M._keys + 1] = {
+			"<leader>lr",
+			function()
+				local inc_rename = require("inc_rename")
+				return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
+			end,
+			expr = true,
+			desc = "Rename",
+			has = "rename",
+		}
+	else
+		M._keys[#M._keys + 1] = { "<leader>lr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
+	end
 	return M._keys
 end
 
