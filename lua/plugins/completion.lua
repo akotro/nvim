@@ -9,6 +9,20 @@ M.luasnip.opts = {
 
 M.cmp = {}
 
+M.cmp.dependencies = {
+	"hrsh7th/cmp-nvim-lsp",
+	"hrsh7th/cmp-buffer",
+	"hrsh7th/cmp-path",
+	"saadparwaiz1/cmp_luasnip",
+	"hrsh7th/cmp-cmdline",
+	{
+		"zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot_cmp").setup()
+		end,
+	},
+}
+
 function M.cmp.opts()
 	vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 	local cmp = require("cmp")

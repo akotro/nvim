@@ -27,6 +27,10 @@ M.opts = {
 			},
 			view = "mini",
 		},
+		{
+			filter = { event = "msg_showmode" },
+			view = "notify",
+		},
 	},
 	popupmenu = {
 		-- backend = "cmp",

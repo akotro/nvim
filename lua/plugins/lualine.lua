@@ -231,6 +231,7 @@ return {
 			components.python_env,
 		},
 		lualine_x = {
+
 			components.diagnostics,
 			components.lsp,
 			components.spaces,
