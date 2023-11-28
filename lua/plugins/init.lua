@@ -310,6 +310,11 @@ return {
 		"RRethy/vim-illuminate",
 		event = "BufRead",
 		opts = {
+			providers = {
+				"treesitter",
+				"lsp",
+				"regex",
+			},
 			delay = 200,
 			large_file_cutoff = 2000,
 			large_file_overrides = {
@@ -957,6 +962,22 @@ return {
 		cmd = "Copilot",
 		event = "InsertEnter",
 		build = ":Copilot auth",
+		keys = {
+			{
+				"<leader>cpe",
+				"<cmd>Copilot enable<cr>",
+				desc = "Copilot Enable",
+			},
+			{
+				"<leader>cpd",
+				"<cmd>Copilot disable<cr>",
+				desc = "Copilot Disable",
+			},
+		},
+		init = function()
+			-- TODO:: silent! not working for Noice notifications?
+			vim.cmd("silent! Copilot disable")
+		end,
 		config = function()
 			require("copilot").setup({
 				suggestion = { enabled = false },
