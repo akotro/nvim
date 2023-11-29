@@ -6,8 +6,8 @@ local allModes = ""
 keymap.set(allModes, ";", ":")
 
 -- cursor movement
-keymap.set("n", "J", "<c-d>")
-keymap.set("n", "K", "<c-u>")
+keymap.set({ "n", "v" }, "J", "<c-d>")
+keymap.set({ "n", "v" }, "K", "<c-u>")
 keymap.set({ "n", "v" }, "<s-h>", "^")
 keymap.set({ "n", "v" }, "<s-l>", "g_")
 

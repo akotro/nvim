@@ -120,6 +120,7 @@ M.opts = {
 		underline = true,
 		update_in_insert = false,
 		virtual_text = false,
+		virtual_lines = false, -- disable by default
 		-- virtual_text = {
 		-- 	spacing = 4,
 		-- 	source = "if_many",
