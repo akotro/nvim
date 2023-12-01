@@ -166,7 +166,8 @@ local components = {
 			end
 
 			local unique_client_names = table.concat(buf_client_names, ", ")
-			local language_servers = string.format("[%s]", unique_client_names)
+			local unique_client_names_formatted = " " .. unique_client_names .. " "
+			local language_servers = string.format("[%s]", unique_client_names_formatted)
 
 			-- if copilot_active then
 			-- 	language_servers = language_servers .. "%#SLCopilot#" .. " " .. icons.git.Octoface .. "%*"
