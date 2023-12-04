@@ -40,6 +40,8 @@ require("lazy").setup(plugins, {
 				"netrw",
 				"netrwPlugin",
 				"netrwSettings",
+				"spellfile",
+				"matchit",
 			},
 		},
 	},

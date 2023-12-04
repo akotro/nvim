@@ -10,6 +10,7 @@ return {
 				vim.notify("Kanagawa not found", vim.log.levels.ERROR)
 			else
 				kanagawa.setup({
+					compile = true,
 					colors = {
 						theme = { all = { ui = { bg_gutter = "none" } } },
 					},
@@ -47,6 +48,7 @@ return {
 	-- NOTE: UI
 	{
 		"rcarriga/nvim-notify",
+		event = "VeryLazy",
 		keys = {
 			{
 				"<leader>un",
@@ -562,6 +564,7 @@ return {
 			-- Optional settings go here!
 			-- e.g.) vim.g.unception_open_buffer_in_new_tab = true
 		end,
+		event = "VeryLazy",
 	},
 	-- NOTE: Git
 	{ "tpope/vim-fugitive", event = "BufRead" },
@@ -763,6 +766,7 @@ return {
 	-- NOTE: Completion
 	{
 		"L3MON4D3/LuaSnip",
+		event = "InsertEnter",
 		build = (not jit.os:find("Windows"))
 				and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
 			or nil,
@@ -974,15 +978,12 @@ return {
 				desc = "Copilot Disable",
 			},
 		},
-		init = function()
-			-- TODO:: silent! not working for Noice notifications?
-			vim.cmd("silent! Copilot disable")
-		end,
 		config = function()
 			require("copilot").setup({
 				suggestion = { enabled = false },
 				panel = { enabled = false },
 			})
+			vim.cmd("silent! Copilot disable")
 		end,
 	},
 	{
