@@ -33,6 +33,23 @@ end
 
 local M = {}
 
+M.plugin = {}
+
+---@param plugin string
+function M.plugin.has(plugin)
+	return require("lazy.core.config").spec.plugins[plugin] ~= nil
+end
+
+---@param name string
+function M.plugin.opts(name)
+	local plugin = require("lazy.core.config").plugins[name]
+	if not plugin then
+		return {}
+	end
+	local Plugin = require("lazy.core.plugin")
+	return Plugin.values(plugin, "opts", false)
+end
+
 M.lsp = {}
 
 ---@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: lsp.Client):boolean}
@@ -456,21 +473,6 @@ end
 -----------------------------------------------------------
 function M.has(str)
 	return vim.fn.has(str) == 1
-end
-
----@param plugin string
-function M.has_plugin(plugin)
-	return require("lazy.core.config").spec.plugins[plugin] ~= nil
-end
-
----@param name string
-function M.plugin_opts(name)
-	local plugin = require("lazy.core.config").plugins[name]
-	if not plugin then
-		return {}
-	end
-	local Plugin = require("lazy.core.plugin")
-	return Plugin.values(plugin, "opts", false)
 end
 
 -----------------------------------------------------------

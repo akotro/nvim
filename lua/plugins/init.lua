@@ -806,7 +806,7 @@ return {
 		"neovim/nvim-lspconfig",
 		event = "BufRead",
 		dependencies = {
-			{ "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+			-- { "folke/neoconf.nvim", cmd = "Neoconf", config = false },
 			{ "folke/neodev.nvim", opts = {} },
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -818,25 +818,52 @@ return {
 				"simrat39/rust-tools.nvim",
 				lazy = true,
 				ft = { "rust", "toml" },
-				config = function()
-					require("rust-tools").setup({
+				opts = function()
+					local ok, mason_registry = pcall(require, "mason-registry")
+					local adapter ---@type any
+					if ok then
+						-- rust tools configuration for debugging support
+						local codelldb = mason_registry.get_package("codelldb")
+						local extension_path = codelldb:get_install_path() .. "/extension/"
+						local codelldb_path = extension_path .. "adapter/codelldb"
+						local liblldb_path = ""
+						if vim.loop.os_uname().sysname:find("Windows") then
+							liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
+						elseif vim.fn.has("mac") == 1 then
+							liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+						else
+							liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+						end
+						adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+					end
+					return {
 						dap = {
-							adapter = {
-								type = "executable",
-								command = "lldb-vscode",
-								name = "rt_lldb",
-							},
+							adapter = adapter,
 						},
-					})
+						tools = {
+							on_initialized = function()
+								vim.cmd([[
+									augroup RustLSP
+									  " autocmd CursorHold                      *.rs silent! lua vim.lsp.buf.document_highlight()
+									  autocmd CursorMoved,InsertEnter         *.rs silent! lua vim.lsp.buf.clear_references()
+									  autocmd BufEnter,CursorHold,InsertLeave *.rs silent! lua vim.lsp.codelens.refresh()
+									augroup END
+							   ]])
+							end,
+						},
+					}
 				end,
+				config = function() end,
 			},
 			{
 				"saecki/crates.nvim",
 				lazy = true,
 				ft = { "rust", "toml" },
-				config = function()
-					require("crates").setup()
-				end,
+				opts = {
+					src = {
+						cmp = { enabled = true },
+					},
+				},
 			},
 			{
 				"pmizio/typescript-tools.nvim",
@@ -997,9 +1024,9 @@ return {
 	-- NOTE: Debugging
 	{
 		"mfussenegger/nvim-dap",
-		dependencies = require("plugins.dap").dependencies,
-		keys = require("plugins.dap").keys,
-		config = require("plugins.dap").config,
+		dependencies = require("plugins.debug").dependencies,
+		keys = require("plugins.debug").keys,
+		config = require("plugins.debug").config,
 	},
 	-- NOTE: Telescope
 	{

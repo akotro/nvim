@@ -15,7 +15,7 @@ function M.config()
 			external = {
 				c = cpp_build,
 				cpp = cpp_build,
-				cs = "dotnet run",
+				cs = "dotnet build",
 				markdown = "glow %",
 				python = "python %",
 				sh = "sh %",

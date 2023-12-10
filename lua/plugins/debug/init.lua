@@ -76,6 +76,8 @@ M.dependencies = {
 			-- online, please don't ask me how to install them :)
 			ensure_installed = {
 				-- Update this to ensure that you have the debuggers for the langs you want
+				"codelldb",
+				"coreclr",
 			},
 		},
 	},
@@ -97,7 +99,21 @@ M.keys = {
 		desc = "Toggle Breakpoint",
 	},
 	{
+		"<F9>",
+		function()
+			require("dap").toggle_breakpoint()
+		end,
+		desc = "Toggle Breakpoint",
+	},
+	{
 		"<leader>dc",
+		function()
+			require("dap").continue()
+		end,
+		desc = "Continue",
+	},
+	{
+		"<F5>",
 		function()
 			require("dap").continue()
 		end,
@@ -118,6 +134,13 @@ M.keys = {
 		desc = "Run to Cursor",
 	},
 	{
+		"<C-F10>",
+		function()
+			require("dap").run_to_cursor()
+		end,
+		desc = "Run to Cursor",
+	},
+	{
 		"<leader>dg",
 		function()
 			require("dap").goto_()
@@ -126,6 +149,13 @@ M.keys = {
 	},
 	{
 		"<leader>di",
+		function()
+			require("dap").step_into()
+		end,
+		desc = "Step Into",
+	},
+	{
+		"<F11>",
 		function()
 			require("dap").step_into()
 		end,
@@ -160,7 +190,21 @@ M.keys = {
 		desc = "Step Out",
 	},
 	{
+		"<S-F11>",
+		function()
+			require("dap").step_out()
+		end,
+		desc = "Step Out",
+	},
+	{
 		"<leader>dO",
+		function()
+			require("dap").step_over()
+		end,
+		desc = "Step Over",
+	},
+	{
+		"<F10>",
 		function()
 			require("dap").step_over()
 		end,
@@ -214,6 +258,18 @@ function M.config()
 			{ text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
 		)
 	end
+
+	local dap = require("dap")
+	dap.configurations.cs = {
+		{
+			type = "coreclr",
+			name = "launch - netcoredbg",
+			request = "launch",
+			program = function()
+				return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
+			end,
+		},
+	}
 end
 
 return M

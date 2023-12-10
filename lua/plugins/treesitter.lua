@@ -74,6 +74,7 @@ M.opts = {
 		"c_sharp",
 		"cpp",
 		"rust",
+		"ron",
 		"sql",
 	},
 	incremental_selection = {

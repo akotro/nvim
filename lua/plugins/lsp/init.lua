@@ -54,7 +54,8 @@ function M.get()
 			has = "codeAction",
 		},
 	}
-	if util.has_plugin("inc-rename.nvim") then
+	-- if util.has_plugin("inc-rename.nvim") then
+	if util.plugin.has("inc-rename.nvim") then
 		M._keys[#M._keys + 1] = {
 			"<leader>lr",
 			function()
@@ -90,7 +91,7 @@ function M.resolve(buffer)
 		return {}
 	end
 	local spec = M.get()
-	local opts = util.plugin_opts("nvim-lspconfig")
+	local opts = util.plugin.opts("nvim-lspconfig")
 	local clients = util.lsp.get_clients({ bufnr = buffer })
 	for _, client in ipairs(clients) do
 		local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
@@ -175,12 +176,58 @@ M.opts = {
 					has = "definition",
 				},
 			},
+			-- handlers = {
+			-- 	["textDocument/definition"] = require("omnisharp_extended").handler,
+			-- },
 			settings = {
 				enable_roslyn_analyzers = true,
 				enable_import_completion = true,
-				-- handlers = {
-				-- 	["textDocument/definition"] = require("omnisharp_extended").handler,
-				-- },
+			},
+		},
+		rust_analyzer = {
+			mason = false,
+			keys = {
+				-- { "<leader>ld", "<cmd>RustHoverActions<cr>", desc = "Hover Actions (Rust)" },
+				-- { "<leader>la", "<cmd>RustCodeAction<cr>", desc = "Code Action (Rust)" },
+				{ "<leader>dR", "<cmd>RustDebuggables<cr>", desc = "Run Debuggables (Rust)" },
+			},
+			settings = {
+				["rust-analyzer"] = {
+					cargo = {
+						allFeatures = true,
+						loadOutDirsFromCheck = true,
+						runBuildScripts = true,
+					},
+					-- Add clippy lints for Rust.
+					checkOnSave = {
+						allFeatures = true,
+						command = "clippy",
+						extraArgs = { "--no-deps" },
+					},
+					procMacro = {
+						enable = true,
+						ignored = {
+							["async-trait"] = { "async_trait" },
+							["napi-derive"] = { "napi" },
+							["async-recursion"] = { "async_recursion" },
+						},
+					},
+				},
+			},
+		},
+		taplo = {
+			keys = {
+				{
+					"<leader>ld",
+					function()
+						if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+							require("crates").show_popup()
+						else
+							vim.lsp.buf.hover()
+						end
+					end,
+					desc = "Show Crate Documentation",
+				},
 			},
 		},
 		tsserver = {},
@@ -208,6 +255,11 @@ M.opts = {
 			require("typescript-tools").setup({})
 			return true
 		end,
+		rust_analyzer = function(_, opts)
+			local rust_tools_opts = require("config.functions").plugin.opts("rust-tools.nvim")
+			require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
+			return true
+		end,
 		-- example to setup with typescript.nvim
 		-- tsserver = function(_, opts)
 		--   require("typescript").setup({ server = opts })
@@ -219,7 +271,7 @@ M.opts = {
 }
 
 function M.config(_, opts)
-	-- if util.has_plugin("neoconf.nvim") then
+	-- if util.plugin.has("neoconf.nvim") then
 	-- 	local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
 	-- 	require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
 	-- end

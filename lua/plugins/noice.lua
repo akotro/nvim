@@ -31,6 +31,15 @@ M.opts = {
 			filter = { event = "msg_showmode" },
 			view = "notify",
 		},
+		-- NOTE: Disable Copilot enabled/disabled messages
+		{
+			filter = {
+				event = "msg_show",
+				kind = "",
+				find = "Copilot",
+			},
+			opts = { skip = true },
+		},
 	},
 	popupmenu = {
 		-- backend = "cmp",
