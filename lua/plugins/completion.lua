@@ -37,6 +37,7 @@ function M.cmp.opts()
     local defaults = require("cmp.config.default")()
     return {
         completion = {
+            autocomplete = false, -- if false, only trigger completions manually
             completeopt = "menu,menuone,noselect,noinsert",
         },
         preselect = cmp.PreselectMode.None,
@@ -136,9 +137,10 @@ function M.cmp.opts()
             scrollbar = false,
         },
         experimental = {
-            ghost_text = {
-                hl_group = "CmpGhostText",
-            },
+            ghost_text = false,
+            -- ghost_text = {
+            --     hl_group = "CmpGhostText",
+            -- },
         },
         sorting = defaults.sorting,
         -- sorting = {
