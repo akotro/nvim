@@ -68,6 +68,7 @@ function M.cmp.opts()
                     cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
                 elseif has_words_before() then
                     cmp.complete()
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
                 else
                     fallback()
                 end
