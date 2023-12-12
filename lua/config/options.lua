@@ -6,16 +6,16 @@ vim.g.mapleader = ","
 local opt = vim.opt
 
 if utils.is_win() then
-	-- Enable powershell as your default shell
-	-- vim.opt.shell = "pwsh.exe -NoLogo"
-	-- vim.opt.shellcmdflag =
-	--  "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
-	-- vim.cmd([[
-	--  let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-	--  let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-	--  set shellquote= shellxquote=
-	--    ]])
-	vim.cmd([[
+    -- Enable powershell as your default shell
+    -- vim.opt.shell = "pwsh.exe -NoLogo"
+    -- vim.opt.shellcmdflag =
+    --  "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+    -- vim.cmd([[
+    --  let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+    --  let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+    --  set shellquote= shellxquote=
+    --    ]])
+    vim.cmd([[
         let &shell = 'nu'
         let &shellcmdflag = '-c'
         let &shellquote = ""
@@ -25,17 +25,17 @@ end
 
 opt.clipboard = "unnamedplus"
 if utils.is_wsl() then
-	-- Set a compatible clipboard manager
-	vim.g.clipboard = {
-		copy = {
-			["+"] = "/mnt/c/Users/koa/.local/bin/win32yank.exe -i --crlf",
-			["*"] = "/mnt/c/Users/koa/.local/bin/win32yank.exe -i --crlf",
-		},
-		paste = {
-			["+"] = "/mnt/c/Users/koa/.local/bin/win32yank.exe -o --lf",
-			["*"] = "/mnt/c/Users/koa/.local/bin/win32yank.exe -o --lf",
-		},
-	}
+    -- Set a compatible clipboard manager
+    vim.g.clipboard = {
+        copy = {
+            ["+"] = "/mnt/c/Users/koa/.local/bin/win32yank.exe -i --crlf",
+            ["*"] = "/mnt/c/Users/koa/.local/bin/win32yank.exe -i --crlf",
+        },
+        paste = {
+            ["+"] = "/mnt/c/Users/koa/.local/bin/win32yank.exe -o --lf",
+            ["*"] = "/mnt/c/Users/koa/.local/bin/win32yank.exe -o --lf",
+        },
+    }
 end
 
 -- opt.autowrite = true           -- Enable auto write
@@ -86,23 +86,23 @@ opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 -- Wrap long lines
 if utils.is_win() then
-	vim.opt.wrap = true -- TODO: Bad for performance??
+    vim.opt.wrap = true -- TODO: Bad for performance??
 else
-	vim.opt.wrap = false
+    vim.opt.wrap = false
 end
 vim.opt.showbreak = [[↪ ]]
 opt.fillchars = {
-	foldopen = "",
-	foldclose = "",
-	-- fold = "⸱",
-	fold = " ",
-	foldsep = " ",
-	diff = "╱",
-	eob = " ",
+    foldopen = "",
+    foldclose = "",
+    -- fold = "⸱",
+    fold = " ",
+    foldsep = " ",
+    diff = "╱",
+    eob = " ",
 }
 
 if vim.fn.has("nvim-0.10") == 1 then
-	opt.smoothscroll = true
+    opt.smoothscroll = true
 end
 
 -- Folding

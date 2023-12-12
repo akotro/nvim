@@ -68,19 +68,19 @@ keymap.set("v", ">", ">gv")
 
 -- keymap.set({ "i", "n" }, "<leader><space>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 keymap.set(
-	"n",
-	"<leader>ur",
-	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-	{ desc = "Redraw / clear hlsearch / diff update" }
+    "n",
+    "<leader>ur",
+    "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+    { desc = "Redraw / clear hlsearch / diff update" }
 )
 
 -- floating terminal
 local lazyterm = function()
-	require("config.terminal")(nil, { cwd = require("config.functions").root.get() })
+    require("config.terminal")(nil, { cwd = require("config.functions").root.get() })
 end
 keymap.set("n", "<leader>ft", lazyterm, { desc = "Terminal (root dir)" })
 keymap.set("n", "<leader>fT", function()
-	require("config.terminal")()
+    require("config.terminal")()
 end, { desc = "Terminal (cwd)" })
 keymap.set("n", "<c-\\>", lazyterm, { desc = "Terminal (root dir)" })
 keymap.set("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
