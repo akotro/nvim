@@ -119,6 +119,69 @@ M.search.cfile = function(global, no_ask)
     M.search.search_replace(vim.fn.expand("<cfile>"), global, no_ask)
 end
 
+---@param no_ask? boolean
+---@param normal? boolean
+M.search.search_within = function(pattern, no_ask, normal)
+    normal = normal or false
+    no_ask = no_ask or false
+
+    local shift = 0
+
+    if string.len(pattern) == 0 then
+        shift = 2
+    else
+        shift = 1
+    end
+
+    local default_options = M.search.options.default_replace_single_buffer_options
+    if no_ask then
+        default_options = M.search.options.default_replace_no_ask_single_buffer_options
+    end
+
+    local left_keypresses = string.rep("\\<Left>", string.len(default_options) + shift)
+    if normal then
+        left_keypresses = string.rep("\\<Left>", string.len(default_options) + 1)
+    end
+
+    if normal == false then
+        vim.cmd(
+            ':call feedkeys(":s@'
+                .. M.search.util.double_escape(pattern)
+                .. "@@"
+                .. default_options
+                .. left_keypresses
+                .. '")'
+        )
+    else
+        vim.cmd(':call feedkeys(":s@' .. "@" .. default_options .. left_keypresses .. '")')
+    end
+end
+
+---@param no_ask boolean
+M.search.within = function(no_ask)
+    M.search.search_within("", no_ask, true)
+end
+
+---@param no_ask boolean
+M.search.within_cword = function(no_ask)
+    M.search.search_within(vim.fn.expand("<cword>"), no_ask)
+end
+
+---@param no_ask boolean
+M.search.within_cWORD = function(no_ask)
+    M.search.search_within(vim.fn.expand("<cWORD>"), no_ask)
+end
+
+---@param no_ask boolean
+M.search.within_cexpr = function(no_ask)
+    M.search.search_within(vim.fn.expand("<cexpr>"), no_ask)
+end
+
+---@param no_ask boolean
+M.search.within_cfile = function(no_ask)
+    M.search.search_within(vim.fn.expand("<cfile>"), no_ask)
+end
+
 M.search.util = {}
 
 -- double escaping is required due to interpretation by feedkeys and then search/replace

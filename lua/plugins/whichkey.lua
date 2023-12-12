@@ -116,6 +116,76 @@ local options = {
             name = "LSP",
             a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
         },
+        r = {
+            name = "+Replace",
+            -- Local (from current line)
+            a = {
+                name = "[a]sk",
+                o = {
+                    function()
+                        require("config.functions").search.within(false)
+                    end,
+                    "[o]pen",
+                },
+                w = {
+                    function()
+                        require("config.functions").search.within_cword(false)
+                    end,
+                    "[w]ord",
+                },
+                W = {
+                    function()
+                        require("config.functions").search.within_cWORD(false)
+                    end,
+                    "[W]ORD",
+                },
+                e = {
+                    function()
+                        require("config.functions").search.within_cexpr(false)
+                    end,
+                    "[e]xpr",
+                },
+                f = {
+                    function()
+                        require("config.functions").search.within_cfile(false)
+                    end,
+                    "[f]ile",
+                },
+            },
+            n = {
+                name = "[n]o ask",
+                o = {
+                    function()
+                        require("config.functions").search.within(true)
+                    end,
+                    "[o]pen",
+                },
+                w = {
+                    function()
+                        require("config.functions").search.within_cword(true)
+                    end,
+                    "[w]ord",
+                },
+                W = {
+                    function()
+                        require("config.functions").search.within_cWORD(true)
+                    end,
+                    "[W]ORD",
+                },
+                e = {
+                    function()
+                        require("config.functions").search.within_cexpr(true)
+                    end,
+                    "[e]xpr",
+                },
+                f = {
+                    function()
+                        require("config.functions").search.within_cfile(true)
+                    end,
+                    "[f]ile",
+                },
+            },
+        },
     },
     mappings = {
         ["<space>"] = { ":nohlsearch<cr>", "Clear Highlight" },
