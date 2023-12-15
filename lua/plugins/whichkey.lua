@@ -524,7 +524,7 @@ local options = {
             j = { "<cmd>rightbelow split<cr>", "Down" },
         },
         -- Tabs
-        t = {
+        T = {
             name = "+Tab",
             t = {
                 "<cmd>lua require('telescope').extensions['telescope-tabs'].list_tabs(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal', prompt_title='Tabs'})<cr>",
@@ -533,6 +533,10 @@ local options = {
             n = { "<cmd>tabnew %<cr>", "New Tab" },
             c = { "<cmd>tabclose<cr>", "Close Tab" },
             o = { "<cmd>tabonly<cr>", "Only Tab" },
+        },
+        -- Terminal
+        t = {
+            name = "+Terminal",
         },
         -- Folds
         z = {

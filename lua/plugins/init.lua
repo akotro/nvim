@@ -289,26 +289,6 @@ return {
             end)
         end,
     },
-    -- {
-    --	"echasnovski/mini.pairs",
-    --	event = "VeryLazy",
-    --	opts = {},
-    --	keys = {
-    --		{
-    --			"<leader>up",
-    --			function()
-    --				local Util = require("lazy.core.util")
-    --				vim.g.minipairs_disable = not vim.g.minipairs_disable
-    --				if vim.g.minipairs_disable then
-    --					Util.warn("Disabled auto pairs", { title = "Option" })
-    --				else
-    --					Util.info("Enabled auto pairs", { title = "Option" })
-    --				end
-    --			end,
-    --			desc = "Toggle auto pairs",
-    --		},
-    --	},
-    -- },
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
@@ -365,31 +345,6 @@ return {
             require("nvim-surround").setup()
         end,
     },
-    -- {
-    --	"karb94/neoscroll.nvim",
-    --	event = "BufRead",
-    --	config = function()
-    --		require("neoscroll").setup({
-    --			easing_function = "quadratic",
-    --		})
-
-    --		local mappings = {}
-    --		-- Syntax: t[keys] = {function, {function arguments}}
-    --		mappings["K"] = { "scroll", { "-vim.wo.scroll", "true", "150" } }
-    --		mappings["J"] = { "scroll", { "vim.wo.scroll", "true", "150" } }
-    --		-- mappings["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "250" } }
-    --		-- mappings["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "250" } }
-    --		-- mappings["<C-b>"] = nil
-    --		-- mappings["<C-f>"] = nil
-    --		mappings["<C-y>"] = { "scroll", { "-0.10", "false", "100" } }
-    --		mappings["<C-e>"] = { "scroll", { "0.10", "false", "100" } }
-    --		mappings["zt"] = { "zt", { "150" } }
-    --		mappings["zz"] = { "zz", { "150" } }
-    --		mappings["zb"] = { "zb", { "150" } }
-
-    --		require("neoscroll.config").set_mappings(mappings)
-    --	end,
-    -- },
     {
         "monaqa/dial.nvim",
         event = "BufRead",
@@ -573,6 +528,31 @@ return {
             -- vim.g.unception_open_buffer_in_new_tab = true
         end,
         event = "VeryLazy",
+    },
+    {
+        "rebelot/terminal.nvim",
+        config = function(opts)
+            require("terminal").setup({
+                -- layout = { open_cmd = "botright new" },
+                layout = { open_cmd = "float", width = 0.9, height = 0.8 },
+                cmd = { vim.o.shell },
+                autoclose = false,
+            })
+            local term_map = require("terminal.mappings")
+            vim.keymap.set({ "n", "x" }, "<leader>ts", term_map.operator_send, { expr = true })
+            vim.keymap.set("n", "<leader>to", term_map.toggle)
+            vim.keymap.set("n", "<leader>tO", term_map.toggle({ open_cmd = "enew" }))
+            vim.keymap.set("n", "<leader>tr", term_map.run)
+            vim.keymap.set("n", "<leader>tR", term_map.run(nil, { layout = { open_cmd = "enew" } }))
+            vim.keymap.set("n", "<leader>tk", term_map.kill)
+            vim.keymap.set("n", "<leader>t]", term_map.cycle_next)
+            vim.keymap.set("n", "<leader>t[", term_map.cycle_prev)
+            vim.keymap.set("n", "<leader>tl", term_map.move({ open_cmd = "belowright vnew", height = 0.3 }))
+            vim.keymap.set("n", "<leader>tL", term_map.move({ open_cmd = "botright vnew", height = 0.3 }))
+            vim.keymap.set("n", "<leader>th", term_map.move({ open_cmd = "belowright new", width = 0.4 }))
+            vim.keymap.set("n", "<leader>tH", term_map.move({ open_cmd = "botright new", width = 0.4 }))
+            vim.keymap.set("n", "<leader>tf", term_map.move({ open_cmd = "float", width = 0.9, height = 0.8 }))
+        end,
     },
     -- NOTE: Git
     { "tpope/vim-fugitive", event = "BufRead" },

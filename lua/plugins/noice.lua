@@ -3,6 +3,9 @@ local M = {}
 M.opts = {
     messages = {
         enabled = true,
+        view = "mini", -- default view for messages
+        view_error = "mini", -- view for errors
+        view_warn = "mini", -- view for warnings
         view_search = false,
     },
     lsp = {
@@ -43,6 +46,16 @@ M.opts = {
     },
     popupmenu = {
         -- backend = "cmp",
+    },
+    views = {
+        mini = {
+            position = {
+                row = 2,
+            },
+            border = {
+                style = "none",
+            },
+        },
     },
     presets = {
         bottom_search = false,
