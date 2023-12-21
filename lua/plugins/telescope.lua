@@ -10,6 +10,8 @@ function M.opts()
         layout_strategy = "vertical"
     end
 
+    local egrep_actions = require("telescope._extensions.egrepify.actions")
+
     return {
         defaults = {
             prompt_prefix = icons.ui.Telescope .. " ",
@@ -162,6 +164,43 @@ function M.opts()
                 override_file_sorter = true, -- override the file sorter
                 case_mode = "smart_case", -- or "ignore_case" or "respect_case"
             },
+            egrepify = {
+                -- intersect tokens in prompt ala "str1.*str2" that ONLY matches
+                -- if str1 and str2 are consecutively in line with anything in between (wildcard)
+                AND = true, -- default
+                permutations = false, -- opt-in to imply AND & match all permutations of prompt tokens
+                lnum = true, -- default, not required
+                lnum_hl = "EgrepifyLnum", -- default, not required, links to `Constant`
+                col = false, -- default, not required
+                col_hl = "EgrepifyCol", -- default, not required, links to `Constant`
+                title = true, -- default, not required, show filename as title rather than inline
+                filename_hl = "EgrepifyFile", -- default, not required, links to `Title`
+                -- suffix = long line, see screenshot
+                -- EXAMPLE ON HOW TO ADD PREFIX!
+                prefixes = {
+                    -- ADDED ! to invert matches
+                    -- example prompt: ! sorter
+                    -- matches all lines that do not comprise sorter
+                    -- rg --invert-match -- sorter
+                    ["!"] = {
+                        flag = "invert-match",
+                    },
+                    -- HOW TO OPT OUT OF PREFIX
+                    -- ^ is not a default prefix and safe example
+                    ["^"] = false,
+                },
+                -- default mappings
+                mappings = {
+                    i = {
+                        -- toggle prefixes, prefixes is default
+                        ["<C-z>"] = egrep_actions.toggle_prefixes,
+                        -- toggle AND, AND is default, AND matches tokens and any chars in between
+                        ["<C-a>"] = egrep_actions.toggle_and,
+                        -- toggle permutations, permutations of tokens is opt-in
+                        ["<C-r>"] = egrep_actions.toggle_permutations,
+                    },
+                },
+            },
         },
     }
 end
@@ -205,6 +244,15 @@ M.dependencies = {
         config = function()
             require("config.functions").on_load("telescope.nvim", function()
                 pcall(require("telescope").load_extension, "advanced_git_search")
+            end)
+        end,
+    },
+    {
+        "fdschmidt93/telescope-egrepify.nvim",
+        lazy = true,
+        config = function()
+            require("config.functions").on_load("telescope.nvim", function()
+                pcall(require("telescope").load_extension, "egrepify")
             end)
         end,
     },
