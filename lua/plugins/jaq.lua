@@ -54,8 +54,8 @@ function M.config()
                 size = 20,
             },
             quickfix = {
-                position = "vert",
-                size = 80,
+                position = "bot",
+                size = 20,
             },
         },
     })
