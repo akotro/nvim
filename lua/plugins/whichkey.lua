@@ -405,7 +405,8 @@ local options = {
             name = "+Git",
             j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
             k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-            l = { "<cmd>GitBlameToggle<cr>", "Blame" },
+            l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame Line" },
+            L = { "<cmd>Git blame<cr>", "Blame" },
             p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
             r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
             R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
@@ -414,16 +415,13 @@ local options = {
                 "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
                 "Undo Stage Hunk",
             },
-            n = { ":!git checkout -b ", "Checkout New Branch" },
+            -- n = { ":!git checkout -b ", "Checkout New Branch" },
             o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
             b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
             c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
             f = { "<cmd>Telescope git_bcommits<cr>", "Checkout buffer commit" },
             d = { "<cmd>DiffviewOpen<cr>", "Diff" },
-            -- d = {
-            --     "<cmd>Gitsigns diffthis HEAD<cr>",
-            --     "Diff",
-            -- },
+            n = { "<cmd>Neogit<cr>", "Neogit" },
         },
         -- Lsp
         l = {

@@ -569,6 +569,16 @@ return {
         },
     },
     {
+        "NeogitOrg/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim",
+            "nvim-telescope/telescope.nvim",
+        },
+        cmd = "Neogit",
+        config = true,
+    },
+    {
         "lewis6991/gitsigns.nvim",
         event = "BufRead",
         cmd = "Gitsigns",
@@ -1069,7 +1079,7 @@ return {
     --  - lervag/vimtex
     {
         "folke/zen-mode.nvim",
-        ft = { "txt", "markdown" },
+        ft = { "txt", "markdown", "norg" },
         cmd = "ZenMode",
         config = function()
             require("zen-mode").setup({})
@@ -1085,7 +1095,7 @@ return {
     },
     {
         "dhruvasagar/vim-table-mode",
-        ft = { "txt", "markdown" },
+        ft = { "txt", "markdown", "norg" },
         cmd = "TableModeToggle",
         config = function()
             vim.g.table_mode_corner = "|"
