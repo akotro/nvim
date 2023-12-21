@@ -15,6 +15,9 @@ local resize_splits = create_augroup("resize_splits")
 local close_with_q = create_augroup("close_with_q")
 local wrap_spell = create_augroup("wrap_spell")
 local auto_create_dir = create_augroup("auto_create_dir")
+local auto_open_quickfix = create_augroup("auto_open_quickfix")
+-- autocmd QuickFixCmdPost [^l]* nested cwindow
+-- autocmd QuickFixCmdPost    l* nested lwindow
 
 local autocommands = {
     -- highlight on yank
@@ -180,6 +183,11 @@ local autocommands = {
         end,
     },
 }
+
+vim.cmd([[
+    autocmd QuickFixCmdPost [^l]* nested cwindow
+    autocmd QuickFixCmdPost    l* nested lwindow
+]])
 
 local function create_autocommands(commands)
     for _, cmd in pairs(commands) do

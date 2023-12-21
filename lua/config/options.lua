@@ -130,3 +130,17 @@ vim.g.markdown_recommended_style = 0
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 -- vim.g.loaded_netrwSettings = 1
+
+-- TODO: Needed for rust cargo build
+vim.cmd([[
+    set errorformat=
+        \%-G,
+        \%-Gerror:\ aborting\ %.%#,
+        \%-Gerror:\ Could\ not\ compile\ %.%#,
+        \%Eerror:\ %m,
+        \%Eerror[E%n]:\ %m,
+        \%Wwarning:\ %m,
+        \%Inote:\ %m,
+        \%C\ %#-->\ %f:%l:%c,
+        \%E\ \ left:%m,%C\ right:%m\ %f:%l:%c,%Z
+]])
