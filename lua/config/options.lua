@@ -7,20 +7,22 @@ local opt = vim.opt
 
 if utils.is_win() then
     -- Enable powershell as your default shell
-    -- vim.opt.shell = "pwsh.exe -NoLogo"
-    -- vim.opt.shellcmdflag =
-    --  "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
-    -- vim.cmd([[
-    --  let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-    --  let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-    --  set shellquote= shellxquote=
-    --    ]])
     vim.cmd([[
-        let &shell = 'nu'
-        let &shellcmdflag = '-c'
-        let &shellquote = ""
-        let &shellxquote = ""
-     ]])
+		let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
+		let &shellcmdflag = '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';Remove-Alias -Force -ErrorAction SilentlyContinue tee;'
+		let &shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+		let &shellpipe  = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
+		set shellquote= shellxquote=
+    ]])
+
+    -- vim.cmd([[
+    --     let &shell = 'nu'
+    --     let &shellcmdflag = '-c'
+    --     let &shellquote = ""
+    --     let &shellxquote = ""
+    --  ]])
+    -- vim.opt.shell = "wsl.exe"
+    -- vim.opt.shellcmdflag = "-e"
 end
 
 opt.clipboard = "unnamedplus"
