@@ -531,7 +531,14 @@ return {
     {
         "akinsho/toggleterm.nvim",
         version = "*",
+        lazy = true,
         keys = {
+            {
+                "<c-\\>",
+                "<cmd>ToggleTerm<cr>",
+                desc = "Toggle Terminal",
+                mode = "",
+            },
             {
                 "<leader>to",
                 "<cmd>ToggleTerm<cr>",
@@ -561,7 +568,7 @@ return {
                     return vim.o.columns * 0.4
                 end
             end,
-            open_mapping = [[<c-\>]],
+            -- open_mapping = [[<c-\>]],
             direction = "float",
             float_opts = {
                 border = "curved", -- 'single' | 'double' | 'shadow' | 'curved' | ... other options supported by win open
