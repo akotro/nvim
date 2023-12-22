@@ -75,15 +75,15 @@ keymap.set(
 )
 
 -- floating terminal
-local lazyterm = function()
-    require("config.terminal")(nil, { cwd = require("config.functions").root.get() })
-end
-keymap.set("n", "<leader>ft", lazyterm, { desc = "Terminal (root dir)" })
-keymap.set("n", "<leader>fT", function()
-    require("config.terminal")()
-end, { desc = "Terminal (cwd)" })
-keymap.set("n", "<c-\\>", lazyterm, { desc = "Terminal (root dir)" })
-keymap.set("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
+-- local lazyterm = function()
+--     require("config.terminal")(nil, { cwd = require("config.functions").root.get() })
+-- end
+-- keymap.set("n", "<leader>ft", lazyterm, { desc = "Terminal (root dir)" })
+-- keymap.set("n", "<leader>fT", function()
+--     require("config.terminal")()
+-- end, { desc = "Terminal (cwd)" })
+-- keymap.set("n", "<c-\\>", lazyterm, { desc = "Terminal (root dir)" })
+-- keymap.set("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
 
 -- Terminal Mappings
 keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
