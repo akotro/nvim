@@ -568,6 +568,7 @@ return {
                     return vim.o.columns * 0.4
                 end
             end,
+            start_in_insert = false,
             -- open_mapping = [[<c-\>]],
             direction = "float",
             float_opts = {
