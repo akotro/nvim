@@ -20,6 +20,9 @@ M.opts = function()
     local ignore_auto_format_filetypes = {
         "cs",
         "xml",
+        "h",
+        "c",
+        "cpp",
     }
 
     return {
@@ -113,10 +116,10 @@ M.opts = function()
             csharpier = {
                 args = { "--fast", "--write-stdout" },
             },
-            beautysh = {
-                command = "beautysh",
-                args = { "--indent-size", "2" },
-            },
+            -- beautysh = {
+            --     command = "beautysh",
+            --     args = { "--indent-size", "2" },
+            -- },
             stylua = {
                 prepend_args = { "--indent-type", "Spaces", "--indent-width", "4" },
             },

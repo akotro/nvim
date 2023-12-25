@@ -169,6 +169,9 @@ function M.cmp.config(_, opts)
     for _, source in ipairs(opts.sources) do
         source.group_index = source.group_index or 1
     end
+
+    table.insert(opts.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
+
     require("cmp").setup(opts)
 end
 

@@ -11,7 +11,7 @@ function M.config()
 
     require("jaq-nvim").setup({
         cmds = {
-            default = "term",
+            default = "quickfix",
             external = {
                 c = cpp_build,
                 cpp = cpp_build,
@@ -22,8 +22,7 @@ function M.config()
                 -- typescript = "deno run %",
                 -- javascript = "node %",
                 -- rust = "rustc % && ./$fileBase && rm $fileBase",
-                -- rust = { "RUST_BACKTRACE=1 cargo run", "RUST_BACKTRACE=1 cargo build" },
-                rust = { "cargo build", "RUST_BACKTRACE=1 cargo run" },
+                rust = { "cargo build", "cargo build && RUST_BACKTRACE=1 cargo run" },
                 -- go = "go run %",
             },
             internal = {
@@ -32,7 +31,7 @@ function M.config()
             },
         },
         behavior = {
-            default = "terminal",
+            default = "quickfix",
             startinsert = false,
             wincmd = false,
             autosave = false,
