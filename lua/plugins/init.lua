@@ -539,7 +539,7 @@ return {
         keys = {
             {
                 "<c-\\>",
-                "<cmd>ToggleTerm<cr>",
+                [[<cmd>exe v:count1 . "ToggleTerm"<cr>]],
                 desc = "Toggle Terminal",
                 mode = "",
             },
@@ -550,17 +550,17 @@ return {
             },
             {
                 "<leader>tf",
-                "<cmd>ToggleTerm direction='float'<cr>",
+                [[<cmd>exe v:count1 . "ToggleTerm direction='float'"<cr>]],
                 desc = "Toggle Floating Terminal",
             },
             {
                 "<leader>th",
-                "<cmd>ToggleTerm direction='horizontal'<cr>",
+                [[<cmd>exe v:count1 . "ToggleTerm direction='horizontal'"<cr>]],
                 desc = "Toggle Horizontal Terminal",
             },
             {
                 "<leader>tv",
-                "<cmd>ToggleTerm direction='vertical'<cr>",
+                [[<cmd>exe v:count1 . "ToggleTerm direction='vertical'"<cr>]],
                 desc = "Toggle Vertical Terminal",
             },
         },

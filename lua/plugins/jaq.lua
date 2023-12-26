@@ -22,7 +22,7 @@ function M.config()
                 -- typescript = "deno run %",
                 -- javascript = "node %",
                 -- rust = "rustc % && ./$fileBase && rm $fileBase",
-                rust = { "cargo build", "cargo build && RUST_BACKTRACE=1 cargo run" },
+                rust = { "cargo build", "RUST_BACKTRACE=1 cargo run", "RUST_BACKTRACE=1 cargo test" },
                 -- go = "go run %",
             },
             internal = {
