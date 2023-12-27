@@ -40,6 +40,17 @@ if utils.is_wsl() then
     }
 end
 
+if vim.g.neovide then
+    vim.o.guifont = "FiraCode NF:h10"
+    vim.g.neovide_cursor_animation_length = 0
+    vim.g.neovide_floating_shadow = false
+    vim.opt.linespace = -1
+    vim.g.neovide_hide_mouse_when_typing = true
+    vim.g.neovide_underline_stroke_scale = 0.8
+    vim.cmd([[inoremap <c-v> <c-r>+]])
+    vim.cmd([[cnoremap <c-v> <c-r>+]])
+end
+
 -- opt.autowrite = true           -- Enable auto write
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 3 -- Hide * markup for bold and italic
@@ -87,11 +98,11 @@ opt.virtualedit = "block" -- Allow cursor to move where there is no text in visu
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 -- Wrap long lines
-if utils.is_win() then
-    vim.opt.wrap = true -- TODO: Bad for performance??
-else
-    vim.opt.wrap = false
-end
+-- if utils.is_win() then
+--     vim.opt.wrap = true -- TODO: Bad for performance??
+-- else
+vim.opt.wrap = false
+-- end
 vim.opt.showbreak = [[↪ ]]
 opt.fillchars = {
     foldopen = "",
