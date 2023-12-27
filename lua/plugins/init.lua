@@ -1082,6 +1082,14 @@ return {
         keys = require("plugins.debug").keys,
         config = require("plugins.debug").config,
     },
+    -- NOTE: Testing
+    {
+        "nvim-neotest/neotest",
+        dependencies = require("plugins.testing").dependencies,
+        opts = require("plugins.testing").opts,
+        config = require("plugins.testing").config,
+        keys = require("plugins.testing").keys,
+    },
     -- NOTE: Telescope
     {
         "nvim-telescope/telescope.nvim",

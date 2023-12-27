@@ -522,16 +522,18 @@ local options = {
             j = { "<cmd>rightbelow split<cr>", "Down" },
         },
         -- Tabs
-        T = {
-            name = "+Tab",
-            t = {
-                "<cmd>lua require('telescope').extensions['telescope-tabs'].list_tabs(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal', prompt_title='Tabs'})<cr>",
-                "Find Tab",
-            },
-            n = { "<cmd>tabnew %<cr>", "New Tab" },
-            c = { "<cmd>tabclose<cr>", "Close Tab" },
-            o = { "<cmd>tabonly<cr>", "Only Tab" },
-        },
+        -- T = {
+        --     name = "+Tab",
+        --     t = {
+        --         "<cmd>lua require('telescope').extensions['telescope-tabs'].list_tabs(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal', prompt_title='Tabs'})<cr>",
+        --         "Find Tab",
+        --     },
+        --     n = { "<cmd>tabnew %<cr>", "New Tab" },
+        --     c = { "<cmd>tabclose<cr>", "Close Tab" },
+        --     o = { "<cmd>tabonly<cr>", "Only Tab" },
+        -- },
+        -- Testing
+        T = { name = "+Test" },
         -- Terminal
         t = {
             name = "+Terminal",
