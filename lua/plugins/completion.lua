@@ -48,7 +48,9 @@ function M.cmp.opts()
         },
         mapping = cmp.mapping.preset.insert({
             ["<C-J>"] = cmp.mapping(function(fallback)
-                if luasnip.expandable() then
+                if luasnip.jumpable(1) then
+                    luasnip.jump(1)
+                elseif luasnip.expandable() then
                     luasnip.expand_or_jump()
                 elseif luasnip.jumpable(1) then
                     luasnip.jump(1)
@@ -83,6 +85,7 @@ function M.cmp.opts()
             ["<C-b>"] = cmp.mapping.scroll_docs(-4),
             ["<C-f>"] = cmp.mapping.scroll_docs(4),
             ["<C-Space>"] = cmp.mapping.complete(),
+            ["<C-S-Space>"] = cmp.mapping.abort(),
             ["<C-e>"] = cmp.mapping.abort(),
             ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
             -- ["<S-CR>"] = cmp.mapping.confirm({
@@ -98,13 +101,15 @@ function M.cmp.opts()
             { name = "nvim_lsp" },
             { name = "luasnip" },
             { name = "path" },
+            { name = "buffer" },
             { name = "copilot" },
             -- { name = "nvim_lsp_signature_help" },
             { name = "crates" },
             { name = "neorg" },
-        }, {
-            { name = "buffer" },
         }),
+        -- }, {
+        --     { name = "buffer" },
+        -- }),
         formatting = {
             format = function(_, item)
                 local icons = require("config.icons").kinds
