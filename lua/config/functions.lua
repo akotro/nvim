@@ -15,7 +15,7 @@ _G.d = function(...)
         what = what[1]
     end
     local msg = vim.inspect(vim.deepcopy(what))
-    require("notify").notify(msg, vim.log.levels.INFO, {
+    vim.notify(msg, vim.log.levels.INFO, {
         title = "Debug: " .. source,
         on_open = function(win)
             vim.wo[win].conceallevel = 3
@@ -549,7 +549,7 @@ end
 function M.toggle_option(option)
     local value = not vim.api.nvim_get_option_value(option, {})
     vim.opt[option] = value
-    require("notify")(option .. " set to " .. tostring(value))
+    vim.notify(option .. " set to " .. tostring(value))
 end
 
 function M.toggle_tabline()
@@ -563,7 +563,7 @@ function M.toggle_tabline()
 
     vim.opt.showtabline = value
 
-    require("notify")("showtabline" .. " set to " .. tostring(value))
+    vim.notify("showtabline" .. " set to " .. tostring(value))
 end
 
 -----------------------------------------------------------
@@ -781,7 +781,7 @@ function M.save_if_unsaved()
     if modifiable == 1 and modified and dont_ignore_type and not is_unnamed_buffer then
         -- vim.cmd("silent! w")
         vim.cmd("silent w")
-        require("notify")("AutoSaved at " .. vim.fn.strftime("%H:%M:%S"))
+        vim.notify("AutoSaved at " .. vim.fn.strftime("%H:%M:%S"))
         -- print("AutoSaved at " .. vim.fn.strftime("%H:%M:%S"))
     end
 end
