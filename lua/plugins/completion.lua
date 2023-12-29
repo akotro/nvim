@@ -2,6 +2,13 @@ local M = {}
 
 M.luasnip = {}
 
+M.luasnip.dependencies = {
+    "rafamadriz/friendly-snippets",
+    config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+    end,
+}
+
 M.luasnip.opts = {
     history = true,
     delete_check_events = "TextChanged",

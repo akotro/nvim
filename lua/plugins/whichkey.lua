@@ -558,7 +558,7 @@ local options = {
     },
 }
 
-M.setup = function()
+function M.config()
     local which_key = require("which-key")
 
     local opts = options.opts

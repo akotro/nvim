@@ -1,5 +1,10 @@
 local M = {}
 
+M.dependencies = {
+    "kristijanhusak/vim-dadbod-ui",
+    "kristijanhusak/vim-dadbod-completion",
+}
+
 local function db_completion()
     require("cmp").setup.buffer({
         sources = {
@@ -10,7 +15,7 @@ local function db_completion()
     })
 end
 
-function M.setup()
+function M.config()
     vim.g.db_ui_save_location = vim.fn.stdpath("data") .. require("plenary.path").path.sep .. "db_ui"
     vim.g.db_ui_execute_on_save = 0
 

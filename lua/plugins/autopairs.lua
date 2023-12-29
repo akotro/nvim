@@ -1,6 +1,8 @@
 local M = {}
 
-M.setup = function()
+M.dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" }
+
+function M.config()
     local opts = {
         map_char = {
             all = "(",
