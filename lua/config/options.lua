@@ -46,9 +46,9 @@ if vim.g.neovide then
     vim.g.neovide_floating_shadow = false
     vim.opt.linespace = -1
     vim.g.neovide_hide_mouse_when_typing = true
-    vim.g.neovide_underline_stroke_scale = 0.8
     vim.cmd([[inoremap <c-s-v> <c-r>+]])
     vim.cmd([[cnoremap <c-s-v> <c-r>+]])
+    vim.g.neovide_underline_stroke_scale = 0.5
 end
 
 -- opt.autowrite = true           -- Enable auto write
