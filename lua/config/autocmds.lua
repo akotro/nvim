@@ -108,7 +108,10 @@ local autocommands = {
 
         group = autoread,
         pattern = { "*" },
-        command = [[lua require("notify")("File changed on disk. Buffer reloaded.", "warn")]],
+        -- command = [[lua require("notify")("File changed on disk. Buffer reloaded.", vim.log.levels.WARN)]],
+        callback = function(event)
+            vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.WARN)
+        end,
     },
     -- Cursorline
     {
