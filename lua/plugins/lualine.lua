@@ -238,6 +238,20 @@ function M.setup()
             color = "SLProgress",
             cond = nil,
         },
+        visual_selection = {
+            function()
+                local fn = vim.fn
+                local isVisualMode = fn.mode():find("[Vv]")
+                if not isVisualMode then
+                    return ""
+                end
+                local starts = fn.line("v")
+                local ends = fn.line(".")
+                local lines = starts <= ends and ends - starts + 1 or starts - ends + 1
+                return tostring(lines) .. "L " .. tostring(fn.wordcount().visual_chars) .. "C"
+            end,
+            color = { fg = colors.violet },
+        },
     }
 
     return {
@@ -261,13 +275,15 @@ function M.setup()
                 components.python_env,
             },
             lualine_x = {
-
                 components.diagnostics,
                 components.lsp,
                 components.spaces,
                 components.filetype,
             },
-            lualine_y = { components.location },
+            lualine_y = {
+                components.visual_selection,
+                components.location,
+            },
             lualine_z = {
                 components.progress,
             },
