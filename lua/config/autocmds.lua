@@ -73,7 +73,7 @@ local autocommands = {
         pattern = { "gitcommit", "markdown" },
         callback = function()
             vim.opt_local.wrap = true
-            vim.opt_local.spell = true
+            -- vim.opt_local.spell = true
         end,
     },
     -- Auto create dir when saving a file, in case some intermediate directory does not exist

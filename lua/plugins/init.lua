@@ -188,6 +188,7 @@ return {
     },
     {
         "NeogitOrg/neogit",
+        branch = "nightly",
         cmd = "Neogit",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -437,7 +438,7 @@ return {
             vim.g.table_mode_corner = "|"
         end,
     },
-    -- NOTE: Neorg
+    -- NOTE: Notes
     {
         "nvim-neorg/neorg",
         build = ":Neorg sync-parsers",
@@ -445,6 +446,35 @@ return {
         cmd = "Neorg",
         dependencies = require("plugins.neorg").dependencies,
         opts = require("plugins.neorg").opts,
+    },
+    {
+        "epwalsh/obsidian.nvim",
+        version = "*",
+        lazy = true,
+        -- ft = "markdown",
+        event = {
+            "BufReadPre " .. vim.fn.expand("~") .. "/obsidian/**.md",
+            "BufNewFile " .. vim.fn.expand("~") .. "/obsidian/**.md",
+        },
+        dependencies = {
+            -- Required.
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
+            "nvim-telescope/telescope.nvim",
+            "nvim-treesitter",
+        },
+        opts = {
+            workspaces = {
+                {
+                    name = "obsidian",
+                    path = "~/obsidian",
+                },
+                -- {
+                --     name = "work",
+                --     path = "~/vaults/work",
+                -- },
+            },
+        },
     },
 
     -- NOTE: Web
