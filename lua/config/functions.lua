@@ -252,6 +252,12 @@ function M.plugin.has(plugin)
     return require("lazy.core.config").spec.plugins[plugin] ~= nil
 end
 
+---@param plugin string
+function M.plugin.loaded(plugin)
+    local lazy = require("lazy.core.config")
+    return lazy.spec.plugins[plugin] ~= nil and lazy.spec.plugins[plugin]._.loaded ~= nil
+end
+
 ---@param name string
 function M.plugin.opts(name)
     local plugin = require("lazy.core.config").plugins[name]

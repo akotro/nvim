@@ -1,5 +1,19 @@
 local M = {}
 
+M.keys = {
+    {
+        "<leader>B",
+        "<cmd>JaqBuild<cr>",
+        "JaqBuild",
+    },
+    {
+        "<leader>Br",
+        "<cmd>JaqRun<cr>",
+        "JaqRun",
+    },
+    { "<leader>R", "<cmd>Jaq<cr>", "Jaq" },
+}
+
 function M.config()
     local utils = require("config.functions")
     local cpp_build = ""
@@ -10,8 +24,8 @@ function M.config()
     end
 
     require("jaq-nvim").setup({
+        -- TODO: separate cmds to build and run
         cmds = {
-            default = "quickfix",
             external = {
                 c = cpp_build,
                 cpp = cpp_build,
@@ -22,7 +36,26 @@ function M.config()
                 -- typescript = "deno run %",
                 -- javascript = "node %",
                 -- rust = "rustc % && ./$fileBase && rm $fileBase",
-                rust = { "cargo build", "RUST_BACKTRACE=1 cargo run", "RUST_BACKTRACE=1 cargo test" },
+                rust = { "RUST_BACKTRACE=1 cargo run", "RUST_BACKTRACE=1 cargo nextest run" },
+                -- go = "go run %",
+            },
+            internal = {
+                -- lua = "luafile %",
+                -- vim = "source %",
+            },
+        },
+        build_cmds = {
+            external = {
+                c = cpp_build,
+                cpp = cpp_build,
+                cs = "dotnet build",
+                markdown = "glow %",
+                python = "python %",
+                sh = "sh %",
+                -- typescript = "deno run %",
+                -- javascript = "node %",
+                -- rust = "rustc % && ./$fileBase && rm $fileBase",
+                rust = "cargo build",
                 -- go = "go run %",
             },
             internal = {
@@ -31,7 +64,7 @@ function M.config()
             },
         },
         behavior = {
-            default = "quickfix",
+            default = "terminal",
             startinsert = false,
             wincmd = false,
             autosave = false,

@@ -121,7 +121,10 @@ return {
     },
     {
         "akotro/jaq-nvim",
+        branch = "dev",
+        -- dir = "/home/akotro/programming/lua/jaq-nvim",
         ft = { "c", "cpp", "cs", "markdown", "python", "sh", "rust" },
+        keys = require("plugins.jaq").keys,
         config = require("plugins.jaq").config,
     },
     {
@@ -456,25 +459,9 @@ return {
             "BufReadPre " .. vim.fn.expand("~") .. "/obsidian/**.md",
             "BufNewFile " .. vim.fn.expand("~") .. "/obsidian/**.md",
         },
-        dependencies = {
-            -- Required.
-            "nvim-lua/plenary.nvim",
-            "hrsh7th/nvim-cmp",
-            "nvim-telescope/telescope.nvim",
-            "nvim-treesitter",
-        },
-        opts = {
-            workspaces = {
-                {
-                    name = "obsidian",
-                    path = "~/obsidian",
-                },
-                -- {
-                --     name = "work",
-                --     path = "~/vaults/work",
-                -- },
-            },
-        },
+        dependencies = require("plugins.obsidian").dependencies,
+        opts = require("plugins.obsidian").opts,
+        keys = require("plugins.obsidian").keys,
     },
 
     -- NOTE: Web

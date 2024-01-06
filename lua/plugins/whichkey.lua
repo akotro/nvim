@@ -193,8 +193,9 @@ local options = {
         ["w"] = { "<cmd>w<cr>", "Save" },
         ["q"] = { '<cmd>lua require("config.functions").smart_quit()<CR>', "Quit" },
         ["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>', "Comment" },
-        ["B"] = { "<cmd>Jaq<cr>", "Jaq" },
-        ["R"] = { "<cmd>JaqRun<cr>", "JaqRun" },
+        -- ["B"] = { "<cmd>JaqBuild<cr>", "JaqBuild" },
+        -- ["Br"] = { "<cmd>JaqRun<cr>", "JaqRun" },
+        -- ["R"] = { "<cmd>Jaq<cr>", "Jaq" },
         -- Plugins (Lazy)
         p = {
             name = "+Plugins",

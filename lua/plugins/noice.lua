@@ -10,28 +10,28 @@ M.keys = {
     -- 	desc = "Redirect Cmdline",
     -- },
     {
-        "<leader>nl",
+        "<leader>Nl",
         function()
             require("noice").cmd("last")
         end,
         desc = "Noice Last Message",
     },
     {
-        "<leader>nh",
+        "<leader>Nh",
         function()
             require("noice").cmd("history")
         end,
         desc = "Noice History",
     },
     {
-        "<leader>na",
+        "<leader>Na",
         function()
             require("noice").cmd("all")
         end,
         desc = "Noice All",
     },
     {
-        "<leader>nd",
+        "<leader>Nd",
         function()
             require("noice").cmd("dismiss")
         end,
