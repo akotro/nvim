@@ -113,7 +113,7 @@ M.opts = {
     views = {
         mini = {
             position = {
-                row = 2,
+                row = 3,
             },
             border = {
                 style = "none",

@@ -375,7 +375,11 @@ M.opts = {
         pyright = {},
         sqlls = {},
         yamlls = {},
-        docker_compose_language_service = {},
+        docker_compose_language_service = {
+            root_dir = function(fname)
+                return require("lspconfig.util").root_pattern("docker-compose.yaml", "docker-compose.yml")(fname)
+            end,
+        },
         dockerls = {},
     },
     -- you can do any additional lsp server setup here
@@ -399,6 +403,16 @@ M.opts = {
             local clangd_ext_opts = require("config.functions").plugin.opts("clangd_extensions.nvim")
             require("clangd_extensions").setup(vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts }))
             return false
+        end,
+        docker_compose_language_service = function(_, _)
+            vim.filetype.add({
+                filename = {
+                    ["docker-compose.yml"] = "yaml.docker-compose",
+                    ["docker-compose.yaml"] = "yaml.docker-compose",
+                    ["compose.yml"] = "yaml.docker-compose",
+                    ["compose.yaml"] = "yaml.docker-compose",
+                },
+            })
         end,
         -- example to setup with typescript.nvim
         -- tsserver = function(_, opts)
