@@ -454,11 +454,11 @@ return {
         "epwalsh/obsidian.nvim",
         version = "*",
         lazy = true,
-        -- ft = "markdown",
-        event = {
-            "BufReadPre " .. vim.fn.expand("~") .. "/obsidian/**.md",
-            "BufNewFile " .. vim.fn.expand("~") .. "/obsidian/**.md",
-        },
+        ft = "markdown",
+        -- event = {
+        --     "BufReadPre " .. vim.fn.expand("~") .. "/obsidian/**.md",
+        --     "BufNewFile " .. vim.fn.expand("~") .. "/obsidian/**.md",
+        -- },
         dependencies = require("plugins.obsidian").dependencies,
         opts = require("plugins.obsidian").opts,
         keys = require("plugins.obsidian").keys,

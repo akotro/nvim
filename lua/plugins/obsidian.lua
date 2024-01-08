@@ -17,17 +17,24 @@ M.opts = {
 }
 
 M.keys = {
-    ["gf"] = {
-        action = function()
-            return require("obsidian").util.gf_passthrough()
+    {
+        "gf",
+        function()
+            require("obsidian").util.gf_passthrough()
         end,
-        opts = { noremap = false, expr = true, buffer = true },
+        { noremap = false, expr = true, buffer = true },
     },
-    ["<leader>ch"] = {
-        action = function()
-            return require("obsidian").util.toggle_checkbox()
+    {
+        "<leader>ch",
+        function()
+            require("obsidian").util.toggle_checkbox()
         end,
-        opts = { buffer = true },
+        { buffer = true },
+    },
+    {
+        "<enter>",
+        "<cmd>ObsidianFollowLink<cr>",
+        { buffer = true },
     },
     {
         "<leader>nf",
