@@ -41,10 +41,21 @@ function M.cmp.opts()
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
+    local function toggle_autocomplete()
+        local current_setting = cmp.get_config().completion.autocomplete
+        if current_setting and #current_setting > 0 then
+            cmp.setup({ completion = { autocomplete = false } })
+            vim.notify("Autocomplete disabled")
+        else
+            cmp.setup({ completion = { autocomplete = { cmp.TriggerEvent.TextChanged } } })
+            vim.notify("Autocomplete enabled")
+        end
+    end
+    vim.api.nvim_create_user_command("NvimCmpToggle", toggle_autocomplete, {})
+
     local defaults = require("cmp.config.default")()
     return {
         completion = {
-            autocomplete = false, -- if false, only trigger completions manually
             completeopt = "menu,menuone,noselect,noinsert",
         },
         preselect = cmp.PreselectMode.None,
@@ -55,9 +66,7 @@ function M.cmp.opts()
         },
         mapping = cmp.mapping.preset.insert({
             ["<C-J>"] = cmp.mapping(function(fallback)
-                if luasnip.jumpable(1) then
-                    luasnip.jump(1)
-                elseif luasnip.expandable() then
+                if luasnip.expandable() then
                     luasnip.expand_or_jump()
                 elseif luasnip.jumpable(1) then
                     luasnip.jump(1)
@@ -106,8 +115,8 @@ function M.cmp.opts()
         }),
         sources = cmp.config.sources({
             { name = "nvim_lsp" },
-            { name = "path" },
             { name = "luasnip" },
+            { name = "path" },
             { name = "buffer" },
             { name = "copilot" },
             -- { name = "nvim_lsp_signature_help" },

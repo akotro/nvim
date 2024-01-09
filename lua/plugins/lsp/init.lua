@@ -54,7 +54,6 @@ function M.get()
             has = "codeAction",
         },
     }
-    -- if util.has_plugin("inc-rename.nvim") then
     if util.plugin.has("inc-rename.nvim") then
         M._keys[#M._keys + 1] = {
             "<leader>lr",

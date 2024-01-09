@@ -433,6 +433,10 @@ local options = {
             -- 	end,
             -- 	"Open Diagnostic Float",
             -- },
+            c = {
+                ":NvimCmpToggle<CR>",
+                "Toggle Autocomplete",
+            },
             w = {
                 "<cmd>Telescope lsp_workspace_diagnostics<cr>",
                 "Workspace Diagnostics",

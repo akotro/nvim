@@ -34,7 +34,7 @@ M.keys = {
     {
         "<enter>",
         "<cmd>ObsidianFollowLink<cr>",
-        { buffer = true },
+        { noremap = false, buffer = true },
     },
     {
         "<leader>nf",
