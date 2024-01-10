@@ -380,6 +380,12 @@ M.opts = {
             end,
         },
         dockerls = {},
+        texlab = {},
+        typst_lsp = {
+            root_dir = function(fname)
+                return require("lspconfig.util").root_pattern("*.typ")(fname)
+            end,
+        },
     },
     -- you can do any additional lsp server setup here
     -- return true if you don't want this server to be setup with lspconfig
@@ -410,6 +416,13 @@ M.opts = {
                     ["docker-compose.yaml"] = "yaml.docker-compose",
                     ["compose.yml"] = "yaml.docker-compose",
                     ["compose.yaml"] = "yaml.docker-compose",
+                },
+            })
+        end,
+        typst_lsp = function(_, _)
+            vim.filetype.add({
+                filename = {
+                    ["*.typ"] = "typst",
                 },
             })
         end,

@@ -4,15 +4,20 @@ M.luasnip = {}
 
 M.luasnip.dependencies = {
     "rafamadriz/friendly-snippets",
-    config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-    end,
 }
 
 M.luasnip.opts = {
     history = true,
     delete_check_events = "TextChanged",
+    enable_autosnippets = true,
 }
+
+function M.luasnip.config()
+    -- friendly-snippets
+    require("luasnip.loaders.from_vscode").lazy_load()
+
+    require("luasnip.loaders.from_lua").lazy_load({ paths = { "~/.config/nvim/snippets" } })
+end
 
 M.cmp = {}
 

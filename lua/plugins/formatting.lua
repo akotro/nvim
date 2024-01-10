@@ -38,7 +38,7 @@ M.opts = function()
             javascript = { { "prettierd", "prettier" } },
             typescript = { { "prettierd", "prettier" } },
             markdown = { "prettierd" },
-            tex = { "prettierd" },
+            tex = { "latexindent" },
             -- You can use a function here to determine the formatters dynamically
             python = function(bufnr)
                 if require("conform").get_formatter_info("ruff_format", bufnr).available then
@@ -47,6 +47,7 @@ M.opts = function()
                     return { "black" }
                 end
             end,
+            typst = { "typstfmt" },
             -- Use the "*" filetype to run formatters on all filetypes.
             -- ["*"] = { "codespell" },
             -- Use the "_" filetype to run formatters on filetypes that don't

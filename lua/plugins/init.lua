@@ -290,6 +290,7 @@ return {
             or nil,
         dependencies = require("plugins.completion").luasnip.dependencies,
         opts = require("plugins.completion").luasnip.opts,
+        config = require("plugins.completion").luasnip.config,
     },
     {
         "hrsh7th/nvim-cmp",
@@ -418,12 +419,18 @@ return {
     -- jbyuki/nabla.nvim
     -- Latex Notes
     --  - https://castel.dev/post/lecture-notes-1/
-    --  - lervag/vimtex
     {
         "folke/zen-mode.nvim",
         ft = { "txt", "markdown", "norg" },
         cmd = "ZenMode",
         config = true,
+    },
+    -- NOTE: Latex
+    {
+        "lervag/vimtex",
+        config = function()
+            vim.g["vimtex_view_method"] = "zathura"
+        end,
     },
     -- NOTE: Markdown
     {
@@ -462,6 +469,19 @@ return {
         dependencies = require("plugins.obsidian").dependencies,
         opts = require("plugins.obsidian").opts,
         keys = require("plugins.obsidian").keys,
+    },
+    -- NOTE: Typst
+    {
+        "kaarmu/typst.vim",
+        ft = "typst",
+    },
+    {
+        "chomosuke/typst-preview.nvim",
+        ft = "typst",
+        version = "0.1.*",
+        build = function()
+            require("typst-preview").update()
+        end,
     },
 
     -- NOTE: Web
