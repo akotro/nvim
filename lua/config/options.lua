@@ -21,8 +21,8 @@ if utils.is_win() then
     --     let &shellquote = ""
     --     let &shellxquote = ""
     --  ]])
-    -- vim.opt.shell = "wsl.exe"
-    -- vim.opt.shellcmdflag = "-e"
+    -- opt.shell = "wsl.exe"
+    -- opt.shellcmdflag = "-e"
 end
 
 opt.clipboard = "unnamedplus"
@@ -42,15 +42,45 @@ end
 
 if vim.g.neovide then
     vim.o.guifont = "FiraCode NF:h10"
+    vim.cmd([[
+        function! ZoomIn()
+            let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
+            let l:gf_size_whole = l:gf_size_whole + 1
+            let l:new_font_size = ':h'.l:gf_size_whole
+            let &guifont = substitute(&guifont, ':h\d\+$', l:new_font_size, '')
+        endfunction
+
+        function! ZoomOut()
+            let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
+            let l:gf_size_whole = l:gf_size_whole - 1
+            let l:new_font_size = ':h'.l:gf_size_whole
+            let &guifont = substitute(&guifont, ':h\d\+$', l:new_font_size, '')
+        endfunction
+
+        command! ZoomIn call ZoomIn()
+        command! ZoomOut call ZoomOut()
+
+    ]])
+    vim.api.nvim_set_keymap("n", "<c-+>", ":ZoomIn<cr>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("n", "<c-=>", ":ZoomIn<cr>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("n", "<c-->", ":ZoomOut<cr>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap(
+        "n",
+        "<c-0>",
+        [[<cmd>lua vim.o.guifont = "FiraCode NF:h10"<cr>]],
+        { noremap = true, silent = true }
+    )
+
     vim.g.neovide_cursor_animation_length = 0
     vim.g.neovide_floating_shadow = false
-    vim.opt.linespace = -1
+    opt.linespace = -1
     vim.g.neovide_hide_mouse_when_typing = true
     vim.cmd([[inoremap <c-s-v> <c-r>+]])
     vim.cmd([[cnoremap <c-s-v> <c-r>+]])
     vim.g.neovide_underline_stroke_scale = 0.5
 end
 
+opt.title = true
 -- opt.autowrite = true           -- Enable auto write
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 2 -- Hide * markup for bold and italic
@@ -99,11 +129,11 @@ opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 -- Wrap long lines
 -- if utils.is_win() then
---     vim.opt.wrap = true -- TODO: Bad for performance??
+--     opt.wrap = true -- TODO: Bad for performance??
 -- else
-vim.opt.wrap = false
+opt.wrap = false
 -- end
-vim.opt.showbreak = [[↪ ]]
+opt.showbreak = [[↪ ]]
 opt.fillchars = {
     foldopen = "",
     foldclose = "",
