@@ -117,6 +117,7 @@ return {
     },
     {
         "NvChad/nvim-colorizer.lua",
+        ft = { "html", "css", "javascript", "vim", "lua", "sh", "zsh" },
         config = require("plugins.colorizer").config,
     },
     {
@@ -157,6 +158,7 @@ return {
     },
     {
         "stevearc/oil.nvim",
+        lazy = false,
         dependencies = require("plugins.oil").dependencies,
         keys = require("plugins.oil").keys,
         opts = require("plugins.oil").opts,
@@ -428,6 +430,7 @@ return {
     -- NOTE: Latex
     {
         "lervag/vimtex",
+        ft = "tex",
         config = function()
             vim.g["vimtex_view_method"] = "zathura"
         end,

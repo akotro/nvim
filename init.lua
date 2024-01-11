@@ -42,6 +42,7 @@ require("lazy").setup(plugins, {
                 "netrwSettings",
                 "spellfile",
                 "matchit",
+                "editorconfig",
             },
         },
     },
