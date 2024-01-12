@@ -44,7 +44,11 @@ M.keys = {
 }
 
 M.opts = {
-    highlight = { enable = true },
+    highlight = {
+        enable = true,
+        disable = { "latex" },
+        additional_vim_regex_highlighting = { "latex" },
+    },
     indent = { enable = true },
     auto_install = true,
     ensure_installed = {
