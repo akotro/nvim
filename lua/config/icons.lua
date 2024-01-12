@@ -4,7 +4,8 @@ local icons = {
     },
     dap = {
         Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
-        Breakpoint = " ",
+        -- Breakpoint = { " ", "DapUIStop" },
+        Breakpoint = { " ", "DapUIStop" },
         BreakpointCondition = " ",
         BreakpointRejected = { " ", "DiagnosticError" },
         LogPoint = ".>",
