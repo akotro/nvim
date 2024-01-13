@@ -423,9 +423,17 @@ return {
     --  - https://castel.dev/post/lecture-notes-1/
     {
         "folke/zen-mode.nvim",
-        ft = { "txt", "markdown", "norg" },
+        ft = { "txt", "markdown", "norg", "tex", "typ" },
         cmd = "ZenMode",
+        opts = require("plugins.zenmode").opts,
         config = true,
+    },
+    {
+        "3rd/image.nvim",
+        enabled = require("config.functions").is_linux(),
+        ft = { "txt", "markdown", "norg", "tex", "typ" },
+        opts = require("plugins.image").opts,
+        config = require("plugins.image").config,
     },
     -- NOTE: Latex
     {
