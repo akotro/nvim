@@ -427,12 +427,6 @@ local options = {
         -- Lsp
         l = {
             name = "+LSP",
-            -- D = {
-            -- 	function()
-            -- 		require("config.functions").open_diagnostic()
-            -- 	end,
-            -- 	"Open Diagnostic Float",
-            -- },
             c = {
                 ":NvimCmpToggle<CR>",
                 "Toggle Autocomplete",
@@ -441,7 +435,7 @@ local options = {
                 "<cmd>Telescope lsp_workspace_diagnostics<cr>",
                 "Workspace Diagnostics",
             },
-            h = { "<cmd>lua require('lsp-inlayhints').toggle()<cr>", "Toggle Hints" },
+            -- h = { "<cmd>lua require('lsp-inlayhints').toggle()<cr>", "Toggle Hints" },
             H = { "<cmd>IlluminationToggle<cr>", "Toggle Doc HL" },
             I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
             j = {
@@ -454,16 +448,8 @@ local options = {
             },
             v = { "<cmd>lua require('lsp_lines').toggle()<cr>", "Virtual Text" },
             l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-            o = { "<cmd>SymbolsOutline<cr>", "Outline" },
+            -- o = { "<cmd>SymbolsOutline<cr>", "Outline" },
             q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-            -- r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-            -- r = {
-            -- 	function()
-            -- 		return ":IncRename " .. vim.fn.expand("<cword>")
-            -- 	end,
-            -- 	"Rename",
-            -- 	expr = true,
-            -- },
             R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
             s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
             S = {
@@ -471,6 +457,12 @@ local options = {
                 "Workspace Symbols",
             },
             t = { '<cmd>lua require("config.functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
+            o = {
+                function()
+                    require("config.functions").open_diagnostic()
+                end,
+                "Open Diagnostic Float",
+            },
             L = {
                 function()
                     require("lsp_lines").toggle()

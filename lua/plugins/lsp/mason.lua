@@ -1,6 +1,6 @@
 local M = {}
 
-M.keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } }
+M.keys = { { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" } }
 
 M.opts = {
     ensure_installed = {
