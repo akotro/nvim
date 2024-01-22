@@ -386,7 +386,9 @@ M.opts = {
                 return require("lspconfig.util").root_pattern("*.typ")(fname)
             end,
         },
-        nil_ls = {},
+        nil_ls = {
+            mason = false,
+        },
     },
     -- you can do any additional lsp server setup here
     -- return true if you don't want this server to be setup with lspconfig
