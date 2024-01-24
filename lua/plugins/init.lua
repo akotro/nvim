@@ -501,17 +501,50 @@ return {
 
     -- NOTE: Database
     {
-        "tpope/vim-dadbod",
+        "kndndrj/nvim-dbee",
         lazy = true,
-        cmd = {
-            "DBUIToggle",
-            "DBUI",
-            "DBUIAddConnection",
-            "DBUIFindBuffer",
-            "DBUIRenameBuffer",
-            "DBUILastQueryInfo",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
         },
-        dependencies = require("plugins.dadbod").dependencies,
-        config = require("plugins.dadbod").config,
+        build = function()
+            -- Install tries to automatically detect the install method.
+            -- if it fails, try calling it with one of these parameters:
+            --    "curl", "wget", "bitsadmin", "go"
+            require("dbee").install()
+        end,
+        config = function()
+            require("dbee").setup({
+                sources = {
+                    require("dbee.sources").MemorySource:new({
+                        -- {
+                        --     name = "",
+                        --     type = "",
+                        --     url = "",
+                        -- },
+                        -- ...
+                    }),
+                    -- require("dbee.sources").EnvSource:new("DBEE_CONNECTIONS"),
+                    -- require("dbee.sources").FileSource:new(vim.fn.stdpath("cache") .. "/dbee/persistence.json"),
+                },
+            })
+        end,
     },
+    {
+        "chrisbra/csv.vim",
+        ft = "csv",
+    },
+    -- {
+    --     "tpope/vim-dadbod",
+    --     lazy = true,
+    --     cmd = {
+    --         "DBUIToggle",
+    --         "DBUI",
+    --         "DBUIAddConnection",
+    --         "DBUIFindBuffer",
+    --         "DBUIRenameBuffer",
+    --         "DBUILastQueryInfo",
+    --     },
+    --     dependencies = require("plugins.dadbod").dependencies,
+    --     config = require("plugins.dadbod").config,
+    -- },
 }
