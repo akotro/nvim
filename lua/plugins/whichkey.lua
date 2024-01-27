@@ -422,8 +422,9 @@ local options = {
             c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
             f = { "<cmd>Telescope git_bcommits<cr>", "Checkout buffer commit" },
             d = {
-                o = { "<cmd>DiffviewOpen<cr>", "Diff" },
-                c = { "<cmd>DiffviewClose<cr>", "Diff" },
+                name = "+Diff",
+                o = { "<cmd>DiffviewOpen<cr>", "DiffviewOpen" },
+                c = { "<cmd>DiffviewClose<cr>", "DiffviewClose" },
             },
             n = { "<cmd>Neogit<cr>", "Neogit" },
         },
