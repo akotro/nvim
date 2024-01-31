@@ -77,7 +77,8 @@ function M.setup()
     local components = {
         mode = {
             function()
-                return " " .. icons.ui.Target .. " "
+                -- return " " .. icons.ui.Target .. " "
+                return " " .. icons.logos.arch .. " "
             end,
             padding = { left = 0, right = 0 },
             color = {},

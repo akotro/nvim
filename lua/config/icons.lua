@@ -164,5 +164,10 @@ local icons = {
         TriangleShortArrowRight = "",
         TriangleShortArrowUp = "",
     },
+    logos = {
+        arch = "󰣇",
+        nixos = "",
+        neovim = "",
+    },
 }
 return icons
