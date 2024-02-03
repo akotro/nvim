@@ -110,6 +110,40 @@ M.opts = {
 
 function M.config()
     require("hlslens").setup(M.opts)
+
+    local kopts = { noremap = true, silent = true }
+
+    vim.keymap.set({ "n", "x" }, "n", function()
+        M.nN("n")
+    end)
+    vim.keymap.set({ "n", "x" }, "N", function()
+        M.nN("N")
+    end)
+    -- vim.api.nvim_set_keymap(
+    --     "n",
+    --     "n",
+    --     [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+    --     kopts
+    -- )
+    -- vim.api.nvim_set_keymap(
+    --     "n",
+    --     "N",
+    --     [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+    --     kopts
+    -- )
+    vim.api.nvim_set_keymap("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+    vim.api.nvim_set_keymap("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+    vim.api.nvim_set_keymap("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+    vim.api.nvim_set_keymap("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+
+    vim.keymap.set({ "n", "x" }, "<Leader>L", function()
+        vim.schedule(function()
+            if require("hlslens").exportLastSearchToQuickfix() then
+                vim.cmd("cw")
+            end
+        end)
+        return ":noh<CR>"
+    end, { expr = true })
 end
 
 return M
