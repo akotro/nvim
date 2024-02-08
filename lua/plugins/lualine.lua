@@ -41,6 +41,7 @@ function M.setup()
         -- end,
     }
 
+    -- TODO: Get colors programmatically
     local colors = {
         bg = "#202328",
         fg = "#bbc2cf",
@@ -236,7 +237,8 @@ function M.setup()
                 return chars[index]
             end,
             padding = { left = 0, right = 0 },
-            color = "SLProgress",
+            -- color = "SLProgress",
+            color = {},
             cond = nil,
         },
         visual_selection = {

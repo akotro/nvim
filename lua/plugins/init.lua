@@ -61,7 +61,6 @@ return {
         opts = require("plugins.bufferline").opts,
         config = require("plugins.bufferline").config,
     },
-    -- NOTE: Statusline
     {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
@@ -81,6 +80,7 @@ return {
         init = require("plugins.mini_indentscope").init,
         opts = require("plugins.mini_indentscope").opts,
     },
+    -- NOTE: Usage
     {
         "echasnovski/mini.ai",
         event = "VeryLazy",
@@ -176,6 +176,11 @@ return {
         lazy = true,
         keys = require("plugins.toggleterm").keys,
         opts = require("plugins.toggleterm").opts,
+    },
+    {
+        "nvim-zh/colorful-winsep.nvim",
+        config = true,
+        event = { "WinNew" },
     },
     -- NOTE: Git
     { "tpope/vim-fugitive", event = "BufRead" },
@@ -504,18 +509,18 @@ return {
         "chrisbra/csv.vim",
         ft = "csv",
     },
-    -- {
-    --     "tpope/vim-dadbod",
-    --     lazy = true,
-    --     cmd = {
-    --         "DBUIToggle",
-    --         "DBUI",
-    --         "DBUIAddConnection",
-    --         "DBUIFindBuffer",
-    --         "DBUIRenameBuffer",
-    --         "DBUILastQueryInfo",
-    --     },
-    --     dependencies = require("plugins.dadbod").dependencies,
-    --     config = require("plugins.dadbod").config,
-    -- },
+    {
+        "tpope/vim-dadbod",
+        lazy = true,
+        cmd = {
+            "DBUIToggle",
+            "DBUI",
+            "DBUIAddConnection",
+            "DBUIFindBuffer",
+            "DBUIRenameBuffer",
+            "DBUILastQueryInfo",
+        },
+        dependencies = require("plugins.dadbod").dependencies,
+        config = require("plugins.dadbod").config,
+    },
 }
