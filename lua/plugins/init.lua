@@ -179,8 +179,14 @@ return {
     },
     {
         "nvim-zh/colorful-winsep.nvim",
-        config = true,
+        -- config = true,
         event = { "WinNew" },
+        opts = {
+            highlight = {
+                fg = "#54546D",
+                -- fg = "#957CC6"
+            },
+        },
     },
     -- NOTE: Git
     { "tpope/vim-fugitive", event = "BufRead" },
