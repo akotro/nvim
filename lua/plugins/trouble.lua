@@ -31,6 +31,9 @@ M.keys = {
     },
 }
 
-M.opts = { use_diagnostic_signs = true }
+M.opts = {
+    use_diagnostic_signs = true,
+    cycle_results = false,
+}
 
 return M
