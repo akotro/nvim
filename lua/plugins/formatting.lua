@@ -1,19 +1,78 @@
 local M = {}
 
+function M.init_msg_progress(title, msg)
+    return require("fidget.progress").handle.create({
+        title = title,
+        message = msg,
+        lsp_client = { name = ">>" }, -- the fake lsp client name
+        percentage = nil, -- skip percentage field
+    })
+end
+
+function M.get_fmt_info(conform, format_args)
+    if conform == nil then
+        conform = pcall(require, "conform")
+    end
+
+    -- get current formatter names
+    if conform then
+        local list_formatters = conform.list_formatters or function()
+            return {}
+        end
+        local will_fallback_lsp = conform.will_fallback_lsp or function()
+            return {}
+        end
+
+        local formatters = list_formatters()
+        local fmt_names = {}
+
+        if not vim.tbl_isempty(formatters) then
+            fmt_names = vim.tbl_map(function(f)
+                return f.name
+            end, formatters)
+        elseif will_fallback_lsp(format_args) then
+            fmt_names = { "lsp" }
+        else
+            return
+        end
+
+        local fmt_info = "fmt: " .. table.concat(fmt_names, "/")
+        return fmt_info
+    end
+
+    return ""
+end
+
+function M.format(format_args)
+    local have_fmt, conform = pcall(require, "conform")
+    if have_fmt then
+        local fmt_info = M.get_fmt_info(conform, format_args)
+        local msg_handle = M.init_msg_progress(fmt_info)
+
+        -- format with auto close popup, and notify if err
+        conform.format(format_args, function(err)
+            msg_handle:finish()
+            -- if err then
+            --     vim.notify(err, vim.log.levels.WARN, { title = fmt_info })
+            -- end
+        end)
+    else
+        vim.lsp.buf.format(format_args)
+    end
+end
+
 M.keys = {
     {
         -- Customize or remove this keymap to your liking
         "<leader>lf",
         function()
-            require("conform").format({ async = true, lsp_fallback = true })
+            -- require("conform").format({ async = true, lsp_fallback = true })
+            M.format({ async = true, lsp_fallback = true })
         end,
         mode = "",
         desc = "Format buffer",
     },
 }
-
--- local mason_path = vim.fn.stdpath("data") .. "/mason/bin/"
--- local stylua_path = mason_path .. "stylua"
 
 M.opts = function()
     local slow_format_filetypes = {}
@@ -65,6 +124,11 @@ M.opts = function()
         -- 	timeout_ms = 500,
         -- },
         format_on_save = function(bufnr)
+            local format_args = { timeout_ms = 200, lsp_fallback = true }
+
+            local fmt_info = M.get_fmt_info(format_args)
+            local msg_handle = M.init_msg_progress(fmt_info)
+
             if vim.tbl_contains(ignore_auto_format_filetypes, vim.bo[bufnr].filetype) then
                 return
             end
@@ -81,16 +145,27 @@ M.opts = function()
             if slow_format_filetypes[vim.bo[bufnr].filetype] then
                 return
             end
+
             local function on_format(err)
+                msg_handle:finish()
+                -- if err then
+                --     vim.notify(err, vim.log.levels.WARN, { title = fmt_info })
+                -- end
+
                 if err and err:match("timeout$") then
                     slow_format_filetypes[vim.bo[bufnr].filetype] = true
                 end
             end
 
-            return { timeout_ms = 200, lsp_fallback = true }, on_format
+            return format_args, on_format
         end,
 
         format_after_save = function(bufnr)
+            local format_args = { lsp_fallback = true }
+
+            local fmt_info = M.get_fmt_info(format_args)
+            local msg_handle = M.init_msg_progress(fmt_info)
+
             if vim.tbl_contains(ignore_auto_format_filetypes, vim.bo[bufnr].filetype) then
                 return
             end
@@ -102,7 +177,15 @@ M.opts = function()
             if not slow_format_filetypes[vim.bo[bufnr].filetype] then
                 return
             end
-            return { lsp_fallback = true }
+
+            local function on_format(err)
+                msg_handle:finish()
+                if err then
+                    vim.notify(err, vim.log.levels.WARN, { title = fmt_info })
+                end
+            end
+
+            return format_args, on_format
         end,
         -- If this is set, Conform will run the formatter asynchronously after save.
         -- It will pass the table to conform.format().
