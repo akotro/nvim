@@ -163,8 +163,8 @@ M.opts = function()
         format_after_save = function(bufnr)
             local format_args = { lsp_fallback = true }
 
-            local fmt_info = M.get_fmt_info(format_args)
-            local msg_handle = M.init_msg_progress(fmt_info)
+            -- local fmt_info = M.get_fmt_info(format_args)
+            -- local msg_handle = M.init_msg_progress(fmt_info)
 
             if vim.tbl_contains(ignore_auto_format_filetypes, vim.bo[bufnr].filetype) then
                 return
@@ -179,10 +179,10 @@ M.opts = function()
             end
 
             local function on_format(err)
-                msg_handle:finish()
-                if err then
-                    vim.notify(err, vim.log.levels.WARN, { title = fmt_info })
-                end
+                -- msg_handle:finish()
+                -- if err then
+                --     vim.notify(err, vim.log.levels.WARN, { title = fmt_info })
+                -- end
             end
 
             return format_args, on_format
