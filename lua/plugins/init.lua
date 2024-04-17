@@ -471,14 +471,14 @@ return {
         end,
     },
     -- NOTE: Notes
-    {
-        "nvim-neorg/neorg",
-        build = ":Neorg sync-parsers",
-        ft = { "norg" },
-        cmd = "Neorg",
-        dependencies = require("plugins.neorg").dependencies,
-        opts = require("plugins.neorg").opts,
-    },
+    -- {
+    --     "nvim-neorg/neorg",
+    --     build = ":Neorg sync-parsers",
+    --     ft = { "norg" },
+    --     cmd = "Neorg",
+    --     dependencies = require("plugins.neorg").dependencies,
+    --     opts = require("plugins.neorg").opts,
+    -- },
     {
         "epwalsh/obsidian.nvim",
         version = "*",
