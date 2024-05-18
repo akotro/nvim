@@ -11,7 +11,7 @@ _G.d = function(...)
     source = vim.loop.fs_realpath(source) or source
     source = vim.fn.fnamemodify(source, ":~:.") .. ":" .. info.linedefined
     local what = { ... }
-    if vim.tbl_islist(what) and vim.tbl_count(what) <= 1 then
+    if vim.islist(what) and vim.tbl_count(what) <= 1 then
         what = what[1]
     end
     local msg = vim.inspect(vim.deepcopy(what))
@@ -279,7 +279,7 @@ function M.lsp.get_clients(opts)
         ret = vim.lsp.get_clients(opts)
     else
         ---@diagnostic disable-next-line: deprecated
-        ret = vim.lsp.get_active_clients(opts)
+        ret = vim.lsp.get_clients(opts)
         if opts and opts.method then
             ---@param client lsp.Client
             ret = vim.tbl_filter(function(client)
