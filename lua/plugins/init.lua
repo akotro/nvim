@@ -8,6 +8,13 @@ return {
     },
     -- NOTE: Util
     {
+        "vhyrro/luarocks.nvim",
+        priority = 1001, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+        opts = {
+            rocks = { "fzy", "magick", "tiktoken_core" },
+        },
+    },
+    {
         "nvim-lua/plenary.nvim",
         lazy = true,
     },
@@ -217,7 +224,7 @@ return {
     },
     {
         "NeogitOrg/neogit",
-        branch = "nightly",
+        branch = "master",
         cmd = "Neogit",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -402,6 +409,14 @@ return {
         cmd = "Copilot",
         keys = require("plugins.lsp").copilot.keys,
         config = require("plugins.lsp").copilot.config,
+    },
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        branch = "canary",
+        dependencies = require("plugins.lsp").copilot_chat.dependencies,
+        opts = require("plugins.lsp").copilot_chat.opts,
+        cmd = require("plugins.lsp").copilot_chat.cmd,
+        keys = require("plugins.lsp").copilot_chat.keys,
     },
     {
         url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
