@@ -13,6 +13,19 @@ return {
     },
     -- NOTE: UI
     { "nvim-tree/nvim-web-devicons", lazy = true },
+    {
+        "rachartier/tiny-devicons-auto-colors.nvim",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        },
+        event = "VeryLazy",
+        config = function()
+            local colors = require("kanagawa.colors").setup()
+            require("tiny-devicons-auto-colors").setup({
+                colors = colors.palette,
+            })
+        end,
+    },
     { "MunifTanjim/nui.nvim", lazy = true },
     {
         "stevearc/dressing.nvim",
