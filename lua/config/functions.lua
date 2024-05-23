@@ -663,6 +663,26 @@ function M.is_linux()
 end
 
 -----------------------------------------------------------
+-- Checks the current hostname.
+-----------------------------------------------------------
+function M.matches_hostname(hostname)
+    local current_hostname = io.popen("hostname"):read("*a")
+    current_hostname = current_hostname:gsub("%s+", "")
+
+    if vim.islist(hostname) then
+        for _, v in ipairs(hostname) do
+            if current_hostname == v then
+                return true
+            end
+        end
+    else
+        return current_hostname == hostname
+    end
+
+    return false
+end
+
+-----------------------------------------------------------
 -- Contatenates given paths with correct separator.
 -- @param: var args of string paths to joon.
 -----------------------------------------------------------

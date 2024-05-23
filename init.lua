@@ -17,7 +17,9 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 local plugins = require("plugins")
+local concurrency_level = require("config.functions").matches_hostname("koa-PC") and 1 or nil
 require("lazy").setup(plugins, {
+    concurrency = concurrency_level,
     checker = { enabled = true, notify = false }, -- automatically check for plugin updates
     performance = {
         rtp = {
