@@ -40,14 +40,22 @@ M.cmd = {
 
 M.keys = {
     {
+        "<leader>cpc",
+        "<cmd>CopilotChat<cr>",
+        desc = "CopilotChat - Chat",
+        mode = { "n", "v" },
+    },
+    {
         "<leader>cpt",
         "<cmd>CopilotChatToggle<cr>",
         desc = "CopilotChat - Toggle",
+        mode = { "n", "v" },
     },
     {
         "<leader>cpr",
         "<cmd>CopilotChatReset<cr>",
         desc = "CopilotChat - Reset",
+        mode = { "n", "v" },
     },
     {
         "<leader>cpq",
@@ -58,6 +66,7 @@ M.keys = {
             end
         end,
         desc = "CopilotChat - Quick chat",
+        mode = { "n", "v" },
     },
     -- Show help actions with telescope
     {
