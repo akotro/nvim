@@ -90,7 +90,7 @@ opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true -- Ignore case
-opt.inccommand = "nosplit" -- preview incremental substitute
+opt.inccommand = "split" -- preview incremental substitute
 opt.laststatus = 3 -- global statusline
 -- Visualise tabs,trailing spaces etc.
 opt.list = true
