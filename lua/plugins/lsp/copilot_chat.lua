@@ -13,7 +13,7 @@ M.opts = {
         relative = "cursor",
         width = 1,
         height = 0.7,
-        row = 1,
+        zindex = 5,
     },
 }
 
