@@ -5,7 +5,7 @@
 -----------------------------------------------------------
 -- Inspect lua code with notify
 -----------------------------------------------------------
-_G.d = function(...)
+_G.p = function(...)
     local info = debug.getinfo(2, "S")
     local source = info.source:sub(2)
     source = vim.loop.fs_realpath(source) or source
@@ -627,6 +627,13 @@ function M.smart_quit()
     else
         vim.cmd("q!")
     end
+end
+
+-----------------------------------------------------------
+-- Deletes all [No Name] and empty buffers
+-----------------------------------------------------------
+function M.delete_empty_buffers()
+    vim.api.nvim_exec([[bufdo! if empty(getbufvar(bufnr('%'), '&buftype')) && empty(bufname('%')) | bd | endif]], false)
 end
 
 -----------------------------------------------------------
