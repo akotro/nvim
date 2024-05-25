@@ -500,13 +500,19 @@ local options = {
                 "<cmd>BufferLineCloseRight<cr>",
                 "Close all to the right",
             },
-            D = {
+            ["sd"] = {
                 "<cmd>BufferLineSortByDirectory<cr>",
                 "Sort by directory",
             },
-            L = {
+            ["sl"] = {
                 "<cmd>BufferLineSortByExtension<cr>",
                 "Sort by language",
+            },
+            D = {
+                function()
+                    require("config.functions").delete_empty_buffers()
+                end,
+                "Delete all empty buffers",
             },
         },
         -- Misc Window
