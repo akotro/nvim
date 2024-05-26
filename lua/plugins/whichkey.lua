@@ -6,16 +6,9 @@ local utils = require("config.functions")
 local file_finder = ""
 local buffer_finder = ""
 local help_finder = ""
--- if utils.is_win() then
 file_finder = "<cmd>Telescope find_files<cr>"
--- buffer_finder = "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>"
 buffer_finder = "<cmd>Telescope buffers sort_mru=true<cr>"
 help_finder = "<cmd>Telescope help_tags<cr>"
--- else
--- 	file_finder = "<cmd>CommandTRipgrep<cr>"
--- 	buffer_finder = "<cmd>CommandTBuffer<cr>"
--- 	help_finder = "<cmd>CommandTHelp<cr>"
--- end
 
 local M = {}
 local options = {
@@ -114,7 +107,12 @@ local options = {
         ["/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment toggle linewise (visual)" },
         l = {
             name = "LSP",
-            a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+            a = {
+                function()
+                    vim.lsp.buf.code_action()
+                end,
+                "Code Action",
+            },
         },
         r = {
             name = "+Replace",
@@ -123,31 +121,31 @@ local options = {
                 name = "[a]sk",
                 o = {
                     function()
-                        require("config.functions").search.within(false)
+                        utils.search.within(false)
                     end,
                     "[o]pen",
                 },
                 w = {
                     function()
-                        require("config.functions").search.within_cword(false)
+                        utils.search.within_cword(false)
                     end,
                     "[w]ord",
                 },
                 W = {
                     function()
-                        require("config.functions").search.within_cWORD(false)
+                        utils.search.within_cWORD(false)
                     end,
                     "[W]ORD",
                 },
                 e = {
                     function()
-                        require("config.functions").search.within_cexpr(false)
+                        utils.search.within_cexpr(false)
                     end,
                     "[e]xpr",
                 },
                 f = {
                     function()
-                        require("config.functions").search.within_cfile(false)
+                        utils.search.within_cfile(false)
                     end,
                     "[f]ile",
                 },
@@ -156,31 +154,31 @@ local options = {
                 name = "[n]o ask",
                 o = {
                     function()
-                        require("config.functions").search.within(true)
+                        utils.search.within(true)
                     end,
                     "[o]pen",
                 },
                 w = {
                     function()
-                        require("config.functions").search.within_cword(true)
+                        utils.search.within_cword(true)
                     end,
                     "[w]ord",
                 },
                 W = {
                     function()
-                        require("config.functions").search.within_cWORD(true)
+                        utils.search.within_cWORD(true)
                     end,
                     "[W]ORD",
                 },
                 e = {
                     function()
-                        require("config.functions").search.within_cexpr(true)
+                        utils.search.within_cexpr(true)
                     end,
                     "[e]xpr",
                 },
                 f = {
                     function()
-                        require("config.functions").search.within_cfile(true)
+                        utils.search.within_cfile(true)
                     end,
                     "[f]ile",
                 },
@@ -191,8 +189,18 @@ local options = {
         ["<space>"] = { ":nohlsearch<cr>", "Clear Highlight" },
         -- ["<space>"] = { '<cmd>let @/=""<CR>', "Clear Highlight" },
         ["w"] = { "<cmd>w<cr>", "Save" },
-        ["q"] = { '<cmd>lua require("config.functions").smart_quit()<CR>', "Quit" },
-        ["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>', "Comment" },
+        ["q"] = {
+            function()
+                utils.smart_quit()
+            end,
+            "Quit",
+        },
+        ["/"] = {
+            function()
+                require("Comment.api").toggle.linewise.current()
+            end,
+            "Comment",
+        },
         -- ["B"] = { "<cmd>JaqBuild<cr>", "JaqBuild" },
         -- ["Br"] = { "<cmd>JaqRun<cr>", "JaqRun" },
         -- ["R"] = { "<cmd>Jaq<cr>", "Jaq" },
@@ -218,7 +226,12 @@ local options = {
             h = { help_finder, "Help" },
             -- H = { "<cmd>Telescope highlights<cr>", "Highlights" },
             H = { "<cmd>Telescope command_history<cr>", "Command History" },
-            i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
+            i = {
+                function()
+                    require("telescope").extensions.media_files.media_files()
+                end,
+                "Media",
+            },
             l = { "<cmd>Telescope resume<cr>", "Last Search" },
             M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
             r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
@@ -239,31 +252,31 @@ local options = {
                     name = "[a]sk",
                     o = {
                         function()
-                            require("config.functions").search.open(true, false)
+                            utils.search.open(true, false)
                         end,
                         "[o]pen",
                     },
                     w = {
                         function()
-                            require("config.functions").search.cword(true, false)
+                            utils.search.cword(true, false)
                         end,
                         "[w]ord",
                     },
                     W = {
                         function()
-                            require("config.functions").search.cWORD(true, false)
+                            utils.search.cWORD(true, false)
                         end,
                         "[W]ORD",
                     },
                     e = {
                         function()
-                            require("config.functions").search.cexpr(true, false)
+                            utils.search.cexpr(true, false)
                         end,
                         "[e]xpr",
                     },
                     f = {
                         function()
-                            require("config.functions").search.cfile(true, false)
+                            utils.search.cfile(true, false)
                         end,
                         "[f]ile",
                     },
@@ -272,31 +285,31 @@ local options = {
                     name = "[n]o ask",
                     o = {
                         function()
-                            require("config.functions").search.open(true, true)
+                            utils.search.open(true, true)
                         end,
                         "[o]pen",
                     },
                     w = {
                         function()
-                            require("config.functions").search.cword(true, true)
+                            utils.search.cword(true, true)
                         end,
                         "[w]ord",
                     },
                     W = {
                         function()
-                            require("config.functions").search.cWORD(true, true)
+                            utils.search.cWORD(true, true)
                         end,
                         "[W]ORD",
                     },
                     e = {
                         function()
-                            require("config.functions").search.cexpr(true, true)
+                            utils.search.cexpr(true, true)
                         end,
                         "[e]xpr",
                     },
                     f = {
                         function()
-                            require("config.functions").search.cfile(true, true)
+                            utils.search.cfile(true, true)
                         end,
                         "[f]ile",
                     },
@@ -307,31 +320,31 @@ local options = {
                 name = "[a]sk",
                 o = {
                     function()
-                        require("config.functions").search.open(false, false)
+                        utils.search.open(false, false)
                     end,
                     "[o]pen",
                 },
                 w = {
                     function()
-                        require("config.functions").search.cword(false, false)
+                        utils.search.cword(false, false)
                     end,
                     "[w]ord",
                 },
                 W = {
                     function()
-                        require("config.functions").search.cWORD(false, false)
+                        utils.search.cWORD(false, false)
                     end,
                     "[W]ORD",
                 },
                 e = {
                     function()
-                        require("config.functions").search.cexpr(false, false)
+                        utils.search.cexpr(false, false)
                     end,
                     "[e]xpr",
                 },
                 f = {
                     function()
-                        require("config.functions").search.cfile(false, false)
+                        utils.search.cfile(false, false)
                     end,
                     "[f]ile",
                 },
@@ -340,31 +353,31 @@ local options = {
                 name = "[n]o ask",
                 o = {
                     function()
-                        require("config.functions").search.open(false, true)
+                        utils.search.open(false, true)
                     end,
                     "[o]pen",
                 },
                 w = {
                     function()
-                        require("config.functions").search.cword(false, true)
+                        utils.search.cword(false, true)
                     end,
                     "[w]ord",
                 },
                 W = {
                     function()
-                        require("config.functions").search.cWORD(false, true)
+                        utils.search.cWORD(false, true)
                     end,
                     "[W]ORD",
                 },
                 e = {
                     function()
-                        require("config.functions").search.cexpr(false, true)
+                        utils.search.cexpr(false, true)
                     end,
                     "[e]xpr",
                 },
                 f = {
                     function()
-                        require("config.functions").search.cfile(false, true)
+                        utils.search.cfile(false, true)
                     end,
                     "[f]ile",
                 },
@@ -404,16 +417,53 @@ local options = {
         -- Git
         g = {
             name = "+Git",
-            j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-            k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-            l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame Line" },
+            j = {
+                function()
+                    require("gitsigns").next_hunk()
+                end,
+                "Next Hunk",
+            },
+            k = {
+                function()
+                    require("gitsigns").prev_hunk()
+                end,
+                "Prev Hunk",
+            },
+            l = {
+                function()
+                    require("gitsigns").blame_line()
+                end,
+                "Blame Line",
+            },
             L = { "<cmd>Git blame<cr>", "Blame" },
-            p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-            r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-            R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-            s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+            p = {
+                function()
+                    require("gitsigns").preview_hunk()
+                end,
+                "Preview Hunk",
+            },
+            r = {
+                function()
+                    require("gitsigns").reset_hunk()
+                end,
+                "Reset Hunk",
+            },
+            R = {
+                function()
+                    require("gitsigns").reset_buffer()
+                end,
+                "Reset Buffer",
+            },
+            s = {
+                function()
+                    require("gitsigns").stage_hunk()
+                end,
+                "Stage Hunk",
+            },
             u = {
-                "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+                function()
+                    require("gitsigns").undo_stage_hunk()
+                end,
                 "Undo Stage Hunk",
             },
             -- n = { ":!git checkout -b ", "Checkout New Branch" },
@@ -444,27 +494,51 @@ local options = {
             H = { "<cmd>IlluminationToggle<cr>", "Toggle Doc HL" },
             I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
             j = {
-                "<cmd>lua vim.diagnostic.goto_next({buffer=0, float=false})<CR>",
+                function()
+                    vim.diagnostic.goto_next({ buffer = 0, float = false })
+                end,
                 "Next Diagnostic",
             },
             k = {
-                "<cmd>lua vim.diagnostic.goto_prev({buffer=0, float=false})<cr>",
+                function()
+                    vim.diagnostic.goto_prev({ buffer = 0, float = false })
+                end,
                 "Prev Diagnostic",
             },
-            v = { "<cmd>lua require('lsp_lines').toggle()<cr>", "Virtual Text" },
-            l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+            v = {
+                function()
+                    require("lsp_lines").toggle()
+                end,
+                "Virtual Text",
+            },
+            l = {
+                function()
+                    vim.lsp.codelens.run()
+                end,
+                "CodeLens Action",
+            },
             -- o = { "<cmd>SymbolsOutline<cr>", "Outline" },
-            q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
+            q = {
+                function()
+                    vim.lsp.diagnostic.set_loclist()
+                end,
+                "Quickfix",
+            },
             R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
             s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
             S = {
                 "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
                 "Workspace Symbols",
             },
-            t = { '<cmd>lua require("config.functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
+            t = {
+                function()
+                    utils.toggle_diagnostics()
+                end,
+                "Toggle Diagnostics",
+            },
             o = {
                 function()
-                    require("config.functions").open_diagnostic()
+                    utils.open_diagnostic()
                 end,
                 "Open Diagnostic Float",
             },
@@ -510,7 +584,7 @@ local options = {
             },
             D = {
                 function()
-                    require("config.functions").delete_empty_buffers()
+                    utils.delete_empty_buffers()
                 end,
                 "Delete all empty buffers",
             },
@@ -519,7 +593,12 @@ local options = {
         o = {
             "+Window",
             n = { "<cmd>only<cr>", "Focus This Window" },
-            f = { [[<cmd>lua require("config.functions").focus_first_float()<cr>]], "Focus Floating Window" },
+            f = {
+                function()
+                    utils.focus_first_float()
+                end,
+                "Focus Floating Window",
+            },
         },
         -- Splits
         s = {
@@ -549,18 +628,38 @@ local options = {
         -- Folds
         z = {
             name = "+Folds",
-            o = { "<cmd>lua require('ufo').openAllFolds<cr>", "Open All Folds" },
-            c = { "<cmd>lua require('ufo').closeAllFolds<cr>", "Close All Folds" },
+            o = {
+                function()
+                    require("ufo").openAllFolds()
+                end,
+                "Open All Folds",
+            },
+            c = {
+                function()
+                    require("ufo").closeAllFolds()
+                end,
+                "Close All Folds",
+            },
         },
         -- Options
         O = {
             name = "+Options",
             -- c = { "<cmd>lua lvim.builtin.cmp.active = false<cr>", "Completion off" },
             -- C = { "<cmd>lua lvim.builtin.cmp.active = true<cr>", "Completion on" },
-            w = { '<cmd>lua require("config.functions").toggle_option("wrap")<cr>', "Wrap" },
+            w = {
+                function()
+                    utils.toggle_option("wrap")
+                end,
+                "Wrap",
+            },
             -- r = { '<cmd>lua require("config.functions").toggle_option("relativenumber")<cr>', "Relative" },
             -- l = { '<cmd>lua require("config.functions").toggle_option("cursorline")<cr>', "Cursorline" },
-            s = { '<cmd>lua require("config.functions").toggle_option("spell")<cr>', "Spell" },
+            s = {
+                function()
+                    utils.toggle_option("spell")
+                end,
+                "Spell",
+            },
             -- t = { '<cmd>lua require("config.functions").toggle_tabline()<cr>', "Tabline" },
         },
     },
