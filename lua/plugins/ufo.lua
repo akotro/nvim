@@ -1,5 +1,22 @@
 local M = {}
 
+M.keys = {
+    {
+        "<leader>zo",
+        function()
+            require("ufo").openAllFolds()
+        end,
+        "Open All Folds",
+    },
+    {
+        "<leader>zc",
+        function()
+            require("ufo").closeAllFolds()
+        end,
+        "Close All Folds",
+    },
+}
+
 function M.config()
     vim.o.foldcolumn = "0" -- '0' is not bad
     vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value

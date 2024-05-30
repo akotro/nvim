@@ -1,16 +1,8 @@
 local icons = require("config.icons")
-
 local utils = require("config.functions")
 
--- Os based finders
-local file_finder = ""
-local buffer_finder = ""
-local help_finder = ""
-file_finder = "<cmd>Telescope find_files<cr>"
-buffer_finder = "<cmd>Telescope buffers sort_mru=true<cr>"
-help_finder = "<cmd>Telescope help_tags<cr>"
-
 local M = {}
+
 local options = {
     setup = {
         plugins = {
@@ -181,7 +173,6 @@ local options = {
     },
     mappings = {
         ["<space>"] = { ":nohlsearch<cr>", "Clear Highlight" },
-        -- ["<space>"] = { '<cmd>let @/=""<CR>', "Clear Highlight" },
         ["w"] = { "<cmd>w<cr>", "Save" },
         ["q"] = {
             function()
@@ -210,32 +201,6 @@ local options = {
         -- Find (Telescope)
         f = {
             name = "+Find",
-            b = { buffer_finder, "Buffers" },
-            B = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
-            c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-            e = { "<cmd>Telescope file_browser<cr>", "File Explorer" },
-            f = { file_finder, "Find files" },
-            g = { "<cmd>Telescope egrepify<cr>", "Find Text" },
-            s = { "<cmd>Telescope grep_string<cr>", "Find String" },
-            h = { help_finder, "Help" },
-            -- H = { "<cmd>Telescope highlights<cr>", "Highlights" },
-            H = { "<cmd>Telescope command_history<cr>", "Command History" },
-            i = {
-                function()
-                    require("telescope").extensions.media_files.media_files()
-                end,
-                "Media",
-            },
-            l = { "<cmd>Telescope resume<cr>", "Last Search" },
-            M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-            r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
-            R = { "<cmd>Telescope registers<cr>", "Registers" },
-            k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-            C = { "<cmd>Telescope commands<cr>", "Commands" },
-            P = { "<cmd>Telescope projects<CR>", "Projects" },
-            y = { "<cmd>Telescope neoclip<CR>", "Neoclip" },
-            t = { "<cmd>TodoTelescope<CR>", "Todo" },
-            G = { "<cmd>Telescope advanced_git_search show_custom_functions<CR>", "Git" },
         },
         -- Replace
         r = {
@@ -468,7 +433,7 @@ local options = {
         b = {
             name = "+Buffers",
             j = { "<cmd>BufferLinePick<cr>", "Jump" },
-            f = { buffer_finder, "Find" },
+            f = { "<cmd>Telescope buffers sort_mru=true<cr>", "Find" },
             p = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
             n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
             d = {
@@ -534,18 +499,6 @@ local options = {
         -- Folds
         z = {
             name = "+Folds",
-            o = {
-                function()
-                    require("ufo").openAllFolds()
-                end,
-                "Open All Folds",
-            },
-            c = {
-                function()
-                    require("ufo").closeAllFolds()
-                end,
-                "Close All Folds",
-            },
         },
         -- Options
         O = {

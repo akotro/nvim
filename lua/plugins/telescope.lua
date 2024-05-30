@@ -1,5 +1,35 @@
 local M = {}
 
+M.keys = {
+    { "<leader>fb", "<cmd>Telescope buffers sort_mru=true<cr>", desc = "Buffers" },
+    { "<leader>fB", "<cmd>Telescope git_branches<cr>", desc = "Checkout Branch" },
+    { "<leader>fc", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme" },
+    { "<leader>fe", "<cmd>Telescope file_browser<cr>", desc = "File Explorer" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+    { "<leader>fg", "<cmd>Telescope egrepify<cr>", desc = "Find Text" },
+    { "<leader>fs", "<cmd>Telescope grep_string<cr>", desc = "Find String" },
+    { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help" },
+    -- { "<leader>fH", "<cmd>Telescope highlights<cr>", desc = "Highlights" },
+    { "<leader>fH", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+    {
+        "<leader>fi",
+        function()
+            require("telescope").extensions.media_files.media_files()
+        end,
+        desc = "Media",
+    },
+    { "<leader>fl", "<cmd>Telescope resume<cr>", desc = "Last Search" },
+    { "<leader>fM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+    { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent File" },
+    { "<leader>fR", "<cmd>Telescope registers<cr>", desc = "Registers" },
+    { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
+    { "<leader>fC", "<cmd>Telescope commands<cr>", desc = "Commands" },
+    { "<leader>fP", "<cmd>Telescope projects<CR>", desc = "Projects" },
+    { "<leader>fy", "<cmd>Telescope neoclip<CR>", desc = "Neoclip" },
+    { "<leader>ft", "<cmd>TodoTelescope<CR>", desc = "Todo" },
+    { "<leader>fG", "<cmd>Telescope advanced_git_search show_custom_functions<CR>", desc = "Git" },
+}
+
 function M.opts()
     local functions = require("config.functions")
     local icons = require("config.icons")

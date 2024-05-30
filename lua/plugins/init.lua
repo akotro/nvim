@@ -169,6 +169,7 @@ return {
         event = "BufRead",
         dependencies = "kevinhwang91/promise-async",
         config = require("plugins.ufo").config,
+        keys = require("plugins.ufo").keys,
     },
     {
         "kevinhwang91/nvim-hlslens",
@@ -197,17 +198,17 @@ return {
         keys = require("plugins.toggleterm").keys,
         opts = require("plugins.toggleterm").opts,
     },
-    {
-        "nvim-zh/colorful-winsep.nvim",
-        -- config = true,
-        event = { "WinNew" },
-        opts = {
-            highlight = {
-                fg = "#54546D",
-                -- fg = "#957CC6"
-            },
-        },
-    },
+    -- {
+    --     "nvim-zh/colorful-winsep.nvim",
+    --     -- config = true,
+    --     event = { "WinNew" },
+    --     opts = {
+    --         highlight = {
+    --             fg = "#54546D",
+    --             -- fg = "#957CC6"
+    --         },
+    --     },
+    -- },
     -- NOTE: Git
     { "tpope/vim-fugitive", event = "BufRead" },
     {
@@ -443,8 +444,9 @@ return {
     {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
-        opts = require("plugins.telescope").opts,
         dependencies = require("plugins.telescope").dependencies,
+        opts = require("plugins.telescope").opts,
+        keys = require("plugins.telescope").keys,
         lazy = true,
         cmd = "Telescope",
     },
