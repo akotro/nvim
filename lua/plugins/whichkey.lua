@@ -107,12 +107,6 @@ local options = {
         ["/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment toggle linewise (visual)" },
         l = {
             name = "LSP",
-            a = {
-                function()
-                    vim.lsp.buf.code_action()
-                end,
-                "Code Action",
-            },
         },
         r = {
             name = "+Replace",
@@ -383,32 +377,12 @@ local options = {
                 },
             },
         },
-        -- Trouble
         n = {
             name = "+Noice",
         },
+        -- Trouble
         x = {
             name = "+Trouble",
-            x = { "<cmd>TroubleToggle<cr>", "Toggle" },
-            w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-            d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-            r = { "<cmd>Trouble lsp_references<cr>", "References" },
-            f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-            q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-            l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-            t = { "<cmd>TodoTrouble<cr>", "Todo" },
-            j = {
-                function()
-                    require("trouble").next({ skip_groups = true, jump = true })
-                end,
-                "Next Item",
-            },
-            k = {
-                function()
-                    require("trouble").previous({ skip_groups = true, jump = true })
-                end,
-                "Previous Item",
-            },
         },
         -- Debug
         d = {
@@ -482,75 +456,7 @@ local options = {
         -- Lsp
         l = {
             name = "+LSP",
-            c = {
-                ":NvimCmpToggle<CR>",
-                "Toggle Autocomplete",
-            },
-            w = {
-                "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-                "Workspace Diagnostics",
-            },
-            -- h = { "<cmd>lua require('lsp-inlayhints').toggle()<cr>", "Toggle Hints" },
-            H = { "<cmd>IlluminationToggle<cr>", "Toggle Doc HL" },
-            I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-            j = {
-                function()
-                    vim.diagnostic.goto_next({ buffer = 0, float = false })
-                end,
-                "Next Diagnostic",
-            },
-            k = {
-                function()
-                    vim.diagnostic.goto_prev({ buffer = 0, float = false })
-                end,
-                "Prev Diagnostic",
-            },
-            v = {
-                function()
-                    require("lsp_lines").toggle()
-                end,
-                "Virtual Text",
-            },
-            l = {
-                function()
-                    vim.lsp.codelens.run()
-                end,
-                "CodeLens Action",
-            },
-            -- o = { "<cmd>SymbolsOutline<cr>", "Outline" },
-            q = {
-                function()
-                    vim.lsp.diagnostic.set_loclist()
-                end,
-                "Quickfix",
-            },
-            R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
-            s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-            S = {
-                "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-                "Workspace Symbols",
-            },
-            t = {
-                function()
-                    utils.toggle_diagnostics()
-                end,
-                "Toggle Diagnostics",
-            },
-            o = {
-                function()
-                    utils.open_diagnostic()
-                end,
-                "Open Diagnostic Float",
-            },
-            L = {
-                function()
-                    require("lsp_lines").toggle()
-                end,
-                "LSP Lines",
-            },
-            u = { "<cmd>LuaSnipUnlinkCurrent<cr>", "Unlink Snippet" },
         },
-        -- TODO: Glance
         ["gp"] = {
             name = "+Glance",
             d = { "<CMD>Glance definitions<CR>", "Glance Definitions" },

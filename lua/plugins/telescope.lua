@@ -12,6 +12,10 @@ function M.opts()
 
     local egrep_actions = require("telescope._extensions.egrepify.actions")
 
+    local open_with_trouble = require("trouble.sources.telescope").open
+    -- Use this to add more results without clearing the trouble list
+    local add_to_trouble = require("trouble.sources.telescope").add
+
     return {
         defaults = {
             prompt_prefix = icons.ui.Telescope .. " ",
@@ -45,7 +49,7 @@ function M.opts()
                         actions.open_qflist(...)
                     end,
                     ["<CR>"] = actions.select_default,
-                    ["<c-t>"] = require("trouble.providers.telescope").open_with_trouble,
+                    ["<c-t>"] = open_with_trouble,
                 },
                 n = {
                     ["<C-n>"] = actions.move_selection_next,
@@ -54,7 +58,7 @@ function M.opts()
                         actions.smart_send_to_qflist(...)
                         actions.open_qflist(...)
                     end,
-                    ["<c-t>"] = require("trouble.providers.telescope").open_with_trouble,
+                    ["<c-t>"] = open_with_trouble,
                 },
             },
             file_ignore_patterns = {

@@ -1,4 +1,4 @@
-local util = require("config.functions")
+local utils = require("config.functions")
 
 local M = {}
 
@@ -10,29 +10,65 @@ function M.get()
     end
     M._keys = {
         { "<leader>li", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+        -- {
+        --     "gd",
+        --     function()
+        --         require("telescope.builtin").lsp_definitions({ reuse_win = true })
+        --     end,
+        --     desc = "Goto Definition",
+        --     has = "definition",
+        -- },
+        -- { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
+        -- { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+        -- {
+        --     "gI",
+        --     function()
+        --         require("telescope.builtin").lsp_implementations({ reuse_win = true })
+        --     end,
+        --     desc = "Goto Implementation",
+        -- },
+        -- {
+        --     "gy",
+        --     function()
+        --         require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
+        --     end,
+        --     desc = "Goto Type Definition",
+        -- },
         {
             "gd",
             function()
-                require("telescope.builtin").lsp_definitions({ reuse_win = true })
+                require("plugins.trouble").lspGoTo("lsp_definitions")
             end,
-            desc = "Goto Definition",
+            desc = "Goto Definitions",
             has = "definition",
         },
-        { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
-        { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+        {
+            "gr",
+            function()
+                require("plugins.trouble").lspGoTo("lsp_references")
+            end,
+            desc = "Goto References",
+        },
+        {
+            "gD",
+            function()
+                require("plugins.trouble").lspGoTo("lsp_declarations")
+            end,
+            desc = "Goto Declaration",
+        },
         {
             "gI",
             function()
-                require("telescope.builtin").lsp_implementations({ reuse_win = true })
+                require("plugins.trouble").lspGoTo("lsp_implementations")
             end,
             desc = "Goto Implementation",
         },
         {
             "gy",
             function()
-                require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
+                require("plugins.trouble").lspGoTo("lsp_type_definitions")
             end,
-            desc = "Goto T[y]pe Definition",
+            desc = "Goto Type Definition",
         },
         { "<leader>ld", vim.lsp.buf.hover, desc = "Hover" },
         { "<leader>lD", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
@@ -53,8 +89,114 @@ function M.get()
             desc = "Source Action",
             has = "codeAction",
         },
+        {
+            "<leader>lc",
+            "<cmd>NvimCmpToggle<CR>",
+            desc = "Toggle Autocomplete",
+        },
+        {
+            "<leader>lw",
+            "<cmd>Trouble diagnostics toggle<cr>",
+            desc = "Workspace Diagnostics",
+        },
+        -- {
+        --     "<leader>lh",
+        --     "<cmd>lua require('lsp-inlayhints').toggle()<cr>",
+        --     "Toggle Hints",
+        -- },
+        {
+            "<leader>lH",
+            "<cmd>IlluminationToggle<cr>",
+            desc = "Toggle Doc HL",
+        },
+        {
+            "<leader>lI",
+            "<cmd>LspInstallInfo<cr>",
+            desc = "Installer Info",
+        },
+        {
+            "<leader>lj",
+            function()
+                vim.diagnostic.goto_next({ buffer = 0, float = false })
+            end,
+            desc = "Next Diagnostic",
+        },
+        {
+            "<leader>lk",
+            function()
+                vim.diagnostic.goto_prev({ buffer = 0, float = false })
+            end,
+            desc = "Prev Diagnostic",
+        },
+        {
+            "<leader>lv",
+            function()
+                require("lsp_lines").toggle()
+            end,
+            desc = "Virtual Text",
+        },
+        {
+            "<leader>ll",
+            function()
+                vim.lsp.codelens.run()
+            end,
+            desc = "CodeLens Action",
+        },
+        -- {
+        --     "<leader>lo",
+        --     "<cmd>SymbolsOutline<cr>",
+        --     "Outline",
+        -- },
+        {
+            "<leader>lq",
+            function()
+                vim.lsp.diagnostic.set_loclist()
+            end,
+            desc = "Quickfix",
+        },
+        {
+            "<leader>lR",
+            "<cmd>Trouble lsp_references toggle focus=false<cr>",
+            desc = "References",
+        },
+        {
+            "<leader>ls",
+            "<cmd>Telescope lsp_document_symbols<cr>",
+            desc = "Document Symbols",
+        },
+        {
+            "<leader>lS",
+            "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+            desc = "Workspace Symbols",
+        },
+        {
+            "<leader>lt",
+            function()
+                utils.toggle_diagnostics()
+            end,
+            desc = "Toggle Diagnostics",
+        },
+        {
+            "<leader>lo",
+            function()
+                utils.open_diagnostic()
+            end,
+            desc = "Open Diagnostic Float",
+        },
+        {
+            "<leader>lL",
+            function()
+                require("lsp_lines").toggle()
+            end,
+            desc = "LSP Lines",
+        },
+        {
+            "<leader>lu",
+            "<cmd>LuaSnipUnlinkCurrent<cr>",
+            desc = "Unlink Snippet",
+        },
     }
-    if util.plugin.has("inc-rename.nvim") then
+    if utils.plugin.has("inc-rename.nvim") then
         M._keys[#M._keys + 1] = {
             "<leader>lr",
             function()
@@ -74,7 +216,7 @@ end
 ---@param method string
 function M.has(buffer, method)
     method = method:find("/") and method or "textDocument/" .. method
-    local clients = util.lsp.get_clients({ bufnr = buffer })
+    local clients = utils.lsp.get_clients({ bufnr = buffer })
     for _, client in ipairs(clients) do
         if client.supports_method(method) then
             return true
@@ -90,8 +232,8 @@ function M.resolve(buffer)
         return {}
     end
     local spec = M.get()
-    local opts = util.plugin.opts("nvim-lspconfig")
-    local clients = util.lsp.get_clients({ bufnr = buffer })
+    local opts = utils.plugin.opts("nvim-lspconfig")
+    local clients = utils.lsp.get_clients({ bufnr = buffer })
     for _, client in ipairs(clients) do
         local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
         vim.list_extend(spec, maps)
@@ -451,7 +593,7 @@ function M.config(_, opts)
     -- setup autoformat
 
     -- setup keymaps
-    util.lsp.on_attach(function(client, buffer)
+    utils.lsp.on_attach(function(client, buffer)
         M.on_attach(client, buffer)
     end)
 
@@ -475,7 +617,7 @@ function M.config(_, opts)
     local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
 
     if opts.inlay_hints.enabled and inlay_hint then
-        util.lsp.on_attach(function(client, buffer)
+        utils.lsp.on_attach(function(client, buffer)
             if client.supports_method("textDocument/inlayHint") then
                 inlay_hint(buffer, true)
             end
