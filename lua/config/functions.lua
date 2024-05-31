@@ -531,6 +531,13 @@ function M.on_very_lazy(fn)
 end
 
 -----------------------------------------------------------
+-- Get config path
+-----------------------------------------------------------
+function M.get_config_path()
+    return vim.fn.stdpath("config")
+end
+
+-----------------------------------------------------------
 -- Remove augroup
 -- @param name: name of augroup to remove
 -----------------------------------------------------------

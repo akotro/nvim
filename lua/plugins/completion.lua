@@ -16,7 +16,10 @@ function M.luasnip.config()
     -- friendly-snippets
     require("luasnip.loaders.from_vscode").lazy_load()
 
-    require("luasnip.loaders.from_lua").lazy_load({ paths = { "~/.config/nvim/snippets" } })
+    local utils = require("config.functions")
+    local snippet_path = utils.join_paths(utils.get_config_path(), "snippets")
+
+    require("luasnip.loaders.from_lua").lazy_load({ paths = { snippet_path } })
 end
 
 M.cmp = {}
@@ -128,9 +131,6 @@ function M.cmp.opts()
             { name = "crates" },
             { name = "neorg" },
         }),
-        -- }, {
-        --     { name = "buffer" },
-        -- }),
         formatting = {
             format = function(_, item)
                 local icons = require("config.icons").kinds
@@ -170,24 +170,6 @@ function M.cmp.opts()
             -- },
         },
         sorting = defaults.sorting,
-        -- sorting = {
-        -- 	priority_weight = 2,
-        -- 	comparators = {
-        -- 		-- Below is the default comparitor list and order for nvim-cmp
-        -- 		cmp.config.compare.offset,
-        -- 		-- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-        -- 		cmp.config.compare.exact,
-        -- 		require("copilot_cmp.comparators").prioritize,
-
-        -- 		cmp.config.compare.score,
-        -- 		cmp.config.compare.recently_used,
-        -- 		cmp.config.compare.locality,
-        -- 		cmp.config.compare.kind,
-        -- 		cmp.config.compare.sort_text,
-        -- 		cmp.config.compare.length,
-        -- 		cmp.config.compare.order,
-        -- 	},
-        -- },
     }
 end
 
@@ -198,7 +180,17 @@ function M.cmp.config(_, opts)
 
     table.insert(opts.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
 
-    require("cmp").setup(opts)
+    local cmp = require("cmp")
+    cmp.setup(opts)
+
+    -- Setup vim-dadbod
+    cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
+        sources = {
+            { name = "vim-dadbod-completion" },
+            { name = "luasnip", keyword_length = 2 },
+            { name = "buffer", keyword_length = 5 },
+        },
+    })
 end
 
 return M
