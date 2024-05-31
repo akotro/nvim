@@ -79,7 +79,7 @@ M.opts = {
     --   },
     -- },
     status = { virtual_text = true },
-    output = { open_on_run = true },
+    output = { open_on_run = false },
     quickfix = {
         open = function()
             if require("config.functions").plugin.has("trouble.nvim") then
