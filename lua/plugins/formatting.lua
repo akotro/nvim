@@ -94,6 +94,7 @@ M.opts = function()
             -- Conform will run multiple formatters sequentially
             go = { "goimports", "gofmt" },
             -- Use a sub-list to run only the first available formatter
+            html = { { "prettierd", "prettier" } },
             javascript = { { "prettierd", "prettier" } },
             typescript = { { "prettierd", "prettier" } },
             markdown = { "prettierd" },
