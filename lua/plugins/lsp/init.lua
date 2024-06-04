@@ -99,11 +99,13 @@ function M.get()
             "<cmd>Trouble diagnostics toggle<cr>",
             desc = "Workspace Diagnostics",
         },
-        -- {
-        --     "<leader>lh",
-        --     "<cmd>lua require('lsp-inlayhints').toggle()<cr>",
-        --     "Toggle Hints",
-        -- },
+        {
+            "<leader>lh",
+            function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ filter = nil }))
+            end,
+            "Toggle Hints",
+        },
         {
             "<leader>lH",
             "<cmd>IlluminationToggle<cr>",
@@ -117,14 +119,14 @@ function M.get()
         {
             "<leader>lj",
             function()
-                vim.diagnostic.goto_next({ buffer = 0, float = false })
+                vim.diagnostic.jump({ count = 1, float = false })
             end,
             desc = "Next Diagnostic",
         },
         {
             "<leader>lk",
             function()
-                vim.diagnostic.goto_prev({ buffer = 0, float = false })
+                vim.diagnostic.jump({ count = -1, float = false })
             end,
             desc = "Prev Diagnostic",
         },
@@ -265,46 +267,51 @@ M.dependencies = {
 
     -- NOTE: LSP Language Extensions
     { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true, ft = "cs" },
+    -- {
+    --     "simrat39/rust-tools.nvim",
+    --     lazy = true,
+    --     ft = { "rust", "toml" },
+    --     opts = function()
+    --         local ok, mason_registry = pcall(require, "mason-registry")
+    --         local adapter ---@type any
+    --         if ok then
+    --             -- rust tools configuration for debugging support
+    --             local codelldb = mason_registry.get_package("codelldb")
+    --             local extension_path = codelldb:get_install_path() .. "/extension/"
+    --             local codelldb_path = extension_path .. "adapter/codelldb"
+    --             local liblldb_path = ""
+    --             if vim.loop.os_uname().sysname:find("Windows") then
+    --                 liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
+    --             elseif vim.fn.has("mac") == 1 then
+    --                 liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+    --             else
+    --                 liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+    --             end
+    --             adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+    --         end
+    --         return {
+    --             dap = {
+    --                 adapter = adapter,
+    --             },
+    --             tools = {
+    --                 on_initialized = function()
+    --                     vim.cmd([[
+    --                         augroup RustLSP
+    --                             " autocmd CursorHold                      *.rs silent! lua vim.lsp.buf.document_highlight()
+    --                             autocmd CursorMoved,InsertEnter         *.rs silent! lua vim.lsp.buf.clear_references()
+    --                             autocmd BufEnter,CursorHold,InsertLeave *.rs silent! lua vim.lsp.codelens.refresh()
+    --                         augroup END
+    -- 		]])
+    --                 end,
+    --             },
+    --         }
+    --     end,
+    --     config = function() end,
+    -- },
     {
-        "simrat39/rust-tools.nvim",
-        lazy = true,
-        ft = { "rust", "toml" },
-        opts = function()
-            local ok, mason_registry = pcall(require, "mason-registry")
-            local adapter ---@type any
-            if ok then
-                -- rust tools configuration for debugging support
-                local codelldb = mason_registry.get_package("codelldb")
-                local extension_path = codelldb:get_install_path() .. "/extension/"
-                local codelldb_path = extension_path .. "adapter/codelldb"
-                local liblldb_path = ""
-                if vim.loop.os_uname().sysname:find("Windows") then
-                    liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
-                elseif vim.fn.has("mac") == 1 then
-                    liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-                else
-                    liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-                end
-                adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
-            end
-            return {
-                dap = {
-                    adapter = adapter,
-                },
-                tools = {
-                    on_initialized = function()
-                        vim.cmd([[
-                            augroup RustLSP
-                                " autocmd CursorHold                      *.rs silent! lua vim.lsp.buf.document_highlight()
-                                autocmd CursorMoved,InsertEnter         *.rs silent! lua vim.lsp.buf.clear_references()
-                                autocmd BufEnter,CursorHold,InsertLeave *.rs silent! lua vim.lsp.codelens.refresh()
-                            augroup END
-						]])
-                    end,
-                },
-            }
-        end,
-        config = function() end,
+        "mrcjkb/rustaceanvim",
+        version = "^4",
+        lazy = false, -- This plugin is already lazy
     },
     {
         "saecki/crates.nvim",
@@ -376,7 +383,7 @@ M.opts = {
     -- Be aware that you also will need to properly configure your LSP server to
     -- provide the inlay hints.
     inlay_hints = {
-        enabled = false,
+        enabled = true,
     },
     -- add any global capabilities here
     capabilities = {},
@@ -429,7 +436,7 @@ M.opts = {
             keys = {
                 -- { "<leader>ld", "<cmd>RustHoverActions<cr>", desc = "Hover Actions (Rust)" },
                 -- { "<leader>la", "<cmd>RustCodeAction<cr>", desc = "Code Action (Rust)" },
-                { "<leader>dR", "<cmd>RustDebuggables<cr>", desc = "Run Debuggables (Rust)" },
+                { "<leader>dR", "<cmd>RustLsp debuggables<cr>", desc = "Run Debuggables (Rust)" },
             },
             settings = {
                 ["rust-analyzer"] = {
@@ -548,8 +555,8 @@ M.opts = {
             return true
         end,
         rust_analyzer = function(_, opts)
-            local rust_tools_opts = require("config.functions").plugin.opts("rust-tools.nvim")
-            require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
+            -- local rust_tools_opts = require("config.functions").plugin.opts("rust-tools.nvim")
+            -- require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
             return true
         end,
         clangd = function(_, opts)
@@ -619,7 +626,7 @@ function M.config(_, opts)
     if opts.inlay_hints.enabled and inlay_hint then
         utils.lsp.on_attach(function(client, buffer)
             if client.supports_method("textDocument/inlayHint") then
-                inlay_hint(buffer, true)
+                inlay_hint.enable(true, { bufnr = buffer })
             end
         end)
     end
