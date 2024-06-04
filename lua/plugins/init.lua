@@ -67,7 +67,7 @@ return {
     -- },
     {
         "folke/noice.nvim",
-        enabled = true,
+        enabled = false,
         event = "User",
         dependencies = "MunifTanjim/nui.nvim",
         keys = require("plugins.noice").keys,
