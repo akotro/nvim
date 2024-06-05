@@ -185,30 +185,12 @@ return {
         opts = require("plugins.oil").opts,
     },
     {
-        "samjwill/nvim-unception",
-        event = "VeryLazy",
-        init = function()
-            -- vim.g.unception_open_buffer_in_new_tab = true
-        end,
-    },
-    {
         "akinsho/toggleterm.nvim",
         version = "*",
         lazy = true,
         keys = require("plugins.toggleterm").keys,
         opts = require("plugins.toggleterm").opts,
     },
-    -- {
-    --     "nvim-zh/colorful-winsep.nvim",
-    --     -- config = true,
-    --     event = { "WinNew" },
-    --     opts = {
-    --         highlight = {
-    --             fg = "#54546D",
-    --             -- fg = "#957CC6"
-    --         },
-    --     },
-    -- },
     -- NOTE: Git
     { "tpope/vim-fugitive", event = "BufRead" },
     {
@@ -267,22 +249,22 @@ return {
         config = require("plugins.treesitter").config,
     },
     -- Show context of the current function
-    -- {
-    --     "nvim-treesitter/nvim-treesitter-context",
-    --     event = "BufRead",
-    --     enabled = true,
-    --     opts = { enable = false, mode = "cursor", max_lines = 3 },
-    --     keys = {
-    --         {
-    --             "<leader>ut",
-    --             function()
-    --                 local tsc = require("treesitter-context")
-    --                 tsc.toggle()
-    --             end,
-    --             desc = "Toggle Treesitter Context",
-    --         },
-    --     },
-    -- },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        event = "BufRead",
+        enabled = true,
+        opts = { enable = true, mode = "cursor", trim_scope = "inner", max_lines = 3 },
+        keys = {
+            {
+                "<leader>ut",
+                function()
+                    local tsc = require("treesitter-context")
+                    tsc.toggle()
+                end,
+                desc = "Toggle Treesitter Context",
+            },
+        },
+    },
     -- comments
     {
         "JoosepAlviste/nvim-ts-context-commentstring",
@@ -376,13 +358,6 @@ return {
     --		})
     --	end,
     -- },
-    {
-        "Bekaboo/dropbar.nvim",
-        event = "BufRead",
-        dependencies = {
-            "nvim-telescope/telescope-fzf-native.nvim",
-        },
-    },
     {
         "kosayoda/nvim-lightbulb",
         event = "BufRead",
