@@ -1,4 +1,4 @@
-local icons = require("config.icons")
+local icons = require("config.ui").icons
 local utils = require("config.functions")
 
 local M = {}

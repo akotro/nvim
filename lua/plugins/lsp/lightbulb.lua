@@ -1,7 +1,7 @@
 local M = {}
 
 function M.config()
-    local icons = require("config.icons")
+    local icons = require("config.ui").icons
     require("nvim-lightbulb").setup({
         sign = {
             enabled = false,

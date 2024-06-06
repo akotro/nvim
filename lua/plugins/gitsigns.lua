@@ -1,7 +1,7 @@
 local M = {}
 
 function M.opts()
-    local icons = require("config.icons")
+    local icons = require("config.ui").icons
     return {
         signs = {
             add = {

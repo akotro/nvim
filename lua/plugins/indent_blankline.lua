@@ -1,13 +1,15 @@
 local M = {}
 
+local icons = require("config.ui").icons
+
 M.opts = {
     indent = {
-        char = require("config.icons").ui.LineLeft,
-        tab_char = require("config.icons").ui.LineLeft,
+        char = icons.ui.LineLeft,
+        tab_char = icons.ui.LineLeft,
     },
     scope = {
         enabled = false,
-        char = require("config.icons").ui.LineLeft,
+        char = icons.ui.LineLeft,
     },
     exclude = {
         buftypes = { "terminal", "nofile" },

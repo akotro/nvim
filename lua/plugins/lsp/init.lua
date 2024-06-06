@@ -562,22 +562,10 @@ function M.config(_, opts)
     -- 	require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
     -- end
 
-    -- setup lsp floating window border
-    -- TODO: Define these somewhere globally so that they can be used to also configure cmp borders
-    vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
-    vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
-    local border = {
-        { "🭽", "FloatBorder" },
-        { "▔", "FloatBorder" },
-        { "🭾", "FloatBorder" },
-        { "▕", "FloatBorder" },
-        { "🭿", "FloatBorder" },
-        { "▁", "FloatBorder" },
-        { "🭼", "FloatBorder" },
-        { "▏", "FloatBorder" },
-    }
+    local icons = require("config.ui").icons
 
-    -- override globally
+    -- setup lsp floating window border (override globally)
+    local border = require("config.ui").get_float_opts().border
     local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
     function vim.lsp.util.open_floating_preview(contents, syntax, options, ...)
         options = options or {}
@@ -602,7 +590,7 @@ function M.config(_, opts)
     end
 
     -- diagnostics
-    for name, icon in pairs(require("config.icons").diagnostics) do
+    for name, icon in pairs(icons.diagnostics) do
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
     end
@@ -620,8 +608,7 @@ function M.config(_, opts)
     if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
             or function(diagnostic)
-                local icons = require("config.icons").diagnostics
-                for d, icon in pairs(icons) do
+                for d, icon in pairs(icons.diagnostics) do
                     if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
                         return icon
                     end

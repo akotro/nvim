@@ -22,7 +22,7 @@ function M.init()
 end
 
 M.opts = {
-    symbol = require("config.icons").ui.LineLeft,
+    symbol = require("config.ui").icons.ui.LineLeft,
     options = { try_as_border = true },
     draw = {
         delay = 50,

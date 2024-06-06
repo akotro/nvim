@@ -115,14 +115,14 @@ local autocommands = {
     },
     -- Cursorline
     {
-        events = { "WinLeave" },
+        events = { "WinLeave", "BufLeave" },
 
         group = cursorline,
         pattern = { "*" },
         command = [[set nocursorline]],
     },
     {
-        events = { "WinEnter" },
+        events = { "WinEnter", "BufEnter" },
         group = cursorline,
         pattern = { "*" },
         command = [[set cursorline]],

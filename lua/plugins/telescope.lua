@@ -32,7 +32,7 @@ M.keys = {
 
 function M.opts()
     local functions = require("config.functions")
-    local icons = require("config.icons")
+    local icons = require("config.ui").icons
     local actions = require("telescope.actions")
 
     local layout_strategy = "horizontal"

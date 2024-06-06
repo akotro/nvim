@@ -249,7 +249,7 @@ M.keys = {
 }
 
 function M.config()
-    local icons = require("config.icons")
+    local icons = require("config.ui").icons
     vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
     for name, sign in pairs(icons.dap) do

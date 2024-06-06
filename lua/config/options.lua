@@ -154,25 +154,7 @@ end
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
--- Disable vim builtin plugins
--- NOTE: Done in lazy.nvim config
--- vim.g.loaded_gzip = 1
--- vim.g.loaded_zip = 1
--- vim.g.loaded_zipPlugin = 1
--- vim.g.loaded_tar = 1
--- vim.g.loaded_tarPlugin = 1
--- vim.g.loaded_getscript = 1
--- vim.g.loaded_getscriptPlugin = 1
--- vim.g.loaded_vimball = 1
--- vim.g.loaded_vimballPlugin = 1
--- vim.g.loaded_2html_plugin = 1
--- vim.g.loaded_logiPat = 1
--- vim.g.loaded_rrhelper = 1
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
--- vim.g.loaded_netrwSettings = 1
-
--- TODO: Needed for rust cargo build
+-- NOTE: Needed for rust cargo build
 vim.cmd([[
     set errorformat=
         \%-G,

@@ -23,7 +23,7 @@ end
 
 function M.setup()
     local functions = require("config.functions")
-    local icons = require("config.icons")
+    local icons = require("config.ui").icons
 
     local window_width_limit = 100
 
@@ -41,7 +41,6 @@ function M.setup()
         -- end,
     }
 
-    -- TODO: Get colors programmatically
     local colors = {
         bg = "#202328",
         fg = "#bbc2cf",
