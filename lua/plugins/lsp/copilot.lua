@@ -18,7 +18,8 @@ function M.config()
         suggestion = { enabled = false },
         panel = { enabled = false },
     })
-    vim.cmd("silent! Copilot disable")
+    -- TODO: find a way to do this without message
+    -- vim.cmd("silent! Copilot disable")
 end
 
 return M
