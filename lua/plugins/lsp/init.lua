@@ -562,7 +562,28 @@ function M.config(_, opts)
     -- 	require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
     -- end
 
-    -- setup autoformat
+    -- setup lsp floating window border
+    -- TODO: Define these somewhere globally so that they can be used to also configure cmp borders
+    vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
+    vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
+    local border = {
+        { "🭽", "FloatBorder" },
+        { "▔", "FloatBorder" },
+        { "🭾", "FloatBorder" },
+        { "▕", "FloatBorder" },
+        { "🭿", "FloatBorder" },
+        { "▁", "FloatBorder" },
+        { "🭼", "FloatBorder" },
+        { "▏", "FloatBorder" },
+    }
+
+    -- override globally
+    local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+    function vim.lsp.util.open_floating_preview(contents, syntax, options, ...)
+        options = options or {}
+        options.border = options.border or border
+        return orig_util_open_floating_preview(contents, syntax, options, ...)
+    end
 
     -- setup keymaps
     utils.lsp.on_attach(function(client, buffer)
