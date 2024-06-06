@@ -349,15 +349,15 @@ return {
         config = require("plugins.lsp").mason.config,
     },
     -- NOTE: LSP Utils
-    -- {
-    --	"ray-x/lsp_signature.nvim",
-    --	event = "BufRead",
-    --	config = function()
-    --		require("lsp_signature").setup({
-    --			hint_enable = false,
-    --		})
-    --	end,
-    -- },
+    {
+        "ray-x/lsp_signature.nvim",
+        event = "BufRead",
+        config = function()
+            require("lsp_signature").setup({
+                hint_enable = false,
+            })
+        end,
+    },
     {
         "kosayoda/nvim-lightbulb",
         event = "BufRead",
