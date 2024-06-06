@@ -277,8 +277,10 @@ M.dependencies = {
         lazy = true,
         ft = { "rust", "toml" },
         opts = {
-            src = {
-                cmp = { enabled = true },
+            completion = {
+                cmp = {
+                    enabled = true,
+                },
             },
         },
     },
