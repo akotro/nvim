@@ -531,6 +531,26 @@ M.opts = {
             return true
         end,
         rust_analyzer = function(_, opts)
+            vim.g.rustaceanvim = {
+                server = {
+                    on_attach = function(client, bufnr)
+                        local Keys = require("lazy.core.handler.keys")
+
+                        for _, keys in pairs(opts.keys) do
+                            if not keys.has or M.has(bufnr, keys.has) then
+                                local key_opts = Keys.opts(keys)
+                                keys.lhs = keys[1]
+                                keys.rhs = keys[2]
+                                key_opts.has = nil
+                                key_opts.silent = key_opts.silent ~= false
+                                key_opts.buffer = bufnr
+                                vim.keymap.set(keys.mode or "n", keys.lhs, keys.rhs, key_opts)
+                            end
+                        end
+                    end,
+                    default_settings = opts.settings,
+                },
+            }
             return true
         end,
         clangd = function(_, opts)
