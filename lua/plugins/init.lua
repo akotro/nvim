@@ -289,8 +289,17 @@ return {
             "jsx",
             "xml",
             "markdown",
+            "rust",
         },
         opts = {},
+    },
+    {
+        "rayliwell/tree-sitter-rstml",
+        dependencies = { "nvim-treesitter" },
+        build = ":TSUpdate",
+        config = function()
+            require("tree-sitter-rstml").setup()
+        end,
     },
     {
         "m-demare/hlargs.nvim",

@@ -84,6 +84,7 @@
   "tiny-devicons-auto-colors.nvim": { "branch": "main", "commit": "13f9391c2bf43df5224924667bdb66cedea37484" },
   "todo-comments.nvim": { "branch": "main", "commit": "70a93ce66083699571adc361166504b03cc39c2b" },
   "toggleterm.nvim": { "branch": "main", "commit": "066cccf48a43553a80a210eb3be89a15d789d6e6" },
+  "tree-sitter-rstml": { "branch": "main", "commit": "9558d7302c5d8d0b0594dbfce778bb56f9d5079a" },
   "trouble.nvim": { "branch": "main", "commit": "806c50491078b66daf13c408042f2e74da46d0ff" },
   "typescript-tools.nvim": { "branch": "master", "commit": "c43d9580c3ff5999a1eabca849f807ab33787ea7" },
   "typst-preview.nvim": { "branch": "master", "commit": "5867db936576741f378b558a9d7428b928819df5" },
