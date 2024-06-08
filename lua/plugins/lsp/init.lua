@@ -10,30 +10,6 @@ function M.get()
     end
     M._keys = {
         { "<leader>li", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
-        -- {
-        --     "gd",
-        --     function()
-        --         require("telescope.builtin").lsp_definitions({ reuse_win = true })
-        --     end,
-        --     desc = "Goto Definition",
-        --     has = "definition",
-        -- },
-        -- { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
-        -- { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-        -- {
-        --     "gI",
-        --     function()
-        --         require("telescope.builtin").lsp_implementations({ reuse_win = true })
-        --     end,
-        --     desc = "Goto Implementation",
-        -- },
-        -- {
-        --     "gy",
-        --     function()
-        --         require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
-        --     end,
-        --     desc = "Goto Type Definition",
-        -- },
         {
             "gd",
             function()
@@ -267,13 +243,30 @@ end
 
 M.dependencies = {
     -- { "folke/neoconf.nvim", cmd = "Neoconf", config = false },
-    { "folke/neodev.nvim", opts = {} },
     "mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     { "j-hui/fidget.nvim", opts = {} },
 
     -- NOTE: LSP Language Extensions
+
+    -- lua
+    {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+                "lazy.nvim",
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "luvit-meta/library", words = { "vim%.uv" } },
+            },
+        },
+    },
+    { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+
+    -- csharp
     { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true, ft = "cs" },
+
+    -- rust
     {
         "mrcjkb/rustaceanvim",
         version = "^4",
@@ -291,6 +284,8 @@ M.dependencies = {
             },
         },
     },
+
+    -- typescript
     {
         "pmizio/typescript-tools.nvim",
         lazy = true,
@@ -298,6 +293,8 @@ M.dependencies = {
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {},
     },
+
+    -- c, cpp
     {
         "p00f/clangd_extensions.nvim",
         lazy = true,

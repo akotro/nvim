@@ -133,6 +133,10 @@ function M.cmp.opts()
         sources = cmp.config.sources({
             { name = "nvim_lsp" },
             { name = "luasnip" },
+            {
+                name = "lazydev",
+                group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+            },
             { name = "path" },
             { name = "buffer" },
             { name = "copilot" },
