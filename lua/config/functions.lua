@@ -867,4 +867,34 @@ function M.focus_first_float()
     end
 end
 
+function M.open_plugin_github()
+    local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+    local line = vim.api.nvim_get_current_line()
+
+    local start_pos = line:sub(1, col):match('()"[^"]*$')
+    local end_pos = line:sub(col + 1):match('"()')
+
+    if not start_pos or not end_pos then
+        print("No valid plugin text found inside quotes")
+        return
+    end
+
+    local text_in_quotes = line:sub(start_pos + 1, col + end_pos - 2)
+
+    local slash_count = 0
+    for _ in string.gmatch(text_in_quotes, "/") do
+        slash_count = slash_count + 1
+    end
+    if slash_count ~= 1 then
+        print("Invalid plugin text format. Expected format: 'user/plugin', got '" .. text_in_quotes .. "'")
+        return
+    end
+    -- print("Opening plugin github page for " .. text_in_quotes)
+
+    local url = "https://github.com/" .. text_in_quotes
+
+    local command = string.format("xdg-open '%s'", url)
+    os.execute(command)
+end
+
 return M

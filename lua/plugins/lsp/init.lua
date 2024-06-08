@@ -70,6 +70,13 @@ function M.get()
             end,
             desc = "Goto Type Definition",
         },
+        {
+            "gp",
+            function()
+                require("config.functions").open_plugin_github()
+            end,
+            desc = "Goto Plugin Github",
+        },
         { "<leader>ld", vim.lsp.buf.hover, desc = "Hover" },
         { "<leader>lD", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
         -- { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
