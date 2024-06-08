@@ -28,6 +28,8 @@ M.dependencies = {
             {
                 "<leader>de",
                 function()
+                    -- call this twice to open and jump into the window
+                    require("dapui").eval()
                     require("dapui").eval()
                 end,
                 desc = "Eval",
@@ -79,6 +81,20 @@ M.dependencies = {
                 -- Update this to ensure that you have the debuggers for the langs you want
                 "codelldb",
                 "coreclr",
+            },
+        },
+    },
+
+    -- lua adapter
+    {
+        "jbyuki/one-small-step-for-vimkind",
+        keys = {
+            {
+                "<leader>dL",
+                function()
+                    require("osv").launch({ port = 8086 })
+                end,
+                desc = "Launch Lua adapter",
             },
         },
     },
@@ -261,6 +277,8 @@ function M.config()
     end
 
     local dap = require("dap")
+
+    -- csharp
     dap.configurations.cs = {
         {
             type = "coreclr",
@@ -271,6 +289,8 @@ function M.config()
             end,
         },
     }
+
+    -- c, c++
     for _, lang in ipairs({ "c", "cpp" }) do
         dap.configurations[lang] = {
             {
@@ -290,6 +310,19 @@ function M.config()
                 cwd = "${workspaceFolder}",
             },
         }
+    end
+
+    -- lua
+    dap.configurations.lua = {
+        {
+            type = "nlua",
+            request = "attach",
+            name = "Attach to running Neovim instance",
+        },
+    }
+
+    dap.adapters.nlua = function(callback, config)
+        callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
     end
 end
 

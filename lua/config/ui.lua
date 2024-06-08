@@ -1,16 +1,5 @@
 M = {}
 
--- local border = {
---     { "╔", "FloatBorder" },
---     { "═", "FloatBorder" },
---     { "╗", "FloatBorder" },
---     { "║", "FloatBorder" },
---     { "╝", "FloatBorder" },
---     { "═", "FloatBorder" },
---     { "╚", "FloatBorder" },
---     { "║", "FloatBorder" },
--- }
-
 function M.get_float_opts()
     vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
     vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
@@ -39,8 +28,8 @@ M.icons = {
     },
     dap = {
         Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
-        -- Breakpoint = { " ", "DapUIStop" },
-        Breakpoint = { " ", "DapUIStop" },
+        Breakpoint = { " ", "DapUIStop" },
+        -- Breakpoint = { " ", "DapUIStop" },
         BreakpointCondition = " ",
         BreakpointRejected = { " ", "DiagnosticError" },
         LogPoint = ".>",
