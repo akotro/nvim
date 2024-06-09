@@ -242,7 +242,11 @@ function M.on_attach(_, buffer)
 end
 
 M.dependencies = {
-    -- { "folke/neoconf.nvim", cmd = "Neoconf", config = false },
+    {
+        "folke/neoconf.nvim",
+        cmd = "Neoconf",
+        opts = {},
+    },
     "mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     { "j-hui/fidget.nvim", opts = {} },
