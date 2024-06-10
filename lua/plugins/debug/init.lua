@@ -252,6 +252,15 @@ M.keys = {
         "<leader>dt",
         function()
             require("dap").terminate()
+            require("dapui").close({})
+        end,
+        desc = "Terminate",
+    },
+    {
+        "<S-F5>",
+        function()
+            require("dap").terminate()
+            require("dapui").close({})
         end,
         desc = "Terminate",
     },
@@ -320,7 +329,6 @@ function M.config()
             name = "Attach to running Neovim instance",
         },
     }
-
     dap.adapters.nlua = function(callback, config)
         callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
     end
