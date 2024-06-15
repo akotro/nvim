@@ -20,7 +20,8 @@ M.keys = {
     },
     { "<leader>fl", "<cmd>Telescope resume<cr>", desc = "Last Search" },
     { "<leader>fM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
-    { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent File" },
+    -- { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent File" },
+    { "<leader>fr", "<cmd>Telescope frecency<cr>", desc = "Frecent Files" },
     { "<leader>fR", "<cmd>Telescope registers<cr>", desc = "Registers" },
     { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
     { "<leader>fC", "<cmd>Telescope commands<cr>", desc = "Commands" },
@@ -246,6 +247,15 @@ M.dependencies = {
         enabled = vim.fn.executable("make") == 1,
         config = function()
             require("telescope").load_extension("fzf")
+        end,
+    },
+    {
+        "nvim-telescope/telescope-frecency.nvim",
+        lazy = true,
+        config = function()
+            require("config.functions").on_load("telescope.nvim", function()
+                pcall(require("telescope").load_extension, "frecency")
+            end)
         end,
     },
     {
