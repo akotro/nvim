@@ -455,7 +455,8 @@ return {
     },
     {
         "3rd/image.nvim",
-        enabled = require("config.functions").is_linux(),
+        -- enabled = require("config.functions").is_linux(),
+        enabled = false,
         ft = { "txt", "markdown", "norg", "tex", "typ" },
         opts = require("plugins.image").opts,
         config = require("plugins.image").config,
