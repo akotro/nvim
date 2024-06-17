@@ -499,9 +499,9 @@ M.opts = {
         nushell = {},
         pyright = {},
         -- sqlls = {},
-        sqls = {
-            mason = false,
-        },
+        -- sqls = {
+        --     mason = false,
+        -- },
         yamlls = {},
         docker_compose_language_service = {
             root_dir = function(fname)

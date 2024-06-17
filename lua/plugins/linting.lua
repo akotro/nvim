@@ -6,12 +6,12 @@ M.opts = {
     linters_by_ft = {
         zsh = { "zsh" },
         fish = { "fish" },
-        html = { "tidy" },
+        -- html = { "tidy" },
         python = { "ruff" },
-        markdown = { "proselint" },
-        norg = { "proselint" },
-        tex = { "proselint" },
-        txt = { "proselint" },
+        markdown = { "vale", "alex" },
+        norg = { "vale", "alex" },
+        tex = { "vale", "alex" },
+        -- txt = { "vale", "alex" },
         -- Use the "*" filetype to run linters on all filetypes.
         -- ['*'] = { 'global linter' },
         -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
