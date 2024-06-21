@@ -75,6 +75,8 @@ M.keys = {
     },
 }
 
-M.opts = {}
+M.opts = {
+    auto_refresh = false,
+}
 
 return M
