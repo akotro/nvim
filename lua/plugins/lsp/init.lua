@@ -517,6 +517,11 @@ M.opts = {
         },
         nil_ls = {
             mason = false,
+            settings = {
+                ["nil"] = {
+                    autoArchive = true,
+                },
+            },
         },
     },
     -- you can do any additional lsp server setup here
