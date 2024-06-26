@@ -50,6 +50,11 @@ M.keys = {
         "<cmd>ObsidianQuickSwitch<cr>",
         { buffer = true },
     },
+    {
+        "<leader>nt",
+        "<cmd>ObsidianTags<cr>",
+        { buffer = true },
+    },
 }
 
 return M
