@@ -8,13 +8,6 @@ return {
     },
     -- NOTE: Util
     {
-        "vhyrro/luarocks.nvim",
-        priority = 1001, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-        opts = {
-            rocks = { "fzy", "magick", "tiktoken_core" },
-        },
-    },
-    {
         "nvim-lua/plenary.nvim",
         lazy = true,
     },
@@ -141,12 +134,12 @@ return {
         config = require("plugins.colorizer").config,
     },
     {
-        "akotro/jaq-nvim",
-        branch = "dev",
-        -- dir = "/home/akotro/programming/lua/jaq-nvim",
-        ft = { "c", "cpp", "cs", "markdown", "python", "sh", "rust" },
-        keys = require("plugins.jaq").keys,
-        config = require("plugins.jaq").config,
+        "stevearc/overseer.nvim",
+        event = "BufRead",
+        lazy = true,
+        keys = require("plugins.overseer").keys,
+        opts = require("plugins.overseer").opts,
+        config = require("plugins.overseer").config,
     },
     {
         "kevinhwang91/nvim-bqf",
@@ -498,11 +491,10 @@ return {
         "epwalsh/obsidian.nvim",
         version = "*",
         lazy = true,
-        ft = "markdown",
-        -- event = {
-        --     "BufReadPre " .. vim.fn.expand("~") .. "/obsidian/**.md",
-        --     "BufNewFile " .. vim.fn.expand("~") .. "/obsidian/**.md",
-        -- },
+        event = {
+            "BufReadPre " .. vim.fn.expand("~") .. "/obsidian/**.md",
+            "BufNewFile " .. vim.fn.expand("~") .. "/obsidian/**.md",
+        },
         dependencies = require("plugins.obsidian").dependencies,
         opts = require("plugins.obsidian").opts,
         keys = require("plugins.obsidian").keys,
