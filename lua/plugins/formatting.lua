@@ -95,7 +95,7 @@ M.opts = function()
             html = { { "prettierd", "prettier" } },
             javascript = { { "prettierd", "prettier" } },
             typescript = { { "prettierd", "prettier" } },
-            markdown = { "prettierd" },
+            markdown = { "deno_fmt" },
             tex = { "latexindent" },
             -- You can use a function here to determine the formatters dynamically
             python = function(bufnr)

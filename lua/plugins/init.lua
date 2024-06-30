@@ -12,6 +12,7 @@ return {
         lazy = true,
     },
     -- NOTE: UI
+    -- { "echasnovski/mini.starter", version = false, opts = {} },
     { "nvim-tree/nvim-web-devicons", lazy = true },
     {
         "rachartier/tiny-devicons-auto-colors.nvim",

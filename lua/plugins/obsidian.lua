@@ -32,7 +32,7 @@ M.keys = {
         { noremap = false, expr = true, buffer = true },
     },
     {
-        "<leader>ch",
+        "<leader>nc",
         function()
             require("obsidian").util.toggle_checkbox()
         end,
@@ -44,6 +44,11 @@ M.keys = {
             require("obsidian").util.smart_action()
         end,
         { noremap = false, buffer = true },
+    },
+    {
+        "<leader>nn",
+        "<cmd>ObsidianNew<cr>",
+        { buffer = true },
     },
     {
         "<leader>nf",
