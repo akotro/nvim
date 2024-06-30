@@ -274,7 +274,9 @@ M.keys = {
 }
 
 function M.config()
+    local utils = require("config.functions")
     local icons = require("config.ui").icons
+
     vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
     for name, sign in pairs(icons.dap) do
@@ -331,6 +333,10 @@ function M.config()
     }
     dap.adapters.nlua = function(callback, config)
         callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
+    end
+
+    if utils.plugin.has("overseer.nvim") then
+        require("overseer").enable_dap()
     end
 end
 
