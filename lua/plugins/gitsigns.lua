@@ -25,7 +25,7 @@ function M.opts()
         linehl = false,
         word_diff = false,
         watch_gitdir = {
-            interval = 1000,
+            enable = true,
             follow_files = true,
         },
         attach_to_untracked = true,
