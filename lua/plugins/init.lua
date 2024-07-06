@@ -384,7 +384,8 @@ return {
     {
         "zbirenbaum/copilot.lua",
         build = ":Copilot auth",
-        event = "InsertEnter",
+        -- event = "InsertEnter",
+        lazy = true,
         cmd = "Copilot",
         keys = require("plugins.lsp").copilot.keys,
         config = require("plugins.lsp").copilot.config,

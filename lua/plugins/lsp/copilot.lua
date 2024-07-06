@@ -11,6 +11,11 @@ M.keys = {
         "<cmd>Copilot disable<cr>",
         desc = "Copilot Disable",
     },
+    {
+        "<leader>cpt",
+        "<cmd>Copilot toggle<cr>",
+        desc = "Copilot Toggle",
+    },
 }
 
 function M.config()
@@ -18,8 +23,6 @@ function M.config()
         suggestion = { enabled = false },
         panel = { enabled = false },
     })
-    -- TODO: find a way to do this without message
-    -- vim.cmd("silent! Copilot disable")
 end
 
 return M
