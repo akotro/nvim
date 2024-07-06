@@ -39,14 +39,14 @@ M.cmd = {
 }
 
 M.keys = {
+    -- {
+    --     "<leader>cpc",
+    --     "<cmd>CopilotChat<cr>",
+    --     desc = "CopilotChat - Chat",
+    --     mode = { "n", "v" },
+    -- },
     {
         "<leader>cpc",
-        "<cmd>CopilotChat<cr>",
-        desc = "CopilotChat - Chat",
-        mode = { "n", "v" },
-    },
-    {
-        "<leader>cpt",
         "<cmd>CopilotChatToggle<cr>",
         desc = "CopilotChat - Toggle",
         mode = { "n", "v" },
