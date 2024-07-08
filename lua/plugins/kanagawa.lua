@@ -7,6 +7,7 @@ function M.config()
     else
         kanagawa.setup({
             compile = true,
+            dimInactive = false,
             colors = {
                 theme = { all = { ui = { bg_gutter = "none" } } },
             },

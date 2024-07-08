@@ -41,20 +41,7 @@ function M.setup()
         -- end,
     }
 
-    local colors = {
-        bg = "#202328",
-        fg = "#bbc2cf",
-        yellow = "#ECBE7B",
-        cyan = "#008080",
-        darkblue = "#081633",
-        green = "#98be65",
-        orange = "#FF8800",
-        violet = "#a9a1e1",
-        magenta = "#c678dd",
-        purple = "#c678dd",
-        blue = "#51afef",
-        red = "#ec5f67",
-    }
+    local colors = require("kanagawa.colors").setup().palette
 
     local function diff_source()
         local gitsigns = vim.b.gitsigns_status_dict
@@ -108,9 +95,9 @@ function M.setup()
             },
             padding = { left = 2, right = 1 },
             diff_color = {
-                added = { fg = colors.green },
-                modified = { fg = colors.yellow },
-                removed = { fg = colors.red },
+                added = { fg = colors.dragonGreen },
+                modified = { fg = colors.dragonYellow },
+                removed = { fg = colors.dragonRed },
             },
             cond = nil,
         },
@@ -148,7 +135,7 @@ function M.setup()
             color = function()
                 local buf = vim.api.nvim_get_current_buf()
                 local ts = vim.treesitter.highlighter.active[buf]
-                return { fg = ts and not vim.tbl_isempty(ts) and colors.green or colors.red }
+                return { fg = ts and not vim.tbl_isempty(ts) and colors.dragonGreen or colors.dragonRed }
             end,
             cond = conditions.hide_in_width,
         },
@@ -252,7 +239,7 @@ function M.setup()
                 local lines = starts <= ends and ends - starts + 1 or starts - ends + 1
                 return tostring(lines) .. "L " .. tostring(fn.wordcount().visual_chars) .. "C"
             end,
-            color = { fg = colors.violet },
+            color = { fg = colors.oniViolet },
         },
     }
 
