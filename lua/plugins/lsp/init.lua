@@ -600,11 +600,11 @@ function M.config(_, opts)
     local icons = require("config.ui").icons
 
     -- setup lsp floating window border (override globally)
-    local border = require("config.ui").get_float_opts().border
+    -- local border = require("config.ui").get_float_opts().border
     local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
     function vim.lsp.util.open_floating_preview(contents, syntax, options, ...)
         options = options or {}
-        options.border = options.border or border
+        -- options.border = options.border or border
         return orig_util_open_floating_preview(contents, syntax, options, ...)
     end
 

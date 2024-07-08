@@ -61,14 +61,14 @@ function M.cmp.opts()
     end
     vim.api.nvim_create_user_command("NvimCmpToggle", toggle_autocomplete, {})
 
-    local float_win_opts = require("config.ui").get_float_opts()
-    local window_opts = {
-        border = float_win_opts.border,
-        winhighlight = float_win_opts.winhighlight,
-        winblend = float_win_opts.winblend,
-        -- side_padding = 0,
-        scrollbar = true,
-    }
+    -- local float_win_opts = require("config.ui").get_float_opts()
+    -- local window_opts = {
+    --     border = float_win_opts.border,
+    --     winhighlight = float_win_opts.winhighlight,
+    --     winblend = float_win_opts.winblend,
+    --     -- side_padding = 0,
+    --     scrollbar = true,
+    -- }
 
     local defaults = require("cmp.config.default")()
     return {
@@ -172,8 +172,8 @@ function M.cmp.opts()
             },
         },
         window = {
-            completion = cmp.config.window.bordered(window_opts),
-            documentation = cmp.config.window.bordered(window_opts),
+            -- completion = cmp.config.window.bordered(window_opts),
+            -- documentation = cmp.config.window.bordered(window_opts),
         },
         experimental = {
             ghost_text = false,

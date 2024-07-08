@@ -1,25 +1,26 @@
 M = {}
 
 function M.get_float_opts()
-    vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
-    vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
+    -- vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
+    -- vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
 
-    local border = {
-        { "🭽", "FloatBorder" },
-        { "▔", "FloatBorder" },
-        { "🭾", "FloatBorder" },
-        { "▕", "FloatBorder" },
-        { "🭿", "FloatBorder" },
-        { "▁", "FloatBorder" },
-        { "🭼", "FloatBorder" },
-        { "▏", "FloatBorder" },
-    }
+    -- local border = {
+    --     { "🭽", "FloatBorder" },
+    --     { "▔", "FloatBorder" },
+    --     { "🭾", "FloatBorder" },
+    --     { "▕", "FloatBorder" },
+    --     { "🭿", "FloatBorder" },
+    --     { "▁", "FloatBorder" },
+    --     { "🭼", "FloatBorder" },
+    --     { "▏", "FloatBorder" },
+    -- }
 
-    local winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None"
+    -- local winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None"
 
     local winblend = 0
 
-    return { border = border, winhighlight = winhighlight, winblend = winblend }
+    -- return { border = border, winhighlight = winhighlight, winblend = winblend }
+    return { winblend = winblend }
 end
 
 M.icons = {
