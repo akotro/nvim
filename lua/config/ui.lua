@@ -1,5 +1,28 @@
 M = {}
 
+M.default_colors = {
+    darkBlue = "#004c73",
+    darkCyan = "#007373",
+    darkGreen = "#005523",
+    darkGrey1 = "#07080d",
+    darkGrey2 = "#14161b",
+    darkGrey3 = "#2c2e33",
+    darkGrey4 = "#4f5258",
+    darkMagenta = "#470045",
+    darkRed = "#590008",
+    darkYellow = "#6b5300",
+    lightBlue = "#a6dbff",
+    lightCyan = "#8cf8f7",
+    lightGreen = "#b3f6c0",
+    lightGrey1 = "#eef1f8",
+    lightGrey2 = "#e0e2ea",
+    lightGrey3 = "#c4c6cd",
+    lightGrey4 = "#9b9ea4",
+    lightMagenta = "#ffcaff",
+    lightRed = "#ffc0b9",
+    lightYellow = "#fce094",
+}
+
 function M.get_float_opts()
     -- vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
     -- vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])

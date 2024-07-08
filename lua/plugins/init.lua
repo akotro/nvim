@@ -23,12 +23,15 @@ return {
         event = "VeryLazy",
         config = function()
             local status, kanagawa_colors = pcall(require, "kanagawa.colors")
+            local colors = {}
             if status then
-                local colors = kanagawa_colors.setup()
-                require("tiny-devicons-auto-colors").setup({
-                    colors = colors.palette,
-                })
+                colors = kanagawa_colors.setup().palette
+            else
+                colors = require("config.ui").default_colors
             end
+            require("tiny-devicons-auto-colors").setup({
+                colors = colors,
+            })
         end,
     },
     { "MunifTanjim/nui.nvim", lazy = true },
