@@ -361,7 +361,13 @@ return {
         event = "BufRead",
         config = function()
             require("lsp_signature").setup({
-                hint_enable = false,
+                floating_window = false,
+                hint_enable = true,
+                hint_prefix = {
+                    above = "↙ ",
+                    current = "← ",
+                    below = "↖ ",
+                },
             })
         end,
     },
