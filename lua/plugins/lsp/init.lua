@@ -164,7 +164,8 @@ function M.get()
         {
             "<leader>lo",
             function()
-                utils.open_diagnostic()
+                -- utils.open_diagnostic()
+                vim.diagnostic.open_float()
             end,
             desc = "Open Diagnostic Float",
         },
