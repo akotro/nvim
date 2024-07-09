@@ -155,21 +155,6 @@ function M.cmp.opts()
         },
         cmdline = {
             enable = true,
-            options = {
-                {
-                    type = ":",
-                    sources = {
-                        { name = "path" },
-                        { name = "cmdline" },
-                    },
-                },
-                {
-                    type = { "/", "?" },
-                    sources = {
-                        { name = "buffer" },
-                    },
-                },
-            },
         },
         window = {
             -- completion = cmp.config.window.bordered(window_opts),
@@ -194,6 +179,28 @@ function M.cmp.config(_, opts)
 
     local cmp = require("cmp")
     cmp.setup(opts)
+
+    -- `/` cmdline setup.
+    cmp.setup.cmdline("/", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+            { name = "buffer" },
+        },
+    })
+    -- `:` cmdline setup.
+    cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+            { name = "path" },
+        }, {
+            {
+                name = "cmdline",
+                option = {
+                    ignore_cmds = { "Man", "!" },
+                },
+            },
+        }),
+    })
 
     -- Setup vim-dadbod
     cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
