@@ -41,18 +41,13 @@ function M.setup()
         -- end,
     }
 
-    local colors = {}
-    local status, kanagawa_colors = pcall(require, "kanagawa.colors")
-    if status then
-        colors = kanagawa_colors.setup().palette
-    else
-        colors = {
-            dragonGreen = "#87a987",
-            dragonYellow = "#c4b28a",
-            dragonRed = "#c4746e",
-            oniViolet = "#957FB8",
-        }
-    end
+    local override_colors = {
+        dragonGreen = "#87a987",
+        dragonYellow = "#c4b28a",
+        dragonRed = "#c4746e",
+        oniViolet = "#957FB8",
+    }
+    local colors = functions.get_current_colors(override_colors)
 
     local function diff_source()
         local gitsigns = vim.b.gitsigns_status_dict

@@ -924,4 +924,18 @@ function M.export_colorscheme_to_kitty()
     print("Colors exported to " .. filename)
 end
 
+---@param override_colors? table
+function M.get_current_colors(override_colors)
+    local colors = override_colors or {}
+
+    local status, kanagawa_colors = pcall(require, "kanagawa.colors")
+    if status and vim.g.colors_name == "kanagawa" then
+        colors = kanagawa_colors.setup().palette
+    elseif colors == {} then
+        colors = require("config.ui").default_colors
+    end
+
+    return colors
+end
+
 return M

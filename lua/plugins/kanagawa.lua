@@ -12,7 +12,7 @@ function M.config()
                 theme = { all = { ui = { bg_gutter = "none" } } },
             },
         })
-        vim.cmd([[colorscheme kanagawa]])
+        -- vim.cmd([[colorscheme kanagawa]])
     end
 end
 

@@ -2,7 +2,7 @@ return {
     -- NOTE: Colorschemes
     {
         "rebelot/kanagawa.nvim",
-        enabled = false,
+        enabled = true,
         lazy = false, -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = require("plugins.kanagawa").config,
@@ -22,13 +22,7 @@ return {
         },
         event = "VeryLazy",
         config = function()
-            local status, kanagawa_colors = pcall(require, "kanagawa.colors")
-            local colors = {}
-            if status then
-                colors = kanagawa_colors.setup().palette
-            else
-                colors = require("config.ui").default_colors
-            end
+            local colors = require("config.functions").get_current_colors()
             require("tiny-devicons-auto-colors").setup({
                 colors = colors,
             })
