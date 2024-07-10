@@ -83,6 +83,11 @@ return {
         opts = require("plugins.lualine").opts,
     },
     {
+        "Bekaboo/dropbar.nvim",
+        event = "BufRead",
+        opts = {},
+    },
+    {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         event = "BufRead",
@@ -244,22 +249,22 @@ return {
         config = require("plugins.treesitter").config,
     },
     -- Show context of the current function
-    {
-        "nvim-treesitter/nvim-treesitter-context",
-        event = "BufRead",
-        enabled = true,
-        opts = { enable = true, mode = "cursor", trim_scope = "inner", max_lines = 3 },
-        keys = {
-            {
-                "<leader>ut",
-                function()
-                    local tsc = require("treesitter-context")
-                    tsc.toggle()
-                end,
-                desc = "Toggle Treesitter Context",
-            },
-        },
-    },
+    -- {
+    --     "nvim-treesitter/nvim-treesitter-context",
+    --     event = "BufRead",
+    --     enabled = true,
+    --     opts = { enable = true, mode = "cursor", trim_scope = "inner", max_lines = 3 },
+    --     keys = {
+    --         {
+    --             "<leader>ut",
+    --             function()
+    --                 local tsc = require("treesitter-context")
+    --                 tsc.toggle()
+    --             end,
+    --             desc = "Toggle Treesitter Context",
+    --         },
+    --     },
+    -- },
     -- comments
     {
         "JoosepAlviste/nvim-ts-context-commentstring",
