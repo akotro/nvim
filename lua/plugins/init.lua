@@ -100,6 +100,10 @@ return {
         init = require("plugins.mini_indentscope").init,
         opts = require("plugins.mini_indentscope").opts,
     },
+    {
+        "Bekaboo/deadcolumn.nvim",
+        event = "BufRead",
+    },
     -- NOTE: Usage
     {
         "echasnovski/mini.ai",
@@ -293,14 +297,14 @@ return {
         },
         opts = {},
     },
-    {
-        "rayliwell/tree-sitter-rstml",
-        dependencies = { "nvim-treesitter" },
-        build = ":TSUpdate",
-        config = function()
-            require("tree-sitter-rstml").setup()
-        end,
-    },
+    -- {
+    --     "rayliwell/tree-sitter-rstml",
+    --     dependencies = { "nvim-treesitter" },
+    --     build = ":TSUpdate",
+    --     config = function()
+    --         require("tree-sitter-rstml").setup()
+    --     end,
+    -- },
     {
         "m-demare/hlargs.nvim",
         event = "BufRead",
