@@ -269,7 +269,8 @@ M.dependencies = {
     { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 
     -- csharp
-    { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true, ft = "cs" },
+    -- { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true, ft = "cs" },
+    { "Decodetalkers/csharpls-extended-lsp.nvim", lazy = true, ft = "cs" },
 
     -- rust
     {
@@ -390,25 +391,23 @@ M.opts = {
                 },
             },
         },
-        omnisharp = {
-            keys = {
-                {
-                    "gd",
-                    function()
-                        require("omnisharp_extended").telescope_lsp_definitions()
-                    end,
-                    desc = "Goto Definition",
-                    has = "definition",
-                },
-            },
-            -- handlers = {
-            -- 	["textDocument/definition"] = require("omnisharp_extended").handler,
-            -- },
-            settings = {
-                enable_roslyn_analyzers = true,
-                enable_import_completion = true,
-            },
-        },
+        -- omnisharp = {
+        --     keys = {
+        --         {
+        --             "gd",
+        --             function()
+        --                 require("omnisharp_extended").telescope_lsp_definitions()
+        --             end,
+        --             desc = "Goto Definition",
+        --             has = "definition",
+        --         },
+        --     },
+        --     settings = {
+        --         enable_roslyn_analyzers = true,
+        --         enable_import_completion = true,
+        --     },
+        -- },
+        csharp_ls = {},
         rust_analyzer = {
             mason = false,
             keys = {
@@ -528,9 +527,15 @@ M.opts = {
     -- you can do any additional lsp server setup here
     -- return true if you don't want this server to be setup with lspconfig
     setup = {
-        omnisharp = function(_, opts)
+        -- omnisharp = function(_, opts)
+        --     opts.handlers = {
+        --         ["textDocument/definition"] = require("omnisharp_extended").handler,
+        --     }
+        -- end,
+        csharp_ls = function(_, opts)
             opts.handlers = {
-                ["textDocument/definition"] = require("omnisharp_extended").handler,
+                ["textDocument/definition"] = require("csharpls_extended").handler,
+                ["textDocument/typeDefinition"] = require("csharpls_extended").handler,
             }
         end,
         tsserver = function(_, opts)
