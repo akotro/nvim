@@ -48,6 +48,10 @@ function M.setup()
         oniViolet = "#957FB8",
     }
     local colors = functions.get_current_colors(override_colors)
+    local theme = "iceberg"
+    if vim.g.colors_name ~= nil then
+        theme = "auto"
+    end
 
     local function diff_source()
         local gitsigns = vim.b.gitsigns_status_dict
@@ -251,7 +255,7 @@ function M.setup()
 
     return {
         options = {
-            theme = "iceberg",
+            theme = theme,
             globalstatus = true,
             component_separators = { left = "", right = "" },
             section_separators = { left = "", right = "" },
