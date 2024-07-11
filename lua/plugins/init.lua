@@ -6,6 +6,9 @@ return {
         lazy = false, -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = require("plugins.kanagawa").config,
+        init = function()
+            vim.api.nvim_command("colorscheme kanagawa")
+        end,
     },
     -- NOTE: Util
     {
