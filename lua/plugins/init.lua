@@ -88,7 +88,7 @@ return {
     {
         "Bekaboo/dropbar.nvim",
         event = "BufRead",
-        opts = {},
+        opts = require("plugins.dropbar").opts,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
