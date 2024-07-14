@@ -77,464 +77,558 @@ local options = {
         },
     },
 
-    opts = {
-        mode = "n", -- NORMAL mode
-        prefix = "<leader>",
-        buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-        silent = true, -- use `silent` when creating keymaps
-        noremap = true, -- use `noremap` when creating keymaps
-        nowait = true, -- use `nowait` when creating keymaps
-    },
-    vopts = {
-        mode = "v", -- VISUAL mode
-        prefix = "<leader>",
-        buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-        silent = true, -- use `silent` when creating keymaps
-        noremap = true, -- use `noremap` when creating keymaps
-        nowait = true, -- use `nowait` when creating keymaps
-    },
+    -- opts = {
+    --     mode = "n", -- NORMAL mode
+    --     prefix = "<leader>",
+    --     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    --     silent = true, -- use `silent` when creating keymaps
+    --     noremap = true, -- use `noremap` when creating keymaps
+    --     nowait = true, -- use `nowait` when creating keymaps
+    -- },
+    -- vopts = {
+    --     mode = "v", -- VISUAL mode
+    --     prefix = "<leader>",
+    --     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    --     silent = true, -- use `silent` when creating keymaps
+    --     noremap = true, -- use `noremap` when creating keymaps
+    --     nowait = true, -- use `nowait` when creating keymaps
+    -- },
     -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
     -- see https://neovim.io/doc/user/map.html#:map-cmd
-    vmappings = {
-        ["/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment toggle linewise (visual)" },
-        l = {
-            name = "LSP",
-        },
-        r = {
-            name = "+Replace",
-            -- Local (from current line)
-            a = {
-                name = "[a]sk",
-                o = {
-                    function()
-                        utils.search.within(false)
-                    end,
-                    "[o]pen",
-                },
-                w = {
-                    function()
-                        utils.search.within_cword(false)
-                    end,
-                    "[w]ord",
-                },
-                W = {
-                    function()
-                        utils.search.within_cWORD(false)
-                    end,
-                    "[W]ORD",
-                },
-                e = {
-                    function()
-                        utils.search.within_cexpr(false)
-                    end,
-                    "[e]xpr",
-                },
-                f = {
-                    function()
-                        utils.search.within_cfile(false)
-                    end,
-                    "[f]ile",
-                },
-            },
-            n = {
-                name = "[n]o ask",
-                o = {
-                    function()
-                        utils.search.within(true)
-                    end,
-                    "[o]pen",
-                },
-                w = {
-                    function()
-                        utils.search.within_cword(true)
-                    end,
-                    "[w]ord",
-                },
-                W = {
-                    function()
-                        utils.search.within_cWORD(true)
-                    end,
-                    "[W]ORD",
-                },
-                e = {
-                    function()
-                        utils.search.within_cexpr(true)
-                    end,
-                    "[e]xpr",
-                },
-                f = {
-                    function()
-                        utils.search.within_cfile(true)
-                    end,
-                    "[f]ile",
-                },
-            },
-        },
-    },
     mappings = {
-        ["<space>"] = { ":nohlsearch<cr>", "Clear Highlight" },
-        ["w"] = { "<cmd>w<cr>", "Save" },
-        ["q"] = {
+        { "<leader>w", "<cmd>w<cr>", desc = "Save", nowait = true, remap = false },
+        {
+            "<leader>q",
             function()
                 utils.smart_quit()
             end,
-            "Quit",
+            desc = "Quit",
+            nowait = true,
+            remap = false,
         },
-        ["/"] = {
+        {
+            "<leader>/",
             function()
                 require("Comment.api").toggle.linewise.current()
             end,
-            "Comment",
+            desc = "Comment",
+            nowait = true,
+            remap = false,
         },
-        -- ["B"] = { "<cmd>JaqBuild<cr>", "JaqBuild" },
-        -- ["Br"] = { "<cmd>JaqRun<cr>", "JaqRun" },
-        -- ["R"] = { "<cmd>Jaq<cr>", "Jaq" },
-        -- Plugins (Lazy)
-        p = {
-            name = "+Plugins",
-            l = { "<cmd>Lazy<cr>", "Lazy" },
-            i = { "<cmd>Lazy install<cr>", "Install" },
-            r = { ":Lazy reload ", "Reload Plugin" },
-            s = { "<cmd>Lazy sync<cr>", "Sync" },
-            u = { "<cmd>Lazy update<cr>", "Update" },
+        { "<leader><space>", ":nohlsearch<cr>", desc = "Clear Highlight", nowait = true, remap = false },
+
+        { "<leader>O", group = "Options", nowait = true, remap = false },
+        {
+            "<leader>Os",
+            function()
+                utils.toggle_option("wrap")
+            end,
+            desc = "Spell",
+            nowait = true,
+            remap = false,
         },
-        -- Find (Telescope)
-        f = {
-            name = "+Find",
+        {
+            "<leader>Ow",
+            function()
+                utils.toggle_option("spell")
+            end,
+            desc = "Wrap",
+            nowait = true,
+            remap = false,
         },
-        -- Replace
-        r = {
-            name = "+Replace",
-            g = {
-                name = "[g]lobal",
-                a = {
-                    name = "[a]sk",
-                    o = {
-                        function()
-                            utils.search.open(true, false)
-                        end,
-                        "[o]pen",
-                    },
-                    w = {
-                        function()
-                            utils.search.cword(true, false)
-                        end,
-                        "[w]ord",
-                    },
-                    W = {
-                        function()
-                            utils.search.cWORD(true, false)
-                        end,
-                        "[W]ORD",
-                    },
-                    e = {
-                        function()
-                            utils.search.cexpr(true, false)
-                        end,
-                        "[e]xpr",
-                    },
-                    f = {
-                        function()
-                            utils.search.cfile(true, false)
-                        end,
-                        "[f]ile",
-                    },
-                },
-                n = {
-                    name = "[n]o ask",
-                    o = {
-                        function()
-                            utils.search.open(true, true)
-                        end,
-                        "[o]pen",
-                    },
-                    w = {
-                        function()
-                            utils.search.cword(true, true)
-                        end,
-                        "[w]ord",
-                    },
-                    W = {
-                        function()
-                            utils.search.cWORD(true, true)
-                        end,
-                        "[W]ORD",
-                    },
-                    e = {
-                        function()
-                            utils.search.cexpr(true, true)
-                        end,
-                        "[e]xpr",
-                    },
-                    f = {
-                        function()
-                            utils.search.cfile(true, true)
-                        end,
-                        "[f]ile",
-                    },
-                },
-            },
-            -- Local (from current line)
-            a = {
-                name = "[a]sk",
-                o = {
-                    function()
-                        utils.search.open(false, false)
-                    end,
-                    "[o]pen",
-                },
-                w = {
-                    function()
-                        utils.search.cword(false, false)
-                    end,
-                    "[w]ord",
-                },
-                W = {
-                    function()
-                        utils.search.cWORD(false, false)
-                    end,
-                    "[W]ORD",
-                },
-                e = {
-                    function()
-                        utils.search.cexpr(false, false)
-                    end,
-                    "[e]xpr",
-                },
-                f = {
-                    function()
-                        utils.search.cfile(false, false)
-                    end,
-                    "[f]ile",
-                },
-            },
-            n = {
-                name = "[n]o ask",
-                o = {
-                    function()
-                        utils.search.open(false, true)
-                    end,
-                    "[o]pen",
-                },
-                w = {
-                    function()
-                        utils.search.cword(false, true)
-                    end,
-                    "[w]ord",
-                },
-                W = {
-                    function()
-                        utils.search.cWORD(false, true)
-                    end,
-                    "[W]ORD",
-                },
-                e = {
-                    function()
-                        utils.search.cexpr(false, true)
-                    end,
-                    "[e]xpr",
-                },
-                f = {
-                    function()
-                        utils.search.cfile(false, true)
-                    end,
-                    "[f]ile",
-                },
-            },
+
+        { "<leader>T", group = "Test", nowait = true, remap = false },
+
+        { "<leader>b", group = "Buffers", nowait = true, remap = false },
+        {
+            "<leader>bD",
+            function()
+                utils.delete_empty_buffers()
+            end,
+            desc = "Delete all empty buffers",
+            nowait = true,
+            remap = false,
         },
-        n = {
-            name = "+Noice",
+        {
+            "<leader>bd",
+            "<cmd>BufferLinePickClose<cr>",
+            desc = "Pick which buffer to close",
+            nowait = true,
+            remap = false,
         },
-        -- Trouble
-        x = {
-            name = "+Trouble",
+        { "<leader>bf", "<cmd>Telescope buffers sort_mru=true<cr>", desc = "Find", nowait = true, remap = false },
+        { "<leader>bh", "<cmd>BufferLineCloseLeft<cr>", desc = "Close all to the left", nowait = true, remap = false },
+        { "<leader>bj", "<cmd>BufferLinePick<cr>", desc = "Jump", nowait = true, remap = false },
+        {
+            "<leader>bl",
+            "<cmd>BufferLineCloseRight<cr>",
+            desc = "Close all to the right",
+            nowait = true,
+            remap = false,
         },
-        -- Debug
-        d = {
-            name = "+Debug",
+        { "<leader>bn", "<cmd>BufferLineCycleNext<cr>", desc = "Next", nowait = true, remap = false },
+        { "<leader>bp", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous", nowait = true, remap = false },
+        {
+            "<leader>bsd",
+            "<cmd>BufferLineSortByDirectory<cr>",
+            desc = "Sort by directory",
+            nowait = true,
+            remap = false,
         },
-        -- Git
-        g = {
-            name = "+Git",
-            j = {
+        {
+            "<leader>bsl",
+            "<cmd>BufferLineSortByExtension<cr>",
+            desc = "Sort by language",
+            nowait = true,
+            remap = false,
+        },
+
+        { "<leader>d", group = "Debug", nowait = true, remap = false },
+
+        { "<leader>f", group = "Find", nowait = true, remap = false },
+
+        { "<leader>g", group = "Git", nowait = true, remap = false },
+        { "<leader>gL", "<cmd>Git blame<cr>", desc = "Blame", nowait = true, remap = false },
+        {
+            "<leader>gR",
+            function()
+                require("gitsigns").reset_buffer()
+            end,
+            desc = "Reset Buffer",
+            nowait = true,
+            remap = false,
+        },
+        { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch", nowait = true, remap = false },
+        { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Checkout commit", nowait = true, remap = false },
+        { "<leader>gd", group = "Diff", nowait = true, remap = false },
+        { "<leader>gdc", "<cmd>DiffviewClose<cr>", desc = "Diff View Close", nowait = true, remap = false },
+        {
+            "<leader>gdh",
+            "<cmd>DiffviewFileHistory %<cr>",
+            desc = "Diff View File History (Current File)",
+            nowait = true,
+            remap = false,
+        },
+        { "<leader>gdo", "<cmd>DiffviewOpen<cr>", desc = "Diff View Open", nowait = true, remap = false },
+        {
+            "<leader>gf",
+            "<cmd>Telescope git_bcommits<cr>",
+            desc = "Checkout buffer commit",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gj",
+            function()
+                require("gitsigns").next_hunk()
+            end,
+            desc = "Next Hunk",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gk",
+            function()
+                require("gitsigns").prev_hunk()
+            end,
+            desc = "Prev Hunk",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gl",
+            function()
+                require("gitsigns").blame_line()
+            end,
+            desc = "Blame Line",
+            nowait = true,
+            remap = false,
+        },
+        { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit", nowait = true, remap = false },
+        { "<leader>go", "<cmd>Telescope git_status<cr>", desc = "Open changed file", nowait = true, remap = false },
+        {
+            "<leader>gr",
+            function()
+                require("gitsigns").reset_hunk()
+            end,
+            desc = "Reset Hunk",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gs",
+            function()
+                require("gitsigns").stage_hunk()
+            end,
+            desc = "Stage Hunk",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gu",
+            function()
+                require("gitsigns").undo_stage_hunk()
+            end,
+            desc = "Undo Stage Hunk",
+            nowait = true,
+            remap = false,
+        },
+
+        { "<leader>gp", group = "Glance", nowait = true, remap = false },
+        {
+            "<leader>gp",
+            function()
+                require("gitsigns").preview_hunk()
+            end,
+            desc = "Preview Hunk",
+            nowait = true,
+            remap = false,
+        },
+        { "<leader>gpd", "<CMD>Glance definitions<CR>", desc = "Glance Definitions", nowait = true, remap = false },
+        {
+            "<leader>gpi",
+            "<CMD>Glance implementations<CR>",
+            desc = "Glance Implementations",
+            nowait = true,
+            remap = false,
+        },
+        { "<leader>gpr", "<CMD>Glance references<CR>", desc = "Glance References", nowait = true, remap = false },
+        { "<leader>gpt", "<CMD>Glance type_definitions<CR>", desc = "Glance Type", nowait = true, remap = false },
+
+        { "<leader>l", group = "LSP", nowait = true, remap = false },
+
+        { "<leader>n", group = "Noice", nowait = true, remap = false },
+
+        { "<leader>o", desc = "+Window", nowait = true, remap = false },
+        {
+            "<leader>of",
+            function()
+                utils.focus_first_float()
+            end,
+            desc = "Focus Floating Window",
+            nowait = true,
+            remap = false,
+        },
+        { "<leader>on", "<cmd>only<cr>", desc = "Focus This Window", nowait = true, remap = false },
+
+        { "<leader>p", group = "Plugins", nowait = true, remap = false },
+        { "<leader>pi", "<cmd>Lazy install<cr>", desc = "Install", nowait = true, remap = false },
+        { "<leader>pl", "<cmd>Lazy<cr>", desc = "Lazy", nowait = true, remap = false },
+        { "<leader>pr", ":Lazy reload ", desc = "Reload Plugin", nowait = true, remap = false },
+        { "<leader>ps", "<cmd>Lazy sync<cr>", desc = "Sync", nowait = true, remap = false },
+        { "<leader>pu", "<cmd>Lazy update<cr>", desc = "Update", nowait = true, remap = false },
+
+        { "<leader>r", group = "Replace", nowait = true, remap = false },
+        { "<leader>ra", group = "[a]sk", nowait = true, remap = false },
+        {
+            "<leader>raW",
+            function()
+                utils.search.cWORD(false, false)
+            end,
+            desc = "[W]ORD",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rae",
+            function()
+                utils.search.cexpr(false, false)
+            end,
+            desc = "[e]xpr",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>raf",
+            function()
+                utils.search.cfile(false, false)
+            end,
+            desc = "[f]ile",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rao",
+            function()
+                utils.search.open(false, false)
+            end,
+            desc = "[o]pen",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>raw",
+            function()
+                utils.search.cword(false, false)
+            end,
+            desc = "[w]ord",
+            nowait = true,
+            remap = false,
+        },
+        { "<leader>rg", group = "[g]lobal", nowait = true, remap = false },
+        { "<leader>rga", group = "[a]sk", nowait = true, remap = false },
+        {
+            "<leader>rgaW",
+            function()
+                utils.search.cWORD(true, false)
+            end,
+            desc = "[W]ORD",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rgae",
+            function()
+                utils.search.cexpr(true, false)
+            end,
+            desc = "[e]xpr",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rgaf",
+            function()
+                utils.search.cfile(true, false)
+            end,
+            desc = "[f]ile",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rgao",
+            function()
+                utils.search.open(true, false)
+            end,
+            desc = "[o]pen",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rgaw",
+            function()
+                utils.search.cword(true, false)
+            end,
+            desc = "[w]ord",
+            nowait = true,
+            remap = false,
+        },
+        { "<leader>rgn", group = "[n]o ask", nowait = true, remap = false },
+        {
+            "<leader>rgnW",
+            function()
+                utils.search.cWORD(true, true)
+            end,
+            desc = "[W]ORD",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rgne",
+            function()
+                utils.search.cexpr(true, true)
+            end,
+            desc = "[e]xpr",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rgnf",
+            function()
+                utils.search.cfile(true, true)
+            end,
+            desc = "[f]ile",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rgno",
+            function()
+                utils.search.open(true, true)
+            end,
+            desc = "[o]pen",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rgnw",
+            function()
+                utils.search.cword(true, true)
+            end,
+            desc = "[w]ord",
+            nowait = true,
+            remap = false,
+        },
+        { "<leader>rn", group = "[n]o ask", nowait = true, remap = false },
+        {
+            "<leader>rnW",
+            function()
+                utils.search.cWORD(false, true)
+            end,
+            desc = "[W]ORD",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rne",
+            function()
+                utils.search.cexpr(false, true)
+            end,
+            desc = "[e]xpr",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rnf",
+            function()
+                utils.search.cfile(false, true)
+            end,
+            desc = "[f]ile",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rno",
+            function()
+                utils.search.open(false, true)
+            end,
+            desc = "[o]pen",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>rnw",
+            function()
+                utils.search.cword(false, true)
+            end,
+            desc = "[w]ord",
+            nowait = true,
+            remap = false,
+        },
+
+        { "<leader>s", group = "Split", nowait = true, remap = false },
+        { "<leader>sh", "<cmd>leftabove vs<cr>", desc = "Left", nowait = true, remap = false },
+        { "<leader>sj", "<cmd>rightbelow split<cr>", desc = "Down", nowait = true, remap = false },
+        { "<leader>sk", "<cmd>leftabove split<cr>", desc = "Up", nowait = true, remap = false },
+        { "<leader>sl", "<cmd>rightbelow vs<cr>", desc = "Right", nowait = true, remap = false },
+
+        { "<leader>t", group = "Terminal", nowait = true, remap = false },
+
+        { "<leader>x", group = "Trouble", nowait = true, remap = false },
+        { "<leader>z", group = "Folds", nowait = true, remap = false },
+
+        {
+            mode = { "v" },
+            {
+                "<leader>/",
                 function()
-                    require("gitsigns").next_hunk()
+                    require("Comment.api").toggle.linewise.current()
                 end,
-                "Next Hunk",
+                desc = "Comment toggle linewise (visual)",
+                nowait = true,
+                remap = false,
             },
-            k = {
+
+            { "<leader>l", group = "LSP", nowait = true, remap = false },
+
+            { "<leader>r", group = "Replace", nowait = true, remap = false },
+            { "<leader>ra", group = "[a]sk", nowait = true, remap = false },
+            {
+                "<leader>raW",
                 function()
-                    require("gitsigns").prev_hunk()
+                    utils.search.within_cWORD(false)
                 end,
-                "Prev Hunk",
+                desc = "[W]ORD",
+                nowait = true,
+                remap = false,
             },
-            l = {
+            {
+                "<leader>rae",
                 function()
-                    require("gitsigns").blame_line()
+                    utils.search.within_cexpr(false)
                 end,
-                "Blame Line",
+                desc = "[e]xpr",
+                nowait = true,
+                remap = false,
             },
-            L = { "<cmd>Git blame<cr>", "Blame" },
-            p = {
+            {
+                "<leader>raf",
                 function()
-                    require("gitsigns").preview_hunk()
+                    utils.search.within_cfile(false)
                 end,
-                "Preview Hunk",
+                desc = "[f]ile",
+                nowait = true,
+                remap = false,
             },
-            r = {
+            {
+                "<leader>rao",
                 function()
-                    require("gitsigns").reset_hunk()
+                    utils.search.within(false)
                 end,
-                "Reset Hunk",
+                desc = "[o]pen",
+                nowait = true,
+                remap = false,
             },
-            R = {
+            {
+                "<leader>raw",
                 function()
-                    require("gitsigns").reset_buffer()
+                    utils.search.within_cword(false)
                 end,
-                "Reset Buffer",
+                desc = "[w]ord",
+                nowait = true,
+                remap = false,
             },
-            s = {
+            { "<leader>rn", group = "[n]o ask", nowait = true, remap = false },
+            {
+                "<leader>rnW",
                 function()
-                    require("gitsigns").stage_hunk()
+                    utils.search.within_cWORD(true)
                 end,
-                "Stage Hunk",
+                desc = "[W]ORD",
+                nowait = true,
+                remap = false,
             },
-            u = {
+            {
+                "<leader>rne",
                 function()
-                    require("gitsigns").undo_stage_hunk()
+                    utils.search.within_cexpr(true)
                 end,
-                "Undo Stage Hunk",
+                desc = "[e]xpr",
+                nowait = true,
+                remap = false,
             },
-            -- n = { ":!git checkout -b ", "Checkout New Branch" },
-            o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-            b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-            c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-            f = { "<cmd>Telescope git_bcommits<cr>", "Checkout buffer commit" },
-            d = {
-                name = "+Diff",
-                h = { "<cmd>DiffviewFileHistory %<cr>", "Diff View File History (Current File)" },
-                o = { "<cmd>DiffviewOpen<cr>", "Diff View Open" },
-                c = { "<cmd>DiffviewClose<cr>", "Diff View Close" },
-            },
-            n = { "<cmd>Neogit<cr>", "Neogit" },
-        },
-        -- Lsp
-        l = {
-            name = "+LSP",
-        },
-        ["gp"] = {
-            name = "+Glance",
-            d = { "<CMD>Glance definitions<CR>", "Glance Definitions" },
-            r = { "<CMD>Glance references<CR>", "Glance References" },
-            t = { "<CMD>Glance type_definitions<CR>", "Glance Type" },
-            i = { "<CMD>Glance implementations<CR>", "Glance Implementations" },
-        },
-        -- Buffers
-        b = {
-            name = "+Buffers",
-            j = { "<cmd>BufferLinePick<cr>", "Jump" },
-            f = { "<cmd>Telescope buffers sort_mru=true<cr>", "Find" },
-            p = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
-            n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
-            d = {
-                "<cmd>BufferLinePickClose<cr>",
-                "Pick which buffer to close",
-            },
-            h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
-            l = {
-                "<cmd>BufferLineCloseRight<cr>",
-                "Close all to the right",
-            },
-            ["sd"] = {
-                "<cmd>BufferLineSortByDirectory<cr>",
-                "Sort by directory",
-            },
-            ["sl"] = {
-                "<cmd>BufferLineSortByExtension<cr>",
-                "Sort by language",
-            },
-            D = {
+            {
+                "<leader>rnf",
                 function()
-                    utils.delete_empty_buffers()
+                    utils.search.within_cfile(true)
                 end,
-                "Delete all empty buffers",
+                desc = "[f]ile",
+                nowait = true,
+                remap = false,
             },
-        },
-        -- Misc Window
-        o = {
-            "+Window",
-            n = { "<cmd>only<cr>", "Focus This Window" },
-            f = {
+            {
+                "<leader>rno",
                 function()
-                    utils.focus_first_float()
+                    utils.search.within(true)
                 end,
-                "Focus Floating Window",
+                desc = "[o]pen",
+                nowait = true,
+                remap = false,
             },
-        },
-        -- Splits
-        s = {
-            name = "+Split",
-            h = { "<cmd>leftabove vs<cr>", "Left" },
-            l = { "<cmd>rightbelow vs<cr>", "Right" },
-            k = { "<cmd>leftabove split<cr>", "Up" },
-            j = { "<cmd>rightbelow split<cr>", "Down" },
-        },
-        -- Tabs
-        -- T = {
-        --     name = "+Tab",
-        --     t = {
-        --         "<cmd>lua require('telescope').extensions['telescope-tabs'].list_tabs(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal', prompt_title='Tabs'})<cr>",
-        --         "Find Tab",
-        --     },
-        --     n = { "<cmd>tabnew %<cr>", "New Tab" },
-        --     c = { "<cmd>tabclose<cr>", "Close Tab" },
-        --     o = { "<cmd>tabonly<cr>", "Only Tab" },
-        -- },
-        -- Testing
-        T = { name = "+Test" },
-        -- Terminal
-        t = {
-            name = "+Terminal",
-        },
-        -- Folds
-        z = {
-            name = "+Folds",
-        },
-        -- Options
-        O = {
-            name = "+Options",
-            -- c = { "<cmd>lua lvim.builtin.cmp.active = false<cr>", "Completion off" },
-            -- C = { "<cmd>lua lvim.builtin.cmp.active = true<cr>", "Completion on" },
-            w = {
+            {
+                "<leader>rnw",
                 function()
-                    utils.toggle_option("wrap")
+                    utils.search.within_cword(true)
                 end,
-                "Wrap",
+                desc = "[w]ord",
+                nowait = true,
+                remap = false,
             },
-            -- r = { '<cmd>lua require("config.functions").toggle_option("relativenumber")<cr>', "Relative" },
-            -- l = { '<cmd>lua require("config.functions").toggle_option("cursorline")<cr>', "Cursorline" },
-            s = {
-                function()
-                    utils.toggle_option("spell")
-                end,
-                "Spell",
-            },
-            -- t = { '<cmd>lua require("config.functions").toggle_tabline()<cr>', "Tabline" },
         },
     },
 }
 
 function M.config()
-    local which_key = require("which-key")
-
-    local opts = options.opts
-    local vopts = options.vopts
-
-    local mappings = options.mappings
-    local vmappings = options.vmappings
-
-    which_key.register(mappings, opts)
-    which_key.register(vmappings, vopts)
+    require("which-key").add(options.mappings)
 end
 
 return M

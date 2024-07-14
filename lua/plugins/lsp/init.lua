@@ -87,7 +87,7 @@ function M.get()
             function()
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ filter = nil }))
             end,
-            "Toggle Hints",
+            desc = "Toggle Hints",
         },
         {
             "<leader>lH",
@@ -237,6 +237,7 @@ function M.on_attach(_, buffer)
             opts.has = nil
             opts.silent = opts.silent ~= false
             opts.buffer = buffer
+            opts.remap = false
             vim.keymap.set(keys.mode or "n", keys.lhs, keys.rhs, opts)
         end
     end

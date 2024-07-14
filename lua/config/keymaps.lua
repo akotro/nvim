@@ -110,4 +110,9 @@ vim.api.nvim_set_keymap("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>zz]]
 vim.api.nvim_set_keymap("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>zz]], kopts)
 vim.api.nvim_set_keymap("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>zz]], kopts)
 
+-- delete default lsp keybinds
+vim.api.nvim_del_keymap("n", "gra")
+vim.api.nvim_del_keymap("n", "grn")
+vim.api.nvim_del_keymap("n", "grr")
+
 -- NOTE: See user/plugins/whichkey for the rest
