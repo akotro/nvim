@@ -326,7 +326,7 @@ return {
     },
     {
         "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
+        event = { "InsertEnter", "CmdlineEnter" },
         dependencies = require("plugins.completion").cmp.dependencies,
         opts = require("plugins.completion").cmp.opts,
         config = require("plugins.completion").cmp.config,
