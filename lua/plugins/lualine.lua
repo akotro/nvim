@@ -75,10 +75,10 @@ function M.setup()
         mode = {
             function()
                 -- return " " .. icons.ui.Target .. " "
-                return " " .. icons.logos.arch .. " "
+                return " " .. icons.logos.neovim .. " "
             end,
             padding = { left = 0, right = 0 },
-            color = {},
+            -- color = {},
             cond = nil,
         },
         branch = {
@@ -88,7 +88,7 @@ function M.setup()
         },
         filename = {
             "filename",
-            color = {},
+            -- color = {},
             cond = nil,
         },
         path = {
@@ -206,7 +206,7 @@ function M.setup()
             fmt = function()
                 return "%P/%L"
             end,
-            color = {},
+            -- color = {},
         },
 
         spaces = {
@@ -219,7 +219,7 @@ function M.setup()
         encoding = {
             "o:encoding",
             fmt = string.upper,
-            color = {},
+            -- color = {},
             cond = conditions.hide_in_width,
         },
         filetype = { "filetype", cond = nil, padding = { left = 1, right = 1 } },
@@ -234,7 +234,7 @@ function M.setup()
             end,
             padding = { left = 0, right = 0 },
             -- color = "SLProgress",
-            color = {},
+            -- color = {},
             cond = nil,
         },
         visual_selection = {

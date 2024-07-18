@@ -899,11 +899,12 @@ end
 
 function M.export_colorscheme_to_kitty()
     local fn = vim.fn
-    local filename = os.getenv("HOME") .. "/.config/kitty/nvim_export.conf"
+    local filename = os.getenv("HOME") .. "/.config/kitty/themes/nvim_export.conf"
     local file = io.open(filename, "w")
     io.output(file)
     io.write("# vim:ft=kitty" .. "\n\n")
-    io.write("# exported from " .. vim.g.colors_name .. "\n\n")
+    local theme_name = vim.g.colors_name or "default"
+    io.write("# exported from " .. theme_name .. "\n\n")
     local fg = fn.synIDattr(fn.hlID("Normal"), "fg")
     local bg = fn.synIDattr(fn.hlID("Normal"), "bg")
     io.write("foreground " .. fg .. "\n")

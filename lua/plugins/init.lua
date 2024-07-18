@@ -7,7 +7,19 @@ return {
         priority = 1000, -- make sure to load this before all the other start plugins
         config = require("plugins.kanagawa").config,
         init = function()
-            vim.api.nvim_command("colorscheme kanagawa")
+            -- vim.api.nvim_command("colorscheme kanagawa")
+        end,
+    },
+    {
+        "folke/tokyonight.nvim",
+        enabled = true,
+        lazy = false,
+        priority = 1000,
+        opts = {
+            style = "night",
+        },
+        init = function()
+            -- vim.api.nvim_command("colorscheme tokyonight")
         end,
     },
     -- NOTE: Util
@@ -311,7 +323,7 @@ return {
     {
         "m-demare/hlargs.nvim",
         event = "BufRead",
-        opts = { color = "#f38ba8" },
+        -- opts = { color = "#f38ba8" },
     },
     -- NOTE: Completion
     {
