@@ -26,6 +26,7 @@ M.keys = {
 M.opts = {
     strategy = { "toggleterm", close_on_exit = false },
     dap = false,
+    templates = { "builtin", "user.custom" },
 }
 
 function M.config(_, opts)

@@ -249,15 +249,15 @@ M.dependencies = {
             require("telescope").load_extension("fzf")
         end,
     },
-    {
-        "nvim-telescope/telescope-frecency.nvim",
-        lazy = true,
-        config = function()
-            require("config.functions").on_load("telescope.nvim", function()
-                pcall(require("telescope").load_extension, "frecency")
-            end)
-        end,
-    },
+    -- {
+    --     "nvim-telescope/telescope-frecency.nvim",
+    --     lazy = true,
+    --     config = function()
+    --         require("config.functions").on_load("telescope.nvim", function()
+    --             pcall(require("telescope").load_extension, "frecency")
+    --         end)
+    --     end,
+    -- },
     {
         "AckslD/nvim-neoclip.lua",
         -- event = "BufRead",
