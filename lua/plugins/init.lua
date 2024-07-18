@@ -210,6 +210,29 @@ return {
         keys = require("plugins.toggleterm").keys,
         opts = require("plugins.toggleterm").opts,
     },
+    {
+        "mbbill/undotree",
+        lazy = true,
+        cmd = {
+            "UndotreeToggle",
+            "UndotreeShow",
+            "UndotreePersistUndo",
+            "UndotreeHide",
+        },
+        keys = {
+            {
+                "<leader>u",
+                function()
+                    vim.api.nvim_command("UndotreeToggle")
+                end,
+                desc = "Undotree Toggle",
+            },
+        },
+        config = function()
+            vim.g.undotree_WindowLayout = 2
+            vim.g.undotree_ShortIndicators = 1
+        end,
+    },
     -- NOTE: Git
     { "tpope/vim-fugitive", event = "BufRead" },
     {

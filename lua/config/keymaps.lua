@@ -68,25 +68,6 @@ keymap.set("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 keymap.set("v", "<", "<gv")
 keymap.set("v", ">", ">gv")
 
--- keymap.set({ "i", "n" }, "<leader><space>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
-keymap.set(
-    "n",
-    "<leader>ur",
-    "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-    { desc = "Redraw / clear hlsearch / diff update" }
-)
-
--- floating terminal
--- local lazyterm = function()
---     require("config.terminal")(nil, { cwd = require("config.functions").root.get() })
--- end
--- keymap.set("n", "<leader>ft", lazyterm, { desc = "Terminal (root dir)" })
--- keymap.set("n", "<leader>fT", function()
---     require("config.terminal")()
--- end, { desc = "Terminal (cwd)" })
--- keymap.set("n", "<c-\\>", lazyterm, { desc = "Terminal (root dir)" })
--- keymap.set("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
-
 -- Terminal Mappings
 keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 keymap.set("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
@@ -97,6 +78,7 @@ keymap.set("t", "<C-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 keymap.set("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- Searching
+
 -- keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next search result" })
 -- keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
 -- keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
@@ -114,5 +96,3 @@ vim.api.nvim_set_keymap("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>zz
 vim.api.nvim_del_keymap("n", "gra")
 vim.api.nvim_del_keymap("n", "grn")
 vim.api.nvim_del_keymap("n", "grr")
-
--- NOTE: See user/plugins/whichkey for the rest
