@@ -48,9 +48,16 @@ function M.setup()
         oniViolet = "#957FB8",
     }
     local colors = functions.get_current_colors(override_colors)
+
+    local diff_color = {
+        added = { fg = colors.dragonGreen },
+        modified = { fg = colors.dragonYellow },
+        removed = { fg = colors.dragonRed },
+    }
     local theme = "iceberg"
     if vim.g.colors_name ~= nil then
         theme = "auto"
+        diff_color = nil
     end
 
     local function diff_source()
@@ -103,11 +110,7 @@ function M.setup()
                 removed = icons.git.LineRemoved .. " ",
             },
             padding = { left = 2, right = 1 },
-            diff_color = {
-                added = { fg = colors.dragonGreen },
-                modified = { fg = colors.dragonYellow },
-                removed = { fg = colors.dragonRed },
-            },
+            diff_color = diff_color,
             cond = nil,
         },
         -- python_env = {

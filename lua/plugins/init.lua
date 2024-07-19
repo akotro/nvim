@@ -3,8 +3,8 @@ return {
     {
         "rebelot/kanagawa.nvim",
         enabled = true,
-        lazy = false, -- make sure we load this during startup if it is your main colorscheme
-        priority = 1000, -- make sure to load this before all the other start plugins
+        lazy = false,
+        -- priority = 1000,
         config = require("plugins.kanagawa").config,
         init = function()
             -- vim.api.nvim_command("colorscheme kanagawa")
@@ -14,12 +14,39 @@ return {
         "folke/tokyonight.nvim",
         enabled = true,
         lazy = false,
-        priority = 1000,
+        -- priority = 1000,
         opts = {
             style = "night",
         },
         init = function()
             -- vim.api.nvim_command("colorscheme tokyonight")
+        end,
+    },
+    {
+        "nyoom-engineering/oxocarbon.nvim",
+        enabled = true,
+        lazy = false,
+        -- priority = 1000,
+        init = function()
+            -- vim.api.nvim_command("colorscheme oxocarbon")
+        end,
+    },
+    {
+        "aktersnurra/no-clown-fiesta.nvim",
+        enabled = true,
+        lazy = false,
+        -- priority = 1000,
+        init = function()
+            -- vim.api.nvim_command("colorscheme no-clown-fiesta")
+        end,
+    },
+    {
+        "EdenEast/nightfox.nvim",
+        enabled = true,
+        lazy = false,
+        priority = 1000,
+        init = function()
+            vim.api.nvim_command("colorscheme carbonfox")
         end,
     },
     -- NOTE: Util
