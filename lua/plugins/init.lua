@@ -45,6 +45,7 @@ return {
         enabled = true,
         lazy = false,
         priority = 1000,
+        opts = {},
         init = function()
             vim.api.nvim_command("colorscheme carbonfox")
         end,

@@ -81,7 +81,8 @@ function M.setup()
     local components = {
         mode = {
             function()
-                return " " .. icons.logos.neovim .. " "
+                -- return " " .. icons.logos.neovim .. " "
+                return " " .. icons.ui.Text .. " "
             end,
             padding = { left = 0, right = 0 },
             -- color = {},
