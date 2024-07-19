@@ -45,7 +45,9 @@ return {
         enabled = true,
         lazy = false,
         priority = 1000,
-        opts = {},
+        opts = {
+            transparent = false,
+        },
         init = function()
             vim.api.nvim_command("colorscheme carbonfox")
         end,
@@ -125,11 +127,11 @@ return {
         init = require("plugins.lualine").init,
         opts = require("plugins.lualine").opts,
     },
-    {
-        "Bekaboo/dropbar.nvim",
-        event = "BufRead",
-        opts = require("plugins.dropbar").opts,
-    },
+    -- {
+    --     "Bekaboo/dropbar.nvim",
+    --     event = "BufRead",
+    --     opts = require("plugins.dropbar").opts,
+    -- },
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
@@ -184,7 +186,7 @@ return {
     },
     {
         "NvChad/nvim-colorizer.lua",
-        ft = { "html", "css", "javascript", "vim", "lua", "sh", "zsh", "rust" },
+        ft = { "html", "css", "javascript", "vim", "lua", "sh", "zsh", "rust", "conf" },
         config = require("plugins.colorizer").config,
     },
     {
@@ -319,22 +321,22 @@ return {
         config = require("plugins.treesitter").config,
     },
     -- Show context of the current function
-    -- {
-    --     "nvim-treesitter/nvim-treesitter-context",
-    --     event = "BufRead",
-    --     enabled = true,
-    --     opts = { enable = true, mode = "cursor", trim_scope = "inner", max_lines = 3 },
-    --     keys = {
-    --         {
-    --             "<leader>ut",
-    --             function()
-    --                 local tsc = require("treesitter-context")
-    --                 tsc.toggle()
-    --             end,
-    --             desc = "Toggle Treesitter Context",
-    --         },
-    --     },
-    -- },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        event = "BufRead",
+        enabled = true,
+        opts = { enable = true, mode = "cursor", trim_scope = "inner", max_lines = 2 },
+        keys = {
+            {
+                "<leader>ut",
+                function()
+                    local tsc = require("treesitter-context")
+                    tsc.toggle()
+                end,
+                desc = "Toggle Treesitter Context",
+            },
+        },
+    },
     -- comments
     {
         "JoosepAlviste/nvim-ts-context-commentstring",
