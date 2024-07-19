@@ -929,9 +929,13 @@ end
 function M.get_current_colors(override_colors)
     local colors = override_colors or {}
 
-    local status, kanagawa_colors = pcall(require, "kanagawa.colors")
-    if status and vim.g.colors_name == "kanagawa" then
+    local kanagawa_status, kanagawa_colors = pcall(require, "kanagawa.colors")
+    local carbonfox_status, carbonfox_colors = pcall(require, "nightfox.palette")
+
+    if kanagawa_status and vim.g.colors_name == "kanagawa" then
         colors = kanagawa_colors.setup().palette
+    elseif carbonfox_status and vim.g.colors_name == "carbonfox" then
+        colors = carbonfox_colors.load("carbonfox")
     elseif colors == {} then
         colors = require("config.ui").default_colors
     end

@@ -58,19 +58,14 @@ return {
         lazy = true,
     },
     -- NOTE: UI
-    -- { "echasnovski/mini.starter", version = false, opts = {} },
-    { "nvim-tree/nvim-web-devicons", lazy = true },
     {
-        "rachartier/tiny-devicons-auto-colors.nvim",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-        },
-        event = "VeryLazy",
+        "echasnovski/mini.icons",
+        version = false,
+        lazy = false,
         config = function()
-            local colors = require("config.functions").get_current_colors()
-            require("tiny-devicons-auto-colors").setup({
-                colors = colors,
-            })
+            local mini_icons = require("mini.icons")
+            mini_icons.setup()
+            mini_icons.mock_nvim_web_devicons()
         end,
     },
     { "MunifTanjim/nui.nvim", lazy = true },
@@ -229,7 +224,6 @@ return {
     {
         "stevearc/oil.nvim",
         lazy = false,
-        dependencies = require("plugins.oil").dependencies,
         keys = require("plugins.oil").keys,
         opts = require("plugins.oil").opts,
     },

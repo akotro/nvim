@@ -1,7 +1,5 @@
 local M = {}
 
-M.dependencies = { "nvim-tree/nvim-web-devicons" }
-
 M.keys = {
     {
         "<leader>e",
