@@ -88,7 +88,7 @@ M.opts = function()
             lua = { "stylua" },
             cs = { "csharpier" },
             rust = { "cargo fmt" },
-            sh = { "beautysh" },
+            sh = { "shfmt" },
             -- Conform will run multiple formatters sequentially
             go = { "goimports", "gofmt" },
             -- Use a sub-list to run only the first available formatter
