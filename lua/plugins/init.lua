@@ -554,6 +554,16 @@ return {
     },
     -- NOTE: Markdown
     {
+        "MeanderingProgrammer/markdown.nvim",
+        main = "render-markdown",
+        ft = { "markdown" },
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "echasnovski/mini.icons",
+        },
+        opts = {},
+    },
+    {
         "iamcco/markdown-preview.nvim",
         ft = { "markdown" },
         build = function()
