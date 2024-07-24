@@ -1,1 +1,1 @@
-return { "user.zig" }
+return { "user.zig", "user.rust" }
