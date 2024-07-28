@@ -19,7 +19,7 @@ function M.get_fmt_info(conform, format_args)
         local list_formatters = conform.list_formatters or function()
             return {}
         end
-        local will_fallback_lsp = conform.will_fallback_lsp or function()
+        local list_formatters_to_run = conform.list_formatters_to_run or function()
             return {}
         end
 
@@ -30,7 +30,7 @@ function M.get_fmt_info(conform, format_args)
             fmt_names = vim.tbl_map(function(f)
                 return f.name
             end, formatters)
-        elseif will_fallback_lsp(format_args) then
+        elseif list_formatters_to_run() then
             fmt_names = { "lsp" }
         else
             return
