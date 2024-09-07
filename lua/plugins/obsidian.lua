@@ -21,6 +21,9 @@ M.opts = {
         -- Trigger completion at 2 chars.
         min_chars = 2,
     },
+
+    -- Due to using markdown.nvim for this
+    ui = { enable = false },
 }
 
 M.keys = {
