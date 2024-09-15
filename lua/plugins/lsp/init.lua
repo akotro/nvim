@@ -519,13 +519,16 @@ M.opts = {
                 return require("lspconfig.util").root_pattern("*.typ")(fname)
             end,
         },
-        nil_ls = {
+        -- nil_ls = {
+        --     mason = false,
+        --     settings = {
+        --         ["nil"] = {
+        --             autoArchive = true,
+        --         },
+        --     },
+        -- },
+        nixd = {
             mason = false,
-            settings = {
-                ["nil"] = {
-                    autoArchive = true,
-                },
-            },
         },
         zls = {},
     },
