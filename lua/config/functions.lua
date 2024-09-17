@@ -808,6 +808,7 @@ function M.save_if_unsaved()
         "dap-repl",
         "dapui_watches",
         "dapui_hover",
+        "OverseerForm",
     }
     local current_buf = vim.api.nvim_get_current_buf()
     local filetype = vim.fn.getbufvar(current_buf, "&filetype")

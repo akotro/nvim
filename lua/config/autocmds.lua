@@ -94,7 +94,10 @@ local autocommands = {
         events = { "FocusLost", "BufLeave" },
         group = autosave,
         pattern = "*",
-        command = [[lua require("config.functions").save_if_unsaved()]],
+        -- command = [[lua require("config.functions").save_if_unsaved()]],
+        callback = function()
+            require("config.functions").save_if_unsaved()
+        end,
     },
     -- Trigger `autoread` when files changes on disk
     {
