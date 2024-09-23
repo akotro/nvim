@@ -392,26 +392,26 @@ M.opts = {
                 },
             },
         },
-        omnisharp = {
-            mason = false,
-            keys = {
-                {
-                    "gd",
-                    function()
-                        require("omnisharp_extended").telescope_lsp_definitions()
-                    end,
-                    desc = "Goto Definition",
-                    has = "definition",
-                },
-            },
-            settings = {
-                enable_roslyn_analyzers = true,
-                enable_import_completion = true,
-            },
-        },
-        -- csharp_ls = {
+        -- omnisharp = {
         --     mason = false,
+        --     keys = {
+        --         {
+        --             "gd",
+        --             function()
+        --                 require("omnisharp_extended").telescope_lsp_definitions()
+        --             end,
+        --             desc = "Goto Definition",
+        --             has = "definition",
+        --         },
+        --     },
+        --     settings = {
+        --         enable_roslyn_analyzers = true,
+        --         enable_import_completion = true,
+        --     },
         -- },
+        csharp_ls = {
+            mason = false,
+        },
         rust_analyzer = {
             mason = false,
             keys = {
