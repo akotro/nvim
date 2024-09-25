@@ -101,7 +101,12 @@ local autocommands = {
     },
     -- Trigger `autoread` when files changes on disk
     {
-        events = { "FocusGained", "BufEnter", "CursorHoldI" },
+        events = {
+            "FocusGained",
+            "BufEnter",
+            --[[ "CursorHoldI" ]]
+            -- NOTE: Errors when in ctrl-f mode in cmdline
+        },
         group = autoread,
         pattern = "*",
         command = [[if mode() != 'c' | checktime | endif]],
