@@ -108,6 +108,7 @@ M.opts = function()
             typst = { "typstfmt" },
             nix = { "alejandra" },
             yaml = { "yamlfmt" },
+            c = { "clang-format" },
             -- Use the "*" filetype to run formatters on all filetypes.
             -- ["*"] = { "codespell" },
             -- Use the "_" filetype to run formatters on filetypes that don't

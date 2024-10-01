@@ -459,6 +459,7 @@ M.opts = {
             },
         },
         clangd = {
+            mason = false,
             keys = {
                 { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
             },
