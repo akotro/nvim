@@ -543,7 +543,15 @@ M.opts = {
             mason = false,
         },
         zls = {},
-        jdtls = {},
+        jdtls = {
+            java = {
+                format = {
+                    settings = {
+                        profile = "GoogleStyle",
+                    },
+                },
+            },
+        },
     },
     -- you can do any additional lsp server setup here
     -- return true if you don't want this server to be setup with lspconfig
