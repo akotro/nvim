@@ -108,7 +108,7 @@ M.opts = function()
             typst = { "typstfmt" },
             nix = { "alejandra" },
             yaml = { "yamlfmt" },
-            c = { "clang-format" },
+            c = { "clang_format" },
             -- Use the "*" filetype to run formatters on all filetypes.
             -- ["*"] = { "codespell" },
             -- Use the "_" filetype to run formatters on filetypes that don't
@@ -208,6 +208,11 @@ M.opts = function()
             -- },
             stylua = {
                 prepend_args = { "--indent-type", "Spaces", "--indent-width", "4" },
+            },
+            clang_format = {
+                prepend_args = {
+                    "--fallback-style=Google",
+                },
             },
             -- my_formatter = {
             --  -- This can be a string or a function that returns a string.
