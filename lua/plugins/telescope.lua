@@ -303,7 +303,7 @@ M.dependencies = {
     {
         "folke/todo-comments.nvim",
         cmd = { "TodoTrouble", "TodoTelescope" },
-        -- event = "BufRead",
+        event = "BufRead",
         lazy = true,
         opts = {
             keywords = {
