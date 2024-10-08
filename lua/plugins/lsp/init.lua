@@ -547,7 +547,7 @@ M.opts = {
             java = {
                 format = {
                     settings = {
-                        profile = "GoogleStyle",
+                        url = "~/.config/java/eclipse-java-google-style.xml",
                     },
                 },
             },
