@@ -324,7 +324,7 @@ return {
     {
         "kwkarlwang/bufjump.nvim",
         lazy = true,
-        config = {},
+        opts = {},
         keys = {
             {
                 "<C-n>",
