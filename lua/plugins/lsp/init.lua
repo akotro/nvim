@@ -552,6 +552,28 @@ M.opts = {
                 },
             },
         },
+        harper_ls = {
+            filetypes = {
+                "markdown",
+                "txt",
+                "gitcommit",
+                "html",
+                -- "rust",
+                -- "typescript",
+                -- "typescriptreact",
+                -- "javascript",
+                -- "python",
+                -- "go",
+                -- "c",
+                -- "cpp",
+                -- "ruby",
+                -- "swift",
+                -- "cs",
+                -- "toml",
+                -- "lua",
+                -- "java",
+            },
+        },
     },
     -- you can do any additional lsp server setup here
     -- return true if you don't want this server to be setup with lspconfig

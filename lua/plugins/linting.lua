@@ -8,13 +8,9 @@ M.opts = {
         fish = { "fish" },
         -- html = { "tidy" },
         python = { "ruff" },
-        markdown = { "alex" },
-        norg = { "alex" },
-        tex = { "alex" },
-        -- markdown = { "vale", "alex" },
-        -- norg = { "vale", "alex" },
-        -- tex = { "vale", "alex" },
-        -- txt = { "vale", "alex" },
+        markdown = {},
+        norg = {},
+        tex = {},
         -- Use the "*" filetype to run linters on all filetypes.
         -- ['*'] = { 'global linter' },
         -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
