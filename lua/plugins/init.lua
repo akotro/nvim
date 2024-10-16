@@ -650,7 +650,12 @@ return {
             "nvim-treesitter/nvim-treesitter",
             "echasnovski/mini.icons",
         },
-        opts = {},
+        opts = {
+            latex = {
+                -- Whether LaTeX should be rendered, mainly used for health check
+                enabled = false,
+            },
+        },
     },
     {
         "iamcco/markdown-preview.nvim",
