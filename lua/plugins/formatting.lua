@@ -115,84 +115,78 @@ M.opts = function()
             -- have other formatters configured.
             -- ["_"] = { "trim_whitespace" },
         },
+
         -- If this is set, Conform will run the formatter on save.
         -- It will pass the table to conform.format().
         -- This can also be a function that returns the table.
-        -- format_on_save = {
-        -- 	-- I recommend these options. See :help conform.format for details.
-        -- 	lsp_fallback = true,
-        -- 	timeout_ms = 500,
-        -- },
-        format_on_save = function(bufnr)
-            local format_args = { timeout_ms = 200, lsp_fallback = true }
+        -- format_on_save = function(bufnr)
+        --     local format_args = { timeout_ms = 200, lsp_fallback = true }
 
-            local fmt_info = M.get_fmt_info(format_args)
-            local msg_handle = M.init_msg_progress(fmt_info)
+        --     local fmt_info = M.get_fmt_info(format_args)
+        --     local msg_handle = M.init_msg_progress(fmt_info)
 
-            if vim.tbl_contains(ignore_auto_format_filetypes, vim.bo[bufnr].filetype) then
-                return
-            end
-            -- Disable with a global or buffer-local variable
-            if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-                return
-            end
-            -- Disable autoformat for files in a certain path
-            -- local bufname = vim.api.nvim_buf_get_name(bufnr)
-            -- if bufname:match("/node_modules/") then
-            -- 	return
-            -- end
+        --     if vim.tbl_contains(ignore_auto_format_filetypes, vim.bo[bufnr].filetype) then
+        --         return
+        --     end
+        --     -- Disable with a global or buffer-local variable
+        --     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+        --         return
+        --     end
+        --     -- Disable autoformat for files in a certain path
+        --     -- local bufname = vim.api.nvim_buf_get_name(bufnr)
+        --     -- if bufname:match("/node_modules/") then
+        --     -- 	return
+        --     -- end
 
-            if slow_format_filetypes[vim.bo[bufnr].filetype] then
-                return
-            end
+        --     if slow_format_filetypes[vim.bo[bufnr].filetype] then
+        --         return
+        --     end
 
-            local function on_format(err)
-                msg_handle:finish()
-                -- if err then
-                --     vim.notify(err, vim.log.levels.WARN, { title = fmt_info })
-                -- end
+        --     local function on_format(err)
+        --         msg_handle:finish()
+        --         -- if err then
+        --         --     vim.notify(err, vim.log.levels.WARN, { title = fmt_info })
+        --         -- end
 
-                if err and err:match("timeout$") then
-                    slow_format_filetypes[vim.bo[bufnr].filetype] = true
-                end
-            end
+        --         if err and err:match("timeout$") then
+        --             slow_format_filetypes[vim.bo[bufnr].filetype] = true
+        --         end
+        --     end
 
-            return format_args, on_format
-        end,
+        --     return format_args, on_format
+        -- end,
 
-        format_after_save = function(bufnr)
-            local format_args = { lsp_fallback = true }
-
-            -- local fmt_info = M.get_fmt_info(format_args)
-            -- local msg_handle = M.init_msg_progress(fmt_info)
-
-            if vim.tbl_contains(ignore_auto_format_filetypes, vim.bo[bufnr].filetype) then
-                return
-            end
-            -- Disable with a global or buffer-local variable
-            if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-                return
-            end
-
-            if not slow_format_filetypes[vim.bo[bufnr].filetype] then
-                return
-            end
-
-            local function on_format(err)
-                -- msg_handle:finish()
-                -- if err then
-                --     vim.notify(err, vim.log.levels.WARN, { title = fmt_info })
-                -- end
-            end
-
-            return format_args, on_format
-        end,
         -- If this is set, Conform will run the formatter asynchronously after save.
         -- It will pass the table to conform.format().
         -- This can also be a function that returns the table.
-        -- format_after_save = {
-        --  lsp_fallback = true,
-        -- },
+        -- format_after_save = function(bufnr)
+        --     local format_args = { lsp_fallback = true }
+
+        --     -- local fmt_info = M.get_fmt_info(format_args)
+        --     -- local msg_handle = M.init_msg_progress(fmt_info)
+
+        --     if vim.tbl_contains(ignore_auto_format_filetypes, vim.bo[bufnr].filetype) then
+        --         return
+        --     end
+        --     -- Disable with a global or buffer-local variable
+        --     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+        --         return
+        --     end
+
+        --     if not slow_format_filetypes[vim.bo[bufnr].filetype] then
+        --         return
+        --     end
+
+        --     local function on_format(err)
+        --         -- msg_handle:finish()
+        --         -- if err then
+        --         --     vim.notify(err, vim.log.levels.WARN, { title = fmt_info })
+        --         -- end
+        --     end
+
+        --     return format_args, on_format
+        -- end,
+
         -- Set the log level. Use `:ConformInfo` to see the location of the log file.
         log_level = vim.log.levels.ERROR,
         -- Conform will notify you when a formatter errors
