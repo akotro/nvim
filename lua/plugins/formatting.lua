@@ -106,7 +106,7 @@ M.opts = function()
                 end
             end,
             typst = { "typstfmt" },
-            nix = { "alejandra" },
+            nix = { "nixfmt" },
             yaml = { "yamlfmt" },
             c = { "clang_format" },
             -- Use the "*" filetype to run formatters on all filetypes.
