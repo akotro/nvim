@@ -47,6 +47,20 @@ function M.get()
             desc = "Goto Type Definition",
         },
         {
+            "gic",
+            function()
+                require("plugins.trouble").lspGoTo("lsp_incoming_calls")
+            end,
+            desc = "Goto Incoming Calls",
+        },
+        {
+            "goc",
+            function()
+                require("plugins.trouble").lspGoTo("lsp_outgoing_calls")
+            end,
+            desc = "Goto Outgoing Calls",
+        },
+        {
             "gp",
             function()
                 require("config.functions").open_plugin_github()
