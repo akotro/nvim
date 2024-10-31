@@ -163,7 +163,7 @@ M.keys = {
         function()
             require("dap").goto_()
         end,
-        desc = "Go to line (no execute)",
+        desc = "Goto to cursor (skip)",
     },
     {
         "<leader>di",
@@ -201,7 +201,7 @@ M.keys = {
         desc = "Run Last",
     },
     {
-        "<leader>do",
+        "<leader>dO",
         function()
             require("dap").step_out()
         end,
@@ -215,7 +215,7 @@ M.keys = {
         desc = "Step Out",
     },
     {
-        "<leader>dO",
+        "<leader>do",
         function()
             require("dap").step_over()
         end,
@@ -311,7 +311,7 @@ function M.config()
 
     local dotnet_get_dll_path = function()
         local request = function()
-            return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
+            return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/", "file")
         end
 
         if vim.g["dotnet_last_dll_path"] == nil then
@@ -330,19 +330,41 @@ function M.config()
 
         return vim.g["dotnet_last_dll_path"]
     end
+
+    local dotnet_get_workspace_path = function()
+        local request = function()
+            return vim.fn.input("Workspace folder: ", vim.fn.getcwd() .. "/", "file")
+        end
+        if vim.g["dotnet_last_workspace_path"] == nil then
+            vim.g["dotnet_last_workspace_path"] = request()
+        else
+            if
+                vim.fn.confirm(
+                    "Do you want to change the workspace folder?\n" .. vim.g["dotnet_last_workspace_path"],
+                    "&yes\n&no",
+                    2
+                ) == 1
+            then
+                vim.g["dotnet_last_workspace_path"] = request()
+            end
+        end
+
+        return vim.g["dotnet_last_workspace_path"]
+    end
     dap.configurations.cs = {
         {
             type = "coreclr",
             name = "launch - netcoredbg",
             request = "launch",
             program = function()
-                if vim.fn.confirm("Should I recompile first?", "&yes\n&no", 2) == 1 then
+                if vim.fn.confirm("Recompile first?", "&yes\n&no", 2) == 1 then
                     dotnet_build_project()
                 end
                 return dotnet_get_dll_path()
             end,
             cwd = function()
-                return vim.fn.input("Workspace folder: ", vim.fn.getcwd() .. "/", "file")
+                return dotnet_get_workspace_path();
+                -- return vim.fn.input("Workspace folder: ", vim.fn.getcwd() .. "/", "file")
             end,
         },
     }
