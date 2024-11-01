@@ -33,7 +33,13 @@ function M.config(_, opts)
     local overseer = require("overseer")
     overseer.setup(opts)
 
-    overseer.add_template_hook({ module = "^cargo$" }, function(task_defn, _)
+    overseer.add_template_hook({ module = "builtin" }, function(task_defn, util)
+        util.add_component(task_defn, { "on_output_quickfix", open = false })
+        util.add_component(task_defn, { "on_result_diagnostics_trouble", close = true })
+    end)
+
+    overseer.add_template_hook({ module = "^cargo$" }, function(task_defn, util)
+        util.add_component(task_defn, { "on_output_quickfix", open = false })
         task_defn.env = vim.tbl_extend("force", task_defn.env or {}, {
             RUST_BACKTRACE = "1",
         })
