@@ -69,7 +69,7 @@ function M.get()
         },
         { "<leader>ld", vim.lsp.buf.hover, desc = "Hover" },
         { "<leader>lD", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-        -- { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+        -- { "<c-s>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
         { "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
         {
             "<leader>lA",
@@ -788,8 +788,8 @@ M.mason = require("plugins.lsp.mason")
 
 M.lightbulb = require("plugins.lsp.lightbulb")
 
-M.copilot = require("plugins.lsp.copilot")
+-- M.copilot = require("plugins.lsp.copilot")
 
-M.copilot_chat = require("plugins.lsp.copilot_chat")
+-- M.copilot_chat = require("plugins.lsp.copilot_chat")
 
 return M

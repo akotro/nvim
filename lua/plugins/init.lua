@@ -529,12 +529,15 @@ return {
         config = function()
             require("lsp_signature").setup({
                 floating_window = false,
+                fix_pos = true,
+                auto_close_after = nil,
                 hint_enable = true,
                 hint_prefix = {
                     above = "↙ ",
                     current = "← ",
                     below = "↖ ",
                 },
+                toggle_key = "<C-S>",
             })
         end,
     },

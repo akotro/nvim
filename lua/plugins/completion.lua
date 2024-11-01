@@ -30,12 +30,13 @@ M.cmp.dependencies = {
     "hrsh7th/cmp-path",
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-cmdline",
-    {
-        "zbirenbaum/copilot-cmp",
-        config = function()
-            require("copilot_cmp").setup()
-        end,
-    },
+    -- "hrsh7th/cmp-nvim-lsp-signature-help",
+    -- {
+    --     "zbirenbaum/copilot-cmp",
+    --     config = function()
+    --         require("copilot_cmp").setup()
+    --     end,
+    -- },
 }
 
 function M.cmp.opts()
@@ -132,6 +133,7 @@ function M.cmp.opts()
         }),
         sources = cmp.config.sources({
             { name = "nvim_lsp" },
+            -- { name = "nvim_lsp_signature_help" },
             { name = "luasnip" },
             {
                 name = "lazydev",
@@ -140,7 +142,6 @@ function M.cmp.opts()
             { name = "path" },
             { name = "buffer" },
             { name = "copilot" },
-            -- { name = "nvim_lsp_signature_help" },
             { name = "crates" },
             { name = "neorg" },
         }),
