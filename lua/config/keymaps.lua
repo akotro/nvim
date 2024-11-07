@@ -70,10 +70,10 @@ keymap.set("v", ">", ">gv")
 
 -- Terminal Mappings
 keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
-keymap.set("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
-keymap.set("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
-keymap.set("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
-keymap.set("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
+-- keymap.set("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
+-- keymap.set("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
+-- keymap.set("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
+-- keymap.set("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
 keymap.set("t", "<C-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 keymap.set("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 

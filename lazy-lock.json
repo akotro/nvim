@@ -110,5 +110,6 @@
   "vim-table-mode": { "branch": "master", "commit": "e4365bde024f73e205eefa2fb78e3029ddb92ea9" },
   "vimtex": { "branch": "master", "commit": "0785fd98af20f308ce6856f75a70a4ece9abab29" },
   "which-key.nvim": { "branch": "main", "commit": "8badb359f7ab8711e2575ef75dfe6fbbd87e4821" },
+  "zellij-nav.nvim": { "branch": "main", "commit": "1d6657d8b8e1f6bbb275a48bc96092b248b8f522" },
   "zen-mode.nvim": { "branch": "main", "commit": "29b292bdc58b76a6c8f294c961a8bf92c5a6ebd6" }
 }
