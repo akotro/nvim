@@ -62,6 +62,7 @@ keymap.set("n", "<space>", "za", silentOpts)
 keymap.set("n", "<f5>", [[<cmd>lua require("config.functions").strip_trailing_whitespace()<cr>]], silentOpts)
 
 --keywordprg
+keymap.set("n", "gK", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 keymap.set("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 
 -- better indenting
