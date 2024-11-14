@@ -549,7 +549,8 @@ return {
                     current = "← ",
                     below = "↖ ",
                 },
-                toggle_key = "<C-S>",
+                toggle_key = "<C-X>",
+                select_signature_key = "<C-S>",
             })
         end,
     },
