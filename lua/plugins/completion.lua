@@ -30,6 +30,7 @@ M.cmp.dependencies = {
     "hrsh7th/cmp-path",
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-cmdline",
+    "rcarriga/cmp-dap",
     -- "hrsh7th/cmp-nvim-lsp-signature-help",
     -- {
     --     "zbirenbaum/copilot-cmp",
@@ -73,6 +74,9 @@ function M.cmp.opts()
 
     local defaults = require("cmp.config.default")()
     return {
+        enabled = function()
+            return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+        end,
         completion = {
             completeopt = "menu,menuone,noselect,noinsert",
         },
@@ -209,6 +213,13 @@ function M.cmp.config(_, opts)
             { name = "vim-dadbod-completion" },
             { name = "luasnip", keyword_length = 2 },
             { name = "buffer", keyword_length = 5 },
+        },
+    })
+
+    -- Setup cmp-dap
+    cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+        sources = {
+            { name = "dap" },
         },
     })
 end
