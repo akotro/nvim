@@ -23,78 +23,6 @@ return {
         end,
     },
     {
-        "nyoom-engineering/oxocarbon.nvim",
-        enabled = false,
-        lazy = false,
-        -- priority = 1000,
-        init = function()
-            -- vim.api.nvim_command("colorscheme oxocarbon")
-        end,
-    },
-    {
-        "aktersnurra/no-clown-fiesta.nvim",
-        enabled = false,
-        lazy = false,
-        -- priority = 1000,
-        init = function()
-            -- vim.api.nvim_command("colorscheme no-clown-fiesta")
-        end,
-    },
-    {
-        "vague2k/vague.nvim",
-        enabled = false,
-        lazy = false,
-        opts = {
-            transparent = false,
-            style = {
-                -- "none" is the same thing as default. But "italic" and "bold" are also valid options
-                boolean = "none",
-                number = "none",
-                float = "none",
-                error = "none",
-                comments = "none",
-                conditionals = "none",
-                functions = "none",
-                headings = "bold",
-                operators = "none",
-                strings = "none",
-                variables = "none",
-
-                -- keywords
-                keywords = "none",
-                keyword_return = "none",
-                keywords_loop = "none",
-                keywords_label = "none",
-                keywords_exception = "none",
-
-                -- builtin
-                builtin_constants = "none",
-                builtin_functions = "none",
-                builtin_types = "none",
-                builtin_variables = "none",
-            },
-            colors = {
-                func = "#bc96b0",
-                keyword = "#787bab",
-                -- string = "#d4bd98",
-                string = "#8a739a",
-                -- string = "#f2e6ff",
-                -- number = "#f2e6ff",
-                -- string = "#d8d5b1",
-                number = "#8f729e",
-                -- type = "#dcaed7",
-            },
-        },
-        init = function()
-            -- sets the line colors for vague
-            -- vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#646477" })
-            -- vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#646477" })
-            -- vim.api.nvim_set_hl(0, "LineNr", { fg = "#d6d2c8" })
-
-            -- vim.api.nvim_command("colorscheme vague")
-        end,
-    },
-    {
         "EdenEast/nightfox.nvim",
         enabled = true,
         lazy = false,
@@ -105,6 +33,12 @@ return {
         init = function()
             vim.api.nvim_command("colorscheme carbonfox")
         end,
+    },
+    {
+        "wnkz/monoglow.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
     },
     -- NOTE: Util
     {
