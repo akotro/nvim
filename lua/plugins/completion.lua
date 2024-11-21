@@ -31,6 +31,14 @@ M.cmp.dependencies = {
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-cmdline",
     "rcarriga/cmp-dap",
+    -- {
+    --     "MattiasMTS/cmp-dbee",
+    --     dependencies = {
+    --         { "kndndrj/nvim-dbee" },
+    --     },
+    --     ft = "sql", -- optional but good to have
+    --     opts = {}, -- needed
+    -- },
     -- "hrsh7th/cmp-nvim-lsp-signature-help",
     -- {
     --     "zbirenbaum/copilot-cmp",
@@ -215,6 +223,13 @@ function M.cmp.config(_, opts)
             { name = "buffer", keyword_length = 5 },
         },
     })
+    -- cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
+    --     sources = {
+    --         { name = "cmp-dbee" },
+    --         { name = "luasnip", keyword_length = 2 },
+    --         { name = "buffer", keyword_length = 5 },
+    --     },
+    -- })
 
     -- Setup cmp-dap
     cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
