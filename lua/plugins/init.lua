@@ -667,37 +667,23 @@ return {
         ft = "csv",
     },
     {
-        "tpope/vim-dadbod",
+        "kndndrj/nvim-dbee",
         lazy = true,
-        cmd = {
-            "DBUIToggle",
-            "DBUI",
-            "DBUIAddConnection",
-            "DBUIFindBuffer",
-            "DBUIRenameBuffer",
-            "DBUILastQueryInfo",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
         },
-        dependencies = require("plugins.dadbod").dependencies,
-        config = require("plugins.dadbod").config,
+        build = function()
+            -- Install tries to automatically detect the install method.
+            -- if it fails, try calling it with one of these parameters:
+            --    "curl", "wget", "bitsadmin", "go"
+            require("dbee").install()
+        end,
+        config = function()
+            require("dbee").setup({
+                sources = {
+                    require("dbee.sources").EnvSource:new("DBEE_CONNECTIONS"),
+                },
+            })
+        end,
     },
-    -- {
-    --     "kndndrj/nvim-dbee",
-    --     lazy = true,
-    --     dependencies = {
-    --         "MunifTanjim/nui.nvim",
-    --     },
-    --     build = function()
-    --         -- Install tries to automatically detect the install method.
-    --         -- if it fails, try calling it with one of these parameters:
-    --         --    "curl", "wget", "bitsadmin", "go"
-    --         require("dbee").install()
-    --     end,
-    --     config = function()
-    --         require("dbee").setup({
-    --             sources = {
-    --                 require("dbee.sources").EnvSource:new("DBEE_CONNECTIONS"),
-    --             },
-    --         })
-    --     end,
-    -- },
 }
