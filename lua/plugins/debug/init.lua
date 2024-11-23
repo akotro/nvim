@@ -356,6 +356,10 @@ function M.config()
             type = "coreclr",
             name = "launch - netcoredbg",
             request = "launch",
+            env = "ASPNETCORE_ENVIRONMENT=Development",
+            args = {
+                "--environment=Development",
+            },
             program = function()
                 if vim.fn.confirm("Recompile first?", "&yes\n&no", 2) == 1 then
                     dotnet_build_project()
@@ -363,8 +367,7 @@ function M.config()
                 return dotnet_get_dll_path()
             end,
             cwd = function()
-                return dotnet_get_workspace_path();
-                -- return vim.fn.input("Workspace folder: ", vim.fn.getcwd() .. "/", "file")
+                return dotnet_get_workspace_path()
             end,
         },
     }
