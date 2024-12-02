@@ -251,7 +251,13 @@ function M.setup()
                 local starts = fn.line("v")
                 local ends = fn.line(".")
                 local lines = starts <= ends and ends - starts + 1 or starts - ends + 1
-                return tostring(lines) .. "L " .. tostring(fn.wordcount().visual_chars) .. "C"
+                local wordcount = fn.wordcount()
+                return tostring(lines)
+                    .. "L "
+                    .. tostring(wordcount.visual_words)
+                    .. "W "
+                    .. tostring(wordcount.visual_chars)
+                    .. "C"
             end,
             color = { fg = colors.oniViolet },
         },
