@@ -4,7 +4,7 @@ return {
         "rebelot/kanagawa.nvim",
         enabled = false,
         lazy = false,
-        -- priority = 1000,
+        priority = 1000,
         config = require("plugins.kanagawa").config,
         init = function()
             -- vim.api.nvim_command("colorscheme kanagawa")
@@ -14,13 +14,21 @@ return {
         "folke/tokyonight.nvim",
         enabled = false,
         lazy = false,
-        -- priority = 1000,
+        priority = 1000,
         opts = {
             style = "night",
         },
         init = function()
             -- vim.api.nvim_command("colorscheme tokyonight")
         end,
+    },
+    {
+        "wnkz/monoglow.nvim",
+        enabled = false,
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        init = function() end,
     },
     {
         "EdenEast/nightfox.nvim",
@@ -34,17 +42,18 @@ return {
             vim.api.nvim_command("colorscheme carbonfox")
         end,
     },
-    {
-        "wnkz/monoglow.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
-        init = function() end,
-    },
     -- NOTE: Util
     {
         "nvim-lua/plenary.nvim",
         lazy = true,
+    },
+    {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        opts = require("plugins.snacks").opts,
+        keys = require("plugins.snacks").keys,
+        init = require("plugins.snacks").init,
     },
     -- NOTE: UI
     {
@@ -64,31 +73,6 @@ return {
         init = require("plugins.dressing").init,
         opts = require("plugins.dressing").opts,
     },
-    -- {
-    --     "rcarriga/nvim-notify",
-    --     event = "VeryLazy",
-    --     keys = {
-    --         {
-    --             "<leader>un",
-    --             function()
-    --                 require("notify").dismiss({ silent = true, pending = true })
-    --             end,
-    --             desc = "Dismiss all Notifications",
-    --         },
-    --     },
-    --     opts = {
-    --         timeout = 3000,
-    --         max_height = function()
-    --             return math.floor(vim.o.lines * 0.75)
-    --         end,
-    --         max_width = function()
-    --             return math.floor(vim.o.columns * 0.75)
-    --         end,
-    --         on_open = function(win)
-    --             vim.api.nvim_win_set_config(win, { zindex = 100 })
-    --         end,
-    --     },
-    -- },
     {
         "folke/noice.nvim",
         enabled = false,
@@ -111,11 +95,6 @@ return {
         init = require("plugins.lualine").init,
         opts = require("plugins.lualine").opts,
     },
-    -- {
-    --     "Bekaboo/dropbar.nvim",
-    --     event = "BufRead",
-    --     opts = require("plugins.dropbar").opts,
-    -- },
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
@@ -136,126 +115,8 @@ return {
     -- NOTE: Usage
     {
         "aserowy/tmux.nvim",
-        opts = {
-            copy_sync = {
-                -- enables copy sync. by default, all registers are synchronized.
-                -- to control which registers are synced, see the `sync_*` options.
-                enable = true,
-
-                -- ignore specific tmux buffers e.g. buffer0 = true to ignore the
-                -- first buffer or named_buffer_name = true to ignore a named tmux
-                -- buffer with name named_buffer_name :)
-                ignore_buffers = { empty = false },
-
-                -- TMUX >= 3.2: all yanks (and deletes) will get redirected to system
-                -- clipboard by tmux
-                redirect_to_clipboard = true,
-
-                -- offset controls where register sync starts
-                -- e.g. offset 2 lets registers 0 and 1 untouched
-                register_offset = 0,
-
-                -- overwrites vim.g.clipboard to redirect * and + to the system
-                -- clipboard using tmux. If you sync your system clipboard without tmux,
-                -- disable this option!
-                sync_clipboard = false,
-
-                -- synchronizes registers *, +, unnamed, and 0 till 9 with tmux buffers.
-                sync_registers = true,
-
-                -- synchronizes registers when pressing p and P.
-                sync_registers_keymap_put = true,
-
-                -- synchronizes registers when pressing (C-r) and ".
-                sync_registers_keymap_reg = true,
-
-                -- syncs deletes with tmux clipboard as well, it is adviced to
-                -- do so. Nvim does not allow syncing registers 0 and 1 without
-                -- overwriting the unnamed register. Thus, ddp would not be possible.
-                sync_deletes = true,
-
-                -- syncs the unnamed register with the first buffer entry from tmux.
-                sync_unnamed = true,
-            },
-            navigation = {
-                -- cycles to opposite pane while navigating into the border
-                cycle_navigation = true,
-
-                -- enables default keybindings (C-hjkl) for normal mode
-                enable_default_keybindings = true,
-
-                -- prevents unzoom tmux when navigating beyond vim border
-                persist_zoom = false,
-            },
-            resize = {
-                -- enables default keybindings (A-hjkl) for normal mode
-                -- enable_default_keybindings = true,
-
-                -- sets resize steps for x axis
-                resize_step_x = 1,
-
-                -- sets resize steps for y axis
-                resize_step_y = 1,
-            },
-        },
-        keys = {
-            {
-                "<c-h>",
-                function()
-                    require("tmux").move_left()
-                end,
-                "Move to left window",
-            },
-            {
-                "<c-j>",
-                function()
-                    require("tmux").move_bottom()
-                end,
-                "Move to bottom window",
-            },
-            {
-                "<c-k>",
-                function()
-                    require("tmux").move_top()
-                end,
-                "Move to top window",
-            },
-            {
-                "<c-l>",
-                function()
-                    require("tmux").move_right()
-                end,
-                "Move to right window",
-            },
-            {
-                "<M-H>",
-                function()
-                    require("tmux").resize_left()
-                end,
-                "Tmux resize left",
-            },
-            {
-                "<M-J>",
-                function()
-                    require("tmux").resize_bottom()
-                end,
-                "Tmux resize bottom",
-            },
-            {
-                "<M-K>",
-                function()
-                    require("tmux").resize_top()
-                end,
-                "Tmux resize top",
-            },
-            {
-                "<M-L>",
-                function()
-                    require("tmux").resize_right()
-                end,
-                "Tmux resize right",
-            },
-        },
+        opts = require("plugins.tmux").opts,
+        keys = require("plugins.tmux").keys,
     },
     {
         "echasnovski/mini.ai",
@@ -268,13 +129,6 @@ return {
         event = "InsertEnter",
         dependencies = require("plugins.autopairs").dependencies,
         config = require("plugins.autopairs").config,
-    },
-    {
-        "RRethy/vim-illuminate",
-        event = "BufRead",
-        keys = require("plugins.illuminate").keys,
-        opts = require("plugins.illuminate").opts,
-        config = require("plugins.illuminate").config,
     },
     {
         "kylechui/nvim-surround",
@@ -357,7 +211,7 @@ return {
         },
         keys = {
             {
-                "<leader>u",
+                "<leader>uu",
                 function()
                     vim.api.nvim_command("UndotreeToggle")
                 end,
@@ -479,7 +333,7 @@ return {
         opts = { enable = true, mode = "cursor", trim_scope = "inner", max_lines = 2 },
         keys = {
             {
-                "<leader>ut",
+                "<leader>Ot",
                 function()
                     local tsc = require("treesitter-context")
                     tsc.toggle()
@@ -540,6 +394,7 @@ return {
         opts = require("plugins.completion").luasnip.opts,
         config = require("plugins.completion").luasnip.config,
     },
+    -- TODO: Migrate to blink.cmp?
     {
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },
@@ -620,23 +475,6 @@ return {
         event = "BufRead",
         config = true,
     },
-    -- {
-    --     "zbirenbaum/copilot.lua",
-    --     build = ":Copilot auth",
-    --     -- event = "InsertEnter",
-    --     lazy = true,
-    --     cmd = "Copilot",
-    --     keys = require("plugins.lsp").copilot.keys,
-    --     config = require("plugins.lsp").copilot.config,
-    -- },
-    -- {
-    --     "CopilotC-Nvim/CopilotChat.nvim",
-    --     branch = "canary",
-    --     dependencies = require("plugins.lsp").copilot_chat.dependencies,
-    --     opts = require("plugins.lsp").copilot_chat.opts,
-    --     cmd = require("plugins.lsp").copilot_chat.cmd,
-    --     keys = require("plugins.lsp").copilot_chat.keys,
-    -- },
     {
         url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         name = "lsp_lines.nvim",

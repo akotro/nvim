@@ -118,24 +118,6 @@ local options = {
         { "<leader><space>", ":nohlsearch<cr>", desc = "Clear Highlight", nowait = true, remap = false },
 
         { "<leader>O", group = "Options", nowait = true, remap = false },
-        {
-            "<leader>Os",
-            function()
-                utils.toggle_option("wrap")
-            end,
-            desc = "Spell",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>Ow",
-            function()
-                utils.toggle_option("spell")
-            end,
-            desc = "Wrap",
-            nowait = true,
-            remap = false,
-        },
 
         { "<leader>T", group = "Test", nowait = true, remap = false },
 
@@ -149,13 +131,13 @@ local options = {
             nowait = true,
             remap = false,
         },
-        {
-            "<leader>bd",
-            "<cmd>BufferLinePickClose<cr>",
-            desc = "Pick which buffer to close",
-            nowait = true,
-            remap = false,
-        },
+        -- {
+        --     "<leader>bd",
+        --     "<cmd>BufferLinePickClose<cr>",
+        --     desc = "Pick which buffer to close",
+        --     nowait = true,
+        --     remap = false,
+        -- },
         { "<leader>bf", "<cmd>Telescope buffers sort_mru=true<cr>", desc = "Find", nowait = true, remap = false },
         { "<leader>bh", "<cmd>BufferLineCloseLeft<cr>", desc = "Close all to the left", nowait = true, remap = false },
         { "<leader>bj", "<cmd>BufferLinePick<cr>", desc = "Jump", nowait = true, remap = false },
