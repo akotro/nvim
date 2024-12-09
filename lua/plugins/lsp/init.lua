@@ -540,7 +540,7 @@ M.opts = {
         },
         dockerls = {},
         texlab = {},
-        typst_lsp = {
+        tinymist = {
             root_dir = function(fname)
                 return require("lspconfig.util").root_pattern("*.typ")(fname)
             end,
@@ -645,7 +645,7 @@ M.opts = {
                 },
             })
         end,
-        typst_lsp = function(_, _)
+        tinymist = function(_, _)
             vim.filetype.add({
                 filename = {
                     ["*.typ"] = "typst",
