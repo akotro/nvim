@@ -536,7 +536,7 @@ return {
     -- NOTE: Latex
     {
         "lervag/vimtex",
-        ft = "tex",
+        lazy = false,
         config = function()
             vim.g["vimtex_view_method"] = "zathura"
         end,
@@ -544,7 +544,7 @@ return {
     {
         "jbyuki/nabla.nvim",
         lazy = true,
-        ft = { "markdown", "tex", "typ", "typst" },
+        -- ft = { "markdown", "tex", "typ", "typst" },
         keys = {
             {
                 "<leader>np",
@@ -569,6 +569,13 @@ return {
                 -- Whether LaTeX should be rendered, mainly used for health check
                 enabled = false,
             },
+            -- NOTE: Uncomment to get inline latex rendering (doesn't work that well)
+            -- win_options = { conceallevel = { rendered = 2 } },
+            -- on = {
+            --     attach = function()
+            --         require("nabla").enable_virt({ autogen = true })
+            --     end,
+            -- },
         },
     },
     {
@@ -587,14 +594,6 @@ return {
         end,
     },
     -- NOTE: Notes
-    -- {
-    --     "nvim-neorg/neorg",
-    --     build = ":Neorg sync-parsers",
-    --     ft = { "norg" },
-    --     cmd = "Neorg",
-    --     dependencies = require("plugins.neorg").dependencies,
-    --     opts = require("plugins.neorg").opts,
-    -- },
     {
         "epwalsh/obsidian.nvim",
         version = "*",
@@ -635,6 +634,11 @@ return {
         lazy = true,
         dependencies = {
             "MunifTanjim/nui.nvim",
+            {
+                "MattiasMTS/cmp-dbee",
+                ft = "sql",
+                opts = {},
+            },
         },
         build = function()
             -- Install tries to automatically detect the install method.
