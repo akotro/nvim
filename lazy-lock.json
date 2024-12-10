@@ -48,6 +48,7 @@
   "mini.icons": { "branch": "main", "commit": "54686be7d58807906cb2c8c2216e0bf9c044f19a" },
   "mini.indentscope": { "branch": "main", "commit": "da9af64649e114aa79480c238fd23f6524bc0903" },
   "monoglow.nvim": { "branch": "main", "commit": "21a304005579388504f0a07d80c4f7c209ae7bc1" },
+  "nabla.nvim": { "branch": "master", "commit": "27a6ea9ed7452bb9e0b19eb0942b5bcf7d051b2f" },
   "neoconf.nvim": { "branch": "main", "commit": "f5e58a7db0e19658c35dd409c3d4e835c14ff876" },
   "neogit": { "branch": "master", "commit": "683ee5d02b3b223a5c39953d700c252187fc5be9" },
   "neotest": { "branch": "master", "commit": "6d3d22cdad49999ef774ebe1bc250a4994038964" },

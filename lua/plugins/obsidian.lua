@@ -40,6 +40,7 @@ M.keys = {
             require("obsidian").util.toggle_checkbox()
         end,
         { buffer = true },
+        desc = "Toggle checkbox",
     },
     {
         "<cr>",
@@ -47,21 +48,25 @@ M.keys = {
             require("obsidian").util.smart_action()
         end,
         { noremap = false, buffer = true },
+        desc = "Toggle checkbox",
     },
     {
         "<leader>nn",
         "<cmd>ObsidianNew<cr>",
         { buffer = true },
+        desc = "Obsidian new note",
     },
     {
         "<leader>nf",
         "<cmd>ObsidianQuickSwitch<cr>",
         { buffer = true },
+        desc = "Obsidian find files",
     },
     {
         "<leader>nt",
         "<cmd>ObsidianTags<cr>",
         { buffer = true },
+        desc = "Obsidian find tags",
     },
 }
 

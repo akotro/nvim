@@ -541,6 +541,20 @@ return {
             vim.g["vimtex_view_method"] = "zathura"
         end,
     },
+    {
+        "jbyuki/nabla.nvim",
+        lazy = true,
+        ft = { "markdown", "tex", "typ", "typst" },
+        keys = {
+            {
+                "<leader>np",
+                function()
+                    require("nabla").popup()
+                end,
+                desc = "Popup latex equation",
+            },
+        },
+    },
     -- NOTE: Markdown
     {
         "MeanderingProgrammer/markdown.nvim",
