@@ -395,12 +395,22 @@ return {
         config = require("plugins.completion").luasnip.config,
     },
     -- TODO: Migrate to blink.cmp?
+    -- {
+    --     "hrsh7th/nvim-cmp",
+    --     event = { "InsertEnter", "CmdlineEnter" },
+    --     dependencies = require("plugins.completion").cmp.dependencies,
+    --     opts = require("plugins.completion").cmp.opts,
+    --     config = require("plugins.completion").cmp.config,
+    -- },
     {
-        "hrsh7th/nvim-cmp",
+        "saghen/blink.cmp",
+        -- NOTE: This seems impacts startup time?
+        -- lazy = false, -- lazy loading handled internally
         event = { "InsertEnter", "CmdlineEnter" },
-        dependencies = require("plugins.completion").cmp.dependencies,
-        opts = require("plugins.completion").cmp.opts,
-        config = require("plugins.completion").cmp.config,
+        build = "nix run .#build-plugin",
+        dependencies = require("plugins.completion").blink.dependencies,
+        opts = require("plugins.completion").blink.opts,
+        opts_extend = require("plugins.completion").blink.opts_extend,
     },
     -- NOTE: Linting
     {
@@ -436,25 +446,25 @@ return {
         config = require("plugins.lsp").mason.config,
     },
     -- NOTE: LSP Utils
-    {
-        "ray-x/lsp_signature.nvim",
-        event = "BufRead",
-        config = function()
-            require("lsp_signature").setup({
-                floating_window = false,
-                fix_pos = true,
-                auto_close_after = nil,
-                hint_enable = true,
-                hint_prefix = {
-                    above = "↙ ",
-                    current = "← ",
-                    below = "↖ ",
-                },
-                toggle_key = "<C-X>",
-                select_signature_key = "<C-S>",
-            })
-        end,
-    },
+    -- {
+    --     "ray-x/lsp_signature.nvim",
+    --     event = "BufRead",
+    --     config = function()
+    --         require("lsp_signature").setup({
+    --             floating_window = false,
+    --             fix_pos = true,
+    --             auto_close_after = nil,
+    --             hint_enable = true,
+    --             hint_prefix = {
+    --                 above = "↙ ",
+    --                 current = "← ",
+    --                 below = "↖ ",
+    --             },
+    --             toggle_key = "<C-X>",
+    --             select_signature_key = "<C-S>",
+    --         })
+    --     end,
+    -- },
     {
         "kosayoda/nvim-lightbulb",
         event = "BufRead",
@@ -632,6 +642,7 @@ return {
     {
         "kndndrj/nvim-dbee",
         lazy = true,
+        cmd = "Dbee",
         dependencies = {
             "MunifTanjim/nui.nvim",
             {

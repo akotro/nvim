@@ -1,6 +1,8 @@
 local M = {}
 
-M.dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" }
+M.dependencies = {
+    "nvim-treesitter/nvim-treesitter" --[[ , "hrsh7th/nvim-cmp" ]],
+}
 
 function M.config()
     local opts = {
@@ -24,6 +26,7 @@ function M.config()
         disable_in_macro = false,
         ---@usage add bracket pairs after quote
         enable_afterquote = true,
+        map_cr = true,
         ---@usage map the <BS> key
         map_bs = true,
         ---@usage map <c-w> to delete a pair if possible
@@ -58,19 +61,20 @@ function M.config()
         ignored_next_char = opts.ignored_next_char,
         enable_moveright = opts.enable_moveright,
         enable_afterquote = opts.enable_afterquote,
+        map_cr = opts.map_cr,
         map_c_w = opts.map_c_w,
         map_bs = opts.map_bs,
         disable_in_visualblock = opts.disable_in_visualblock,
         fast_wrap = opts.fast_wrap,
     })
 
-    pcall(function()
-        local function on_confirm_done(...)
-            require("nvim-autopairs.completion.cmp").on_confirm_done()(...)
-        end
-        require("cmp").event:off("confirm_done", on_confirm_done)
-        require("cmp").event:on("confirm_done", on_confirm_done)
-    end)
+    -- pcall(function()
+    --     local function on_confirm_done(...)
+    --         require("nvim-autopairs.completion.cmp").on_confirm_done()(...)
+    --     end
+    --     require("cmp").event:off("confirm_done", on_confirm_done)
+    --     require("cmp").event:on("confirm_done", on_confirm_done)
+    -- end)
 end
 
 return M

@@ -307,7 +307,7 @@ M.dependencies = {
         lazy = true,
         opts = {
             keywords = {
-                TODO = { color = "error", alt = { "todo", "unimplemented" } },
+                TODO = { color = "error", alt = { "todo", "unimplemented", "IMPORTANT" } },
             },
             highlight = {
                 pattern = {

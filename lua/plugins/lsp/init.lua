@@ -296,12 +296,22 @@ M.dependencies = {
     {
         "saecki/crates.nvim",
         lazy = true,
+        event = { "BufRead Cargo.toml" },
         ft = { "rust", "toml" },
         opts = {
             completion = {
-                cmp = {
+                crates = {
                     enabled = true,
                 },
+                -- cmp = {
+                --     enabled = true,
+                -- },
+            },
+            lsp = {
+                enabled = true,
+                actions = true,
+                completion = true,
+                hover = true,
             },
         },
     },
@@ -725,12 +735,14 @@ function M.config(_, opts)
     vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
     local servers = opts.servers
-    local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+    -- local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+    local has_blink, blink_cmp = pcall(require, "blink.cmp")
     local capabilities = vim.tbl_deep_extend(
         "force",
         {},
         vim.lsp.protocol.make_client_capabilities(),
-        has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+        -- has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+        has_blink and blink_cmp.get_lsp_capabilities(nil, true) or {},
         opts.capabilities or {}
     )
 

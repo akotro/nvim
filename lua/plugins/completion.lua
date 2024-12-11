@@ -20,6 +20,15 @@ function M.luasnip.config()
     local snippet_path = utils.join_paths(utils.get_config_path(), "snippets")
 
     require("luasnip.loaders.from_lua").lazy_load({ paths = { snippet_path } })
+
+    local ls = require("luasnip")
+    vim.keymap.set({ "i" }, "<C-J>", function()
+        if ls.expandable() then
+            ls.expand_or_jump()
+        elseif ls.jumpable(1) then
+            ls.jump(1)
+        end
+    end, { silent = true })
 end
 
 M.cmp = {}
@@ -147,7 +156,7 @@ function M.cmp.opts()
             format = function(_, item)
                 local icons = require("config.ui").icons.kinds
                 if icons[item.kind] then
-                    item.kind = icons[item.kind]--[[  .. item.kind ]]
+                    item.kind = icons[item.kind]
                 end
                 return item
             end,
@@ -211,11 +220,160 @@ function M.cmp.config(_, opts)
     })
 
     -- Setup cmp-dap
-    cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+    cmp.setup.filetype({ "dap_repl", "dapui_watches", "dapui_hover" }, {
         sources = {
             { name = "dap" },
         },
     })
 end
+
+M.blink = {}
+
+M.blink.dependencies = {
+    "echasnovski/mini.icons",
+    "L3MON4D3/LuaSnip",
+    {
+        "saghen/blink.compat",
+        lazy = true,
+        opts = {
+            impersonate_nvim_cmp = true,
+        },
+    },
+    "rcarriga/cmp-dap",
+}
+
+---@module "blink.cmp"
+---@type blink.cmp.Config
+M.blink.opts = {
+    keymap = {
+        preset = "default",
+        ["<C-J>"] = { "snippet_forward", "fallback" },
+        ["<C-K>"] = { "snippet_backward", "fallback" },
+    },
+
+    -- Disables keymaps, completions and signature help for these filetypes
+    blocked_filetypes = {},
+
+    snippets = {
+        -- Function to use when expanding LSP provided snippets
+        expand = function(snippet)
+            require("luasnip").lsp_expand(snippet)
+        end,
+        -- Function to use when checking if a snippet is active
+        active = function(filter)
+            if filter and filter.direction then
+                return require("luasnip").jumpable(filter.direction)
+            end
+            return require("luasnip").in_snippet()
+        end,
+        -- Function to use when jumping between tab stops in a snippet, where direction can be negative or positive
+        jump = function(direction)
+            require("luasnip").jump(direction)
+        end,
+    },
+
+    -- experimental auto-brackets support
+    ---@diagnostic disable-next-line: missing-fields
+    completion = { accept = { auto_brackets = { enabled = true } } },
+
+    menu = {
+        draw = {
+            components = {
+                kind_icon = {
+                    ellipsis = false,
+                    text = function(ctx)
+                        local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+                        return kind_icon
+                    end,
+                },
+            },
+        },
+    },
+
+    documentation = {
+        auto_show = true,
+    },
+
+    -- experimental signature help support
+    ---@diagnostic disable-next-line: missing-fields
+    signature = { enabled = true },
+
+    ---@diagnostic disable-next-line: missing-fields
+    appearance = {
+        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+        -- Useful for when your theme doesn't support blink.cmp
+        -- will be removed in a future release
+        use_nvim_cmp_as_default = true,
+        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+        -- Adjusts spacing to ensure icons are aligned
+        nerd_font_variant = "mono",
+    },
+
+    -- default list of enabled providers defined so that you can extend it
+    -- elsewhere in your config, without redefining it, via `opts_extend`
+    sources = {
+        default = {
+            "lsp",
+            "path",
+            -- "snippets",
+            "luasnip",
+            "buffer",
+            "lazydev",
+            "crates",
+            "obsidian",
+            "obsidian_new",
+            "obsidian_tags",
+        },
+
+        per_filetype = {
+            sql = { "cmp_dbee", "luasnip", "buffer" },
+            mysql = { "cmp_dbee", "luasnip", "buffer" },
+            plsql = { "cmp_dbee", "luasnip", "buffer" },
+
+            dap_repl = { "cmp_dap" },
+            dapui_watches = { "cmp_dap" },
+            dapui_hover = { "cmp_dap" },
+        },
+
+        providers = {
+            -- dont show LuaLS require statements when lazydev has items
+            lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
+
+            cmp_dap = {
+                name = "dap", -- IMPORTANT: use the same name as you would for nvim-cmp
+                module = "blink.compat.source",
+            },
+
+            crates = {
+                name = "crates",
+                module = "blink.compat.source",
+            },
+
+            obsidian = {
+                name = "obsidian",
+                module = "blink.compat.source",
+            },
+            obsidian_new = {
+                name = "obsidian_new",
+                module = "blink.compat.source",
+            },
+            obsidian_tags = {
+                name = "obsidian_tags",
+                module = "blink.compat.source",
+            },
+
+            cmp_dbee = {
+                name = "cmp-dbee",
+                module = "blink.compat.source",
+            },
+        },
+    },
+}
+
+-- allows extending the enabled_providers array elsewhere in your config
+-- without having to redefine it
+M.blink.opts_extend = {
+    "sources.default",
+}
 
 return M
