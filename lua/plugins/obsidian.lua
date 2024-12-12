@@ -43,14 +43,6 @@ M.keys = {
         desc = "Toggle checkbox",
     },
     {
-        "<cr>",
-        function()
-            require("obsidian").util.smart_action()
-        end,
-        { noremap = false, buffer = true },
-        desc = "Toggle checkbox",
-    },
-    {
         "<leader>nn",
         "<cmd>ObsidianNew<cr>",
         { buffer = true },
