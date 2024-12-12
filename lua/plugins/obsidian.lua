@@ -16,8 +16,7 @@ M.opts = {
     },
 
     completion = {
-        -- Set to false to disable completion.
-        nvim_cmp = true,
+        nvim_cmp = false, -- NOTE: see https://github.com/epwalsh/obsidian.nvim/issues/770
         -- Trigger completion at 2 chars.
         min_chars = 2,
     },

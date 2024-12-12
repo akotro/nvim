@@ -320,6 +320,7 @@ M.blink.opts = {
             "buffer",
             "lazydev",
             "crates",
+            -- NOTE: Disabled from obsidian.nvim side as it causes error, see https://github.com/epwalsh/obsidian.nvim/issues/770
             "obsidian",
             "obsidian_new",
             "obsidian_tags",
