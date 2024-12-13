@@ -5,7 +5,7 @@ local M = {}
 ---@type snacks.Config
 M.opts = {
     bigfile = { enabled = true },
-    dashboard = { enabled = true },
+    dashboard = { enabled = false },
     -- notifier = {
     --     enabled = true,
     --     timeout = 3000,
