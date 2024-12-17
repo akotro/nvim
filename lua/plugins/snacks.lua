@@ -13,7 +13,16 @@ M.opts = {
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
+    indent = {
+        filter = function(buf)
+            return vim.g.snacks_indent ~= false and vim.b[buf].snacks_indent ~= false and vim.bo[buf].buftype == ""
+        end,
+    },
+    input = { enabled = true },
+    -- scroll = { enabled = true },
+
     styles = {
+        ---@diagnostic disable-next-line: missing-fields
         notification = {
             wo = { wrap = true }, -- Wrap notifications
         },
@@ -90,6 +99,7 @@ M.keys = {
         "<leader>uN",
         desc = "Neovim News",
         function()
+            ---@diagnostic disable-next-line: missing-fields
             Snacks.win({
                 file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
                 width = 0.6,

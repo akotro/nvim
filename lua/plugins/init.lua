@@ -95,19 +95,19 @@ return {
         init = require("plugins.lualine").init,
         opts = require("plugins.lualine").opts,
     },
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        event = "BufRead",
-        opts = require("plugins.indent_blankline").opts,
-    },
-    {
-        "echasnovski/mini.indentscope",
-        version = false,
-        event = "BufRead",
-        init = require("plugins.mini_indentscope").init,
-        opts = require("plugins.mini_indentscope").opts,
-    },
+    -- {
+    --     "lukas-reineke/indent-blankline.nvim",
+    --     main = "ibl",
+    --     event = "BufRead",
+    --     opts = require("plugins.indent_blankline").opts,
+    -- },
+    -- {
+    --     "echasnovski/mini.indentscope",
+    --     version = false,
+    --     event = "BufRead",
+    --     init = require("plugins.mini_indentscope").init,
+    --     opts = require("plugins.mini_indentscope").opts,
+    -- },
     {
         "Bekaboo/deadcolumn.nvim",
         event = "BufRead",
@@ -330,7 +330,7 @@ return {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufRead",
         enabled = true,
-        opts = { enable = true, mode = "cursor", trim_scope = "inner", max_lines = 2 },
+        opts = { enable = true, mode = "cursor", trim_scope = "outer", max_lines = 4 },
         keys = {
             {
                 "<leader>Ot",
