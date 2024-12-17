@@ -386,6 +386,7 @@ return {
     -- NOTE: Completion
     {
         "L3MON4D3/LuaSnip",
+        version = "v2.*",
         event = "InsertEnter",
         build = (not jit.os:find("Windows"))
                 and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"

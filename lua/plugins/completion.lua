@@ -251,9 +251,6 @@ M.blink.opts = {
         ["<C-K>"] = { "snippet_backward", "fallback" },
     },
 
-    -- Disables keymaps, completions and signature help for these filetypes
-    blocked_filetypes = {},
-
     snippets = {
         -- Function to use when expanding LSP provided snippets
         expand = function(snippet)
@@ -274,24 +271,26 @@ M.blink.opts = {
 
     -- experimental auto-brackets support
     ---@diagnostic disable-next-line: missing-fields
-    completion = { accept = { auto_brackets = { enabled = true } } },
+    completion = {
+        accept = { auto_brackets = { enabled = true } },
 
-    menu = {
-        draw = {
-            components = {
-                kind_icon = {
-                    ellipsis = false,
-                    text = function(ctx)
-                        local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-                        return kind_icon
-                    end,
+        documentation = {
+            auto_show = true,
+        },
+
+        menu = {
+            draw = {
+                components = {
+                    kind_icon = {
+                        ellipsis = false,
+                        text = function(ctx)
+                            local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+                            return kind_icon
+                        end,
+                    },
                 },
             },
         },
-    },
-
-    documentation = {
-        auto_show = true,
     },
 
     -- experimental signature help support
