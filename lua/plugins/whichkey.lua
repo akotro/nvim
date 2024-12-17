@@ -296,7 +296,7 @@ local options = {
         { "<leader>p", group = "Plugins", nowait = true, remap = false },
         { "<leader>pi", "<cmd>Lazy install<cr>", desc = "Install", nowait = true, remap = false },
         { "<leader>pl", "<cmd>Lazy<cr>", desc = "Lazy", nowait = true, remap = false },
-        { "<leader>pr", ":Lazy reload ", desc = "Reload Plugin", nowait = true, remap = false },
+        { "<leader>pr", "<cmd>Lazy restore<cr>", desc = "Restore", nowait = true, remap = false },
         { "<leader>ps", "<cmd>Lazy sync<cr>", desc = "Sync", nowait = true, remap = false },
         { "<leader>pu", "<cmd>Lazy update<cr>", desc = "Update", nowait = true, remap = false },
 
