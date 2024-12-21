@@ -395,7 +395,6 @@ return {
         opts = require("plugins.completion").luasnip.opts,
         config = require("plugins.completion").luasnip.config,
     },
-    -- TODO: Migrate to blink.cmp?
     -- {
     --     "hrsh7th/nvim-cmp",
     --     event = { "InsertEnter", "CmdlineEnter" },
@@ -405,7 +404,7 @@ return {
     -- },
     {
         "saghen/blink.cmp",
-        -- NOTE: This seems impacts startup time?
+        -- NOTE: This seems to impact startup time?
         -- lazy = false, -- lazy loading handled internally
         event = { "InsertEnter", "CmdlineEnter" },
         build = "nix run .#build-plugin",
