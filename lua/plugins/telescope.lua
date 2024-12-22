@@ -29,6 +29,13 @@ M.keys = {
     { "<leader>fy", "<cmd>Telescope neoclip<CR>", desc = "Neoclip" },
     { "<leader>ft", "<cmd>TodoTelescope<CR>", desc = "Todo" },
     { "<leader>fG", "<cmd>Telescope advanced_git_search show_custom_functions<CR>", desc = "Git" },
+    {
+        "<leader>fn",
+        function()
+            require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
+        end,
+        desc = "Neovim Config",
+    },
 }
 
 function M.opts()
