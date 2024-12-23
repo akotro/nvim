@@ -475,11 +475,11 @@ return {
         event = "BufRead",
         config = true,
     },
-    {
-        "dnlhc/glance.nvim",
-        cmd = "Glance",
-        config = true,
-    },
+    -- {
+    --     "dnlhc/glance.nvim",
+    --     cmd = "Glance",
+    --     config = true,
+    -- },
     {
         "Kasama/nvim-custom-diagnostic-highlight",
         event = "BufRead",
