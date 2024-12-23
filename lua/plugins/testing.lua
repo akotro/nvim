@@ -62,22 +62,10 @@ M.keys = {
 M.dependencies = {
     "antoinemadec/FixCursorHold.nvim",
     "rouge8/neotest-rust",
+    -- "Issafalcon/neotest-dotnet",
 }
 
 M.opts = {
-    -- Can be a list of adapters like what neotest expects,
-    -- or a list of adapter names,
-    -- or a table of adapter names, mapped to adapter configs.
-    -- The adapter will then be automatically loaded with the config.
-    adapters = {
-        ["neotest-rust"] = {},
-    },
-    -- Example for loading neotest-go with a custom config
-    -- adapters = {
-    --   ["neotest-go"] = {
-    --     args = { "-tags=integration" },
-    --   },
-    -- },
     status = { virtual_text = true },
     output = { open_on_run = false },
     quickfix = {
@@ -133,31 +121,10 @@ function M.config(_, opts)
         end
     end
 
-    if opts.adapters then
-        local adapters = {}
-        for name, config in pairs(opts.adapters or {}) do
-            if type(name) == "number" then
-                if type(config) == "string" then
-                    config = require(config)
-                end
-                adapters[#adapters + 1] = config
-            elseif config ~= false then
-                local adapter = require(name)
-                if type(config) == "table" and not vim.tbl_isempty(config) then
-                    local meta = getmetatable(adapter)
-                    if adapter.setup then
-                        adapter.setup(config)
-                    elseif meta and meta.__call then
-                        adapter(config)
-                    else
-                        error("Adapter " .. name .. " does not support setup")
-                    end
-                end
-                adapters[#adapters + 1] = adapter
-            end
-        end
-        opts.adapters = adapters
-    end
+    opts.adapters = {
+        require("neotest-rust"),
+        -- require("neotest-dotnet"),
+    }
 
     require("neotest").setup(opts)
 end
