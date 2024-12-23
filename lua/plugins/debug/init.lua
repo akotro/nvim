@@ -67,18 +67,13 @@ M.dependencies = {
         dependencies = "mason.nvim",
         cmd = { "DapInstall", "DapUninstall" },
         opts = {
-            -- Makes a best effort to setup the various debuggers with
-            -- reasonable debug configurations
             automatic_installation = true,
 
             -- You can provide additional configuration to the handlers,
             -- see mason-nvim-dap README for more information
             handlers = {},
 
-            -- You'll need to check that you have the required things installed
-            -- online, please don't ask me how to install them :)
             ensure_installed = {
-                -- Update this to ensure that you have the debuggers for the langs you want
                 "codelldb",
                 "coreclr",
                 "netcoredbg",
@@ -96,6 +91,19 @@ M.dependencies = {
                     require("osv").launch({ port = 8086 })
                 end,
                 desc = "Launch Lua adapter",
+            },
+        },
+    },
+
+    -- csharp
+    {
+        "GustavEikaas/easy-dotnet.nvim",
+        lazy = true,
+        ft = "cs",
+        dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+        opts = {
+            test_runner = {
+                mappings = {},
             },
         },
     },
@@ -288,123 +296,9 @@ function M.config()
         )
     end
 
-    local dap = require("dap")
-
-    -- csharp
-    local dotnet_build_project = function()
-        local default_path = vim.fn.getcwd() .. "/"
-        if vim.g["dotnet_last_proj_path"] ~= nil then
-            default_path = vim.g["dotnet_last_proj_path"]
-        end
-        local path = vim.fn.input("Path to your *proj file", default_path, "file")
-        vim.g["dotnet_last_proj_path"] = path
-        local cmd = "dotnet build -c Debug " .. path .. " > /dev/null"
-        print("")
-        print("Cmd to execute: " .. cmd)
-        local f = os.execute(cmd)
-        if f == 0 then
-            print("\nBuild: ✔️ ")
-        else
-            print("\nBuild: ❌ (code: " .. f .. ")")
-        end
-    end
-
-    local dotnet_get_dll_path = function()
-        local request = function()
-            return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/", "file")
-        end
-
-        if vim.g["dotnet_last_dll_path"] == nil then
-            vim.g["dotnet_last_dll_path"] = request()
-        else
-            if
-                vim.fn.confirm(
-                    "Do you want to change the path to dll?\n" .. vim.g["dotnet_last_dll_path"],
-                    "&yes\n&no",
-                    2
-                ) == 1
-            then
-                vim.g["dotnet_last_dll_path"] = request()
-            end
-        end
-
-        return vim.g["dotnet_last_dll_path"]
-    end
-
-    local dotnet_get_workspace_path = function()
-        local request = function()
-            return vim.fn.input("Workspace folder: ", vim.fn.getcwd() .. "/", "file")
-        end
-        if vim.g["dotnet_last_workspace_path"] == nil then
-            vim.g["dotnet_last_workspace_path"] = request()
-        else
-            if
-                vim.fn.confirm(
-                    "Do you want to change the workspace folder?\n" .. vim.g["dotnet_last_workspace_path"],
-                    "&yes\n&no",
-                    2
-                ) == 1
-            then
-                vim.g["dotnet_last_workspace_path"] = request()
-            end
-        end
-
-        return vim.g["dotnet_last_workspace_path"]
-    end
-    dap.configurations.cs = {
-        {
-            type = "coreclr",
-            name = "launch - netcoredbg",
-            request = "launch",
-            env = "ASPNETCORE_ENVIRONMENT=Development",
-            args = {
-                "--environment=Development",
-            },
-            program = function()
-                if vim.fn.confirm("Recompile first?", "&yes\n&no", 2) == 1 then
-                    dotnet_build_project()
-                end
-                return dotnet_get_dll_path()
-            end,
-            cwd = function()
-                return dotnet_get_workspace_path()
-            end,
-        },
-    }
-
-    -- c, c++
-    for _, lang in ipairs({ "c", "cpp" }) do
-        dap.configurations[lang] = {
-            {
-                type = "codelldb",
-                request = "launch",
-                name = "Launch file",
-                program = function()
-                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                end,
-                cwd = "${workspaceFolder}",
-            },
-            {
-                type = "codelldb",
-                request = "attach",
-                name = "Attach to process",
-                processId = require("dap.utils").pick_process,
-                cwd = "${workspaceFolder}",
-            },
-        }
-    end
-
-    -- lua
-    dap.configurations.lua = {
-        {
-            type = "nlua",
-            request = "attach",
-            name = "Attach to running Neovim instance",
-        },
-    }
-    dap.adapters.nlua = function(callback, config)
-        callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
-    end
+    require("plugins.debug.dotnet").setup()
+    require("plugins.debug.c").setup()
+    require("plugins.debug.lua").setup()
 
     if utils.plugin.has("overseer.nvim") then
         require("overseer").enable_dap()
