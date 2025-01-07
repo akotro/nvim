@@ -230,8 +230,6 @@ end
 M.blink = {}
 
 M.blink.dependencies = {
-    "echasnovski/mini.icons",
-    "L3MON4D3/LuaSnip",
     {
         "saghen/blink.compat",
         lazy = true,
@@ -239,6 +237,8 @@ M.blink.dependencies = {
             impersonate_nvim_cmp = true,
         },
     },
+    "echasnovski/mini.icons",
+    "L3MON4D3/LuaSnip",
     "rcarriga/cmp-dap",
 }
 
