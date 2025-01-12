@@ -407,7 +407,7 @@ return {
         -- NOTE: This seems to impact startup time?
         -- lazy = false, -- lazy loading handled internally
         event = { "InsertEnter", "CmdlineEnter" },
-        build = "nix run .#build-plugin",
+        build = "nix run .#build-plugin --accept-flake-config",
         dependencies = require("plugins.completion").blink.dependencies,
         opts = require("plugins.completion").blink.opts,
         opts_extend = require("plugins.completion").blink.opts_extend,

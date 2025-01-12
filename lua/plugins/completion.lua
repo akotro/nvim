@@ -252,6 +252,7 @@ M.blink.opts = {
     },
 
     snippets = {
+        preset = "luasnip",
         -- Function to use when expanding LSP provided snippets
         expand = function(snippet)
             require("luasnip").lsp_expand(snippet)
@@ -318,8 +319,7 @@ M.blink.opts = {
         default = {
             "lsp",
             "path",
-            -- "snippets",
-            "luasnip",
+            "snippets",
             "buffer",
             "lazydev",
             "crates",
