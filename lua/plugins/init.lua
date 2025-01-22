@@ -224,16 +224,6 @@ return {
         end,
     },
     {
-        "mikesmithgh/kitty-scrollback.nvim",
-        enabled = require("config.functions").is_linux(),
-        lazy = true,
-        cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth" },
-        event = { "User KittyScrollbackLaunch" },
-        config = function()
-            require("kitty-scrollback").setup()
-        end,
-    },
-    {
         "kwkarlwang/bufjump.nvim",
         lazy = true,
         opts = {},
