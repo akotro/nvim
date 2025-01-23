@@ -735,6 +735,14 @@ function M.config(_, opts)
     vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
     local servers = opts.servers
+    local has_ufo, _ = pcall(require, "ufo")
+    local ufo_capabilities = vim.lsp.protocol.make_client_capabilities()
+    if has_ufo then
+        ufo_capabilities.textDocument.foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true,
+        }
+    end
     -- local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
     local has_blink, blink_cmp = pcall(require, "blink.cmp")
     local capabilities = vim.tbl_deep_extend(
@@ -742,6 +750,7 @@ function M.config(_, opts)
         {},
         vim.lsp.protocol.make_client_capabilities(),
         -- has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+        has_ufo and ufo_capabilities or {},
         has_blink and blink_cmp.get_lsp_capabilities(nil, true) or {},
         opts.capabilities or {}
     )

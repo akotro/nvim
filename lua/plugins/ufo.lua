@@ -25,7 +25,7 @@ function M.config()
 
     local handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}
-        local suffix = ("  %d "):format(endLnum - lnum)
+        local suffix = (" -- %d "):format(endLnum - lnum)
         local sufWidth = vim.fn.strdisplaywidth(suffix)
         local targetWidth = width - sufWidth
         local curWidth = 0
@@ -51,6 +51,7 @@ function M.config()
         return newVirtText
     end
 
+    ---@diagnostic disable-next-line: missing-fields
     require("ufo").setup({
         provider_selector = function(bufnr, filetype, buftype)
             return { "treesitter", "indent" }
