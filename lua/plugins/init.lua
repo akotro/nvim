@@ -420,6 +420,13 @@ return {
     },
     -- NOTE: LSP
     {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        keys = require("plugins.lsp.copilot").keys,
+        config = require("plugins.lsp.copilot").config,
+    },
+    {
         "neovim/nvim-lspconfig",
         event = "BufRead",
         dependencies = require("plugins.lsp").dependencies,

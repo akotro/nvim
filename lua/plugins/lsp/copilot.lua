@@ -11,11 +11,6 @@ M.keys = {
         "<cmd>Copilot disable<cr>",
         desc = "Copilot Disable",
     },
-    {
-        "<leader>cpt",
-        "<cmd>Copilot toggle<cr>",
-        desc = "Copilot Toggle",
-    },
 }
 
 function M.config()

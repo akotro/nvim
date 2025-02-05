@@ -240,6 +240,7 @@ M.blink.dependencies = {
     "echasnovski/mini.icons",
     "L3MON4D3/LuaSnip",
     "rcarriga/cmp-dap",
+    "fang2hou/blink-copilot",
 }
 
 ---@module "blink.cmp"
@@ -284,8 +285,13 @@ M.blink.opts = {
                     kind_icon = {
                         ellipsis = false,
                         text = function(ctx)
-                            local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-                            return kind_icon
+                            -- local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+                            -- return kind_icon
+                            local icons = require("config.ui").icons.kinds
+                            if icons[ctx.kind] then
+                                return icons[ctx.kind]
+                            end
+                            return nil
                         end,
                         -- Optionally, you may also use the highlights from mini.icons
                         highlight = function(ctx)
@@ -322,6 +328,7 @@ M.blink.opts = {
             "snippets",
             "buffer",
             "lazydev",
+            "copilot",
             "crates",
             -- NOTE: Disabled from obsidian.nvim side as it causes error, see https://github.com/epwalsh/obsidian.nvim/issues/770
             "obsidian",
@@ -340,6 +347,18 @@ M.blink.opts = {
         },
 
         providers = {
+            copilot = {
+                name = "copilot",
+                module = "blink-copilot",
+                score_offset = 100,
+                async = true,
+                opts = {
+                    -- Local options override global ones
+                    -- Final settings: max_completions = 3, max_attempts = 2, kind = "Copilot"
+                    max_completions = 3, -- Override global max_completions
+                },
+            },
+
             -- dont show LuaLS require statements when lazydev has items
             lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
 
