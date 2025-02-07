@@ -337,9 +337,9 @@ M.blink.opts = {
         },
 
         per_filetype = {
-            sql = { "cmp_dbee", "luasnip", "buffer" },
-            mysql = { "cmp_dbee", "luasnip", "buffer" },
-            plsql = { "cmp_dbee", "luasnip", "buffer" },
+            sql = { "cmp_dbee", "snippets", "buffer" },
+            mysql = { "cmp_dbee", "snippets", "buffer" },
+            plsql = { "cmp_dbee", "snippets", "buffer" },
 
             dap_repl = { "cmp_dap" },
             dapui_watches = { "cmp_dap" },
