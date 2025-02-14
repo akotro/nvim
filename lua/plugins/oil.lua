@@ -53,4 +53,20 @@ M.opts = {
     },
 }
 
+M.config = function(_, opts)
+    require("oil").setup(opts)
+
+    local has_snacks, snacks = pcall(require, "snacks")
+    if has_snacks then
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "OilActionsPost",
+            callback = function(event)
+                if event.data.actions.type == "move" then
+                    snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+                end
+            end,
+        })
+    end
+end
+
 return M

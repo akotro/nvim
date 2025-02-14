@@ -192,6 +192,7 @@ return {
         lazy = false,
         keys = require("plugins.oil").keys,
         opts = require("plugins.oil").opts,
+        config = require("plugins.oil").config,
     },
     {
         "akinsho/toggleterm.nvim",

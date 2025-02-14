@@ -19,7 +19,19 @@ M.opts = {
         end,
     },
     input = { enabled = true },
-    -- scroll = { enabled = true },
+    scroll = {
+        enabled = false,
+        animate = {
+            duration = { step = 5, total = 50 },
+            easing = "linear",
+        },
+        -- faster animation when repeating scroll after delay
+        animate_repeat = {
+            delay = 100, -- delay in ms before using the repeat animation
+            duration = { step = 2, total = 20 },
+            easing = "linear",
+        },
+    },
 
     styles = {
         ---@diagnostic disable-next-line: missing-fields
@@ -31,6 +43,8 @@ M.opts = {
     image = {
         enabled = true,
     },
+
+    -- TODO: Add picker plugin to replace telescope?
 }
 
 M.keys = {
