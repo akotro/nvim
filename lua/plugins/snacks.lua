@@ -27,6 +27,10 @@ M.opts = {
             wo = { wrap = true }, -- Wrap notifications
         },
     },
+
+    image = {
+        enabled = true,
+    },
 }
 
 M.keys = {
