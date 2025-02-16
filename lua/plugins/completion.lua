@@ -319,6 +319,10 @@ M.blink.opts = {
         nerd_font_variant = "mono",
     },
 
+    cmdline = {
+        enabled = true,
+    },
+
     -- default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, via `opts_extend`
     sources = {
