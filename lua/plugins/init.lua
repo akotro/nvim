@@ -196,13 +196,13 @@ return {
         opts = require("plugins.oil").opts,
         config = require("plugins.oil").config,
     },
-    {
-        "akinsho/toggleterm.nvim",
-        version = "*",
-        lazy = true,
-        keys = require("plugins.toggleterm").keys,
-        opts = require("plugins.toggleterm").opts,
-    },
+    -- {
+    --     "akinsho/toggleterm.nvim",
+    --     version = "*",
+    --     lazy = true,
+    --     keys = require("plugins.toggleterm").keys,
+    --     opts = require("plugins.toggleterm").opts,
+    -- },
     {
         "mbbill/undotree",
         lazy = true,

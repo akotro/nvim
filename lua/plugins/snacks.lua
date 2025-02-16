@@ -57,6 +57,8 @@ M.dependencies = {
     },
 }
 
+local target_term_id = vim.v.count1
+
 ---@type snacks.Config
 M.opts = {
     bigfile = { enabled = true },
@@ -101,6 +103,27 @@ M.opts = {
 
     picker = {
         enabled = true,
+    },
+
+    terminal = {
+        enabled = true,
+        win = {
+            on_buf = function(self)
+                -- NOTE: `on_buf` called before `on_win`
+                target_term_id = vim.b[self.buf].snacks_terminal.id
+            end,
+            on_win = function(self)
+                -- INFO: assign event for TermClose
+                self:on("TermClose", function()
+                    -- HACK: manually detele term buffer before destroy win
+                    if vim.api.nvim_buf_is_loaded(self.buf) then
+                        vim.api.nvim_buf_delete(self.buf, { force = true })
+                    end
+                    self:destroy()
+                    vim.cmd.checktime()
+                end, { buf = true })
+            end,
+        },
     },
 }
 
@@ -561,6 +584,48 @@ M.keys = {
                 },
             })
         end,
+    },
+    {
+        "<c-\\>",
+        function()
+            -- INFO: only mapped toggle key for no cmd terminal
+            local terminal_toggle_opts = {
+                win = {
+                    keys = {
+                        ["<c-\\>"] = { "toggle", mode = "t" },
+                    },
+                },
+            }
+
+            -- NOTE: check target_term_id exist in terminal list
+            local user_input = vim.v.count ~= 0
+            local check_term_id = user_input and vim.v.count1 or target_term_id
+            local terminals = Snacks.terminal.list()
+            local matched = false
+            local last_checked_id = nil
+
+            for _, terminal in ipairs(terminals) do
+                local term_id = vim.b[terminal.buf].snacks_terminal.id
+                if term_id then
+                    if term_id == check_term_id then
+                        vim.api.nvim_feedkeys(tostring(check_term_id), "nx", false)
+                        matched = true
+                        break
+                    end
+                    if not last_checked_id or (last_checked_id < check_term_id and term_id < check_term_id) then
+                        last_checked_id = term_id
+                    end
+                end
+            end
+
+            -- INFO: if not match any and has valid term then use the prev id before target id in list
+            if last_checked_id and not matched and not user_input then
+                vim.api.nvim_feedkeys(tostring(last_checked_id), "nx", false)
+            end
+
+            Snacks.terminal.toggle(nil, terminal_toggle_opts)
+        end,
+        desc = "Toggle Terminal",
     },
 }
 

@@ -194,7 +194,7 @@ local options = {
         { "<leader>pr", "<cmd>Lazy restore<cr>", desc = "Restore", nowait = true, remap = false },
         { "<leader>ps", "<cmd>Lazy sync<cr>", desc = "Sync", nowait = true, remap = false },
         { "<leader>pu", "<cmd>Lazy update<cr>", desc = "Update", nowait = true, remap = false },
-        { "<leader>pc", "<cmd>Lazy clean<cr>", desc = "Clean", nowait = true, remap = false },
+        { "<leader>px", "<cmd>Lazy clean<cr>", desc = "Clean", nowait = true, remap = false },
 
         { "<leader>r", group = "Replace", nowait = true, remap = false },
         { "<leader>ra", group = "[a]sk", nowait = true, remap = false },
