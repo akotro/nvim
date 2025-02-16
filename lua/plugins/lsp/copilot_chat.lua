@@ -69,23 +69,23 @@ M.keys = {
         mode = { "n", "v" },
     },
     -- Show help actions with telescope
-    {
-        "<leader>cph",
-        function()
-            local actions = require("CopilotChat.actions")
-            require("CopilotChat.integrations.telescope").pick(actions.help_actions())
-        end,
-        desc = "CopilotChat - Help actions",
-    },
+    -- {
+    --     "<leader>cph",
+    --     function()
+    --         local actions = require("CopilotChat.actions")
+    --         require("CopilotChat.integrations.telescope").pick(actions.help_actions())
+    --     end,
+    --     desc = "CopilotChat - Help actions",
+    -- },
     -- Show prompts actions with telescope
-    {
-        "<leader>cpp",
-        function()
-            local actions = require("CopilotChat.actions")
-            require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-        end,
-        desc = "CopilotChat - Prompt actions",
-    },
+    -- {
+    --     "<leader>cpp",
+    --     function()
+    --         local actions = require("CopilotChat.actions")
+    --         require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+    --     end,
+    --     desc = "CopilotChat - Prompt actions",
+    -- },
 }
 
 return M

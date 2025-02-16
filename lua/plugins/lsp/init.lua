@@ -134,13 +134,13 @@ function M.get()
             end,
             desc = "Virtual Text",
         },
-        {
-            "<leader>ll",
-            function()
-                vim.lsp.codelens.run()
-            end,
-            desc = "CodeLens Action",
-        },
+        -- {
+        --     "<leader>ll",
+        --     function()
+        --         vim.lsp.codelens.run()
+        --     end,
+        --     desc = "CodeLens Action",
+        -- },
         -- {
         --     "<leader>lo",
         --     "<cmd>SymbolsOutline<cr>",
@@ -160,12 +160,18 @@ function M.get()
         },
         {
             "<leader>ls",
-            "<cmd>Telescope lsp_document_symbols<cr>",
+            -- "<cmd>Telescope lsp_document_symbols<cr>",
+            function()
+                Snacks.picker.lsp_symbols()
+            end,
             desc = "Document Symbols",
         },
         {
             "<leader>lS",
-            "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+            -- "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+            function()
+                Snacks.picker.lsp_workspace_symbols()
+            end,
             desc = "Workspace Symbols",
         },
         {
@@ -182,6 +188,13 @@ function M.get()
                 vim.diagnostic.open_float()
             end,
             desc = "Open Diagnostic Float",
+        },
+        {
+            "<leader>ll",
+            function()
+                require("lsp_lines").toggle()
+            end,
+            desc = "LSP Lines",
         },
         {
             "<leader>lL",

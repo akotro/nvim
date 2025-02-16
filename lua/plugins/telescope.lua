@@ -36,6 +36,9 @@ M.keys = {
         end,
         desc = "Neovim Config",
     },
+    -- { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch" },
+    -- { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Checkout commit" },
+    -- { "<leader>go", "<cmd>Telescope git_status<cr>", desc = "Open changed file", nowait = true, remap = false },
 }
 
 function M.opts()

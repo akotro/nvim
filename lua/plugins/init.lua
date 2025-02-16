@@ -51,9 +51,17 @@ return {
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
+        dependencies = require("plugins.snacks").dependencies,
         opts = require("plugins.snacks").opts,
         keys = require("plugins.snacks").keys,
         init = require("plugins.snacks").init,
+    },
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        opts = require("plugins.flash").opts,
+        specs = require("plugins.flash").specs,
+        keys = require("plugins.flash").keys,
     },
     -- NOTE: UI
     {
@@ -67,12 +75,6 @@ return {
         end,
     },
     { "MunifTanjim/nui.nvim", lazy = true },
-    {
-        "stevearc/dressing.nvim",
-        lazy = true,
-        init = require("plugins.dressing").init,
-        opts = require("plugins.dressing").opts,
-    },
     {
         "folke/noice.nvim",
         enabled = false,
@@ -150,14 +152,14 @@ return {
         ft = { "html", "css", "javascript", "vim", "lua", "sh", "zsh", "rust", "conf", "cpp", "nix" },
         config = require("plugins.colorizer").config,
     },
-    {
-        "stevearc/overseer.nvim",
-        event = "BufRead",
-        lazy = true,
-        keys = require("plugins.overseer").keys,
-        opts = require("plugins.overseer").opts,
-        config = require("plugins.overseer").config,
-    },
+    -- {
+    --     "stevearc/overseer.nvim",
+    --     event = "BufRead",
+    --     lazy = true,
+    --     keys = require("plugins.overseer").keys,
+    --     opts = require("plugins.overseer").opts,
+    --     config = require("plugins.overseer").config,
+    -- },
     {
         "kevinhwang91/nvim-bqf",
         event = "BufRead",
@@ -260,7 +262,11 @@ return {
         },
     },
     -- NOTE: Git
-    { "tpope/vim-fugitive", event = "BufRead" },
+    {
+        "tpope/vim-fugitive",
+        event = "BufRead",
+        keys = require("plugins.fugitive").keys,
+    },
     {
         "sindrets/diffview.nvim",
         cmd = {
@@ -272,6 +278,7 @@ return {
             "DiffviewRefresh",
             "DiffviewToggleFiles",
         },
+        keys = require("plugins.diffview").keys,
     },
     {
         "NeogitOrg/neogit",
@@ -280,15 +287,17 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim",
-            "nvim-telescope/telescope.nvim",
+            -- "nvim-telescope/telescope.nvim",
         },
         config = true,
+        keys = require("plugins.neogit").keys,
     },
     {
         "lewis6991/gitsigns.nvim",
         event = "BufRead",
         cmd = "Gitsigns",
         opts = require("plugins.gitsigns").opts,
+        keys = require("plugins.gitsigns").keys,
     },
     {
         "numToStr/Comment.nvim",
@@ -473,11 +482,6 @@ return {
         event = "BufRead",
         config = true,
     },
-    -- {
-    --     "dnlhc/glance.nvim",
-    --     cmd = "Glance",
-    --     config = true,
-    -- },
     {
         "Kasama/nvim-custom-diagnostic-highlight",
         event = "BufRead",
@@ -505,21 +509,23 @@ return {
         keys = require("plugins.testing").keys,
     },
     -- NOTE: Telescope
-    {
-        "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
-        dependencies = require("plugins.telescope").dependencies,
-        opts = require("plugins.telescope").opts,
-        keys = require("plugins.telescope").keys,
-        lazy = true,
-        cmd = "Telescope",
-    },
+    -- {
+    --     "nvim-telescope/telescope.nvim",
+    --     enabled = false,
+    --     branch = "0.1.x",
+    --     dependencies = require("plugins.telescope").dependencies,
+    --     opts = require("plugins.telescope").opts,
+    --     keys = require("plugins.telescope").keys,
+    --     lazy = true,
+    --     cmd = "Telescope",
+    -- },
     -- NOTE: Trouble
     {
         "folke/trouble.nvim",
         cmd = { "TroubleToggle", "Trouble" },
         keys = require("plugins.trouble").keys,
         opts = require("plugins.trouble").opts,
+        specs = require("plugins.trouble").specs,
     },
 
     -- NOTE: Writing

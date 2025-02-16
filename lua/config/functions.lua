@@ -801,6 +801,7 @@ end
 -----------------------------------------------------------
 function M.save_if_unsaved()
     local ignore_filetypes = {
+        "snacks_picker_input",
         "TelescopePrompt",
         "CommandTPrompt",
         "Trouble",

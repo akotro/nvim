@@ -100,7 +100,10 @@ M.dependencies = {
         "GustavEikaas/easy-dotnet.nvim",
         lazy = true,
         ft = "cs",
-        dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            -- "nvim-telescope/telescope.nvim"
+        },
         opts = {
             test_runner = {
                 mappings = {},

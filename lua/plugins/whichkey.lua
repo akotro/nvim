@@ -73,7 +73,7 @@ local options = {
         -- Disabled by default for Telescope
         disable = {
             buftypes = {},
-            filetypes = { "TelescopePrompt" },
+            filetypes = { "TelescopePrompt", "snacks_picker_input" },
         },
     },
 
@@ -138,7 +138,7 @@ local options = {
         --     nowait = true,
         --     remap = false,
         -- },
-        { "<leader>bf", "<cmd>Telescope buffers sort_mru=true<cr>", desc = "Find", nowait = true, remap = false },
+        -- { "<leader>bf", "<cmd>Telescope buffers sort_mru=true<cr>", desc = "Find", nowait = true, remap = false },
         { "<leader>bh", "<cmd>BufferLineCloseLeft<cr>", desc = "Close all to the left", nowait = true, remap = false },
         { "<leader>bj", "<cmd>BufferLinePick<cr>", desc = "Jump", nowait = true, remap = false },
         {
@@ -170,112 +170,7 @@ local options = {
         { "<leader>f", group = "Find", nowait = true, remap = false },
 
         { "<leader>g", group = "Git", nowait = true, remap = false },
-        { "<leader>gL", "<cmd>Git blame<cr>", desc = "Blame", nowait = true, remap = false },
-        {
-            "<leader>gR",
-            function()
-                require("gitsigns").reset_buffer()
-            end,
-            desc = "Reset Buffer",
-            nowait = true,
-            remap = false,
-        },
-        { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch", nowait = true, remap = false },
-        { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Checkout commit", nowait = true, remap = false },
         { "<leader>gd", group = "Diff", nowait = true, remap = false },
-        { "<leader>gdc", "<cmd>DiffviewClose<cr>", desc = "Diff View Close", nowait = true, remap = false },
-        {
-            "<leader>gdh",
-            "<cmd>DiffviewFileHistory %<cr>",
-            desc = "Diff View File History (Current File)",
-            nowait = true,
-            remap = false,
-        },
-        { "<leader>gdo", "<cmd>DiffviewOpen<cr>", desc = "Diff View Open", nowait = true, remap = false },
-        {
-            "<leader>gf",
-            "<cmd>Telescope git_bcommits<cr>",
-            desc = "Checkout buffer commit",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>gj",
-            function()
-                require("gitsigns").next_hunk()
-            end,
-            desc = "Next Hunk",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>gk",
-            function()
-                require("gitsigns").prev_hunk()
-            end,
-            desc = "Prev Hunk",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>gl",
-            function()
-                require("gitsigns").blame_line()
-            end,
-            desc = "Blame Line",
-            nowait = true,
-            remap = false,
-        },
-        { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit", nowait = true, remap = false },
-        { "<leader>go", "<cmd>Telescope git_status<cr>", desc = "Open changed file", nowait = true, remap = false },
-        {
-            "<leader>gr",
-            function()
-                require("gitsigns").reset_hunk()
-            end,
-            desc = "Reset Hunk",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>gs",
-            function()
-                require("gitsigns").stage_hunk()
-            end,
-            desc = "Stage Hunk",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>gu",
-            function()
-                require("gitsigns").undo_stage_hunk()
-            end,
-            desc = "Undo Stage Hunk",
-            nowait = true,
-            remap = false,
-        },
-
-        { "<leader>gp", group = "Glance", nowait = true, remap = false },
-        {
-            "<leader>gp",
-            function()
-                require("gitsigns").preview_hunk()
-            end,
-            desc = "Preview Hunk",
-            nowait = true,
-            remap = false,
-        },
-        { "<leader>gpd", "<CMD>Glance definitions<CR>", desc = "Glance Definitions", nowait = true, remap = false },
-        {
-            "<leader>gpi",
-            "<CMD>Glance implementations<CR>",
-            desc = "Glance Implementations",
-            nowait = true,
-            remap = false,
-        },
-        { "<leader>gpr", "<CMD>Glance references<CR>", desc = "Glance References", nowait = true, remap = false },
-        { "<leader>gpt", "<CMD>Glance type_definitions<CR>", desc = "Glance Type", nowait = true, remap = false },
 
         { "<leader>l", group = "LSP", nowait = true, remap = false },
 
@@ -299,6 +194,7 @@ local options = {
         { "<leader>pr", "<cmd>Lazy restore<cr>", desc = "Restore", nowait = true, remap = false },
         { "<leader>ps", "<cmd>Lazy sync<cr>", desc = "Sync", nowait = true, remap = false },
         { "<leader>pu", "<cmd>Lazy update<cr>", desc = "Update", nowait = true, remap = false },
+        { "<leader>pc", "<cmd>Lazy clean<cr>", desc = "Clean", nowait = true, remap = false },
 
         { "<leader>r", group = "Replace", nowait = true, remap = false },
         { "<leader>ra", group = "[a]sk", nowait = true, remap = false },
