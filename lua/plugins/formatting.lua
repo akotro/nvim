@@ -95,6 +95,7 @@ M.opts = function()
             html = { "prettierd", "prettier", stop_after_first = true },
             javascript = { "prettierd", "prettier", stop_after_first = true },
             typescript = { "prettierd", "prettier", stop_after_first = true },
+            vue = { "prettierd", "prettier", stop_after_first = true },
             markdown = { "deno_fmt" },
             tex = { "latexindent" },
             -- You can use a function here to determine the formatters dynamically
