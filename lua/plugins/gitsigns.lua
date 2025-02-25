@@ -58,14 +58,14 @@ M.keys = {
         function()
             require("gitsigns").nav_hunk("next")
         end,
-        desc = "Next Hunk",
+        desc = "Git Next Hunk",
     },
     {
         "[g",
         function()
             require("gitsigns").nav_hunk("prev")
         end,
-        desc = "Prev Hunk",
+        desc = "Git Prev Hunk",
     },
     -- {
     --     "<leader>gp",
@@ -74,6 +74,13 @@ M.keys = {
     --     end,
     --     desc = "Preview Hunk",
     -- },
+    {
+        "<leader>gB",
+        function()
+            require("gitsigns").blame_line()
+        end,
+        desc = "Git Blame Line",
+    },
     -- {
     --     "<leader>gl",
     --     function()

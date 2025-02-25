@@ -544,13 +544,6 @@ M.keys = {
         desc = "Rename File",
     },
     {
-        "<leader>gB",
-        function()
-            Snacks.gitbrowse()
-        end,
-        desc = "Git Browse",
-    },
-    {
         "]]",
         function()
             Snacks.words.jump(vim.v.count1)

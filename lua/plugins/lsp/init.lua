@@ -61,11 +61,11 @@ function M.get()
             desc = "Goto Outgoing Calls",
         },
         {
-            "gp",
+            "gB",
             function()
-                require("config.functions").open_plugin_github()
+                Snacks.gitbrowse()
             end,
-            desc = "Goto Plugin Github",
+            desc = "Goto Git Remote",
         },
         { "<leader>ld", vim.lsp.buf.hover, desc = "Hover" },
         { "<leader>lD", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
