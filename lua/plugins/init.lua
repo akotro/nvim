@@ -149,7 +149,7 @@ return {
     },
     {
         "NvChad/nvim-colorizer.lua",
-        ft = { "html", "css", "javascript", "vim", "lua", "sh", "zsh", "rust", "conf", "cpp", "nix" },
+        ft = { "html", "css", "javascript", "vim", "lua", "sh", "zsh", "rust", "conf", "cpp", "nix", "yaml" },
         config = require("plugins.colorizer").config,
     },
     -- {

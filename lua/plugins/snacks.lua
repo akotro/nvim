@@ -105,6 +105,10 @@ M.opts = {
         enabled = true,
     },
 
+    lazygit = {
+        enabled = true,
+    },
+
     terminal = {
         enabled = true,
         win = {
@@ -222,6 +226,13 @@ M.keys = {
         desc = "Recent",
     },
     -- git
+    {
+        "<leader>gg",
+        function()
+            Snacks.lazygit()
+        end,
+        desc = "Open lazygit",
+    },
     {
         "<leader>gf",
         function()
