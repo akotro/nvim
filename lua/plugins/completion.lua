@@ -321,6 +321,11 @@ M.blink.opts = {
 
     cmdline = {
         enabled = true,
+        completion = {
+            menu = {
+                auto_show = true,
+            },
+        },
     },
 
     -- default list of enabled providers defined so that you can extend it
