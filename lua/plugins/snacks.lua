@@ -141,6 +141,13 @@ M.keys = {
         desc = "Smart Find Files",
     },
     {
+        "<leader>fF",
+        function()
+            Snacks.picker.files()
+        end,
+        desc = "Simple Find Files",
+    },
+    {
         "<leader>fb",
         function()
             Snacks.picker.buffers()
