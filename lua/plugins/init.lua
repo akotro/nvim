@@ -56,13 +56,13 @@ return {
         keys = require("plugins.snacks").keys,
         init = require("plugins.snacks").init,
     },
-    {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        opts = require("plugins.flash").opts,
-        specs = require("plugins.flash").specs,
-        keys = require("plugins.flash").keys,
-    },
+    -- {
+    --     "folke/flash.nvim",
+    --     event = "VeryLazy",
+    --     opts = require("plugins.flash").opts,
+    --     specs = require("plugins.flash").specs,
+    --     keys = require("plugins.flash").keys,
+    -- },
     -- NOTE: UI
     {
         "echasnovski/mini.icons",
