@@ -602,8 +602,8 @@ M.opts = {
             filetypes = {
                 "markdown",
                 "txt",
-                "gitcommit",
                 "html",
+                -- "gitcommit",
                 -- "rust",
                 -- "typescript",
                 -- "typescriptreact",
