@@ -87,18 +87,18 @@ return {
         init = require("plugins.lualine").init,
         opts = require("plugins.lualine").opts,
     },
-    -- {
-    --     "Bekaboo/deadcolumn.nvim",
-    --     event = "BufRead",
-    -- },
     {
-        "tadaa/vimade",
-        event = "VeryLazy",
-        opts = {
-            ncmode = "windows",
-            fadelevel = 0.75,
-        },
+        "Bekaboo/deadcolumn.nvim",
+        event = "BufRead",
     },
+    -- {
+    --     "tadaa/vimade",
+    --     event = "VeryLazy",
+    --     opts = {
+    --         ncmode = "windows",
+    --         fadelevel = 0.75,
+    --     },
+    -- },
     -- NOTE: Usage
     {
         "aserowy/tmux.nvim",
