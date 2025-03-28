@@ -306,7 +306,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufRead",
-        enabled = true,
+        enabled = false,
         opts = { enable = true, mode = "cursor", trim_scope = "outer", max_lines = 4 },
         keys = {
             {
