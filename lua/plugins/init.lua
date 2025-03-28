@@ -87,10 +87,10 @@ return {
         init = require("plugins.lualine").init,
         opts = require("plugins.lualine").opts,
     },
-    {
-        "Bekaboo/deadcolumn.nvim",
-        event = "BufRead",
-    },
+    -- {
+    --     "Bekaboo/deadcolumn.nvim",
+    --     event = "BufRead",
+    -- },
     {
         "tadaa/vimade",
         event = "VeryLazy",
