@@ -7,7 +7,6 @@ local autoread = create_augroup("autoread")
 local cursorline = create_augroup("cursorline")
 local line_return = create_augroup("line_return")
 local format_options = create_augroup("format_options")
--- local open_diagnostic = create_augroup("open_diagnostic")
 local glsl = create_augroup("glsl")
 local unception = create_augroup("unception")
 local highlight_yank = create_augroup("highlight_yank")
@@ -15,7 +14,7 @@ local resize_splits = create_augroup("resize_splits")
 local close_with_q = create_augroup("close_with_q")
 local wrap_spell = create_augroup("wrap_spell")
 local auto_create_dir = create_augroup("auto_create_dir")
-local auto_open_quickfix = create_augroup("auto_open_quickfix")
+-- local auto_open_quickfix = create_augroup("auto_open_quickfix")
 -- autocmd QuickFixCmdPost [^l]* nested cwindow
 -- autocmd QuickFixCmdPost    l* nested lwindow
 
@@ -116,8 +115,7 @@ local autocommands = {
 
         group = autoread,
         pattern = { "*" },
-        -- command = [[lua require("notify")("File changed on disk. Buffer reloaded.", vim.log.levels.WARN)]],
-        callback = function(event)
+        callback = function(_)
             vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.WARN)
         end,
     },
@@ -127,13 +125,13 @@ local autocommands = {
 
         group = cursorline,
         pattern = { "*" },
-        command = [[set nocursorline]],
+        command = [[setlocal nocursorline]],
     },
     {
         events = { "WinEnter", "BufEnter" },
         group = cursorline,
         pattern = { "*" },
-        command = [[set cursorline]],
+        command = [[setlocal cursorline]],
     },
     -- Make sure Vim returns to the same line when you reopen a file
     {
@@ -155,25 +153,12 @@ local autocommands = {
             end
         end,
     },
-    -- {
-    --     events = { "BufReadPost" },
-
-    --     group = line_return,
-    --     pattern = { "*" },
-    --     command = [[if line("'\"") > 0 && line("'\"") <= line("$") | execute 'normal! g`"zvzz' | endif]],
-    -- },
     {
         events = { "BufRead", "BufEnter" },
         group = format_options,
         pattern = { "*" },
         command = [[set formatoptions-=cro]],
     },
-    -- {
-    --     events = { "CursorHold" },
-    --     group = open_diagnostic,
-    --     pattern = { "*" },
-    --     command = [[lua require("config.functions").open_diagnostic()]],
-    -- }
     -- Set glsl filetype
     {
         events = { "BufNewFile", "BufRead" },
@@ -195,10 +180,10 @@ local autocommands = {
     },
 }
 
-vim.cmd([[
-    autocmd QuickFixCmdPost [^l]* nested cwindow
-    autocmd QuickFixCmdPost    l* nested lwindow
-]])
+-- vim.cmd([[
+--     autocmd QuickFixCmdPost [^l]* nested cwindow
+--     autocmd QuickFixCmdPost    l* nested lwindow
+-- ]])
 
 local function create_autocommands(commands)
     for _, cmd in pairs(commands) do

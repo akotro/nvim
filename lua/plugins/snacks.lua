@@ -62,20 +62,26 @@ local target_term_id = vim.v.count1
 ---@type snacks.Config
 M.opts = {
     bigfile = { enabled = true },
-    dashboard = { enabled = false },
+
+    quickfile = { enabled = true },
+
     -- notifier = {
     --     enabled = true,
     --     timeout = 3000,
     -- },
-    quickfile = { enabled = true },
+
     statuscolumn = { enabled = true },
+
     words = { enabled = true },
+
     indent = {
         filter = function(buf)
             return vim.g.snacks_indent ~= false and vim.b[buf].snacks_indent ~= false and vim.bo[buf].buftype == ""
         end,
     },
+
     input = { enabled = true },
+
     scroll = {
         enabled = false,
         animate = {
@@ -103,6 +109,9 @@ M.opts = {
 
     picker = {
         enabled = true,
+        main = {
+            file = false,
+        },
     },
 
     lazygit = {

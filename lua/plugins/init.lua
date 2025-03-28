@@ -43,10 +43,8 @@ return {
         end,
     },
     -- NOTE: Util
-    {
-        "nvim-lua/plenary.nvim",
-        lazy = true,
-    },
+    { "nvim-lua/plenary.nvim", lazy = true },
+    { "MunifTanjim/nui.nvim", lazy = true },
     {
         "folke/snacks.nvim",
         priority = 1000,
@@ -56,13 +54,6 @@ return {
         keys = require("plugins.snacks").keys,
         init = require("plugins.snacks").init,
     },
-    -- {
-    --     "folke/flash.nvim",
-    --     event = "VeryLazy",
-    --     opts = require("plugins.flash").opts,
-    --     specs = require("plugins.flash").specs,
-    --     keys = require("plugins.flash").keys,
-    -- },
     -- NOTE: UI
     {
         "echasnovski/mini.icons",
@@ -74,7 +65,6 @@ return {
             mini_icons.mock_nvim_web_devicons()
         end,
     },
-    { "MunifTanjim/nui.nvim", lazy = true },
     {
         "folke/noice.nvim",
         enabled = false,
@@ -97,23 +87,25 @@ return {
         init = require("plugins.lualine").init,
         opts = require("plugins.lualine").opts,
     },
-    -- {
-    --     "lukas-reineke/indent-blankline.nvim",
-    --     main = "ibl",
-    --     event = "BufRead",
-    --     opts = require("plugins.indent_blankline").opts,
-    -- },
-    -- {
-    --     "echasnovski/mini.indentscope",
-    --     version = false,
-    --     event = "BufRead",
-    --     init = require("plugins.mini_indentscope").init,
-    --     opts = require("plugins.mini_indentscope").opts,
-    -- },
     {
         "Bekaboo/deadcolumn.nvim",
         event = "BufRead",
     },
+    -- {
+    --     "tadaa/vimade",
+    --     event = "VeryLazy",
+    --     opts = {
+    --         ncmode = "windows",
+    --         fadelevel = 0.75,
+    --         blocklist = {
+    --             colorcolumn = {
+    --                 highlights = {
+    --                     "ColorColumn",
+    --                 }
+    --             },
+    --         },
+    --     },
+    -- },
     -- NOTE: Usage
     {
         "aserowy/tmux.nvim",
@@ -152,14 +144,6 @@ return {
         ft = { "html", "css", "javascript", "vim", "lua", "sh", "zsh", "rust", "conf", "cpp", "nix", "yaml" },
         config = require("plugins.colorizer").config,
     },
-    -- {
-    --     "stevearc/overseer.nvim",
-    --     event = "BufRead",
-    --     lazy = true,
-    --     keys = require("plugins.overseer").keys,
-    --     opts = require("plugins.overseer").opts,
-    --     config = require("plugins.overseer").config,
-    -- },
     {
         "kevinhwang91/nvim-bqf",
         event = "BufRead",
@@ -196,13 +180,6 @@ return {
         opts = require("plugins.oil").opts,
         config = require("plugins.oil").config,
     },
-    -- {
-    --     "akinsho/toggleterm.nvim",
-    --     version = "*",
-    --     lazy = true,
-    --     keys = require("plugins.toggleterm").keys,
-    --     opts = require("plugins.toggleterm").opts,
-    -- },
     {
         "mbbill/undotree",
         lazy = true,
@@ -395,13 +372,6 @@ return {
         opts = require("plugins.completion").luasnip.opts,
         config = require("plugins.completion").luasnip.config,
     },
-    -- {
-    --     "hrsh7th/nvim-cmp",
-    --     event = { "InsertEnter", "CmdlineEnter" },
-    --     dependencies = require("plugins.completion").cmp.dependencies,
-    --     opts = require("plugins.completion").cmp.opts,
-    --     config = require("plugins.completion").cmp.config,
-    -- },
     {
         "saghen/blink.cmp",
         -- NOTE: This seems to impact startup time?
@@ -508,17 +478,6 @@ return {
         config = require("plugins.testing").config,
         keys = require("plugins.testing").keys,
     },
-    -- NOTE: Telescope
-    -- {
-    --     "nvim-telescope/telescope.nvim",
-    --     enabled = false,
-    --     branch = "0.1.x",
-    --     dependencies = require("plugins.telescope").dependencies,
-    --     opts = require("plugins.telescope").opts,
-    --     keys = require("plugins.telescope").keys,
-    --     lazy = true,
-    --     cmd = "Telescope",
-    -- },
     -- NOTE: Trouble
     {
         "folke/trouble.nvim",
@@ -538,14 +497,6 @@ return {
         cmd = "ZenMode",
         opts = require("plugins.zenmode").opts,
         config = true,
-    },
-    {
-        "3rd/image.nvim",
-        -- enabled = require("config.functions").is_linux(),
-        enabled = false,
-        ft = { "txt", "markdown", "norg", "tex", "typ" },
-        opts = require("plugins.image").opts,
-        config = require("plugins.image").config,
     },
     -- NOTE: Latex
     {
