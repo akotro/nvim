@@ -91,21 +91,14 @@ return {
         "Bekaboo/deadcolumn.nvim",
         event = "BufRead",
     },
-    -- {
-    --     "tadaa/vimade",
-    --     event = "VeryLazy",
-    --     opts = {
-    --         ncmode = "windows",
-    --         fadelevel = 0.75,
-    --         blocklist = {
-    --             colorcolumn = {
-    --                 highlights = {
-    --                     "ColorColumn",
-    --                 }
-    --             },
-    --         },
-    --     },
-    -- },
+    {
+        "tadaa/vimade",
+        event = "VeryLazy",
+        opts = {
+            ncmode = "windows",
+            fadelevel = 0.75,
+        },
+    },
     -- NOTE: Usage
     {
         "aserowy/tmux.nvim",
