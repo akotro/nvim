@@ -297,7 +297,7 @@ M.dependencies = {
     { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 
     -- csharp
-    { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true, ft = "cs" },
+    -- { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true, ft = "cs" },
     { "Decodetalkers/csharpls-extended-lsp.nvim", lazy = true, ft = "cs" },
 
     -- rust
@@ -625,16 +625,13 @@ M.opts = {
     -- you can do any additional lsp server setup here
     -- return true if you don't want this server to be setup with lspconfig
     setup = {
-        omnisharp = function(_, opts)
-            opts.handlers = {
-                ["textDocument/definition"] = require("omnisharp_extended").handler,
-            }
-        end,
-        csharp_ls = function(_, opts)
-            opts.handlers = {
-                ["textDocument/definition"] = require("csharpls_extended").handler,
-                ["textDocument/typeDefinition"] = require("csharpls_extended").handler,
-            }
+        -- omnisharp = function(_, opts)
+        --     opts.handlers = {
+        --         ["textDocument/definition"] = require("omnisharp_extended").handler,
+        --     }
+        -- end,
+        csharp_ls = function(_, _)
+            require("csharpls_extended").buf_read_cmd_bind()
         end,
         tsserver = function(_, opts)
             require("typescript-tools").setup({})
