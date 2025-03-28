@@ -449,6 +449,13 @@ M.keys = {
         desc = "Search for Plugin Spec",
     },
     {
+        "<leader>fsP",
+        function()
+            Snacks.picker.files({ cwd = vim.fn.stdpath("data") })
+        end,
+        desc = "Search for Plugin Files",
+    },
+    {
         "<leader>fsq",
         function()
             Snacks.picker.qflist()
