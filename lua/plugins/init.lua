@@ -101,6 +101,11 @@ return {
     -- },
     -- NOTE: Usage
     {
+        "ggandor/leap.nvim",
+        dependencies = require("plugins.leap").dependencies,
+        config = require("plugins.leap").config,
+    },
+    {
         "aserowy/tmux.nvim",
         opts = require("plugins.tmux").opts,
         keys = require("plugins.tmux").keys,

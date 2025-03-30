@@ -48,7 +48,7 @@ keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- newline with enter
-keymap.set("n", "<CR>", "o<Esc>", silentOpts)
+-- keymap.set("n", "<CR>", "o<Esc>", silentOpts)
 
 -- redo
 keymap.set("n", "R", "<C-R>")
