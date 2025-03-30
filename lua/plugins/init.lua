@@ -450,12 +450,6 @@ return {
         event = "BufRead",
         config = true,
     },
-    {
-        url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-        name = "lsp_lines.nvim",
-        event = "BufRead",
-        config = true,
-    },
     -- NOTE: Debugging
     {
         "mfussenegger/nvim-dap",

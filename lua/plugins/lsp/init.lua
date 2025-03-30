@@ -127,13 +127,6 @@ function M.get()
             end,
             desc = "Prev Diagnostic",
         },
-        {
-            "<leader>lv",
-            function()
-                require("lsp_lines").toggle()
-            end,
-            desc = "Virtual Text",
-        },
         -- {
         --     "<leader>ll",
         --     function()
@@ -192,14 +185,16 @@ function M.get()
         {
             "<leader>ll",
             function()
-                require("lsp_lines").toggle()
+                local new_config = not vim.diagnostic.config().virtual_lines
+                vim.diagnostic.config({ virtual_lines = new_config })
             end,
             desc = "LSP Lines",
         },
         {
             "<leader>lL",
             function()
-                require("lsp_lines").toggle()
+                local new_config = not vim.diagnostic.config().virtual_lines
+                vim.diagnostic.config({ virtual_lines = new_config })
             end,
             desc = "LSP Lines",
         },
@@ -389,14 +384,6 @@ M.opts = {
         update_in_insert = false,
         virtual_text = false,
         virtual_lines = false, -- disable by default
-        -- virtual_text = {
-        -- 	spacing = 4,
-        -- 	source = "if_many",
-        -- 	prefix = "●",
-        -- 	-- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-        -- 	-- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-        -- 	-- prefix = "icons",
-        -- },
         severity_sort = true,
     },
     -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
