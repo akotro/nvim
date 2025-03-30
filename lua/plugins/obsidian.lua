@@ -2,8 +2,6 @@ local M = {}
 
 M.dependencies = {
     "nvim-lua/plenary.nvim",
-    -- "hrsh7th/nvim-cmp",
-    -- "nvim-telescope/telescope.nvim",
     "nvim-treesitter",
 }
 
@@ -16,9 +14,13 @@ M.opts = {
     },
 
     completion = {
-        nvim_cmp = false, -- NOTE: see https://github.com/epwalsh/obsidian.nvim/issues/770
+        blink = true,
         -- Trigger completion at 2 chars.
         min_chars = 2,
+    },
+
+    picker = {
+        name = "snacks.pick",
     },
 
     -- Due to using markdown.nvim for this
