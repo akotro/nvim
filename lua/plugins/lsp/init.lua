@@ -378,7 +378,7 @@ M.dependencies = {
 }
 
 M.opts = {
-    -- options for vim.diagnostic.config()
+    ---@type vim.diagnostic.Opts
     diagnostics = {
         underline = true,
         update_in_insert = false,
@@ -714,8 +714,21 @@ function M.config(_, opts)
 
     -- diagnostics
     for name, icon in pairs(icons.diagnostics) do
-        name = "DiagnosticSign" .. name
-        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+        local severity = vim.diagnostic.severity[name:upper()]
+
+        if severity then
+            if not opts.diagnostics.signs then
+                opts.diagnostics.signs = {}
+            end
+            if not opts.diagnostics.signs.text then
+                opts.diagnostics.signs.text = {}
+            end
+
+            opts.diagnostics.signs.text[severity] = icon
+
+            local sign_name = "DiagnosticSign" .. name
+            vim.fn.sign_define(sign_name, { text = icon, texthl = sign_name, numhl = "" })
+        end
     end
 
     local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
@@ -729,14 +742,13 @@ function M.config(_, opts)
     end
 
     if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
-        opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-            or function(diagnostic)
-                for d, icon in pairs(icons.diagnostics) do
-                    if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                        return icon
-                    end
+        opts.diagnostics.virtual_text.prefix = function(diagnostic)
+            for d, icon in pairs(icons.diagnostics) do
+                if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                    return icon
                 end
             end
+        end
     end
 
     vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
