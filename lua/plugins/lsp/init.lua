@@ -735,7 +735,7 @@ function M.config(_, opts)
 
     if opts.inlay_hints.enabled and inlay_hint then
         utils.lsp.on_attach(function(client, buffer)
-            if client.supports_method("textDocument/inlayHint") then
+            if client:supports_method("textDocument/inlayHint") then
                 inlay_hint.enable(true, { bufnr = buffer })
             end
         end)

@@ -281,9 +281,9 @@ function M.lsp.get_clients(opts)
         ---@diagnostic disable-next-line: deprecated
         ret = vim.lsp.get_clients(opts)
         if opts and opts.method then
-            ---@param client lsp.Client
+            ---@param client vim.lsp.Client
             ret = vim.tbl_filter(function(client)
-                return client.supports_method(opts.method, { bufnr = opts.bufnr })
+                return client:supports_method(opts.method, opts.bufnr)
             end, ret)
         end
     end
@@ -306,9 +306,9 @@ end
 function M.lsp.on_rename(from, to)
     local clients = M.lsp.get_clients()
     for _, client in ipairs(clients) do
-        if client.supports_method("workspace/willRenameFiles") then
+        if client:supports_method("workspace/willRenameFiles") then
             ---@diagnostic disable-next-line: invisible
-            local resp = client.request_sync("workspace/willRenameFiles", {
+            local resp = client:request_sync("workspace/willRenameFiles", {
                 files = {
                     {
                         oldUri = vim.uri_from_fname(from),
