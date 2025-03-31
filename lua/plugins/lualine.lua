@@ -319,6 +319,7 @@ function M.setup()
                 components.progress,
             },
         },
+        winbar = {},
         tabline = {},
         extensions = {},
     }

@@ -120,19 +120,19 @@ local autocommands = {
         end,
     },
     -- Cursorline
-    {
-        events = { "WinLeave", "BufLeave" },
+    -- {
+    --     events = { "WinLeave", "BufLeave" },
 
-        group = cursorline,
-        pattern = { "*" },
-        command = [[setlocal nocursorline]],
-    },
-    {
-        events = { "WinEnter", "BufEnter" },
-        group = cursorline,
-        pattern = { "*" },
-        command = [[setlocal cursorline]],
-    },
+    --     group = cursorline,
+    --     pattern = { "*" },
+    --     command = [[setlocal nocursorline]],
+    -- },
+    -- {
+    --     events = { "WinEnter", "BufEnter" },
+    --     group = cursorline,
+    --     pattern = { "*" },
+    --     command = [[setlocal cursorline]],
+    -- },
     -- Make sure Vim returns to the same line when you reopen a file
     {
         events = { "BufReadPost" },

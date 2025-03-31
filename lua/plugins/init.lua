@@ -3,37 +3,27 @@ return {
     {
         "rebelot/kanagawa.nvim",
         enabled = false,
-        lazy = false,
-        priority = 1000,
+        lazy = true,
         config = require("plugins.kanagawa").config,
-        init = function()
-            -- vim.api.nvim_command("colorscheme kanagawa")
-        end,
     },
     {
         "folke/tokyonight.nvim",
         enabled = false,
-        lazy = false,
-        priority = 1000,
+        lazy = true,
         opts = {
             style = "night",
         },
-        init = function()
-            -- vim.api.nvim_command("colorscheme tokyonight")
-        end,
     },
     {
         "wnkz/monoglow.nvim",
         enabled = false,
-        lazy = false,
-        priority = 1000,
+        lazy = true,
         opts = {},
-        init = function() end,
     },
     {
         "EdenEast/nightfox.nvim",
         enabled = true,
-        lazy = false,
+        lazy = true,
         priority = 1000,
         opts = {
             transparent = false,
@@ -75,6 +65,7 @@ return {
     },
     {
         "akinsho/bufferline.nvim",
+        enabled = false,
         event = "VeryLazy",
         keys = require("plugins.bufferline").keys,
         dependencies = require("plugins.bufferline").dependencies,
@@ -86,6 +77,13 @@ return {
         event = "VeryLazy",
         init = require("plugins.lualine").init,
         opts = require("plugins.lualine").opts,
+    },
+    {
+        "b0o/incline.nvim",
+        enabled = true,
+        event = "VeryLazy",
+        dependencies = require("plugins.incline").dependencies,
+        config = require("plugins.incline").config,
     },
     {
         "Bekaboo/deadcolumn.nvim",
