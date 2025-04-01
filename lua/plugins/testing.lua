@@ -61,8 +61,7 @@ M.keys = {
 
 M.dependencies = {
     "antoinemadec/FixCursorHold.nvim",
-    "rouge8/neotest-rust",
-    -- "Issafalcon/neotest-dotnet",
+    "Issafalcon/neotest-dotnet",
 }
 
 M.opts = {
@@ -122,8 +121,8 @@ function M.config(_, opts)
     end
 
     opts.adapters = {
-        require("neotest-rust"),
-        -- require("neotest-dotnet"),
+        require("rustaceanvim.neotest"),
+        require("neotest-dotnet"),
     }
 
     require("neotest").setup(opts)
