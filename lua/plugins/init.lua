@@ -574,40 +574,9 @@ return {
             require("typst-preview").update()
         end,
     },
-
-    -- NOTE: Web
-    -- { "mattn/emmet-vim", ft = { "html", "css", "js" } },
-    -- { "manzeloth/live-server", cmd = "LiveServer" },
-
     -- NOTE: Database
     {
         "chrisbra/csv.vim",
         ft = "csv",
-    },
-    {
-        "kndndrj/nvim-dbee",
-        lazy = true,
-        cmd = "Dbee",
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            {
-                "MattiasMTS/cmp-dbee",
-                ft = "sql",
-                opts = {},
-            },
-        },
-        build = function()
-            -- Install tries to automatically detect the install method.
-            -- if it fails, try calling it with one of these parameters:
-            --    "curl", "wget", "bitsadmin", "go"
-            require("dbee").install()
-        end,
-        config = function()
-            require("dbee").setup({
-                sources = {
-                    require("dbee.sources").EnvSource:new("DBEE_CONNECTIONS"),
-                },
-            })
-        end,
     },
 }
