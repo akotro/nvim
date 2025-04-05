@@ -946,4 +946,18 @@ function M.get_current_colors(override_colors)
     return colors
 end
 
+---@param path string
+---@param sep string
+---@return string
+function M.filename_and_parent(path, sep)
+    local segments = vim.split(path, sep)
+    if #segments == 0 then
+        return path
+    elseif #segments == 1 then
+        return segments[#segments]
+    else
+        return table.concat({ segments[#segments - 1], segments[#segments] }, sep)
+    end
+end
+
 return M

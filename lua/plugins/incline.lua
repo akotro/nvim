@@ -7,6 +7,7 @@ M.dependencies = {
 function M.config()
     local devicons = require("nvim-web-devicons")
     local lualine_utils = require("lualine.utils.utils")
+    local functions = require("config.functions")
 
     local active_fg = vim.api.nvim_get_hl(0, { name = "lualine_c_normal" }).fg
     local inactive_fg = vim.api.nvim_get_hl(0, { name = "lualine_c_inactive" }).fg
@@ -23,10 +24,13 @@ function M.config()
             margin = { horizontal = 0 },
         },
         render = function(props)
-            local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-            if filename == "" then
+            local bufname = vim.api.nvim_buf_get_name(props.buf)
+            local filename =
+                functions.filename_and_parent(vim.fn.fnamemodify(bufname, ":p:~"), package.config:sub(1, 1))
+            if bufname == "" then
                 filename = "[No Name]"
             end
+
             local is_active = props.focused
 
             local text_color = is_active and active_fg_color or inactive_fg_color
