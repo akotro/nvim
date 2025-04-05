@@ -533,15 +533,15 @@ M.opts = {
         tsserver = {},
         tailwindcss = {},
         svelte = {},
-        volar = {
-            filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-            init_options = {
-                vue = {
-                    -- disable hybrid mode
-                    hybridMode = false,
-                },
-            },
-        },
+        -- volar = {
+        --     filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+        --     init_options = {
+        --         vue = {
+        --             -- disable hybrid mode
+        --             hybridMode = false,
+        --         },
+        --     },
+        -- },
         jsonls = {},
         lemminx = {},
         bashls = {},
