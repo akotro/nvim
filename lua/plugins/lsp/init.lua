@@ -828,6 +828,8 @@ M.mason = require("plugins.lsp.mason")
 
 M.lightbulb = require("plugins.lsp.lightbulb")
 
+M.navic = require("plugins.lsp.navic")
+
 M.copilot = require("plugins.lsp.copilot")
 
 -- M.copilot_chat = require("plugins.lsp.copilot_chat")

@@ -8,6 +8,7 @@ function M.config()
     local devicons = require("nvim-web-devicons")
     local lualine_utils = require("lualine.utils.utils")
     local functions = require("config.functions")
+    local navic = require("nvim-navic")
 
     local active_fg = vim.api.nvim_get_hl(0, { name = "lualine_c_normal" }).fg
     local inactive_fg = vim.api.nvim_get_hl(0, { name = "lualine_c_inactive" }).fg
@@ -21,7 +22,7 @@ function M.config()
     require("incline").setup({
         window = {
             padding = 0,
-            margin = { horizontal = 0 },
+            margin = { horizontal = 0, vertical = 0 },
         },
         render = function(props)
             local bufname = vim.api.nvim_buf_get_name(props.buf)
@@ -44,7 +45,7 @@ function M.config()
 
             local decorations = is_active and "underline" or ""
 
-            return {
+            local result = {
                 ft_icon and { " ", ft_icon, " ", guibg = bg_color, guifg = ft_color } or "",
                 " ",
                 {
@@ -54,9 +55,27 @@ function M.config()
                     guifg = text_color,
                     guibg = bg_color,
                 },
-                " ",
+                -- " ",
                 guibg = bg_color,
             }
+
+            if is_active then
+                for i, item in ipairs(navic.get_data(props.buf) or {}) do
+                    if i > functions.plugin.opts("nvim-navic").depth_limit then
+                        break
+                    end
+
+                    table.insert(result, {
+                        { " > ", group = "NavicSeparator" },
+                        { item.icon, group = "NavicIcons" .. item.type },
+                        { item.name, group = "NavicText" },
+                    })
+                end
+            end
+
+            table.insert(result, " ")
+
+            return result
         end,
     })
 end

@@ -453,6 +453,12 @@ return {
         event = "BufRead",
         config = true,
     },
+    {
+        "SmiteshP/nvim-navic",
+        lazy = true,
+        dependencies = require("plugins.lsp").navic.dependencies,
+        opts = require("plugins.lsp").navic.opts,
+    },
     -- NOTE: Debugging
     {
         "mfussenegger/nvim-dap",
