@@ -205,14 +205,14 @@ return {
         opts = {},
         keys = {
             {
-                "<C-n>",
+                "<M-n>",
                 function()
                     require("bufjump").forward()
                 end,
                 "Jumplist forward",
             },
             {
-                "<C-p>",
+                "<M-p>",
                 function()
                     require("bufjump").backward()
                 end,
