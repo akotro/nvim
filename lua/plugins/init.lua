@@ -80,10 +80,15 @@ return {
     },
     {
         "b0o/incline.nvim",
-        enabled = true,
+        enabled = false,
         event = "VeryLazy",
         dependencies = require("plugins.incline").dependencies,
         config = require("plugins.incline").config,
+    },
+    {
+        "Bekaboo/dropbar.nvim",
+        -- opts = require("plugins.dropbar").opts,
+        config = require("plugins.dropbar").config,
     },
     {
         "Bekaboo/deadcolumn.nvim",
@@ -319,7 +324,7 @@ return {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufRead",
         enabled = false,
-        opts = { enable = true, mode = "cursor", trim_scope = "outer", max_lines = 4 },
+        opts = { enable = false, mode = "cursor", trim_scope = "outer", max_lines = 4 },
         keys = {
             {
                 "<leader>Ot",
@@ -471,6 +476,7 @@ return {
     },
     {
         "SmiteshP/nvim-navic",
+        enabled = false,
         lazy = true,
         dependencies = require("plugins.lsp").navic.dependencies,
         opts = require("plugins.lsp").navic.opts,
