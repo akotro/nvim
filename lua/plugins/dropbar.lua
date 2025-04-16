@@ -57,7 +57,7 @@ function M.config()
     local inactive_fg_color = inactive_fg and string.format("#%06X", inactive_fg)
     local statusline_hl = vim.api.nvim_get_hl(0, { name = "StatusLine" })
     local inactive_bg_color = statusline_hl.bg and string.format("#%06X", statusline_hl.bg)
-    local active_bold = false
+    local active_bold = true
 
     vim.api.nvim_set_hl(0, "WinBar", {
         fg = active_fg_color,
