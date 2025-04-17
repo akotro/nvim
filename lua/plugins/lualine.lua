@@ -81,11 +81,9 @@ function M.setup()
     local components = {
         mode = {
             function()
-                -- return " " .. icons.logos.neovim .. " "
-                return " " .. icons.ui.Text .. " "
+                return " " .. icons.logos.neovim .. " "
             end,
             padding = { left = 0, right = 0 },
-            -- color = {},
             cond = nil,
         },
         branch = {
@@ -95,7 +93,6 @@ function M.setup()
         },
         filename = {
             "filename",
-            -- color = {},
             cond = nil,
         },
         path = {
