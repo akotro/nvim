@@ -15,6 +15,9 @@ function M.config()
 
     require("dropbar").setup({
         sources = {
+            path = {
+                min_widths = { 100 },
+            },
             lsp = {
                 max_depth = 4,
             },
