@@ -291,13 +291,13 @@ M.keys = {
         end,
         desc = "Git Stash",
     },
-    {
-        "<leader>gdh",
-        function()
-            Snacks.picker.git_diff()
-        end,
-        desc = "Git Diff (Hunks)",
-    },
+    -- {
+    --     "<leader>gdh",
+    --     function()
+    --         Snacks.picker.git_diff()
+    --     end,
+    --     desc = "Git Diff (Hunks)",
+    -- },
     {
         "<leader>gF",
         function()
