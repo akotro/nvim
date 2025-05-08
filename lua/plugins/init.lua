@@ -418,6 +418,7 @@ return {
     -- NOTE: LSP
     {
         "zbirenbaum/copilot.lua",
+        enabled = false,
         cmd = "Copilot",
         event = "InsertEnter",
         keys = require("plugins.lsp.copilot").keys,
