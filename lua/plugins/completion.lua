@@ -75,6 +75,8 @@ M.blink.opts = {
         end,
     },
 
+    fuzzy = { implementation = "prefer_rust_with_warning" },
+
     -- experimental auto-brackets support
     completion = {
         accept = { auto_brackets = { enabled = true } },
@@ -136,11 +138,11 @@ M.blink.opts = {
     -- elsewhere in your config, without redefining it, via `opts_extend`
     sources = {
         default = {
+            "lazydev",
             "lsp",
             "path",
             "snippets",
             "buffer",
-            "lazydev",
             "copilot",
             "crates",
             "obsidian",
@@ -168,7 +170,12 @@ M.blink.opts = {
             },
 
             -- dont show LuaLS require statements when lazydev has items
-            lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
+            lazydev = {
+                name = "LazyDev",
+                module = "lazydev.integrations.blink",
+                -- make lazydev completions top priority
+                score_offset = 100,
+            },
 
             cmp_dap = {
                 name = "dap", -- IMPORTANT: use the same name as you would for nvim-cmp

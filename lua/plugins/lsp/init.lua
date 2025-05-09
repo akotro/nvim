@@ -280,12 +280,16 @@ M.dependencies = {
     -- lua
     {
         "folke/lazydev.nvim",
+        -- disable when a .luarc.json file is found
+        -- enabled = function(root_dir)
+        --     return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+        -- end,
         ft = "lua", -- only load on lua files
         opts = {
             library = {
                 "lazy.nvim",
                 -- Load luvit types when the `vim.uv` word is found
-                { path = "luvit-meta/library", words = { "vim%.uv" } },
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
             },
         },
     },
