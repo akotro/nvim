@@ -433,7 +433,7 @@ return {
     },
     {
 
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         cmd = "Mason",
         build = ":MasonUpdate",
         keys = require("plugins.lsp").mason.keys,
