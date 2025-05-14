@@ -428,6 +428,7 @@ return {
         "neovim/nvim-lspconfig",
         event = "BufRead",
         dependencies = require("plugins.lsp").dependencies,
+        keys = require("plugins.lsp").keys,
         opts = require("plugins.lsp").opts,
         config = require("plugins.lsp").config,
     },

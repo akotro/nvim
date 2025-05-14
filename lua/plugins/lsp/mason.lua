@@ -3,12 +3,7 @@ local M = {}
 M.keys = { { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" } }
 
 M.opts = {
-    ensure_installed = {
-        "stylua",
-        "shfmt",
-        "beautysh",
-        -- "flake8",
-    },
+    ensure_installed = {},
 }
 
 function M.config(_, opts)
