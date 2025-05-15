@@ -580,6 +580,21 @@ function M.config(_, opts)
     vim.lsp.enable("nushell")
 
     -- pyright
+    local pyright_opts = {
+        settings = {
+            pyright = {
+                -- Using Ruff's import organizer
+                disableOrganizeImports = true,
+            },
+            python = {
+                analysis = {
+                    -- Ignore all files for analysis to exclusively use Ruff for linting
+                    ignore = { "*" },
+                },
+            },
+        },
+    }
+    vim.lsp.config("pyright", pyright_opts)
     vim.lsp.enable("pyright")
 
     -- yamlls
