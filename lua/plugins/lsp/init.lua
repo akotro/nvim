@@ -475,6 +475,9 @@ M.opts = {
                             ["async-recursion"] = { "async_recursion" },
                         },
                     },
+                    -- files = {
+                    --     excludeDirs = { ".direnv" },
+                    -- },
                 },
             },
         },
@@ -544,7 +547,9 @@ M.opts = {
         -- },
         jsonls = {},
         lemminx = {},
-        bashls = {},
+        bashls = {
+            filetypes = { "bash", "sh", "zsh" },
+        },
         nushell = {},
         pyright = {
             settings = {
