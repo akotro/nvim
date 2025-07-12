@@ -195,8 +195,8 @@ M.opts = function()
         -- Custom formatters and changes to built-in formatters
         formatters = {
             csharpier = {
-                command = "dotnet-csharpier",
-                args = { "--fast", "--write-stdout" },
+                command = "csharpier",
+                args = { "format", "--write-stdout" },
             },
             -- beautysh = {
             --     command = "beautysh",
