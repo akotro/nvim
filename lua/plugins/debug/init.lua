@@ -14,45 +14,53 @@ end
 
 M.dependencies = {
     -- fancy UI for the debugger
+    -- {
+    --     "rcarriga/nvim-dap-ui",
+    --     dependencies = "nvim-neotest/nvim-nio",
+    --     keys = {
+    --         {
+    --             "<leader>du",
+    --             function()
+    --                 require("dapui").toggle({})
+    --             end,
+    --             desc = "Dap UI",
+    --         },
+    --         {
+    --             "<leader>de",
+    --             function()
+    --                 -- call this twice to open and jump into the window
+    --                 require("dapui").eval()
+    --                 require("dapui").eval()
+    --             end,
+    --             desc = "Eval",
+    --             mode = { "n", "v" },
+    --         },
+    --     },
+    --     opts = {},
+    --     config = function(_, opts)
+    --         -- setup dap config by VsCode launch.json file
+    --         -- require("dap.ext.vscode").load_launchjs()
+    --         local dap = require("dap")
+    --         local dapui = require("dapui")
+    --         dapui.setup(opts)
+    --         dap.listeners.after.event_initialized["dapui_config"] = function()
+    --             dapui.open({})
+    --         end
+    --         dap.listeners.before.event_terminated["dapui_config"] = function()
+    --             dapui.close({})
+    --         end
+    --         dap.listeners.before.event_exited["dapui_config"] = function()
+    --             dapui.close({})
+    --         end
+    --     end,
+    -- },
     {
-        "rcarriga/nvim-dap-ui",
-        dependencies = "nvim-neotest/nvim-nio",
-        keys = {
-            {
-                "<leader>du",
-                function()
-                    require("dapui").toggle({})
-                end,
-                desc = "Dap UI",
-            },
-            {
-                "<leader>de",
-                function()
-                    -- call this twice to open and jump into the window
-                    require("dapui").eval()
-                    require("dapui").eval()
-                end,
-                desc = "Eval",
-                mode = { "n", "v" },
-            },
+        "igorlfs/nvim-dap-view",
+        ---@module 'dap-view'
+        ---@type dapview.Config
+        opts = {
+            auto_toggle = true,
         },
-        opts = {},
-        config = function(_, opts)
-            -- setup dap config by VsCode launch.json file
-            -- require("dap.ext.vscode").load_launchjs()
-            local dap = require("dap")
-            local dapui = require("dapui")
-            dapui.setup(opts)
-            dap.listeners.after.event_initialized["dapui_config"] = function()
-                dapui.open({})
-            end
-            dap.listeners.before.event_terminated["dapui_config"] = function()
-                dapui.close({})
-            end
-            dap.listeners.before.event_exited["dapui_config"] = function()
-                dapui.close({})
-            end
-        end,
     },
 
     -- virtual text for the debugger
@@ -264,7 +272,7 @@ M.keys = {
         "<leader>dt",
         function()
             require("dap").terminate()
-            require("dapui").close({})
+            -- require("dapui").close({})
         end,
         desc = "Terminate",
     },
@@ -272,7 +280,7 @@ M.keys = {
         "<S-F5>",
         function()
             require("dap").terminate()
-            require("dapui").close({})
+            -- require("dapui").close({})
         end,
         desc = "Terminate",
     },
@@ -282,6 +290,14 @@ M.keys = {
             require("dap.ui.widgets").hover()
         end,
         desc = "Widgets",
+    },
+    {
+        "<leader>de",
+        function()
+            require("dap.ui.widgets").hover()
+        end,
+        desc = "Eval",
+        mode = { "n", "v" },
     },
 }
 
@@ -302,6 +318,7 @@ function M.config()
     require("plugins.debug.dotnet").setup()
     require("plugins.debug.c").setup()
     require("plugins.debug.lua").setup()
+    require("plugins.debug.zig").setup()
 
     if utils.plugin.has("overseer.nvim") then
         require("overseer").enable_dap()

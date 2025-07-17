@@ -110,6 +110,7 @@ M.opts = function()
             nix = { "nixfmt" },
             yaml = { "yamlfmt" },
             c = { "clang_format" },
+            zig = { "zigfmt" },
             -- Use the "*" filetype to run formatters on all filetypes.
             -- ["*"] = { "codespell" },
             -- Use the "_" filetype to run formatters on filetypes that don't
