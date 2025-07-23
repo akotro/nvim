@@ -94,14 +94,6 @@ return {
         "Bekaboo/deadcolumn.nvim",
         event = "BufRead",
     },
-    -- {
-    --     "tadaa/vimade",
-    --     event = "VeryLazy",
-    --     opts = {
-    --         ncmode = "windows",
-    --         fadelevel = 0.75,
-    --     },
-    -- },
     -- NOTE: Usage
     {
         "ggandor/leap.nvim",
@@ -254,6 +246,13 @@ return {
             -- by default it will only happen when cmdheight changed.
             clear_always = false,
         },
+    },
+    {
+        "mistweaverco/kulala.nvim",
+        ft = { "http", "rest" },
+        keys = require("plugins.kulala").keys,
+        opts = require("plugins.kulala").opts,
+        init = require("plugins.kulala").init,
     },
     -- NOTE: Git
     {

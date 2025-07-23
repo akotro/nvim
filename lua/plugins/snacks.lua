@@ -570,13 +570,13 @@ M.keys = {
         end,
         desc = "Delete Buffer",
     },
-    {
-        "<leader>cR",
-        function()
-            Snacks.rename.rename_file()
-        end,
-        desc = "Rename File",
-    },
+    -- {
+    --     "<leader>cR",
+    --     function()
+    --         Snacks.rename.rename_file()
+    --     end,
+    --     desc = "Rename File",
+    -- },
     {
         "]]",
         function()

@@ -111,6 +111,8 @@ M.opts = function()
             yaml = { "yamlfmt" },
             c = { "clang_format" },
             zig = { "zigfmt" },
+            http = { "kulala-fmt`" },
+            rest = { "kulala-fmt`" },
             -- Use the "*" filetype to run formatters on all filetypes.
             -- ["*"] = { "codespell" },
             -- Use the "_" filetype to run formatters on filetypes that don't
