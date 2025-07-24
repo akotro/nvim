@@ -1,5 +1,7 @@
 local M = {}
 
+M.dependencies = "kevinhwang91/promise-async"
+
 M.keys = {
     {
         "<leader>zo",

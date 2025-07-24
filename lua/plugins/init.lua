@@ -7,14 +7,6 @@ return {
         config = require("plugins.kanagawa").config,
     },
     {
-        "folke/tokyonight.nvim",
-        enabled = false,
-        lazy = true,
-        opts = {
-            style = "night",
-        },
-    },
-    {
         "wnkz/monoglow.nvim",
         enabled = false,
         lazy = true,
@@ -56,34 +48,10 @@ return {
         end,
     },
     {
-        "folke/noice.nvim",
-        enabled = false,
-        event = "User",
-        dependencies = "MunifTanjim/nui.nvim",
-        keys = require("plugins.noice").keys,
-        config = require("plugins.noice").config,
-    },
-    {
-        "akinsho/bufferline.nvim",
-        enabled = false,
-        event = "VeryLazy",
-        keys = require("plugins.bufferline").keys,
-        dependencies = require("plugins.bufferline").dependencies,
-        opts = require("plugins.bufferline").opts,
-        config = require("plugins.bufferline").config,
-    },
-    {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
         init = require("plugins.lualine").init,
         opts = require("plugins.lualine").opts,
-    },
-    {
-        "b0o/incline.nvim",
-        enabled = false,
-        event = "VeryLazy",
-        dependencies = require("plugins.incline").dependencies,
-        config = require("plugins.incline").config,
     },
     {
         "Bekaboo/dropbar.nvim",
@@ -156,7 +124,7 @@ return {
     {
         "kevinhwang91/nvim-ufo",
         event = "BufRead",
-        dependencies = "kevinhwang91/promise-async",
+        dependencies = require("plugins.ufo").dependencies,
         config = require("plugins.ufo").config,
         keys = require("plugins.ufo").keys,
     },
@@ -176,76 +144,21 @@ return {
     {
         "mbbill/undotree",
         lazy = true,
-        cmd = {
-            "UndotreeToggle",
-            "UndotreeShow",
-            "UndotreePersistUndo",
-            "UndotreeHide",
-        },
-        keys = {
-            {
-                "<leader>uu",
-                function()
-                    vim.api.nvim_command("UndotreeToggle")
-                end,
-                desc = "Undotree Toggle",
-            },
-        },
-        config = function()
-            vim.g.undotree_WindowLayout = 2
-            vim.g.undotree_ShortIndicators = 1
-        end,
+        cmd = require("plugins.undotree").cmd,
+        keys = require("plugins.undotree").keys,
+        config = require("plugins.undotree").config,
     },
     {
         "kwkarlwang/bufjump.nvim",
         lazy = true,
+        keys = require("plugins.bufjump").keys,
         opts = {},
-        keys = {
-            {
-                "<M-n>",
-                function()
-                    require("bufjump").forward()
-                end,
-                "Jumplist forward",
-            },
-            {
-                "<M-p>",
-                function()
-                    require("bufjump").backward()
-                end,
-                "Jumplist backward",
-            },
-            {
-                "<M-i>",
-                function()
-                    require("bufjump").forward_same_buf()
-                end,
-                "Jumplist forward same buffer",
-            },
-            {
-                "<M-o>",
-                function()
-                    require("bufjump").backward_same_buf()
-                end,
-                "Jumplist backward same buffer",
-            },
-        },
     },
     {
         -- NOTE: Until this features gets implemented in core
         "jake-stewart/auto-cmdheight.nvim",
         lazy = false,
-        opts = {
-            -- max cmdheight before displaying hit enter prompt.
-            max_lines = 5,
-            -- number of seconds until the cmdheight can restore.
-            duration = 2,
-            -- whether key press is required to restore cmdheight.
-            remove_on_key = true,
-            -- always clear the cmdline after duration and key press.
-            -- by default it will only happen when cmdheight changed.
-            clear_always = false,
-        },
+        opts = require("plugins.auto-cmdheight").opts,
     },
     {
         "mistweaverco/kulala.nvim",
@@ -262,39 +175,28 @@ return {
     },
     {
         "sindrets/diffview.nvim",
-        cmd = {
-            "DiffviewOpen",
-            "DiffviewClose",
-            "DiffviewFileHistory",
-            "DiffviewFocusFiles",
-            "DiffviewLog",
-            "DiffviewRefresh",
-            "DiffviewToggleFiles",
-        },
+        cmd = require("plugins.diffview").cmd,
         keys = require("plugins.diffview").keys,
     },
     {
         "NeogitOrg/neogit",
         branch = "master",
-        cmd = "Neogit",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "sindrets/diffview.nvim",
-            -- "nvim-telescope/telescope.nvim",
-        },
-        config = true,
+        cmd = require("plugins.neogit").cmd,
+        dependencies = require("plugins.neogit").dependencies,
         keys = require("plugins.neogit").keys,
+        config = true,
     },
     {
         "lewis6991/gitsigns.nvim",
         event = "BufRead",
-        cmd = "Gitsigns",
+        cmd = require("plugins.gitsigns").cmd,
         opts = require("plugins.gitsigns").opts,
         keys = require("plugins.gitsigns").keys,
     },
     {
         "numToStr/Comment.nvim",
-        event = "User FileOpened",
+        lazy = true,
+        event = "User",
         keys = require("plugins.comment").keys,
         opts = require("plugins.comment").opts,
     },
@@ -302,7 +204,7 @@ return {
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
-        cmd = "WhichKey",
+        cmd = require("plugins.whichkey").cmd,
         config = require("plugins.whichkey").config,
     },
 
@@ -310,32 +212,13 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        -- event = { "LazyFile", "VeryLazy" },
-        cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+        cmd = require("plugins.treesitter").cmd,
         dependencies = require("plugins.treesitter").dependencies,
         init = require("plugins.treesitter").init,
         keys = require("plugins.treesitter").keys,
         opts = require("plugins.treesitter").opts,
         config = require("plugins.treesitter").config,
     },
-    -- Show context of the current function
-    {
-        "nvim-treesitter/nvim-treesitter-context",
-        event = "BufRead",
-        enabled = false,
-        opts = { enable = false, mode = "cursor", trim_scope = "outer", max_lines = 4 },
-        keys = {
-            {
-                "<leader>Ot",
-                function()
-                    local tsc = require("treesitter-context")
-                    tsc.toggle()
-                end,
-                desc = "Toggle Treesitter Context",
-            },
-        },
-    },
-    -- comments
     {
         "JoosepAlviste/nvim-ts-context-commentstring",
         lazy = true,
@@ -343,7 +226,6 @@ return {
             enable_autocmd = false,
         },
     },
-    -- Automatically add closing tags for HTML and JSX
     {
         "windwp/nvim-ts-autotag",
         event = "BufRead",
@@ -363,27 +245,16 @@ return {
         },
         opts = {},
     },
-    -- {
-    --     "rayliwell/tree-sitter-rstml",
-    --     dependencies = { "nvim-treesitter" },
-    --     build = ":TSUpdate",
-    --     config = function()
-    --         require("tree-sitter-rstml").setup()
-    --     end,
-    -- },
     {
         "m-demare/hlargs.nvim",
         event = "BufRead",
-        -- opts = { color = "#f38ba8" },
     },
     -- NOTE: Completion
     {
         "L3MON4D3/LuaSnip",
         version = "v2.*",
         event = "InsertEnter",
-        build = (not jit.os:find("Windows"))
-                and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
-            or nil,
+        build = require("plugins.completion").luasnip.build,
         dependencies = require("plugins.completion").luasnip.dependencies,
         opts = require("plugins.completion").luasnip.opts,
         config = require("plugins.completion").luasnip.config,
@@ -393,7 +264,7 @@ return {
         -- NOTE: This seems to impact startup time?
         -- lazy = false, -- lazy loading handled internally
         event = { "InsertEnter", "CmdlineEnter" },
-        build = "nix run .#build-plugin --accept-flake-config",
+        build = require("plugins.completion").blink.build,
         dependencies = require("plugins.completion").blink.dependencies,
         opts = require("plugins.completion").blink.opts,
         opts_extend = require("plugins.completion").blink.opts_extend,
@@ -443,25 +314,6 @@ return {
         config = require("plugins.lsp").mason.config,
     },
     -- NOTE: LSP Utils
-    -- {
-    --     "ray-x/lsp_signature.nvim",
-    --     event = "BufRead",
-    --     config = function()
-    --         require("lsp_signature").setup({
-    --             floating_window = false,
-    --             fix_pos = true,
-    --             auto_close_after = nil,
-    --             hint_enable = true,
-    --             hint_prefix = {
-    --                 above = "↙ ",
-    --                 current = "← ",
-    --                 below = "↖ ",
-    --             },
-    --             toggle_key = "<C-X>",
-    --             select_signature_key = "<C-S>",
-    --         })
-    --     end,
-    -- },
     {
         "kosayoda/nvim-lightbulb",
         event = "BufRead",
@@ -476,13 +328,6 @@ return {
         "Kasama/nvim-custom-diagnostic-highlight",
         event = "BufRead",
         config = true,
-    },
-    {
-        "SmiteshP/nvim-navic",
-        enabled = false,
-        lazy = true,
-        dependencies = require("plugins.lsp").navic.dependencies,
-        opts = require("plugins.lsp").navic.opts,
     },
     -- NOTE: Debugging
     {
@@ -509,9 +354,6 @@ return {
     },
 
     -- NOTE: Writing
-    -- jbyuki/nabla.nvim
-    -- Latex Notes
-    --  - https://castel.dev/post/lecture-notes-1/
     {
         "folke/zen-mode.nvim",
         ft = { "txt", "markdown", "norg", "tex", "typ" },
@@ -523,61 +365,31 @@ return {
     {
         "lervag/vimtex",
         lazy = false,
-        config = function()
-            vim.g["vimtex_view_method"] = "zathura"
-        end,
+        config = require("plugins.vimtex").config,
     },
     {
         "jbyuki/nabla.nvim",
         lazy = true,
-        -- ft = { "markdown", "tex", "typ", "typst" },
-        keys = {
-            {
-                "<leader>np",
-                function()
-                    require("nabla").popup()
-                end,
-                desc = "Popup latex equation",
-            },
-        },
+        keys = require("plugins.nabla").keys,
     },
     -- NOTE: Markdown
     {
         "MeanderingProgrammer/markdown.nvim",
         main = "render-markdown",
         ft = { "markdown" },
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "echasnovski/mini.icons",
-        },
-        opts = {
-            latex = {
-                -- Whether LaTeX should be rendered, mainly used for health check
-                enabled = false,
-            },
-            -- NOTE: Uncomment to get inline latex rendering (doesn't work that well)
-            -- win_options = { conceallevel = { rendered = 2 } },
-            -- on = {
-            --     attach = function()
-            --         require("nabla").enable_virt({ autogen = true })
-            --     end,
-            -- },
-        },
+        dependencies = require("plugins.markdown").dependencies,
+        opts = require("plugins.markdown").opts,
     },
     {
         "iamcco/markdown-preview.nvim",
         ft = { "markdown" },
-        build = function()
-            vim.fn["mkdp#util#install"]()
-        end,
+        build = require("plugins.markdown-preview").build,
     },
     {
         "dhruvasagar/vim-table-mode",
         ft = { "txt", "markdown", "norg" },
         cmd = "TableModeToggle",
-        config = function()
-            vim.g.table_mode_corner = "|"
-        end,
+        config = require("plugins.vim-table-mode").config,
     },
     -- NOTE: Notes
     {
@@ -601,9 +413,7 @@ return {
         "chomosuke/typst-preview.nvim",
         ft = "typst",
         version = "0.1.*",
-        build = function()
-            require("typst-preview").update()
-        end,
+        build = require("plugins.typst-preview").build,
     },
     -- NOTE: Database
     {

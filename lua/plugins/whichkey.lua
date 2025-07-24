@@ -3,6 +3,8 @@ local utils = require("config.functions")
 
 local M = {}
 
+M.cmd = "WhichKey"
+
 local options = {
     setup = {
         plugins = {

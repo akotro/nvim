@@ -1,5 +1,7 @@
 local M = {}
 
+M.cmd = "Gitsigns"
+
 function M.opts()
     local icons = require("config.ui").icons
     return {

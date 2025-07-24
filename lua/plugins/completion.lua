@@ -2,6 +2,10 @@ local M = {}
 
 M.luasnip = {}
 
+M.build = (not jit.os:find("Windows"))
+        and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
+    or nil
+
 M.luasnip.dependencies = {
     "rafamadriz/friendly-snippets",
 }
@@ -32,6 +36,8 @@ function M.luasnip.config()
 end
 
 M.blink = {}
+
+M.build = "nix run .#build-plugin --accept-flake-config"
 
 M.blink.dependencies = {
     {
