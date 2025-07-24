@@ -271,7 +271,14 @@ M.dependencies = {
         cmd = "Neoconf",
         opts = {},
     },
-    { "mason-org/mason.nvim", version = "^1.0.0" },
+    {
+        "mason-org/mason.nvim",
+        version = "^1.0.0",
+        opts = function(_, opts)
+            opts.registries = opts.registries or {}
+            table.insert(opts.registries, "github:mistweaverco/zana-registry")
+        end,
+    },
     { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
     { "j-hui/fidget.nvim", opts = {} },
 
@@ -627,6 +634,7 @@ M.opts = {
             },
         },
         prolog_ls = {},
+        kulala_ls = {},
     },
     -- you can do any additional lsp server setup here
     -- return true if you don't want this server to be setup with lspconfig
