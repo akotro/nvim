@@ -37,7 +37,7 @@ end
 
 M.blink = {}
 
-M.build = "nix run .#build-plugin --accept-flake-config"
+M.blink.build = "nix run .#build-plugin --accept-flake-config"
 
 M.blink.dependencies = {
     {
