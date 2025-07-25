@@ -1,16 +1,26 @@
 return {
     -- NOTE: Colorschemes
     {
-        "rebelot/kanagawa.nvim",
-        enabled = false,
-        lazy = true,
-        config = require("plugins.kanagawa").config,
-    },
-    {
-        "wnkz/monoglow.nvim",
-        enabled = false,
-        lazy = true,
-        opts = {},
+        "slugbyte/lackluster.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            local lackluster = require("lackluster")
+            local color = lackluster.color
+
+            -- !must called setup() before setting the colorscheme!
+            ---@diagnostic disable-next-line: missing-fields
+            lackluster.setup({
+                tweak_syntax = {
+                    string = color.green, -- lackluster color
+                },
+            })
+
+            -- FIXME: Cursorline highlight breaks when opening Snacks.picker a second time
+
+            -- !must set colorscheme after calling setup()!
+            -- vim.cmd.colorscheme("lackluster")
+        end,
     },
     {
         "EdenEast/nightfox.nvim",
@@ -21,7 +31,7 @@ return {
             transparent = false,
         },
         init = function()
-            vim.api.nvim_command("colorscheme carbonfox")
+            vim.cmd.colorscheme("carbonfox")
         end,
     },
     -- NOTE: Util
