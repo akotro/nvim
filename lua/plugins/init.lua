@@ -273,8 +273,10 @@ return {
         "saghen/blink.cmp",
         -- NOTE: This seems to impact startup time?
         -- lazy = false, -- lazy loading handled internally
+        -- FIXME: Required due to https://github.com/Saghen/blink.cmp/issues/2044
+        version = "1.*",
         event = { "InsertEnter", "CmdlineEnter" },
-        build = require("plugins.completion").blink.build,
+        -- build = require("plugins.completion").blink.build,
         dependencies = require("plugins.completion").blink.dependencies,
         opts = require("plugins.completion").blink.opts,
         opts_extend = require("plugins.completion").blink.opts_extend,
