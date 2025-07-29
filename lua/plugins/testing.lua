@@ -60,6 +60,8 @@ M.keys = {
 }
 
 M.dependencies = {
+    "nvim-neotest/nvim-nio",
+    "nvim-lua/plenary.nvim",
     "antoinemadec/FixCursorHold.nvim",
     "Issafalcon/neotest-dotnet",
 }
