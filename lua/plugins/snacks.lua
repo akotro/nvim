@@ -112,6 +112,7 @@ M.opts = {
         main = {
             file = false,
         },
+        layout = "bottom",
     },
 
     lazygit = {
