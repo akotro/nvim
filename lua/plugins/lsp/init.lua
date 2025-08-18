@@ -393,6 +393,9 @@ M.opts = {
         virtual_lines = false, -- disable by default
         severity_sort = true,
     },
+
+    -- TODO: Tryout vim.lsp.document_color.enable() to replace nvim-colorizer
+
     -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
     -- Be aware that you also will need to properly configure your LSP server to
     -- provide the inlay hints.
