@@ -46,6 +46,26 @@ return {
         keys = require("plugins.snacks").keys,
         init = require("plugins.snacks").init,
     },
+    {
+        "dmtrKovalenko/fff.nvim",
+        lazy = true,
+        build = "nix run .#release",
+        opts = {
+            prompt = require("config.ui").icons.ui.FindFile .. " ",
+            preview = {
+                show_file_info = true,
+            },
+        },
+        keys = {
+            {
+                "<leader>ff",
+                function()
+                    require("fff").find_files()
+                end,
+                desc = "Open file picker",
+            },
+        },
+    },
     -- NOTE: UI
     {
         "echasnovski/mini.icons",
@@ -111,7 +131,7 @@ return {
         config = true,
     },
     {
-        "NvChad/nvim-colorizer.lua",
+        "catgoose/nvim-colorizer.lua",
         ft = { "html", "css", "javascript", "vim", "lua", "sh", "zsh", "rust", "conf", "cpp", "nix", "yaml" },
         config = require("plugins.colorizer").config,
     },

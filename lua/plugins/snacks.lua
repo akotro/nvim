@@ -143,13 +143,13 @@ M.opts = {
 
 M.keys = {
     -- Top Pickers
-    {
-        "<leader>ff",
-        function()
-            Snacks.picker.smart()
-        end,
-        desc = "Smart Find Files",
-    },
+    -- {
+    --     "<leader>ff",
+    --     function()
+    --         Snacks.picker.smart()
+    --     end,
+    --     desc = "Smart Find Files",
+    -- },
     {
         "<leader>fF",
         function()
