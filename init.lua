@@ -23,6 +23,9 @@ require("lazy").setup(plugins, {
         path = "~/dev",
     },
     concurrency = concurrency_level,
+    git = {
+        timeout = 420,
+    },
     checker = { enabled = true, notify = false }, -- automatically check for plugin updates
     performance = {
         rtp = {
