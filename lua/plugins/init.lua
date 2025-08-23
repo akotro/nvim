@@ -185,12 +185,6 @@ return {
         opts = {},
     },
     {
-        -- NOTE: Until this features gets implemented in core
-        "jake-stewart/auto-cmdheight.nvim",
-        lazy = false,
-        opts = require("plugins.auto-cmdheight").opts,
-    },
-    {
         "mistweaverco/kulala.nvim",
         ft = { "http", "rest" },
         keys = require("plugins.kulala").keys,

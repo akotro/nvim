@@ -152,6 +152,12 @@ end
 -- Folding
 -- opt.foldlevel = 99
 
+-- WARNING: This is an experimental interface intended to replace the message grid in the TUI.
+-- :help vim._extui
+require("vim._extui").enable({
+    enable = true,
+})
+
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
