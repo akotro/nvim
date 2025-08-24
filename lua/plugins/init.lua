@@ -85,7 +85,6 @@ return {
     },
     {
         "Bekaboo/dropbar.nvim",
-        dependencies = require("plugins.dropbar").dependencies,
         config = require("plugins.dropbar").config,
     },
     {
