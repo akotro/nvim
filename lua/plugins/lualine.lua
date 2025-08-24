@@ -41,13 +41,14 @@ function M.setup()
         -- end,
     }
 
-    local override_colors = {
-        dragonGreen = "#87a987",
-        dragonYellow = "#c4b28a",
-        dragonRed = "#c4746e",
-        oniViolet = "#957FB8",
-    }
-    local colors = functions.get_current_colors(override_colors)
+    -- local override_colors = {
+    --     dragonGreen = "#87a987",
+    --     dragonYellow = "#c4b28a",
+    --     dragonRed = "#c4746e",
+    --     oniViolet = "#957FB8",
+    -- }
+    -- local colors = functions.get_current_colors(override_colors)
+    local colors = functions.get_current_colors(nil)
 
     local diff_color = {
         added = { fg = colors.dragonGreen },

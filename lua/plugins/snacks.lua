@@ -57,90 +57,6 @@ M.dependencies = {
     },
 }
 
-local target_term_id = vim.v.count1
-
----@type snacks.Config
-M.opts = {
-    bigfile = { enabled = true },
-
-    quickfile = { enabled = true },
-
-    -- notifier = {
-    --     enabled = true,
-    --     timeout = 3000,
-    -- },
-
-    statuscolumn = { enabled = true },
-
-    words = { enabled = true },
-
-    indent = {
-        filter = function(buf)
-            return vim.g.snacks_indent ~= false and vim.b[buf].snacks_indent ~= false and vim.bo[buf].buftype == ""
-        end,
-    },
-
-    input = { enabled = true },
-
-    scroll = {
-        enabled = false,
-        animate = {
-            duration = { step = 5, total = 50 },
-            easing = "linear",
-        },
-        -- faster animation when repeating scroll after delay
-        animate_repeat = {
-            delay = 100, -- delay in ms before using the repeat animation
-            duration = { step = 2, total = 20 },
-            easing = "linear",
-        },
-    },
-
-    styles = {
-        ---@diagnostic disable-next-line: missing-fields
-        notification = {
-            wo = { wrap = true }, -- Wrap notifications
-        },
-    },
-
-    image = {
-        enabled = true,
-    },
-
-    picker = {
-        enabled = true,
-        main = {
-            file = false,
-        },
-        layout = "bottom",
-    },
-
-    lazygit = {
-        enabled = true,
-    },
-
-    terminal = {
-        enabled = true,
-        win = {
-            on_buf = function(self)
-                -- NOTE: `on_buf` called before `on_win`
-                target_term_id = vim.b[self.buf].snacks_terminal.id
-            end,
-            on_win = function(self)
-                -- INFO: assign event for TermClose
-                self:on("TermClose", function()
-                    -- HACK: manually detele term buffer before destroy win
-                    if vim.api.nvim_buf_is_loaded(self.buf) then
-                        vim.api.nvim_buf_delete(self.buf, { force = true })
-                    end
-                    self:destroy()
-                    vim.cmd.checktime()
-                end, { buf = true })
-            end,
-        },
-    },
-}
-
 M.keys = {
     -- Top Pickers
     -- {
@@ -654,6 +570,90 @@ M.keys = {
             Snacks.terminal.toggle(nil, terminal_toggle_opts)
         end,
         desc = "Toggle Terminal",
+    },
+}
+
+local target_term_id = vim.v.count1
+
+---@type snacks.Config
+M.opts = {
+    bigfile = { enabled = true },
+
+    quickfile = { enabled = true },
+
+    -- notifier = {
+    --     enabled = true,
+    --     timeout = 3000,
+    -- },
+
+    statuscolumn = { enabled = true },
+
+    words = { enabled = true },
+
+    indent = {
+        filter = function(buf)
+            return vim.g.snacks_indent ~= false and vim.b[buf].snacks_indent ~= false and vim.bo[buf].buftype == ""
+        end,
+    },
+
+    input = { enabled = true },
+
+    scroll = {
+        enabled = false,
+        animate = {
+            duration = { step = 5, total = 50 },
+            easing = "linear",
+        },
+        -- faster animation when repeating scroll after delay
+        animate_repeat = {
+            delay = 100, -- delay in ms before using the repeat animation
+            duration = { step = 2, total = 20 },
+            easing = "linear",
+        },
+    },
+
+    styles = {
+        ---@diagnostic disable-next-line: missing-fields
+        notification = {
+            wo = { wrap = true }, -- Wrap notifications
+        },
+    },
+
+    image = {
+        enabled = true,
+    },
+
+    picker = {
+        enabled = true,
+        main = {
+            file = false,
+        },
+        layout = "bottom",
+    },
+
+    lazygit = {
+        enabled = true,
+    },
+
+    terminal = {
+        enabled = true,
+        win = {
+            on_buf = function(self)
+                -- NOTE: `on_buf` called before `on_win`
+                target_term_id = vim.b[self.buf].snacks_terminal.id
+            end,
+            on_win = function(self)
+                -- INFO: assign event for TermClose
+                self:on("TermClose", function()
+                    -- HACK: manually detele term buffer before destroy win
+                    if vim.api.nvim_buf_is_loaded(self.buf) then
+                        vim.api.nvim_buf_delete(self.buf, { force = true })
+                    end
+                    self:destroy()
+                    vim.cmd.checktime()
+                end, { buf = true })
+            end,
+        },
     },
 }
 

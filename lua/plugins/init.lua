@@ -1,31 +1,19 @@
 return {
     -- NOTE: Colorschemes
     {
-        "slugbyte/lackluster.nvim",
+        "https://git.sr.ht/~p00f/alabaster.nvim",
+        enabled = false,
         lazy = false,
         priority = 1000,
         config = function()
-            local lackluster = require("lackluster")
-            local color = lackluster.color
-
-            -- !must called setup() before setting the colorscheme!
-            ---@diagnostic disable-next-line: missing-fields
-            lackluster.setup({
-                tweak_syntax = {
-                    string = color.green, -- lackluster color
-                },
-            })
-
-            -- FIXME: Cursorline highlight breaks when opening Snacks.picker a second time
-
-            -- !must set colorscheme after calling setup()!
-            -- vim.cmd.colorscheme("lackluster")
+            vim.g.alabaster_dim_comments = true
+            vim.cmd.colorscheme("alabaster")
         end,
     },
     {
         "EdenEast/nightfox.nvim",
-        enabled = true,
-        lazy = true,
+        enabled = false,
+        lazy = false,
         priority = 1000,
         opts = {
             transparent = false,
@@ -42,8 +30,8 @@ return {
         priority = 1000,
         lazy = false,
         dependencies = require("plugins.snacks").dependencies,
-        opts = require("plugins.snacks").opts,
         keys = require("plugins.snacks").keys,
+        opts = require("plugins.snacks").opts,
         init = require("plugins.snacks").init,
     },
     {

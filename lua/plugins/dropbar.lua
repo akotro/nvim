@@ -64,7 +64,7 @@ function M.config()
 
     vim.api.nvim_set_hl(0, "WinBar", {
         fg = active_fg_color,
-        bg = inactive_bg_color,
+        -- bg = inactive_bg_color,
         bold = active_bold,
     })
 
