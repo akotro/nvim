@@ -36,7 +36,7 @@ return {
     },
     {
         "dmtrKovalenko/fff.nvim",
-        lazy = true,
+        lazy = false,
         build = "nix run .#release",
         opts = {
             prompt = require("config.ui").icons.ui.FindFile .. " ",
@@ -73,6 +73,7 @@ return {
     },
     {
         "Bekaboo/dropbar.nvim",
+        event = "VeryLazy",
         config = require("plugins.dropbar").config,
     },
     {
@@ -82,6 +83,7 @@ return {
     -- NOTE: Usage
     {
         "ggandor/leap.nvim",
+        event = "BufRead",
         dependencies = require("plugins.leap").dependencies,
         config = require("plugins.leap").config,
     },

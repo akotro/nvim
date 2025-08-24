@@ -811,6 +811,7 @@ function M.save_if_unsaved()
         "dapui_hover",
         "OverseerForm",
         "oil",
+        "fff_input",
     }
     local current_buf = vim.api.nvim_get_current_buf()
     local filetype = vim.fn.getbufvar(current_buf, "&filetype")

@@ -17,12 +17,12 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 local plugins = require("plugins")
-local concurrency_level = require("config.functions").matches_hostname("koa-PC") and 1 or nil
+-- local concurrency_level = require("config.functions").matches_hostname("koa-PC") and 1 or nil
 require("lazy").setup(plugins, {
     dev = {
         path = "~/dev",
     },
-    concurrency = concurrency_level,
+    -- concurrency = concurrency_level,
     git = {
         timeout = 420,
     },
