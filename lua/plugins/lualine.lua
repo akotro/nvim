@@ -51,11 +51,11 @@ function M.setup()
     local colors = functions.get_current_colors(nil)
 
     local diff_color = {
-        added = { fg = colors.dragonGreen },
-        modified = { fg = colors.dragonYellow },
-        removed = { fg = colors.dragonRed },
+        added = { fg = colors.green },
+        modified = { fg = colors.yellow },
+        removed = { fg = colors.red },
     }
-    local theme = "iceberg"
+    local theme = "carbonfox"
     if vim.g.colors_name ~= nil then
         theme = "auto"
         diff_color = nil

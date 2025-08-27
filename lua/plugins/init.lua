@@ -1,26 +1,16 @@
 return {
     -- NOTE: Colorschemes
     {
-        "https://git.sr.ht/~p00f/alabaster.nvim",
-        enabled = false,
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.g.alabaster_dim_comments = true
-            vim.cmd.colorscheme("alabaster")
-        end,
-    },
-    {
         "EdenEast/nightfox.nvim",
-        enabled = false,
+        enabled = true,
         lazy = false,
         priority = 1000,
         opts = {
             transparent = false,
         },
-        init = function()
-            vim.cmd.colorscheme("carbonfox")
-        end,
+        -- init = function()
+        --     vim.cmd.colorscheme("carbonfox")
+        -- end,
     },
     -- NOTE: Util
     { "nvim-lua/plenary.nvim", lazy = true },

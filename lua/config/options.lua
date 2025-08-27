@@ -14,15 +14,6 @@ if utils.is_win() then
 		let &shellpipe  = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
 		set shellquote= shellxquote=
     ]])
-
-    -- vim.cmd([[
-    --     let &shell = 'nu'
-    --     let &shellcmdflag = '-c'
-    --     let &shellquote = ""
-    --     let &shellxquote = ""
-    --  ]])
-    -- opt.shell = "wsl.exe"
-    -- opt.shellcmdflag = "-e"
 end
 
 opt.clipboard = "unnamedplus"
@@ -38,46 +29,6 @@ if utils.is_wsl() then
             ["*"] = "/mnt/c/Users/koa/.local/bin/win32yank.exe -o --lf",
         },
     }
-end
-
-if vim.g.neovide then
-    vim.o.guifont = "FiraCode NF:h10"
-    vim.cmd([[
-        function! ZoomIn()
-            let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
-            let l:gf_size_whole = l:gf_size_whole + 1
-            let l:new_font_size = ':h'.l:gf_size_whole
-            let &guifont = substitute(&guifont, ':h\d\+$', l:new_font_size, '')
-        endfunction
-
-        function! ZoomOut()
-            let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
-            let l:gf_size_whole = l:gf_size_whole - 1
-            let l:new_font_size = ':h'.l:gf_size_whole
-            let &guifont = substitute(&guifont, ':h\d\+$', l:new_font_size, '')
-        endfunction
-
-        command! ZoomIn call ZoomIn()
-        command! ZoomOut call ZoomOut()
-
-    ]])
-    vim.api.nvim_set_keymap("n", "<c-+>", ":ZoomIn<cr>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<c-=>", ":ZoomIn<cr>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<c-->", ":ZoomOut<cr>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap(
-        "n",
-        "<c-0>",
-        [[<cmd>lua vim.o.guifont = "FiraCode NF:h10"<cr>]],
-        { noremap = true, silent = true }
-    )
-
-    vim.g.neovide_cursor_animation_length = 0
-    vim.g.neovide_floating_shadow = false
-    opt.linespace = -1
-    vim.g.neovide_hide_mouse_when_typing = true
-    vim.cmd([[inoremap <c-s-v> <c-r>+]])
-    vim.cmd([[cnoremap <c-s-v> <c-r>+]])
-    vim.g.neovide_underline_stroke_scale = 0.5
 end
 
 opt.title = true
@@ -144,6 +95,7 @@ opt.fillchars = {
     diff = "╱",
     eob = " ",
 }
+opt.winborder = "single"
 
 if vim.fn.has("nvim-0.10") == 1 then
     opt.smoothscroll = true
@@ -174,3 +126,32 @@ vim.cmd([[
         \%C\ %#-->\ %f:%l:%c,
         \%E\ \ left:%m,%C\ right:%m\ %f:%l:%c,%Z
 ]])
+
+local function keep_transparent_bg()
+    local groups = {
+        "Normal",
+        "NormalFloat",
+        "SignColumn",
+        "MsgArea",
+        "NonText",
+        "LineNr",
+        "CursorLineNr",
+        "EndOfBuffer",
+        "VertSplit",
+        "StatusLine",
+        "StatusLineNC",
+        "TabLine",
+        "TabLineFill",
+        "TabLineSel",
+        "QuickFixLine",
+        "Pmenu",
+        "FloatBorder",
+    }
+    for _, name in ipairs(groups) do
+        vim.api.nvim_set_hl(0, name, { bg = "NONE", ctermbg = "NONE" })
+    end
+end
+
+-- apply now and after any colorscheme change
+keep_transparent_bg()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = keep_transparent_bg })
