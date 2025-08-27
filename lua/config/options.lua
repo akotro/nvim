@@ -131,21 +131,9 @@ local function keep_transparent_bg()
     local groups = {
         "Normal",
         "NormalFloat",
-        "SignColumn",
-        "MsgArea",
-        "NonText",
-        "LineNr",
-        "CursorLineNr",
-        "EndOfBuffer",
-        "VertSplit",
-        "StatusLine",
-        "StatusLineNC",
-        "TabLine",
         "TabLineFill",
         "TabLineSel",
-        "QuickFixLine",
         "Pmenu",
-        "FloatBorder",
     }
     for _, name in ipairs(groups) do
         vim.api.nvim_set_hl(0, name, { bg = "NONE", ctermbg = "NONE" })
