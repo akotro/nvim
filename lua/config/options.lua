@@ -134,12 +134,12 @@ local function keep_transparent_bg()
         "TabLineFill",
         "TabLineSel",
         "Pmenu",
+        "PmenuKind",
+        "PmenuKindSel",
     }
     for _, name in ipairs(groups) do
         vim.api.nvim_set_hl(0, name, { bg = "NONE", ctermbg = "NONE" })
     end
 end
-
--- apply now and after any colorscheme change
 keep_transparent_bg()
 vim.api.nvim_create_autocmd("ColorScheme", { callback = keep_transparent_bg })
