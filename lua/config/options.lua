@@ -126,20 +126,3 @@ vim.cmd([[
         \%C\ %#-->\ %f:%l:%c,
         \%E\ \ left:%m,%C\ right:%m\ %f:%l:%c,%Z
 ]])
-
-local function keep_transparent_bg()
-    local groups = {
-        "Normal",
-        "NormalFloat",
-        "TabLineFill",
-        "TabLineSel",
-        "Pmenu",
-        "PmenuKind",
-        "PmenuKindSel",
-    }
-    for _, name in ipairs(groups) do
-        vim.api.nvim_set_hl(0, name, { bg = "NONE", ctermbg = "NONE" })
-    end
-end
-keep_transparent_bg()
-vim.api.nvim_create_autocmd("ColorScheme", { callback = keep_transparent_bg })

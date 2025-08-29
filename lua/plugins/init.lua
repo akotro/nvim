@@ -12,6 +12,32 @@ return {
         --     vim.cmd.colorscheme("carbonfox")
         -- end,
     },
+    {
+        "xiyaowong/transparent.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            local transparent = require("transparent")
+            transparent.setup({
+                -- table: additional groups that should be cleared
+                extra_groups = {
+                    "NormalFloat",
+                    "Pmenu",
+                    "PmenuKind",
+                    "PmenuKindSel",
+                },
+                -- table: groups you don't want to clear
+                exclude_groups = {
+                    "CursorLine",
+                    "CursorLineNr",
+                },
+                -- function: code to be executed after highlight groups are cleared
+                -- Also the user event "TransparentClear" will be triggered
+                on_clear = function() end,
+            })
+            vim.g.transparent_enabled = true
+        end,
+    },
     -- NOTE: Util
     { "nvim-lua/plenary.nvim", lazy = true },
     { "MunifTanjim/nui.nvim", lazy = true },
