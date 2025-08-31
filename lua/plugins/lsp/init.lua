@@ -299,7 +299,7 @@ M.dependencies = {
     { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 
     -- csharp
-    { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true, ft = "cs" },
+    -- { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true, ft = "cs" },
     { "Decodetalkers/csharpls-extended-lsp.nvim", lazy = true, ft = "cs" },
 
     -- rust
@@ -437,27 +437,27 @@ M.opts = {
                 },
             },
         },
-        omnisharp = {
-            mason = false,
-            keys = {
-                {
-                    "gd",
-                    function()
-                        require("omnisharp_extended").lsp_definition()
-                    end,
-                    desc = "Goto Definition",
-                    has = "definition",
-                },
-            },
-            cmd = { "OmniSharp" },
-            settings = {
-                enable_roslyn_analyzers = true,
-                enable_import_completion = true,
-            },
-        },
-        -- csharp_ls = {
+        -- omnisharp = {
         --     mason = false,
+        --     keys = {
+        --         {
+        --             "gd",
+        --             function()
+        --                 require("omnisharp_extended").lsp_definition()
+        --             end,
+        --             desc = "Goto Definition",
+        --             has = "definition",
+        --         },
+        --     },
+        --     cmd = { "OmniSharp" },
+        --     settings = {
+        --         enable_roslyn_analyzers = true,
+        --         enable_import_completion = true,
+        --     },
         -- },
+        csharp_ls = {
+            mason = false,
+        },
         rust_analyzer = {
             mason = false,
             keys = {
@@ -644,12 +644,15 @@ M.opts = {
     setup = {
         omnisharp = function(_, opts)
             opts.handlers = {
-                ["textDocument/definition"] = require("omnisharp_extended").handler,
+                ["textDocument/definition"] = require("omnisharp_extended").definition_handler,
+                ["textDocument/typeDefinition"] = require("omnisharp_extended").type_definition_handler,
+                ["textDocument/references"] = require("omnisharp_extended").references_handler,
+                ["textDocument/implementation"] = require("omnisharp_extended").implementation_handler,
             }
         end,
-        -- csharp_ls = function(_, _)
-        --     require("csharpls_extended").buf_read_cmd_bind()
-        -- end,
+        csharp_ls = function(_, _)
+            require("csharpls_extended").buf_read_cmd_bind()
+        end,
         tsserver = function(_, opts)
             require("typescript-tools").setup({})
             return true

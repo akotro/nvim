@@ -116,6 +116,9 @@ M.dependencies = {
             test_runner = {
                 mappings = {},
             },
+            auto_bootstrap_namespace = {
+                enabled = false,
+            },
         },
     },
 }
