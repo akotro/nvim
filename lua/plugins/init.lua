@@ -72,7 +72,7 @@ return {
     },
     -- NOTE: UI
     {
-        "echasnovski/mini.icons",
+        "nvim-mini/mini.icons",
         version = false,
         lazy = false,
         config = function()
@@ -109,7 +109,7 @@ return {
         keys = require("plugins.tmux").keys,
     },
     {
-        "echasnovski/mini.ai",
+        "nvim-mini/mini.ai",
         event = "VeryLazy",
         opts = require("plugins.mini_ai").opts,
         config = require("plugins.mini_ai").config,
