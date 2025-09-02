@@ -3,6 +3,10 @@ local M = {}
 M.keys = { { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" } }
 
 M.opts = {
+    registries = {
+        "github:mason-org/mason-registry",
+        "github:Crashdummyy/mason-registry",
+    },
     ensure_installed = {},
 }
 

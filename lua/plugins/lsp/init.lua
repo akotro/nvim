@@ -299,8 +299,18 @@ M.dependencies = {
     { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 
     -- csharp
+    {
+        "seblyng/roslyn.nvim",
+        ft = { "cs" },
+        ---@module 'roslyn.config'
+        ---@type RoslynNvimConfig
+        opts = {},
+        config = function()
+            vim.lsp.enable("roslyn")
+        end,
+    },
     -- { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true, ft = "cs" },
-    { "Decodetalkers/csharpls-extended-lsp.nvim", lazy = true, ft = "cs" },
+    -- { "Decodetalkers/csharpls-extended-lsp.nvim", lazy = true, ft = "cs" },
 
     -- rust
     {
@@ -455,9 +465,10 @@ M.opts = {
         --         enable_import_completion = true,
         --     },
         -- },
-        csharp_ls = {
-            mason = false,
-        },
+        -- csharp_ls = {
+        --     mason = false,
+        -- },
+        roslyn = {},
         rust_analyzer = {
             mason = false,
             keys = {
