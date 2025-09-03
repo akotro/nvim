@@ -195,7 +195,6 @@ return {
         ft = { "http", "rest" },
         keys = require("plugins.kulala").keys,
         opts = require("plugins.kulala").opts,
-        init = require("plugins.kulala").init,
     },
     -- NOTE: Git
     {

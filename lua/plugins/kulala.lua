@@ -32,12 +32,4 @@ M.opts = {
     },
 }
 
-M.init = function()
-    vim.filetype.add({
-        extension = {
-            ["http"] = "http",
-        },
-    })
-end
-
 return M
