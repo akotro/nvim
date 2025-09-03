@@ -191,6 +191,7 @@ return {
     },
     {
         "mistweaverco/kulala.nvim",
+        lazy = true,
         ft = { "http", "rest" },
         keys = require("plugins.kulala").keys,
         opts = require("plugins.kulala").opts,
@@ -343,6 +344,84 @@ return {
         keys = require("plugins.lsp").mason.keys,
         opts = require("plugins.lsp").mason.opts,
         config = require("plugins.lsp").mason.config,
+    },
+    -- NOTE: LSP Language Extensions
+    {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+            library = {
+                "lazy.nvim",
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "luvit-meta/library", words = { "vim%.uv" } },
+            },
+        },
+    },
+    { "Bilal2453/luvit-meta", ft = "lua" },
+    {
+        "seblyng/roslyn.nvim",
+        ft = { "cs" },
+        ---@module 'roslyn.config'
+        ---@type RoslynNvimConfig
+        opts = {},
+    },
+    {
+        "mrcjkb/rustaceanvim",
+        version = "^6",
+        lazy = false, -- This plugin is already lazy
+    },
+    {
+        "saecki/crates.nvim",
+        lazy = true,
+        event = { "BufRead Cargo.toml" },
+        ft = { "rust", "toml" },
+        opts = {
+            completion = {
+                crates = {
+                    enabled = true,
+                },
+            },
+            lsp = {
+                enabled = true,
+                actions = true,
+                completion = true,
+                hover = true,
+            },
+        },
+    },
+    {
+        "pmizio/typescript-tools.nvim",
+        lazy = true,
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {},
+    },
+    {
+        "p00f/clangd_extensions.nvim",
+        lazy = true,
+        opts = {
+            inlay_hints = {
+                inline = false,
+            },
+            ast = {
+                role_icons = {
+                    type = "",
+                    declaration = "",
+                    expression = "",
+                    specifier = "",
+                    statement = "",
+                    ["template argument"] = "",
+                },
+                kind_icons = {
+                    Compound = "",
+                    Recovery = "",
+                    TranslationUnit = "",
+                    PackExpansion = "",
+                    TemplateTypeParm = "",
+                    TemplateTemplateParm = "",
+                    TemplateParamObject = "",
+                },
+            },
+        },
     },
     -- NOTE: LSP Utils
     {

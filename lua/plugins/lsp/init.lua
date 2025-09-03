@@ -197,14 +197,6 @@ M.keys = {
     },
 }
 M.dependencies = {
-    {
-        "mason-org/mason.nvim",
-        version = "^1.0.0",
-        opts = function(_, opts)
-            opts.registries = opts.registries or {}
-            table.insert(opts.registries, "github:mistweaverco/zana-registry")
-        end,
-    },
     { "j-hui/fidget.nvim", opts = {} },
     -- {
     --     "oribarilan/lensline.nvim",
@@ -213,114 +205,6 @@ M.dependencies = {
     --     config = function()
     --         require("lensline").setup()
     --     end,
-    -- },
-
-    -- NOTE: LSP Language Extensions
-
-    -- lua
-    {
-        "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
-        opts = {
-            library = {
-                "lazy.nvim",
-                -- Load luvit types when the `vim.uv` word is found
-                { path = "luvit-meta/library", words = { "vim%.uv" } },
-            },
-        },
-    },
-    { "Bilal2453/luvit-meta", ft = "lua" }, -- optional `vim.uv` typings
-
-    -- csharp
-    {
-        "seblyng/roslyn.nvim",
-        ft = { "cs" },
-        ---@module 'roslyn.config'
-        ---@type RoslynNvimConfig
-        opts = {},
-    },
-    -- { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true, ft = "cs" },
-    -- { "Decodetalkers/csharpls-extended-lsp.nvim", lazy = true, ft = "cs" },
-
-    -- rust
-    {
-        "mrcjkb/rustaceanvim",
-        version = "^4",
-        lazy = false, -- This plugin is already lazy
-    },
-    {
-        "saecki/crates.nvim",
-        lazy = true,
-        event = { "BufRead Cargo.toml" },
-        ft = { "rust", "toml" },
-        opts = {
-            completion = {
-                crates = {
-                    enabled = true,
-                },
-                -- cmp = {
-                --     enabled = true,
-                -- },
-            },
-            lsp = {
-                enabled = true,
-                actions = true,
-                completion = true,
-                hover = true,
-            },
-        },
-    },
-
-    -- typescript
-    {
-        "pmizio/typescript-tools.nvim",
-        lazy = true,
-        -- ft = { "ts", "tsx", "js", "jsx" },
-        dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {},
-    },
-
-    -- c, cpp
-    {
-        "p00f/clangd_extensions.nvim",
-        lazy = true,
-        config = function() end,
-        opts = {
-            inlay_hints = {
-                inline = false,
-            },
-            ast = {
-                --These require codicons (https://github.com/microsoft/vscode-codicons)
-                role_icons = {
-                    type = "",
-                    declaration = "",
-                    expression = "",
-                    specifier = "",
-                    statement = "",
-                    ["template argument"] = "",
-                },
-                kind_icons = {
-                    Compound = "",
-                    Recovery = "",
-                    TranslationUnit = "",
-                    PackExpansion = "",
-                    TemplateTypeParm = "",
-                    TemplateTemplateParm = "",
-                    TemplateParamObject = "",
-                },
-            },
-        },
-    },
-
-    -- java
-    -- {
-    --     "nvim-java/nvim-java",
-    --     lazy = true,
-    --     opts = {
-    --         jdk = {
-    --             auto_install = false,
-    --         },
-    --     },
     -- },
 }
 
@@ -572,7 +456,7 @@ function M.config(_, opts)
     vim.lsp.enable({
         "lua_ls",
         "roslyn",
-        -- NOTE: rustaceanvim already sets this up?
+        -- NOTE: rustaceanvim already sets this up
         -- "rust_analyzer",
         "taplo",
         "clangd",
