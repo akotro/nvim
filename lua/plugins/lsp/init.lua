@@ -139,6 +139,14 @@ M.keys = {
         desc = "Quickfix",
     },
     {
+        "<leader>lr",
+        function()
+            return ":" .. require("inc_rename").config.cmd_name .. " " .. vim.fn.expand("<cword>")
+        end,
+        expr = true,
+        desc = "Rename",
+    },
+    {
         "<leader>lR",
         "<cmd>Trouble lsp_references toggle focus=false<cr>",
         desc = "References",
