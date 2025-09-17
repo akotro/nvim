@@ -53,24 +53,9 @@ return {
     {
         "dmtrKovalenko/fff.nvim",
         lazy = false,
-        build = function()
-            require("fff.download").download_or_build_binary()
-        end,
-        opts = {
-            prompt = require("config.ui").icons.ui.FindFile .. " ",
-            preview = {
-                show_file_info = true,
-            },
-        },
-        keys = {
-            {
-                "<leader>ff",
-                function()
-                    require("fff").find_files()
-                end,
-                desc = "Open file picker",
-            },
-        },
+        build = require("plugins.fff").build,
+        keys = require("plugins.fff").keys,
+        opts = require("plugins.fff").opts,
     },
     -- NOTE: UI
     {
@@ -294,10 +279,8 @@ return {
         "saghen/blink.cmp",
         -- NOTE: This seems to impact startup time?
         -- lazy = false, -- lazy loading handled internally
-        -- FIXME: Required due to https://github.com/Saghen/blink.cmp/issues/2044
-        version = "1.*",
         event = { "InsertEnter", "CmdlineEnter" },
-        -- build = require("plugins.completion").blink.build,
+        build = require("plugins.completion").blink.build,
         dependencies = require("plugins.completion").blink.dependencies,
         opts = require("plugins.completion").blink.opts,
         opts_extend = require("plugins.completion").blink.opts_extend,
