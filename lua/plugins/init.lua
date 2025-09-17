@@ -53,7 +53,9 @@ return {
     {
         "dmtrKovalenko/fff.nvim",
         lazy = false,
-        build = "nix run .#release",
+        build = function()
+            require("fff.download").download_or_build_binary()
+        end,
         opts = {
             prompt = require("config.ui").icons.ui.FindFile .. " ",
             preview = {
