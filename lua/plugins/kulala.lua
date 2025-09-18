@@ -4,26 +4,104 @@ local M = {}
 
 M.keys = {
     { "<leader>c", "", desc = "+Rest" },
-    { "<leader>cb", "<cmd>lua require('kulala').scratchpad()<cr>", desc = "Open scratchpad" },
-    { "<leader>cc", "<cmd>lua require('kulala').copy()<cr>", desc = "Copy as cURL" },
-    { "<leader>cC", "<cmd>lua require('kulala').from_curl()<cr>", desc = "Paste from curl" },
+    {
+        "<leader>cb",
+        function()
+            require("kulala").scratchpad()
+        end,
+        desc = "Open scratchpad",
+    },
+    {
+        "<leader>cc",
+        function()
+            require("kulala").copy()
+        end,
+        desc = "Copy as cURL",
+    },
+    {
+        "<leader>cC",
+        function()
+            require("kulala").from_curl()
+        end,
+        desc = "Paste from curl",
+    },
     {
         "<leader>cg",
-        "<cmd>lua require('kulala').download_graphql_schema()<cr>",
+        function()
+            require("kulala").download_graphql_schema()
+        end,
         desc = "Download GraphQL schema",
     },
-    { "<leader>ci", "<cmd>lua require('kulala').inspect()<cr>", desc = "Inspect current request" },
-    { "<leader>cn", "<cmd>lua require('kulala').jump_next()<cr>", desc = "Jump to next request" },
+    {
+        "<leader>ci",
+        function()
+            require("kulala").inspect()
+        end,
+        desc = "Inspect current request",
+    },
+    {
+        "<leader>cn",
+        function()
+            require("kulala").jump_next()
+        end,
+        desc = "Jump to next request",
+    },
     {
         "<leader>cp",
-        "<cmd>lua require('kulala').jump_prev()<cr>",
+        function()
+            require("kulala").jump_prev()
+        end,
         desc = "Jump to previous request",
     },
-    { "<leader>cq", "<cmd>lua require('kulala').close()<cr>", desc = "Close window" },
-    { "<leader>cr", "<cmd>lua require('kulala').replay()<cr>", desc = "Replay the last request" },
-    { "<leader>cs", "<cmd>lua require('kulala').run()<cr>", desc = "Send the request" },
-    { "<leader>cS", "<cmd>lua require('kulala').show_stats()<cr>", desc = "Show stats" },
-    { "<leader>ct", "<cmd>lua require('kulala').toggle_view()<cr>", desc = "Toggle headers/body" },
+    {
+        "<leader>cq",
+        function()
+            require("kulala").close()
+        end,
+        desc = "Close window",
+    },
+    {
+        "<leader>cr",
+        function()
+            require("kulala").replay()
+        end,
+        desc = "Replay the last request",
+    },
+    {
+        "<leader>cs",
+        function()
+            require("kulala").run()
+        end,
+        desc = "Send the request",
+    },
+    {
+        "<leader>cS",
+        function()
+            require("kulala").show_stats()
+        end,
+        desc = "Show stats",
+    },
+    {
+        "<leader>ct",
+        function()
+            require("kulala").toggle_view()
+        end,
+        desc = "Toggle headers/body",
+    },
+    {
+        "<leader>cu",
+        function()
+            require("lua.kulala.ui.auth_manager").open_auth_config()
+        end,
+        desc = "Manage Auth Config",
+    },
+    {
+        "<leader>ce",
+        function()
+            require("kulala").set_selected_env()
+        end,
+        desc = "Select environment",
+    },
 }
 
 M.opts = {
