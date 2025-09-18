@@ -312,17 +312,14 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        event = "VeryLazy",
+        event = { "BufReadPre", "BufNewFile", "BufWritePre" },
         dependencies = require("plugins.lsp").dependencies,
         keys = require("plugins.lsp").keys,
-        opts = require("plugins.lsp").opts,
         config = require("plugins.lsp").config,
     },
     {
 
         "mason-org/mason.nvim",
-        -- TODO: Pin to v1 for now
-        version = "^1.0.0",
         cmd = "Mason",
         build = ":MasonUpdate",
         keys = require("plugins.lsp").mason.keys,

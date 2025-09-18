@@ -206,83 +206,40 @@ M.keys = {
 }
 M.dependencies = {
     { "j-hui/fidget.nvim", opts = {} },
-    -- {
-    --     "oribarilan/lensline.nvim",
-    --     branch = "release/1.x",
-    --     event = "LspAttach",
-    --     config = function()
-    --         require("lensline").setup()
-    --     end,
-    -- },
 }
 
-M.opts = {
+function M.config()
+    local icons = require("config.ui").icons
+
+    -- diagnostics
     ---@type vim.diagnostic.Opts
-    diagnostics = {
+    local diagnostics = {
         underline = true,
         update_in_insert = false,
         virtual_text = false,
         virtual_lines = false, -- disable by default
         severity_sort = true,
-    },
+    }
 
-    -- TODO: Tryout vim.lsp.document_color.enable() to replace nvim-colorizer
-
-    inlay_hints = {
-        enabled = false,
-    },
-    -- options for vim.lsp.buf.format
-    -- `bufnr` and `filter` is handled by the LazyVim formatter,
-    -- but can be also overridden when specified
-    format = {
-        formatting_options = nil,
-        timeout_ms = nil,
-    },
-}
-
-function M.config(_, opts)
-    local icons = require("config.ui").icons
-
-    -- diagnostics
     for name, icon in pairs(icons.diagnostics) do
         local severity = vim.diagnostic.severity[name:upper()]
 
         if severity then
-            if not opts.diagnostics.signs then
-                opts.diagnostics.signs = {}
+            if not diagnostics.signs then
+                diagnostics.signs = {}
             end
-            if not opts.diagnostics.signs.text then
-                opts.diagnostics.signs.text = {}
+            if not diagnostics.signs.text then
+                diagnostics.signs.text = {}
             end
 
-            opts.diagnostics.signs.text[severity] = icon
+            diagnostics.signs.text[severity] = icon
 
             local sign_name = "DiagnosticSign" .. name
             vim.fn.sign_define(sign_name, { text = icon, texthl = sign_name, numhl = "" })
         end
     end
 
-    local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-
-    if opts.inlay_hints.enabled and inlay_hint then
-        utils.lsp.on_attach(function(client, buffer)
-            if client:supports_method("textDocument/inlayHint") then
-                inlay_hint.enable(true, { bufnr = buffer })
-            end
-        end)
-    end
-
-    if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
-        opts.diagnostics.virtual_text.prefix = function(diagnostic)
-            for d, icon in pairs(icons.diagnostics) do
-                if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                    return icon
-                end
-            end
-        end
-    end
-
-    vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+    vim.diagnostic.config(vim.deepcopy(diagnostics))
 
     vim.lsp.config("lua_ls", {
         on_init = function(client)
@@ -325,6 +282,23 @@ function M.config(_, opts)
                     -- library = {
                     --   vim.api.nvim_get_runtime_file('', true),
                     -- }
+                },
+                codeLens = {
+                    enable = true,
+                },
+                completion = {
+                    callSnippet = "Replace",
+                },
+                doc = {
+                    privateName = { "^_" },
+                },
+                hint = {
+                    enable = true,
+                    setType = false,
+                    paramType = true,
+                    paramName = "Disable",
+                    semicolon = "Disable",
+                    arrayIndex = "Disable",
                 },
             })
         end,
