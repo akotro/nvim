@@ -305,7 +305,6 @@ M.keys = {
 }
 
 function M.config()
-    local utils = require("config.functions")
     local icons = require("config.ui").icons
 
     vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
@@ -322,10 +321,6 @@ function M.config()
     require("plugins.debug.c").setup()
     require("plugins.debug.lua").setup()
     require("plugins.debug.zig").setup()
-
-    if utils.plugin.has("overseer.nvim") then
-        require("overseer").enable_dap()
-    end
 end
 
 return M
