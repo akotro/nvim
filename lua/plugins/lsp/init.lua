@@ -433,6 +433,15 @@ function M.config()
         },
     })
 
+    vim.lsp.config("html", {
+        filetypes = {
+            "html",
+            "templ",
+            "cshtml",
+            "razor",
+        },
+    })
+
     vim.lsp.enable({
         "lua_ls",
         "roslyn",
@@ -459,6 +468,7 @@ function M.config()
         "harper_ls",
         "prolog_ls",
         "kulala_ls",
+        "html",
     })
 end
 
