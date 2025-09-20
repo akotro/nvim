@@ -961,4 +961,19 @@ function M.filename_and_parent(path, sep)
     end
 end
 
+---@param exe_name string
+---@return (string|nil)
+function M.nix_store_lib_path(exe_name)
+    local exe = vim.fn.exepath(exe_name)
+    if not exe or exe == "" then
+        return nil
+    end
+
+    exe = vim.loop.fs_realpath(exe) or exe
+    local bin_dir = vim.fn.fnamemodify(exe, ":h") -- .../bin
+    local pkg_dir = vim.fn.fnamemodify(bin_dir, ":h") -- .../store-...
+
+    return vim.fs.joinpath(pkg_dir, "lib", exe_name)
+end
+
 return M
