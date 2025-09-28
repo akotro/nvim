@@ -410,6 +410,16 @@ function M.config()
         -- end,
     })
 
+    vim.lsp.config("nixd", {
+        settings = {
+            nixd = {
+                formatting = {
+                    command = { "nixfmt" },
+                },
+            },
+        },
+    })
+
     vim.lsp.config("harper_ls", {
         filetypes = {
             "markdown",
