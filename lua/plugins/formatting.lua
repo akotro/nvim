@@ -107,7 +107,9 @@ M.opts = function()
                 end
             end,
             typst = { "typstfmt" },
-            -- nix = { "nixfmt" },
+            nix = {
+                "nix_fmt", --[[ "nixfmt" ]]
+            },
             yaml = { "yamlfmt" },
             c = { "clang_format" },
             zig = { "zigfmt" },
@@ -212,6 +214,10 @@ M.opts = function()
                 prepend_args = {
                     "--fallback-style=Google",
                 },
+            },
+            nix_fmt = {
+                command = "nix",
+                args = { "fmt", "--", "--stdin", "$FILENAME" },
             },
             -- my_formatter = {
             --  -- This can be a string or a function that returns a string.
