@@ -204,8 +204,15 @@ M.keys = {
         desc = "Unlink Snippet",
     },
 }
+
 M.dependencies = {
-    { "j-hui/fidget.nvim", opts = {} },
+    {
+        "j-hui/fidget.nvim",
+        config = function()
+            require("fidget").setup({})
+            vim.notify = require("fidget").notify
+        end,
+    },
 }
 
 function M.config()
