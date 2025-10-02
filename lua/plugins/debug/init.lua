@@ -113,6 +113,9 @@ M.dependencies = {
             -- "nvim-telescope/telescope.nvim"
         },
         opts = {
+            lsp = {
+                enabled = false,
+            },
             test_runner = {
                 mappings = {},
             },
