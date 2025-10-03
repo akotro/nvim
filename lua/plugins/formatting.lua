@@ -108,7 +108,8 @@ M.opts = function()
             end,
             typst = { "typstfmt" },
             nix = {
-                "nix_fmt", --[[ "nixfmt" ]]
+                --[[ "nix_fmt", ]]
+                "nixfmt",
             },
             yaml = { "yamlfmt" },
             c = { "clang_format" },
