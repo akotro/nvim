@@ -216,13 +216,6 @@ return {
         keys = require("plugins.comment").keys,
         opts = require("plugins.comment").opts,
     },
-    -- NOTE: Keymaps
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        cmd = require("plugins.whichkey").cmd,
-        config = require("plugins.whichkey").config,
-    },
 
     -- NOTE: Treesitter
     {
